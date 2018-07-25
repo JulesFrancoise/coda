@@ -28,10 +28,6 @@ import train from './operator/ml/train';
 import recognize from './operator/ml/recognize';
 import kicks from './operator/spectral/kicks';
 import wavelet from './operator/spectral/wavelet';
-import heatmap from './ui/heatmap';
-import plot from './ui/plot';
-import recorder from './ui/recorder';
-import looper from './ui/looper';
 import tomax from './sink/tomax';
 import scalelearn from './operator/ml/scalelearn';
 import scale2 from './operator/ml/scale2';
@@ -712,38 +708,6 @@ export default class Stream {
    */
   wavelet(options) {
     return new Stream(wavelet(options, this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  plot(options) {
-    return new Stream(plot(options, this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  heatmap(options) {
-    return new Stream(heatmap(options, this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  recorder(options) {
-    return new Stream(recorder(options, this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  looper(options) {
-    return new Stream(looper(options, this));
   }
 
   /**

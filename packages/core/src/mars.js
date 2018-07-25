@@ -30,10 +30,6 @@ import wavelet_ from './operator/spectral/wavelet';
 import myo_ from './source/myo';
 import transport_ from './source/transport';
 import xebra_ from './source/xebra';
-import heatmap_ from './ui/heatmap';
-import plot_ from './ui/plot';
-import recorder_ from './ui/recorder';
-import looper_ from './ui/looper';
 import tomax_ from './sink/tomax';
 import scalelearn_ from './operator/ml/scalelearn';
 import scale2_ from './operator/ml/scale2';
@@ -215,22 +211,6 @@ export const xebra = channel =>
 /** @ignore */
 export const transport = name =>
   new Stream(transport_(name));
-
-/** @ignore */
-export const heatmap = (options, stream) =>
-  new Stream(heatmap_(options, stream));
-
-/** @ignore */
-export const plot = (options, stream) =>
-  new Stream(plot_(options, stream));
-
-/** @ignore */
-export const recorder = (options, stream) =>
-  new Stream(recorder_(options, stream));
-
-/** @ignore */
-export const looper = (options, stream) =>
-  new Stream(looper_(options, stream));
 
 /** @ignore */
 export const tomax = (options, stream) =>

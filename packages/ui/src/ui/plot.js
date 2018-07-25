@@ -1,9 +1,8 @@
-import { disposeBoth } from '@most/disposable';
 import Vue from 'vue';
-import parseParameters from '../lib/common/parameters';
-import validateStream from '../lib/common/validation';
+import { parseParameters, validateStream } from '@coda/core';
+import { disposeBoth } from '@most/disposable';
 import plotComponent from './Plot.vue';
-import uiSettings from '../lib/common/ui';
+import uiSettings from '../lib/ui';
 
 /**
  * Parameter definitions

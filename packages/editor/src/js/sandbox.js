@@ -3,6 +3,9 @@ import { generate } from 'escodegen';
 import vm from 'vm';
 import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
+import * as codaUi from '@coda/ui';
+
+codaUi.setup(codaCore.Stream);
 
 const defaultScheduler = codaCore.newDefaultScheduler();
 
@@ -108,6 +111,7 @@ function createSandbox() {
   const s = Object.assign(
     codaCore,
     codaAudio,
+    codaUi,
     { streams: {}, synths: {} },
   );
   const sandbox = vm.createContext(s);

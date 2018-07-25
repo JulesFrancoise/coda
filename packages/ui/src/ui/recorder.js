@@ -1,10 +1,13 @@
+import Vue from 'vue';
+import {
+  parseParameters,
+  validateStream,
+  registerContainer,
+  generateContainerId,
+} from '@coda/core';
 import { disposeBoth } from '@most/disposable';
 import { currentTime } from '@most/scheduler';
-import Vue from 'vue';
-import parseParameters from '../lib/common/parameters';
-import validateStream from '../lib/common/validation';
 import recorderComponent from './Recorder.vue';
-import { registerContainer, generateContainerId } from '../lib/common/container';
 
 /**
  * Parameter definitions

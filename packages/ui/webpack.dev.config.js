@@ -22,12 +22,6 @@ module.exports = merge(common, {
       amd: '@most/scheduler',
       root: '@most/scheduler',
     },
-    '@most/dom-event': {
-      commonjs: '@most/dom-event',
-      commonjs2: '@most/dom-event',
-      amd: '@most/dom-event',
-      root: '@most/dom-event',
-    },
     '@most/prelude': {
       commonjs: '@most/prelude',
       commonjs2: '@most/prelude',
@@ -40,23 +34,23 @@ module.exports = merge(common, {
       amd: '@most/disposable',
       root: '@most/disposable',
     },
-    'xebra.js': {
-      commonjs: 'xebra.js',
-      commonjs2: 'xebra.js',
-      amd: 'xebra.js',
-      root: 'xebra.js',
+    colormap: {
+      commonjs: 'colormap',
+      commonjs2: 'colormap',
+      amd: 'colormap',
+      root: 'colormap',
     },
-    myo: {
-      commonjs: 'myo',
-      commonjs2: 'myo',
-      amd: 'myo',
-      root: 'myo',
+    vue: {
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue',
+      root: 'vue',
     },
-    tonal: {
-      commonjs: 'tonal',
-      commonjs2: 'tonal',
-      amd: 'tonal',
-      root: 'tonal',
+    'vue-template-compiler': {
+      commonjs: 'vue-template-compiler',
+      commonjs2: 'vue-template-compiler',
+      amd: 'vue-template-compiler',
+      root: 'vue-template-compiler',
     },
   },
 });

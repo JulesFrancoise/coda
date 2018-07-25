@@ -213,8 +213,7 @@ class MyoQuatSource extends MyoDataSource {
 }
 
 try {
-  Myo.connect('com.julesfrancoise.mars');
-  // console.log('Myo', Myo);
+  Myo.connect('com.coda.myolala');
 } catch (e) {
   // eslint-disable-next-line no-console
   console.log('Unable to activate myo (use only locally)');

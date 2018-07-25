@@ -104,7 +104,7 @@ export default function parseParameters(definitions, options = {}) {
 
   optList.forEach((name) => {
     if (!paramList.includes(name)) {
-      throw new Error(`Unkown parameter '${name}'.`);
+      throw new Error(`Unknown parameter '${name}'.`);
     }
   });
 

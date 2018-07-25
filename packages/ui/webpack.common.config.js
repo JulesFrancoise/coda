@@ -1,4 +1,5 @@
 const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: 'none',
@@ -9,6 +10,9 @@ module.exports = {
     libraryTarget: 'umd',
     library: '@coda/core',
   },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -27,6 +31,17 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.json'],
+    alias: {
+      vue$: 'vue/dist/vue.esm.js',
+    },
+    extensions: ['*', '.js', '.vue', '.json'],
+  },
+  externals: {
+    '@coda/core': {
+      commonjs: '@coda/core',
+      commonjs2: '@coda/core',
+      amd: '@coda/core',
+      root: '@coda/core',
+    },
   },
 };
