@@ -1,0 +1,88 @@
+{
+  "name": "@coda/core",
+  "description": "Movement Analysis with Reactive Streams",
+  "version": "0.0.1",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
+    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules && npm run build-client",
+    "build-client": "cross-env BABEL_ENV=build webpack --config=webpack.browser.config.js --progress --hide-modules",
+    "lint": "eslint src test",
+    "test": "eslint src test benchmark && BABEL_ENV=test ava",
+    "test:coverage": "eslint src test && BABEL_ENV=test nyc --all --reporter=html ava --verbose",
+    "doc": "esdoc && cp -r demos docs/examples && cp -r dist docs/dist",
+    "benchmark": "ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
+  },
+  "dependencies": {
+    "@most/core": "^1.2.3",
+    "@most/disposable": "^1.1.0",
+    "@most/dom-event": "^2.0.0",
+    "@most/scheduler": "^1.1.0",
+    "colormap": "^2.3.0",
+    "complex-js": "^5.0.0",
+    "myo": "^3.0.0",
+    "tonal": "^1.1.3",
+    "vue": "^2.5.16",
+    "vue-awesome": "^3.0.0",
+    "vue-template-compiler": "^2.5.16",
+    "webpack-bundle-analyzer": "^2.11.3",
+    "xebra.js": "^1.2.2",
+    "xmm": "github:JulesFrancoise/xmmjs"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "benchmark": "^2.1.4",
+    "cross-env": "^5.1.5",
+    "css-loader": "^0.28.11",
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-inject-style-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.11.0",
+    "nyc": "^11.7.3",
+    "rimraf": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "vue-loader": "^15.0.10",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-merge": "^4.1.2",
+    "workerize-loader": "^1.0.2"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "source": [
+      "**/*.{js}",
+      "!dist/**/*"
+    ],
+    "concurrency": 5,
+    "failFast": false,
+    "failWithoutAssertions": false,
+    "powerAssert": false,
+    "modules": true,
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ]
+  }
+}

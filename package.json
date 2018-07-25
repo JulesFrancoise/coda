@@ -1,0 +1,25 @@
+{
+  "name": "@coda/monorepo",
+  "private": true,
+  "description": "Live-coding for movement interaction",
+  "scripts": {
+    "prepare": "npm run bootstrap && lerna run prepare",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean --yes",
+    "build": "lerna run build",
+    "dev": "lerna run dev --parallel",
+    "release": "lerna publish",
+    "test": "lerna run test",
+    "test:unit": "lerna run test:unit",
+    "test:lint": "lerna run test:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JulesFrancoise/coda"
+  },
+  "author": "me@julesfrancoise.com",
+  "license": "MIT",
+	"devDependencies": {
+		"lerna": "^2.11.0"
+	}
+}
