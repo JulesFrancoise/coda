@@ -4,21 +4,6 @@ import vm from 'vm';
 import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
 
-console.log('codaCore', codaCore);
-console.log('codaAudio', codaAudio);
-
-function addAaa(o) {
-  const c = o;
-  c.prototype.aaa = function aaa(x) {
-    return x + 2;
-  };
-}
-
-console.log('codaCore.Stream', codaCore.Stream);
-addAaa(codaCore.Stream);
-// codaCore.Stream.prototype.extend(addAdd);
-console.log('codaCore.Stream', codaCore.Stream);
-
 const defaultScheduler = codaCore.newDefaultScheduler();
 
 const findStream = sandbox => (stream) => {
