@@ -37,11 +37,13 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json'],
   },
   externals: {
-    '@coda/core': {
-      commonjs: '@coda/core',
-      commonjs2: '@coda/core',
-      amd: 'codaCore',
-      root: '@coda/core',
-    },
+    '@coda/core': '@coda/core',
+    '@most/core': '@most/core',
+    '@most/scheduler': '@most/scheduler',
+    '@most/prelude': '@most/prelude',
+    '@most/disposable': '@most/disposable',
+    colormap: 'colormap',
+    vue: 'vue',
+    'vue-template-compiler': 'vue-template-compiler',
   },
 };

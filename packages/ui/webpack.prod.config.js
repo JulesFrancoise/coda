@@ -20,48 +20,4 @@ module.exports = merge(common, {
     }),
   ],
   devtool: 'source-map',
-  externals: {
-    '@most/core': {
-      commonjs: '@most/core',
-      commonjs2: '@most/core',
-      amd: '@most/core',
-      root: '@most/core',
-    },
-    '@most/scheduler': {
-      commonjs: '@most/scheduler',
-      commonjs2: '@most/scheduler',
-      amd: '@most/scheduler',
-      root: '@most/scheduler',
-    },
-    '@most/prelude': {
-      commonjs: '@most/prelude',
-      commonjs2: '@most/prelude',
-      amd: '@most/prelude',
-      root: '@most/prelude',
-    },
-    '@most/disposable': {
-      commonjs: '@most/disposable',
-      commonjs2: '@most/disposable',
-      amd: '@most/disposable',
-      root: '@most/disposable',
-    },
-    colormap: {
-      commonjs: 'colormap',
-      commonjs2: 'colormap',
-      amd: 'colormap',
-      root: 'colormap',
-    },
-    vue: {
-      commonjs: 'vue',
-      commonjs2: 'vue',
-      amd: 'vue',
-      root: 'vue',
-    },
-    'vue-template-compiler': {
-      commonjs: 'vue-template-compiler',
-      commonjs2: 'vue-template-compiler',
-      amd: 'vue-template-compiler',
-      root: 'vue-template-compiler',
-    },
-  },
 });

@@ -21,4 +21,8 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.json'],
   },
+  externals: {
+    '@most/core': '@most/core',
+    '@most/scheduler': '@most/scheduler',
+  },
 };

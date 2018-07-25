@@ -29,4 +29,14 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.json'],
   },
+  externals: {
+    '@most/core': '@most/core',
+    '@most/scheduler': '@most/scheduler',
+    '@most/dom-event': '@most/dom-event',
+    '@most/prelude': '@most/prelude',
+    '@most/disposable': '@most/disposable',
+    'xebra.js': 'xebra.js',
+    myo: 'myo',
+    tonal: 'tonal',
+  },
 };
