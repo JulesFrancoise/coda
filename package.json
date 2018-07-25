@@ -4,9 +4,10 @@
   "description": "Live-coding for movement interaction",
   "scripts": {
     "prepare": "npm run bootstrap && lerna run prepare",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna clean --yes",
     "build": "lerna run build",
+    "build-client": "lerna run build-client",
     "dev": "lerna run dev --parallel",
     "release": "lerna publish",
     "test": "lerna run test",
@@ -19,7 +20,7 @@
   },
   "author": "me@julesfrancoise.com",
   "license": "MIT",
-	"devDependencies": {
-		"lerna": "^2.11.0"
-	}
+  "devDependencies": {
+    "lerna": "^2.11.0"
+  }
 }

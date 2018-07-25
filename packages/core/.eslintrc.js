@@ -4,7 +4,6 @@ module.exports = {
   env: {
     browser: true,
   },
-  plugins: ['html'],
   extends: 'airbnb-base',
   // add your custom rules here
   rules: {

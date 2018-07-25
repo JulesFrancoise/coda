@@ -40,7 +40,7 @@ module.exports = {
     '@coda/core': {
       commonjs: '@coda/core',
       commonjs2: '@coda/core',
-      amd: '@coda/core',
+      amd: 'codaCore',
       root: '@coda/core',
     },
   },

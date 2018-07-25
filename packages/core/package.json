@@ -8,12 +8,10 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
-    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules && npm run build-client",
-    "build-client": "cross-env BABEL_ENV=build webpack --config=webpack.browser.config.js --progress --hide-modules",
+    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
     "lint": "eslint src test",
     "test": "eslint src test benchmark && BABEL_ENV=test ava",
     "test:coverage": "eslint src test && BABEL_ENV=test nyc --all --reporter=html ava --verbose",
-    "doc": "esdoc && cp -r demos docs/examples && cp -r dist docs/dist",
     "benchmark": "ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
   },
   "dependencies": {
@@ -39,14 +37,8 @@
     "benchmark": "^2.1.4",
     "cross-env": "^5.1.5",
     "css-loader": "^0.28.11",
-    "esdoc": "^1.1.0",
-    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
-    "esdoc-inject-style-plugin": "^1.0.0",
-    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-html": "^4.0.3",
-    "eslint-plugin-import": "^2.11.0",
     "nyc": "^11.7.3",
     "rimraf": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.2.5",
