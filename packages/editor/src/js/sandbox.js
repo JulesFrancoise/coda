@@ -5,6 +5,7 @@ import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
 import * as codaUi from '@coda/ui';
 import * as codaMax from '@coda/max';
+import * as codaMyo from '@coda/myo';
 
 codaUi.setup(codaCore.Stream);
 codaMax.setup(codaCore.Stream);
@@ -115,6 +116,7 @@ function createSandbox() {
     codaAudio,
     codaUi,
     codaMax,
+    codaMyo,
     { streams: {}, synths: {} },
   );
   const sandbox = vm.createContext(s);

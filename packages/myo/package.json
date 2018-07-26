@@ -1,0 +1,19 @@
+{
+  "name": "@coda/myo",
+  "description": "Myo data source for CO/DA",
+  "version": "0.0.1",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
+    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
+    "lint": "eslint src test"
+  },
+  "dependencies": {
+    "@coda/core": "^0.0.1",
+    "@most/scheduler": "^1.2.1",
+    "myo": "^3.0.0"
+  }
+}

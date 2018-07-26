@@ -20,7 +20,6 @@
     "@most/dom-event": "^2.0.0",
     "@most/scheduler": "^1.2.1",
     "complex-js": "^5.0.0",
-    "myo": "^3.0.0",
     "tonal": "^1.1.3",
     "xmm": "github:JulesFrancoise/xmmjs"
   },

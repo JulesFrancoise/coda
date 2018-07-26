@@ -13,6 +13,7 @@
     "@coda/audio": "^0.0.1",
     "@coda/core": "^0.0.1",
     "@coda/max": "^0.0.1",
+    "@coda/myo": "^0.0.1",
     "@coda/ui": "^0.0.1",
     "codemirror": "^5.37.0",
     "escodegen": "^1.9.1",

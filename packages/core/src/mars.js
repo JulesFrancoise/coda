@@ -27,7 +27,6 @@ import train_ from './operator/ml/train';
 import recognize_ from './operator/ml/recognize';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
-import myo_ from './source/myo';
 import transport_ from './source/transport';
 import scalelearn_ from './operator/ml/scalelearn';
 import scale2_ from './operator/ml/scale2';
@@ -188,19 +187,6 @@ export const pack = streams =>
 /** @ignore */
 export const wavelet = (options, stream) =>
   new Stream(wavelet_(options, stream));
-
-/** @ignore */
-export const myo = (name) => {
-  const m = myo_(name);
-  return {
-    emg: new Stream(m.emg),
-    acc: new Stream(m.acc),
-    gyro: new Stream(m.gyro),
-    quat: new Stream(m.quat),
-    pose: new Stream(m.pose),
-    pose_off: new Stream(m.pose_off),
-  };
-};
 
 /** @ignore */
 export const transport = name =>

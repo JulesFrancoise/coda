@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: '@coda/core',
+    library: '@coda/myo',
   },
   module: {
     rules: [
@@ -22,11 +22,7 @@ module.exports = {
     extensions: ['*', '.js', '.json'],
   },
   externals: {
-    '@most/core': '@most/core',
+    '@coda/core': '@coda/core',
     '@most/scheduler': '@most/scheduler',
-    '@most/dom-event': '@most/dom-event',
-    '@most/prelude': '@most/prelude',
-    '@most/disposable': '@most/disposable',
-    tonal: 'tonal',
   },
 };
