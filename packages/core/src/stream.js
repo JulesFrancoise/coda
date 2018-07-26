@@ -28,7 +28,6 @@ import train from './operator/ml/train';
 import recognize from './operator/ml/recognize';
 import kicks from './operator/spectral/kicks';
 import wavelet from './operator/spectral/wavelet';
-import tomax from './sink/tomax';
 import scalelearn from './operator/ml/scalelearn';
 import scale2 from './operator/ml/scale2';
 import clusterize from './operator/ml/clusterize';
@@ -708,14 +707,6 @@ export default class Stream {
    */
   wavelet(options) {
     return new Stream(wavelet(options, this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  tomax(options) {
-    return new Stream(tomax(options, this));
   }
 
   /**

@@ -41,7 +41,6 @@ const solarCompletions = {
   wavelet: 'wavelet({ frequencyMin: 1, frequencyMax: 50, bandsPerOctave: 4, carrier: 5, optimisation: \'standard2\' })',
   // sources
   myo: 'myo()',
-  xebra: 'xebra(\'*\', \'localhost\')',
   transport: 'transport(\'4n\')',
   // ui
   plot: 'plot({ legend: \'\', stacked: false, fill: \'none\', duration: 5 })',

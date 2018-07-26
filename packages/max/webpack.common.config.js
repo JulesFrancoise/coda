@@ -7,22 +7,14 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: '@coda/core',
+    library: '@coda/max',
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader'],
-      },
-      {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
       },
     ],
   },
@@ -30,12 +22,8 @@ module.exports = {
     extensions: ['*', '.js', '.json'],
   },
   externals: {
+    '@coda/core': '@coda/core',
     '@most/core': '@most/core',
     '@most/scheduler': '@most/scheduler',
-    '@most/dom-event': '@most/dom-event',
-    '@most/prelude': '@most/prelude',
-    '@most/disposable': '@most/disposable',
-    myo: 'myo',
-    tonal: 'tonal',
   },
 };

@@ -4,8 +4,10 @@ import vm from 'vm';
 import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
 import * as codaUi from '@coda/ui';
+import * as codaMax from '@coda/max';
 
 codaUi.setup(codaCore.Stream);
+codaMax.setup(codaCore.Stream);
 
 const defaultScheduler = codaCore.newDefaultScheduler();
 
@@ -112,6 +114,7 @@ function createSandbox() {
     codaCore,
     codaAudio,
     codaUi,
+    codaMax,
     { streams: {}, synths: {} },
   );
   const sandbox = vm.createContext(s);

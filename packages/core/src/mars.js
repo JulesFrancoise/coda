@@ -29,8 +29,6 @@ import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
 import myo_ from './source/myo';
 import transport_ from './source/transport';
-import xebra_ from './source/xebra';
-import tomax_ from './sink/tomax';
 import scalelearn_ from './operator/ml/scalelearn';
 import scale2_ from './operator/ml/scale2';
 import clusterize_ from './operator/ml/clusterize';
@@ -205,16 +203,8 @@ export const myo = (name) => {
 };
 
 /** @ignore */
-export const xebra = channel =>
-  new Stream(xebra_(channel));
-
-/** @ignore */
 export const transport = name =>
   new Stream(transport_(name));
-
-/** @ignore */
-export const tomax = (options, stream) =>
-  new Stream(tomax_(options, stream));
 
 /** @ignore */
 export const scalelearn = source =>

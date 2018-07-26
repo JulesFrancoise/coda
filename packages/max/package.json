@@ -1,6 +1,6 @@
 {
-  "name": "@coda/audio",
-  "description": "Movement Analysis with Reactive Streams",
+  "name": "@coda/max",
+  "description": "CO/DA Communication with Cycling'74 Max",
   "version": "0.0.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
@@ -9,18 +9,14 @@
   "scripts": {
     "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
     "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
-    "lint": "eslint src test",
-    "test": "eslint src test benchmark && BABEL_ENV=test ava",
-    "test:coverage": "eslint src test && BABEL_ENV=test nyc --all --reporter=html ava --verbose"
+    "lint": "eslint src test"
   },
   "dependencies": {
+    "@coda/core": "^0.0.1",
     "@most/core": "^1.3.2",
-    "@most/scheduler": "^1.2.1",
-    "waves-audio": "^0.4.0",
-    "waves-loaders": "^0.1.5"
+    "@most/scheduler": "^1.2.1"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -31,35 +27,10 @@
     "cross-env": "^5.1.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "nyc": "^11.7.3",
     "rimraf": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3",
     "webpack-merge": "^4.1.2"
-  },
-  "ava": {
-    "files": [
-      "test/**/*.test.js"
-    ],
-    "source": [
-      "**/*.{js}",
-      "!dist/**/*"
-    ],
-    "concurrency": 5,
-    "failFast": false,
-    "failWithoutAssertions": false,
-    "powerAssert": false,
-    "modules": true,
-    "require": [
-      "babel-register",
-      "babel-polyfill"
-    ],
-    "babel": "inherit"
-  },
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ]
   }
 }
