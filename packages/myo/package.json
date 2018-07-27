@@ -15,5 +15,8 @@
     "@coda/core": "^0.0.1",
     "@most/scheduler": "^1.2.1",
     "myo": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.2.0"
   }
 }

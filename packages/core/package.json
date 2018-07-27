@@ -24,6 +24,9 @@
     "xmm": "github:JulesFrancoise/xmmjs"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
+    "benchmark": "^2.1.4",
+    "eslint": "^5.2.0",
     "workerize-loader": "^1.0.2"
   },
   "ava": {
