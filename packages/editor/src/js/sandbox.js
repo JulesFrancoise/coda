@@ -102,6 +102,7 @@ const clear = sandbox => async () => {
   });
   await Promise.all(proms);
   Object.keys(sandbox.synths).forEach((synthId) => {
+    sandbox.synths[synthId].synth.stop();
     sandbox.synths[synthId].synth.dispose();
   });
 };

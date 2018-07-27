@@ -1,15 +1,20 @@
 import * as wavesLoaders from 'waves-loaders';
 import * as wavesAudio from 'waves-audio';
-import BaseAudioEngine from '../core/base';
 import parseParameters from '../../../core/src/lib/common/parameters';
+import BaseAudioEngine from '../core/base';
+import PolyAudioEngine from '../core/poly';
 
 /**
  * Parameter definitions
  * @ignore
  */
 const definitions = {
+  voices: {
+    type: 'integer',
+    default: 1,
+  },
   file: {
-    type: 'string',
+    type: 'any',
     default: '',
   },
   period: {
@@ -102,92 +107,91 @@ export class GranularEngine extends BaseAudioEngine {
     this.granularEngine.connect(this.output);
     this.audioScheduler = wavesAudio.getScheduler();
     this.loader = new wavesLoaders.AudioBufferLoader();
-    this.disposeFuncs = [];
-    this.disposeFuncs.push(this.defineParameter(
+    this.defineParameter(
       'file',
       options.file,
       (value) => {
         this.load(value);
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'position',
       options.position,
       (value) => {
         this.granularEngine.position =
           value * this.granularEngine.bufferDuration;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'period',
       options.period,
       (value) => {
         this.granularEngine.periodAbs = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'duration',
       options.duration,
       (value) => {
         this.granularEngine.durationAbs = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'positionVar',
       options.positionVar,
       (value) => {
         this.granularEngine.positionVar = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'attackAbs',
       options.attackAbs,
       (value) => {
         this.granularEngine.attackAbs = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'attackRel',
       options.attackRel,
       (value) => {
         this.granularEngine.attackRel = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'releaseAbs',
       options.releaseAbs,
       (value) => {
         this.granularEngine.releaseAbs = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'releaseRel',
       options.releaseRel,
       (value) => {
         this.granularEngine.releaseRel = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'resampling',
       options.resampling,
       (value) => {
         this.granularEngine.resampling = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'resamplingVar',
       options.resamplingVar,
       (value) => {
         this.granularEngine.resamplingVar = value;
       },
-    ));
-    this.disposeFuncs.push(this.defineParameter(
+    );
+    this.defineParameter(
       'gain',
       options.gain,
       (value) => {
         this.granularEngine.gain = value;
       },
-    ));
+    );
   }
 
   /**
@@ -229,20 +233,65 @@ export class GranularEngine extends BaseAudioEngine {
     this.running = false;
     return this;
   }
+}
+
+/**
+ * Polyphonic granular engine definition
+ */
+export class PolyGranularEngine extends PolyAudioEngine {
+  constructor(options) {
+    const individualOptions = Array.from(Array(options.voices), (_, i) => {
+      const opt = {};
+      Object.keys(options).forEach((name) => {
+        if (Array.isArray(options[name])) {
+          opt[name] = options[name][i];
+        } else {
+          opt[name] = options[name];
+        }
+      });
+      return opt;
+    });
+    super(options.voices, GranularEngine, individualOptions);
+    this.defineParameter('file', options.file);
+    this.defineParameter('position', options.position);
+    this.defineParameter('period', options.period);
+    this.defineParameter('duration', options.duration);
+    this.defineParameter('positionVar', options.positionVar);
+    this.defineParameter('attackAbs', options.attackAbs);
+    this.defineParameter('attackRel', options.attackRel);
+    this.defineParameter('releaseAbs', options.releaseAbs);
+    this.defineParameter('releaseRel', options.releaseRel);
+    this.defineParameter('resampling', options.resampling);
+    this.defineParameter('resamplingVar', options.resamplingVar);
+    this.defineParameter('gain', options.gain);
+  }
 
   /**
-   * Properly dispose the synthesizer (terminate parameter streams)
+   * Start the synthesizer
+   * @return {GranularEngine} Granular engine instance
    */
-  dispose() {
-    this.stop();
-    this.disposeFuncs.forEach((f) => { f(); });
+  start() {
+    this.synths.forEach((x) => {
+      x.start();
+    });
+  }
+
+  /**
+   * Stop the synthesizer
+   * @return {GranularEngine} Granular engine instance
+   */
+  stop() {
+    this.synths.forEach((x) => {
+      x.stop();
+    });
   }
 }
 
 /**
- * Create a granular synthesizer
+ * Create a polyphonic granular synthesizer
  *
  * @param  {Object} [options={}] Granular synthesis parameters
+ * @param  {Number} [options.voices=1] Number of voices (polyphony)
  * @param  {String} [options.file=''] Default audio file
  * @param  {Number} [options.period=0.01] Grain period
  * @param  {Number} [options.duration=0.1] Grain duration
@@ -260,5 +309,5 @@ export class GranularEngine extends BaseAudioEngine {
  */
 export default function granular(options = {}) {
   const opts = parseParameters(definitions, options);
-  return new GranularEngine(opts);
+  return new PolyGranularEngine(opts);
 }

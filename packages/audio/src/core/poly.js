@@ -1,14 +1,19 @@
 import { audioContext } from 'waves-audio';
 import { runEffects, tap, takeWhile, throttle } from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
+import BaseAudioEngine from './base';
 
 /**
- * Base architecture for Audio engines accepting stream parameters
+ * Base architecture for Polyphonic Audio engines accepting stream parameters
  */
-export default class BaseAudioEngine {
-  constructor() {
-    this.output = audioContext.createGain();
-    this.disposeFuncs = [];
+export default class PolyAudioEngine extends BaseAudioEngine {
+  constructor(voices = 1, MonoSynthClass, options) {
+    super();
+    this.voices = voices;
+    this.synths = Array.from(Array(voices), (_, i) => new MonoSynthClass(options[i]));
+    this.synths.forEach((synth) => {
+      synth.connect(this.output);
+    });
   }
 
   /**
@@ -20,7 +25,15 @@ export default class BaseAudioEngine {
   }
 
   /**
-   * Connnect the audio engine to a given destination (AudioNode or Engin)
+   * Defines the object as a polyphonic synthesizer
+   * @type {Boolean}
+   */
+  get isPoly() { // eslint-disable-line
+    return true;
+  }
+
+  /**
+   * Connnect the audio engine to a given destination (AudioNode or Engine)
    * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
    * @return {BaseAudioEngine}
    */
@@ -65,12 +78,16 @@ export default class BaseAudioEngine {
    * @param {Function} callback     Callback function, called whenever a new
    * value is available for the parameter
    */
-  defineParameter(name, defaultValue, callback, throttleTime = 20) {
+  defineParameter(name, defaultValue, throttleTime = 20) {
     let current = defaultValue;
     let stream = null;
     let running = false;
+    let isArray = false;
     Object.defineProperty(this, name, {
       get() {
+        if (isArray) {
+          return this.synths.map(x => x[name]);
+        }
         return current;
       },
       async set(value) {
@@ -80,21 +97,50 @@ export default class BaseAudioEngine {
           stream = null;
         }
         if (value.isStream) {
+          // Handle streams of vectors? => for now yes...
           running = true;
           stream = runEffects(
             takeWhile(
               () => running,
-              tap(callback, throttle(throttleTime, value)),
+              tap((x) => {
+                if (Array.isArray(x)) {
+                  x.forEach((val, i) => {
+                    this.synths[i][name] = val;
+                  });
+                } else {
+                  this.synths.forEach((synth) => {
+                    const s = synth;
+                    s[name] = x;
+                  });
+                }
+              }, throttle(throttleTime, value)),
             ),
             newDefaultScheduler(),
           );
+        } else if (Array.isArray(value)) {
+          value.forEach((val, i) => {
+            this.synths[i][name] = val;
+          });
+          isArray = true;
         } else {
-          callback(value);
+          this.synths.forEach((synth) => {
+            const s = synth;
+            s[name] = value;
+          });
         }
         current = value;
       },
     });
-    callback(defaultValue);
+    if (Array.isArray(defaultValue)) {
+      defaultValue.forEach((val, i) => {
+        this.synths[i][name] = val;
+      });
+    } else {
+      this.synths.forEach((synth) => {
+        const s = synth;
+        s[name] = defaultValue;
+      });
+    }
     this.disposeFuncs.push(async () => {
       if (stream) {
         running = false;
@@ -102,12 +148,5 @@ export default class BaseAudioEngine {
         stream = null;
       }
     });
-  }
-
-  /**
-   * Properly dispose the synthesizer (terminate parameter streams)
-   */
-  dispose() {
-    this.disposeFuncs.forEach((f) => { f(); });
   }
 }
