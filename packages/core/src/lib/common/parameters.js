@@ -75,6 +75,23 @@ const paramTemplates = {
   },
 };
 
+Object.keys(paramTemplates).forEach((type) => {
+  paramTemplates[`array<${type}>`] = {
+    definitionTemplate: ['default'],
+    typeCheckFunction(value, definition, name) {
+      if (!Array.isArray(value)) {
+        throw new Error(`Invalid value for array<${type}> param "${name}": ${value} is not an array`);
+      }
+      try {
+        return value.map(x =>
+          paramTemplates[type].typeCheckFunction(x, definition, name));
+      } catch (e) {
+        throw new Error(`Invalid value for array<${type}> param "${name}": ${value}`);
+      }
+    },
+  };
+});
+
 /**
  * Create a parameters structure from a set of definitions and new values.
  *
@@ -110,26 +127,39 @@ export default function parseParameters(definitions, options = {}) {
 
   const params = paramList.map((name) => {
     const definition = definitions[name];
-
-    if (!paramTemplates[definition.type]) {
-      throw new Error(`Unknown param type "${definition.type}"`);
-    }
-
-    const {
-      definitionTemplate,
-      typeCheckFunction,
-    } = paramTemplates[definition.type];
-
-    definitionTemplate.forEach((key) => {
-      if (!Object.keys(definition).includes(key)) {
-        throw new Error(`Invalid definition for param "${name}", ${key} is not defined`);
+    const types = definition.type.split('|');
+    types.forEach((type) => {
+      if (!paramTemplates[type]) {
+        throw new Error(`Unknown param type "${type}"`);
       }
-    });
+      const { definitionTemplate } = paramTemplates[type];
 
-    const value = (optList.includes(name)) ?
-      typeCheckFunction(options[name], definition, name) :
-      definition.default;
-    return { [name]: value };
+      definitionTemplate.forEach((key) => {
+        if (!Object.keys(definition).includes(key)) {
+          throw new Error(`Invalid definition for param "${name}", ${key} is not defined`);
+        }
+      });
+    });
+    if (!optList.includes(name)) {
+      return { [name]: definition.default };
+    }
+    let error = new Error(`Invalid definition for param "${name}": type checking failed for all types.`);
+    for (let i = 0; i < types.length; i += 1) {
+      const type = types[i];
+
+      const { typeCheckFunction } = paramTemplates[type];
+
+      try {
+        const value = typeCheckFunction(options[name], definition, name);
+        return { [name]: value };
+      } catch (e) {
+        error = e;
+        if (types.length === 1) {
+          error = e;
+        }
+      }
+    }
+    throw error;
   }).reduce((p, o) => Object.assign({}, p, o), {});
 
   return params;

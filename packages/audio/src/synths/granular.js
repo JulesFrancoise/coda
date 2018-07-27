@@ -14,51 +14,51 @@ const definitions = {
     default: 1,
   },
   file: {
-    type: 'any',
+    type: 'string|array<string>',
     default: '',
   },
   period: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0.01,
   },
   duration: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0.1,
   },
   position: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0,
   },
   positionVar: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0.003,
   },
   attackAbs: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0,
   },
   attackRel: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0.5,
   },
   releaseAbs: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0,
   },
   releaseRel: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0.5,
   },
   resampling: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0,
   },
   resamplingVar: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 0,
   },
   gain: {
-    type: 'float',
+    type: 'float|array<float>',
     default: 1,
   },
   throttle: {

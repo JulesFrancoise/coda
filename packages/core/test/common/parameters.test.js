@@ -202,3 +202,48 @@ test('Any type', (t) => {
   });
   t.deepEqual(params, { a: [1, 2, 3] });
 });
+
+test('Array type', (t) => {
+  const definitions = {
+    a: {
+      type: 'array<float>',
+      default: [1, 2],
+    },
+  };
+  let values = { a: [3, 4, 5] };
+  let params;
+  t.notThrows(() => {
+    params = parseParameters(definitions, values);
+  });
+  t.deepEqual(params, values);
+  values = {};
+  t.notThrows(() => {
+    params = parseParameters(definitions, values);
+  });
+  t.deepEqual(params, { a: [1, 2] });
+});
+
+test('Multiple types', (t) => {
+  const definitions = {
+    a: {
+      type: 'float|string',
+      default: 1,
+    },
+  };
+  let values = { a: 'deux' };
+  let params;
+  t.notThrows(() => {
+    params = parseParameters(definitions, values);
+  });
+  t.deepEqual(params, values);
+  values = {};
+  t.notThrows(() => {
+    params = parseParameters(definitions, values);
+  });
+  t.deepEqual(params, { a: 1 });
+  values = { a: 3 };
+  t.notThrows(() => {
+    params = parseParameters(definitions, values);
+  });
+  t.deepEqual(params, values);
+});
