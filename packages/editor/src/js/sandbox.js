@@ -5,10 +5,12 @@ import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
 import * as codaUi from '@coda/ui';
 import * as codaMax from '@coda/max';
+import * as codaMidi from '@coda/midi';
 import * as codaMyo from '@coda/myo';
 
-codaUi.setup(codaCore.Stream);
 codaMax.setup(codaCore.Stream);
+codaMidi.setup(codaCore.Stream);
+codaUi.setup(codaCore.Stream);
 
 const defaultScheduler = codaCore.newDefaultScheduler();
 
@@ -117,6 +119,7 @@ function createSandbox() {
     codaAudio,
     codaUi,
     codaMax,
+    codaMidi,
     codaMyo,
     { streams: {}, synths: {} },
   );

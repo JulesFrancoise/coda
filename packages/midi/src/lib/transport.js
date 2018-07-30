@@ -1,5 +1,5 @@
 import { periodic, multicast } from '@most/core';
-import withAttr from './mixins';
+import { withAttr } from '@coda/core';
 
 /**
  * Global Transport Hashtable

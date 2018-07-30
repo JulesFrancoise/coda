@@ -18,9 +18,6 @@ import clip from './operator/mapping/clip';
 import cycle from './operator/mapping/cycle';
 import delta from './operator/mapping/delta';
 import dbtoa from './operator/mapping/dbtoa';
-import ftom from './operator/mapping/ftom';
-import mtof from './operator/mapping/mtof';
-import quantize from './operator/mapping/quantize';
 import rand from './operator/mapping/rand';
 import scale from './operator/mapping/scale';
 import autoscale from './operator/mapping/autoscale';
@@ -501,13 +498,6 @@ export default class Stream {
   }
 
   /**
-   * @return {Stream}
-   */
-  ftom() {
-    return new Stream(ftom(this));
-  }
-
-  /**
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -553,13 +543,6 @@ export default class Stream {
   /**
    * @return {Stream}
    */
-  mtof() {
-    return new Stream(mtof(this));
-  }
-
-  /**
-   * @return {Stream}
-   */
   mul(streams) {
     return new Stream(mul(this, streams));
   }
@@ -577,14 +560,6 @@ export default class Stream {
    */
   prod() {
     return new Stream(prod(this));
-  }
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  quantize(options) {
-    return new Stream(quantize(options, this));
   }
 
   /**

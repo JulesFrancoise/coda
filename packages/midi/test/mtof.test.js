@@ -1,8 +1,8 @@
 import test from 'ava';
-import mtof from '../../../src/operator/mapping/mtof';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../helper/assertions';
+import { withAttr } from '@coda/core';
+import mtof from '../src/operator/mtof';
+import { makeEventsFromArray, collectEventsFor } from '../../core/test/helper/testEnv';
+import { approxArrayEqual, allTrue } from '../../core/test/helper/assertions';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

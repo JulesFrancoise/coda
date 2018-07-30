@@ -1,8 +1,8 @@
 import test from 'ava';
+import { withAttr } from '@coda/core';
 import { Scale, Note, PcSet } from 'tonal';
-import quantize from '../../../src/operator/mapping/quantize';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import quantize from '../src/operator/quantize';
+import { makeEventsFromArray, collectEventsFor } from '../../core/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

@@ -1,8 +1,6 @@
 import { map } from '@most/core';
 import { Scale, Note } from 'tonal';
-import parseParameters from '../../lib/common/parameters';
-import validateStream from '../../lib/common/validation';
-import withAttr from '../../lib/common/mixins';
+import { parseParameters, validateStream, withAttr } from '@coda/core';
 
 /**
  * Parameter definitions

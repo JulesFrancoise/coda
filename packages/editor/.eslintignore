@@ -2,5 +2,6 @@ examples
 ../audio
 ../core
 ../max
+../midi
 ../myo
 ../ui

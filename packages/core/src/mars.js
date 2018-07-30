@@ -17,9 +17,6 @@ import clip_ from './operator/mapping/clip';
 import cycle_ from './operator/mapping/cycle';
 import delta_ from './operator/mapping/delta';
 import dbtoa_ from './operator/mapping/dbtoa';
-import ftom_ from './operator/mapping/ftom';
-import mtof_ from './operator/mapping/mtof';
-import quantize_ from './operator/mapping/quantize';
 import rand_ from './operator/mapping/rand';
 import scale_ from './operator/mapping/scale';
 import autoscale_ from './operator/mapping/autoscale';
@@ -27,7 +24,6 @@ import train_ from './operator/ml/train';
 import recognize_ from './operator/ml/recognize';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
-import transport_ from './source/transport';
 import scalelearn_ from './operator/ml/scalelearn';
 import scale2_ from './operator/ml/scale2';
 import clusterize_ from './operator/ml/clusterize';
@@ -77,10 +73,6 @@ export const force = (options, stream) =>
   new Stream(force_(options, stream));
 
 /** @ignore */
-export const ftom = stream =>
-  new Stream(ftom_(stream));
-
-/** @ignore */
 export const kicks = (options, stream) =>
   new Stream(kicks_(options, stream));
 
@@ -105,10 +97,6 @@ export const minmax = stream =>
   new Stream(reduce_.minmax(stream));
 
 /** @ignore */
-export const mtof = (options, stream) =>
-  new Stream(mtof_(options, stream));
-
-/** @ignore */
 export const mul = stream =>
   new Stream(elementwise_.mul(stream));
 
@@ -119,10 +107,6 @@ export const mvavrg = (options, stream) =>
 /** @ignore */
 export const prod = stream =>
   new Stream(reduce_.prod(stream));
-
-/** @ignore */
-export const quantize = (options, stream) =>
-  new Stream(quantize_(options, stream));
 
 /** @ignore */
 export const rand = (options, stream) =>
@@ -187,10 +171,6 @@ export const pack = streams =>
 /** @ignore */
 export const wavelet = (options, stream) =>
   new Stream(wavelet_(options, stream));
-
-/** @ignore */
-export const transport = name =>
-  new Stream(transport_(name));
 
 /** @ignore */
 export const scalelearn = source =>

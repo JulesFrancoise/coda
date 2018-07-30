@@ -1,8 +1,8 @@
 import test from 'ava';
-import ftom from '../../../src/operator/mapping/ftom';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../helper/assertions';
+import { withAttr } from '@coda/core';
+import ftom from '../src/operator/ftom';
+import { makeEventsFromArray, collectEventsFor } from '../../core/test/helper/testEnv';
+import { approxArrayEqual, allTrue } from '../../core/test/helper/assertions';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

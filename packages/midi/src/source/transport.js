@@ -1,5 +1,5 @@
 import { filter } from '@most/core';
-import { getTransport } from '../lib/common/transport';
+import { getTransport } from '../lib/transport';
 
 /**
  * Parse the midi interval to a number of beats (64th) to skip

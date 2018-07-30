@@ -1,6 +1,5 @@
 import { map } from '@most/core';
-import validateStream from '../../lib/common/validation';
-import withAttr from '../../lib/common/mixins';
+import { validateStream, withAttr } from '@coda/core';
 
 /**
  * Stream I/O Attributes Specification
