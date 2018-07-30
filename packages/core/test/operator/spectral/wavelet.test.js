@@ -48,7 +48,7 @@ test('Computes the Online CWT on a scalar stream', async (t) => {
   })(makeEventsFromArray(0, input));
   let stream;
   t.notThrows(() => {
-    stream = wavelet({ optimisation: 'none' }, a);
+    stream = wavelet({ frequencyMax: 50, optimisation: 'none' }, a);
   });
   t.is(stream.attr.format, 'vector');
   t.is(stream.attr.size, 23);
@@ -84,7 +84,7 @@ test('Computes the Online CWT on a vector stream', async (t) => {
   })(makeEventsFromArray(0, input));
   let stream;
   t.notThrows(() => {
-    stream = wavelet({ optimisation: 'none' }, a);
+    stream = wavelet({ frequencyMax: 50, optimisation: 'none' }, a);
   });
   t.is(stream.attr.format, 'vector');
   t.is(stream.attr.size, 23);
@@ -120,7 +120,7 @@ test('Computes the Online CWT on a scalar stream (standard optimisation)', async
   })(makeEventsFromArray(0, input));
   let stream;
   t.notThrows(() => {
-    stream = wavelet({ optimisation: 'standard2' }, a);
+    stream = wavelet({ frequencyMax: 50, optimisation: 'standard2' }, a);
   });
   t.is(stream.attr.format, 'vector');
   t.is(stream.attr.size, 23);
