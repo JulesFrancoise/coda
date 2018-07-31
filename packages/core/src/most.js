@@ -1,7 +1,6 @@
+import { Stream, withAttr } from '@coda/prelude';
 import * as most from '@most/core';
 import { domEvent } from '@most/dom-event';
-import Stream from './stream';
-import withAttr from './lib/common/mixins';
 
 /**
  * Create a Stream containing no events and ends immediately.

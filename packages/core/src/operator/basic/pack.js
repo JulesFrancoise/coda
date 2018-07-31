@@ -1,6 +1,5 @@
+import { validateStream, withAttr } from '@coda/prelude';
 import { sample } from '@most/core';
-import validateStream from '../../lib/common/validation';
-import withAttr from '../../lib/common/mixins';
 import pak from './pak';
 
 /**

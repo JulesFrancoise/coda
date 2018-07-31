@@ -13,7 +13,7 @@ export function generateContainerId() {
 }
 
 /**
- * Register a new container
+ * Register a new shared data container
  * @param  {String} id         Container Id
  * @param  {Object} attributes Container attributes
  * @return {Object}            The created container

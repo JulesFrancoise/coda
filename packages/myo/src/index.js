@@ -1,5 +1,5 @@
 /* esdoc-ignore */
-import { Stream } from '@coda/core';
+import { Stream } from '@coda/prelude';
 import myo_ from './myo';
 
 // eslint-disable-next-line import/prefer-default-export

@@ -1,9 +1,9 @@
+import { getContainer } from '@coda/prelude';
 import { now } from '@most/core';
 import { currentTime } from '@most/scheduler';
 import * as xmm from 'xmm';
 // eslint-disable-next-line
 import worker from 'workerize-loader?ready&name=xmm!./xmm.worker';
-import { getContainer } from '../../lib/common/container';
 
 /**
  * Trainer Sink

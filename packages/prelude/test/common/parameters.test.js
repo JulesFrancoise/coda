@@ -1,5 +1,5 @@
 import test from 'ava';
-import parseParameters from '../../src/lib/common/parameters';
+import parseParameters from '../../src/lib/parameters';
 
 test('Unknown parameters', (t) => {
   const definitions = {

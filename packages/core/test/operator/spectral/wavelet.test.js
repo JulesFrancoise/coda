@@ -1,8 +1,8 @@
 import test from 'ava';
 import { readFileSync } from 'fs';
+import { withAttr } from '@coda/prelude';
 import wavelet from '../../../src/operator/spectral/wavelet';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

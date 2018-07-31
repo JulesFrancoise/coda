@@ -1,6 +1,6 @@
 import * as wavesLoaders from 'waves-loaders';
 import * as wavesAudio from 'waves-audio';
-import parseParameters from '../../../core/src/lib/common/parameters';
+import { parseParameters } from '@coda/prelude';
 import BaseAudioEngine from '../core/base';
 import PolyAudioEngine from '../core/poly';
 

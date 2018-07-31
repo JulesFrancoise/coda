@@ -1,5 +1,5 @@
 /* esdoc-ignore */
-import { Stream } from '@coda/core';
+import { Stream } from '@coda/prelude';
 import heatmap_ from './ui/heatmap';
 import looper_ from './ui/looper';
 import plot_ from './ui/plot';

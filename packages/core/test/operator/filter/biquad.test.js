@@ -1,8 +1,8 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import biquad from '../../../src/operator/filter/biquad';
 import rand from '../../../src/operator/mapping/rand';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 // TODO: Add test to check the validity of the values
 

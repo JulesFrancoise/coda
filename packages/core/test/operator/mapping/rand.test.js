@@ -1,6 +1,6 @@
 import test from 'ava';
 import rand from '../../../src/operator/mapping/rand';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has no attributes', async (t) => {
   const a = makeEventsFromArray(0, []);

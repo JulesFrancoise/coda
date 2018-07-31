@@ -1,7 +1,7 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import select from '../../../src/operator/basic/select';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeRandomEvents, collectEventsFor } from '../../helper/testEnv';
+import { makeRandomEvents, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = withAttr({})(makeRandomEvents(100, 5));

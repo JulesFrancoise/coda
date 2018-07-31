@@ -1,5 +1,5 @@
+import { parseParameters, validateStream, withAttr } from '@coda/prelude';
 import { tap } from '@most/core';
-import { parseParameters, validateStream, withAttr } from '@coda/core';
 
 let wsocket;
 let connected = false;

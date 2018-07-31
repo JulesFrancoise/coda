@@ -1,7 +1,7 @@
 import * as wavesLoaders from 'waves-loaders';
 import { audioContext } from 'waves-audio';
+import { parseParameters } from '@coda/prelude';
 import BaseAudioEffect from '../core/effect';
-import parseParameters from '../../../core/src/lib/common/parameters';
 
 /**
  * Parameter definitions

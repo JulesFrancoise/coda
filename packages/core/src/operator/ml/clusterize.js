@@ -1,5 +1,5 @@
 import * as xmm from 'xmm';
-import parseParameters from '../../lib/common/parameters';
+import { parseParameters } from '@coda/prelude';
 
 /**
  * Parameter definitions

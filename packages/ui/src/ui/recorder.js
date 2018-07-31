@@ -4,7 +4,7 @@ import {
   validateStream,
   registerContainer,
   generateContainerId,
-} from '@coda/core';
+} from '@coda/prelude';
 import { disposeBoth } from '@most/disposable';
 import { currentTime } from '@most/scheduler';
 import recorderComponent from './Recorder.vue';

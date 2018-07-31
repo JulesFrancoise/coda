@@ -6,15 +6,10 @@
 /** @author John Hann */
 
 import { newScheduler, newTimeline, currentTime, delay } from '@most/scheduler';
-import {
-  propagateEventTask,
-  propagateEndTask,
-  runEffects,
-  tap,
-} from '@most/core';
+import { propagateEventTask, propagateEndTask, runEffects, tap } from '@most/core';
 import { disposeWith, disposeNone } from '@most/disposable';
 import VirtualTimer from './VirtualTimer';
-import withAttr from '../../src/lib/common/mixins';
+import withAttr from '../../src/lib/with_attr';
 
 export function newEnv() {
   const timer = new VirtualTimer();

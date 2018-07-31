@@ -1,10 +1,10 @@
+import { CircularBuffer } from '@coda/prelude';
 import Complex from 'complex-js';
 import MorletWavelet, {
   frequency2scale,
   scale2frequency,
 } from './morlet';
 import LowpassFilter from './lowpass';
-import CircularBuffer from '../common/circular_buffer';
 
 /**
  * Real-time implementation of the Continuous Wavelet Transform, using the

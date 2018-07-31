@@ -1,7 +1,7 @@
+import { withAttr } from '@coda/prelude';
 import { iterations, size, params } from './options';
 import wavelet from '../../src/operator/spectral/wavelet';
-import withAttr from '../../src/lib/common/mixins';
-import { makeRandomEvents, collectEventsFor } from '../../test/helper/testEnv';
+import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({
   format: 'vector',

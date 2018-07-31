@@ -1,5 +1,5 @@
 import { iterations, size, value } from './options';
-import CircularBuffer from '../../src/lib/common/circular_buffer';
+import CircularBuffer from '../../src/lib/circular_buffer';
 
 function benchmark() {
   const p = new CircularBuffer(50);
@@ -7,7 +7,7 @@ function benchmark() {
   for (let i = 0; i < iterations; i += 1) {
     p.push(value);
     // eslint-disable-next-line
-    p.forEach((x, j) => {
+    p.values().forEach((x, j) => {
       y += x * j;
     });
   }
@@ -15,6 +15,6 @@ function benchmark() {
 }
 
 export default suite => suite.add(
-  `CircularBuffer # ${iterations} x ${size}`,
+  `CircularBuffer / values # ${iterations} x ${size}`,
   benchmark,
 );

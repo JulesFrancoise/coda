@@ -1,5 +1,5 @@
 /* esdoc-ignore */
-import { Stream } from '@coda/core';
+import { Stream } from '@coda/prelude';
 import ftom_ from './operator/ftom';
 import mtof_ from './operator/mtof';
 import quantize_ from './operator/quantize';

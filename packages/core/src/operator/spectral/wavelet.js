@@ -1,7 +1,5 @@
+import { parseParameters, validateStream, withAttr } from '@coda/prelude';
 import { map } from '@most/core';
-import parseParameters from '../../lib/common/parameters';
-import validateStream from '../../lib/common/validation';
-import withAttr from '../../lib/common/mixins';
 import WaveletFilterbank from '../../lib/wavelet';
 
 /**

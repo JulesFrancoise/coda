@@ -1,6 +1,5 @@
+import { validateStream, withAttr } from '@coda/prelude';
 import { scan } from '@most/core';
-import validateStream from '../../lib/common/validation';
-import withAttr from '../../lib/common/mixins';
 
 /**
  * Stream I/O Attributes Specification

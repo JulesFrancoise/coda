@@ -1,4 +1,4 @@
-import validateStream from '../../lib/common/validation';
+import { validateStream } from '@coda/prelude';
 
 /**
  * Stream I/O Attributes Specification

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { parseParameters, validateStream } from '@coda/core';
+import { parseParameters, validateStream } from '@coda/prelude';
 import { disposeBoth } from '@most/disposable';
 import heatmapComponent from './Heatmap.vue';
 

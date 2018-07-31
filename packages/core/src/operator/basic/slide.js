@@ -1,5 +1,4 @@
-import parseParameters from '../../lib/common/parameters';
-import validateStream from '../../lib/common/validation';
+import { validateStream, parseParameters } from '@coda/prelude';
 
 /**
  * Parameter definitions

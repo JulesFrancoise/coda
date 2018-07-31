@@ -1,4 +1,4 @@
-import Stream from './stream';
+import { Stream } from '@coda/prelude';
 import * as elementwise_ from './operator/basic/elementwise';
 import * as meanstd_ from './operator/basic/meanstd';
 import pak_ from './operator/basic/pak';

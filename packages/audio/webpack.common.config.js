@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['*', '.js', '.json'],
   },
   externals: {
+    '@coda/prelude': '@coda/prelude',
     '@most/core': '@most/core',
     '@most/scheduler': '@most/scheduler',
   },

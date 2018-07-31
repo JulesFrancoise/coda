@@ -1,6 +1,6 @@
+import { parseParameters, validateStream, withAttr } from '@coda/prelude';
 import { map } from '@most/core';
 import { Scale, Note } from 'tonal';
-import { parseParameters, validateStream, withAttr } from '@coda/core';
 
 /**
  * Parameter definitions

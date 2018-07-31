@@ -1,7 +1,7 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import clip from '../../../src/operator/mapping/clip';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has no attributes', async (t) => {
   const a = makeEventsFromArray(0, []);

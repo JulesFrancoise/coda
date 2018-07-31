@@ -1,5 +1,5 @@
+import { validateStream, withAttr } from '@coda/prelude';
 import { map } from '@most/core';
-import { validateStream, withAttr } from '@coda/core';
 
 /**
  * Stream I/O Attributes Specification

@@ -1,7 +1,7 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import { mean, std, meanstd } from '../../../src/operator/basic/meanstd';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   [mean, std, meanstd].forEach((f) => {

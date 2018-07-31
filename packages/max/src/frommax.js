@@ -1,5 +1,5 @@
+import { parseParameters } from '@coda/prelude';
 import { currentTime } from '@most/scheduler';
-import { parseParameters } from '@coda/core';
 
 let wsocket;
 let connected = false;
@@ -64,8 +64,8 @@ function tryEvent(t, x, sink) {
  * Receive data from Max
  *
  * @param  {Object}  [options={}]                   Options
- * @param  {Stringn} [options.hostname='localhost'] Hostname (ws server)
- * @param  {Stringn} [options.channel='mars']       Channel name
+ * @param  {string} [options.hostname='localhost'] Hostname (ws server)
+ * @param  {string} [options.channel='mars']       Channel name
  * @return {Stream}                                 Unchanged stream
  */
 export default function fromMax(options = {}) {

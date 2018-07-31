@@ -22,8 +22,7 @@ module.exports = {
     extensions: ['*', '.js', '.json'],
   },
   externals: {
-    '@coda/core': '@coda/core',
+    '@coda/prelude': '@coda/prelude',
     '@most/core': '@most/core',
-    tonal: 'tonal',
   },
 };

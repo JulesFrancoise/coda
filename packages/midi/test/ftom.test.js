@@ -1,8 +1,8 @@
 import test from 'ava';
-import { withAttr } from '@coda/core';
+import { withAttr } from '@coda/prelude';
 import ftom from '../src/operator/ftom';
-import { makeEventsFromArray, collectEventsFor } from '../../core/test/helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../core/test/helper/assertions';
+import { makeEventsFromArray, collectEventsFor } from '../../prelude/test/helper/testEnv';
+import { approxArrayEqual, allTrue } from '../../prelude/test/helper/assertions';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

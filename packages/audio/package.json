@@ -12,6 +12,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@coda/prelude": "^0.0.1",
     "@most/core": "^1.3.2",
     "@most/scheduler": "^1.2.1",
     "waves-audio": "^0.4.0",

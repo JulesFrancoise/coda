@@ -1,5 +1,5 @@
 import * as xmm from 'xmm';
-import parseParameters from '../../lib/common/parameters';
+import { parseParameters } from '@coda/prelude';
 
 /**
  * Parameter definitions
@@ -90,7 +90,6 @@ class RecognizerSink {
   }
 
   error(t, e) {
-    console.log('Error', t, e);
     return this.sink.error(t, e);
   }
 }

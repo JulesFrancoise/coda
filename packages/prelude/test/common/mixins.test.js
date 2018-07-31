@@ -1,5 +1,5 @@
 import test from 'ava';
-import withAttr from '../../src/lib/common/mixins';
+import withAttr from '../../src/lib/with_attr';
 
 test('Attach attributes to a stream', (t) => {
   const stream = Object.create({});

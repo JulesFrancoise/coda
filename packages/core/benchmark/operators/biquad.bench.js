@@ -1,7 +1,7 @@
+import { withAttr } from '@coda/prelude';
 import { iterations, size } from './options';
 import biquad from '../../src/operator/filter/biquad';
-import withAttr from '../../src/lib/common/mixins';
-import { makeRandomEvents, collectEventsFor } from '../../test/helper/testEnv';
+import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({
   type: 'emg',

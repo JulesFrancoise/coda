@@ -1,5 +1,5 @@
 import test from 'ava';
-import validateStream from '../../src/lib/common/validation';
+import validateStream from '../../src/lib/validation';
 
 test('Required attributes', (t) => {
   const specification = {

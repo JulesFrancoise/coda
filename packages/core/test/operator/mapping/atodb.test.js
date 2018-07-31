@@ -1,8 +1,8 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import atodb from '../../../src/operator/mapping/atodb';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../helper/assertions';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
+import { approxArrayEqual, allTrue } from '../../../../prelude/test/helper/assertions';
 
 test('Throws if the input stream has invalid attributes', async (t) => {
   let a = makeEventsFromArray(0, []);

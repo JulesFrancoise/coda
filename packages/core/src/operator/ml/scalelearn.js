@@ -1,5 +1,4 @@
-import validateStream from '../../lib/common/validation';
-import { getContainer } from '../../lib/common/container';
+import { getContainer, validateStream } from '@coda/prelude';
 
 const specification = {
   format: {

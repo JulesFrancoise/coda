@@ -1,7 +1,7 @@
 import test from 'ava';
+import { withAttr } from '@coda/prelude';
 import cycle from '../../../src/operator/mapping/cycle';
-import withAttr from '../../../src/lib/common/mixins';
-import { makeEventsFromArray, collectEventsFor } from '../../helper/testEnv';
+import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
 test('Throws if the buffer is invalid', (t) => {
   let a = makeEventsFromArray(0, []);
