@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
-    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
+    "dev": "cross-env BABEL_ENV=build NODE_ENV=development rollup -c -w",
+    "build": "cross-env BABEL_ENV=build  NODE_ENV=production rollup -c",
     "lint": "eslint src test",
     "test": "eslint src test && BABEL_ENV=test ava",
     "test:coverage": "eslint src test && BABEL_ENV=test nyc --all --reporter=html ava --verbose"
@@ -20,7 +21,9 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "eslint": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "rollup": "^0.63.5"
   },
   "ava": {
     "files": [

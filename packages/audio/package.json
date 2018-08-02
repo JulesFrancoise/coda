@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
-    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
+    "dev": "cross-env BABEL_ENV=build NODE_ENV=development rollup -c -w",
+    "build": "cross-env BABEL_ENV=build  NODE_ENV=production rollup -c",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -19,6 +20,9 @@
     "waves-loaders": "^0.1.5"
   },
   "devDependencies": {
-    "eslint": "^5.2.0"
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "rollup": "^0.63.5"
   }
 }

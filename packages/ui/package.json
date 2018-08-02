@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "dev": "cross-env BABEL_ENV=build webpack --config=webpack.dev.config.js --watch",
-    "build": "cross-env BABEL_ENV=build webpack --config=webpack.prod.config.js --progress --hide-modules",
+    "dev": "cross-env BABEL_ENV=build NODE_ENV=development rollup -c -w",
+    "build": "cross-env BABEL_ENV=build  NODE_ENV=production rollup -c",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -21,10 +22,12 @@
     "vue-template-compiler": "^2.5.16"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "eslint": "^5.2.0",
     "eslint-plugin-html": "^4.0.3",
     "eslint-plugin-import": "^2.11.0",
-    "vue-loader": "^15.0.10"
+    "rollup": "^0.63.5",
+    "rollup-plugin-vue": "^4.3.2"
   }
 }

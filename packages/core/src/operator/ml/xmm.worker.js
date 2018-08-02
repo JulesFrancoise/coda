@@ -16,7 +16,7 @@ function recreateTrainingSet(trainingSet) {
   return ts;
 }
 
-export function trainGMM(trainingSet, configuration) {
+function trainGMM(trainingSet, configuration) {
   try {
     const params = xmm.trainMulticlassGMM(
       recreateTrainingSet(trainingSet),
@@ -32,7 +32,7 @@ export function trainGMM(trainingSet, configuration) {
   return null;
 }
 
-export function trainHMM(trainingSet, configuration) {
+function trainHMM(trainingSet, configuration) {
   try {
     const params = xmm.trainMulticlassHMM(
       recreateTrainingSet(trainingSet),
@@ -47,3 +47,13 @@ export function trainHMM(trainingSet, configuration) {
   }
   return null;
 }
+
+onmessage = function onmessage(e) {
+  const { trainingSet, configuration, type } = e.data;
+  const f = type === 'gmm' ? trainGMM : trainHMM;
+  const params = f(trainingSet, configuration);
+  postMessage({
+    type: 'model',
+    params,
+  });
+};

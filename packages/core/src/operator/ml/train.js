@@ -2,24 +2,30 @@ import { getContainer } from '@coda/prelude';
 import { now } from '@most/core';
 import { currentTime } from '@most/scheduler';
 import * as xmm from 'xmm';
-// eslint-disable-next-line
-import worker from 'workerize-loader?ready&name=xmm!./xmm.worker';
 
 /**
  * Trainer Sink
  * @private
  */
 class TrainerSink {
-  constructor(containerId, trainingMethod, configuration, sink, scheduler) {
+  constructor(containerId, modelType, configuration, sink, scheduler) {
     this.sink = sink;
     this.scheduler = scheduler;
     this.container = getContainer(containerId);
-    this.trainingMethod = trainingMethod;
+    this.modelType = modelType;
     this.configuration = configuration;
     this.trainingSet = xmm.TrainingSet({
       inputDimension: this.container.attributes.size,
     });
-    this.instance = worker();
+    this.worker = new Worker('xmm.worker.js');
+    this.worker.onmessage = (e) => {
+      if (e.data.type === 'error') {
+        throw new Error(e.data.message);
+      }
+      if (e.data.type === 'model') {
+        this.sink.event(currentTime(this.scheduler), e.data.params);
+      }
+    };
   }
 
   event(t, x) {
@@ -33,15 +39,11 @@ class TrainerSink {
         p.push(frame);
       });
     });
-    this.instance.onmessage = function onmessage(e) {
-      if (e.data.type === 'error') {
-        throw new Error(e.data.message);
-      }
-    };
-    this.instance[this.trainingMethod](this.trainingSet, this.configuration)
-      .then((params) => {
-        this.sink.event(currentTime(this.scheduler), params);
-      });
+    this.worker.postMessage({
+      type: this.modelType,
+      trainingSet: this.trainingSet,
+      configuration: this.configuration,
+    });
   }
 
   end(t) {
@@ -91,11 +93,11 @@ export default function train(options = { type: 'GMM' }, source) {
     covarianceMode: 'full',
   }, options, { regularization });
   const { type } = configuration;
-  let trainingMethod;
+  let modelType;
   if (type === 'GMM') {
-    trainingMethod = 'trainGMM';
+    modelType = 'gmm';
   } else if (type === 'HMM' || type === 'HHMM') {
-    trainingMethod = 'trainHMM';
+    modelType = 'hmm';
   } else {
     throw new Error('`train`: unknown model type');
   }
@@ -107,7 +109,7 @@ export default function train(options = { type: 'GMM' }, source) {
     run(sink, scheduler) {
       const trainerSink = new TrainerSink(
         containerId,
-        trainingMethod,
+        modelType,
         configuration,
         sink,
         scheduler,
