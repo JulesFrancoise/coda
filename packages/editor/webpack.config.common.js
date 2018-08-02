@@ -22,7 +22,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: './examples', to: './examples' },
+      { from: './examples/**/*.js', to: './examples/', flatten: true },
       { from: './media/**/*.wav', to: './media/', flatten: true },
       { from: './src/index.html', to: './index.html' },
       { from: './src/css', to: './css' },

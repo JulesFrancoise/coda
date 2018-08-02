@@ -1,3 +1,10 @@
 node_modules
 dist
-media/local
+
+examples/*
+!examples/_default
+!examples/README.md
+
+media/*
+!media/_default
+!media/README.md
