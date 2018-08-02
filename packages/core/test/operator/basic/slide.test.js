@@ -1,47 +1,33 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import slide from '../../../src/operator/basic/slide';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
-test('Throws if the input stream has invalid attributes', (t) => {
+test('Throws if the input stream has invalid attributes', () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    slide({}, a);
-  });
+  expect(() => slide({}, a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    slide({}, a);
-  });
+  expect(() => slide({}, a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    slide({}, a);
-  });
+  expect(() => slide({}, a)).toThrow();
   a = withAttr({ format: 'scalar', size: 1 })(a);
-  t.notThrows(() => {
-    slide({}, a);
-  });
+  slide({}, a);
   a = withAttr({ format: 'vector', size: 10 })(a);
-  t.notThrows(() => {
-    slide({}, a);
-  });
+  slide({}, a);
 });
 
-test('Computes a sliding window on a scalar stream', async (t) => {
+test('Computes a sliding window on a scalar stream', async () => {
   const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const a = withAttr({
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = slide({ size: 5 }, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 5);
+  const stream = slide({ size: 5 }, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(5);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
+    expect(value instanceof Array).toBeTruthy();
   });
   const expected = [
     [1],
@@ -55,10 +41,10 @@ test('Computes a sliding window on a scalar stream', async (t) => {
     [5, 6, 7, 8, 9],
     [6, 7, 8, 9, 10],
   ];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Computes a sliding window on a vector stream', async (t) => {
+test('Computes a sliding window on a vector stream', async () => {
   const input = [
     [1, 10],
     [2, 9],
@@ -75,16 +61,13 @@ test('Computes a sliding window on a vector stream', async (t) => {
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = slide({ size: 5 }, a);
-  });
-  t.is(stream.attr.format, 'array');
-  t.is(stream.attr.size, 10);
+  const stream = slide({ size: 5 }, a);
+  expect(stream.attr.format).toBe('array');
+  expect(stream.attr.size).toBe(10);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
-    value.forEach(v => t.true(v instanceof Array));
+    expect(value instanceof Array).toBeTruthy();
+    value.forEach(v => expect(v instanceof Array).toBeTruthy());
   });
   const expected = [
     [[1, 10]],
@@ -98,10 +81,10 @@ test('Computes a sliding window on a vector stream', async (t) => {
     [[5, 6], [6, 5], [7, 4], [8, 3], [9, 2]],
     [[6, 5], [7, 4], [8, 3], [9, 2], [10, 1]],
   ];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Computes a sliding window with a hop size on a vector stream', async (t) => {
+test('Computes a sliding window with a hop size on a vector stream', async () => {
   const input = [
     [1, 10],
     [2, 9],
@@ -118,16 +101,13 @@ test('Computes a sliding window with a hop size on a vector stream', async (t) =
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = slide({ size: 5, hop: 3 }, a);
-  });
-  t.is(stream.attr.format, 'array');
-  t.is(stream.attr.size, 10);
+  const stream = slide({ size: 5, hop: 3 }, a);
+  expect(stream.attr.format).toBe('array');
+  expect(stream.attr.size).toBe(10);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
-    value.forEach(v => t.true(v instanceof Array));
+    expect(value instanceof Array).toBeTruthy();
+    value.forEach(v => expect(v instanceof Array).toBeTruthy());
   });
   const expected = [
     [[1, 10]],
@@ -135,5 +115,5 @@ test('Computes a sliding window with a hop size on a vector stream', async (t) =
     [[3, 8], [4, 7], [5, 6], [6, 5], [7, 4]],
     [[6, 5], [7, 4], [8, 3], [9, 2], [10, 1]],
   ];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });

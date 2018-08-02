@@ -1,19 +1,16 @@
-import test from 'ava';
 import validateStream from '../../src/lib/validation';
 
-test('Required attributes', (t) => {
+test('Required attributes', () => {
   const specification = {
     a: {
       required: true,
     },
   };
   const values = {};
-  t.throws(() => {
-    validateStream('a', specification, values);
-  });
+  expect(() => validateStream('a', specification, values)).toThrow();
 });
 
-test('No type checking', (t) => {
+test('No type checking', () => {
   const specification = {
     a: {
       required: true,
@@ -21,77 +18,54 @@ test('No type checking', (t) => {
     },
   };
   const values = { a: 'un' };
-  let attr;
-  t.notThrows(() => {
-    attr = validateStream('a', specification, values);
-  });
-  t.deepEqual(attr, values);
+  const attr = validateStream('a', specification, values);
+  expect(attr).toEqual(values);
 });
 
-test('Enum type checking', (t) => {
+test('Enum type checking', () => {
   const specification = {
     a: {
       required: true,
       check: ['un', 'deux'],
     },
   };
-  let attr;
-  t.notThrows(() => {
-    attr = validateStream('a', specification, { a: 'un' });
-  });
-  t.deepEqual(attr, { a: 'un' });
-  t.throws(() => {
-    validateStream('a', specification, { a: 'trois' });
-  });
+  const attr = validateStream('a', specification, { a: 'un' });
+  expect(attr).toEqual({ a: 'un' });
+  expect(() => validateStream('a', specification, { a: 'trois' })).toThrow();
 });
 
-test('Min/Max type checking', (t) => {
+test('Min/Max type checking', () => {
   const specification = {
     a: {
       required: true,
       check: { min: 0, max: 3 },
     },
   };
-  let attr;
-  t.notThrows(() => {
-    attr = validateStream('a', specification, { a: 2 });
-  });
-  t.deepEqual(attr, { a: 2 });
-  t.throws(() => {
-    validateStream('a', specification, { a: -1 });
-  });
-  t.throws(() => {
-    validateStream('a', specification, { a: 4 });
-  });
+  const attr = validateStream('a', specification, { a: 2 });
+  expect(attr).toEqual({ a: 2 });
+  expect(() => validateStream('a', specification, { a: -1 })).toThrow();
+  expect(() => validateStream('a', specification, { a: 4 })).toThrow();
 });
 
-test('Functional type checking', (t) => {
+test('Functional type checking', () => {
   const specification = {
     a: {
       required: true,
       check: x => Math.log2(x) === Math.floor(Math.log2(x)),
     },
   };
-  let attr;
-  t.notThrows(() => {
-    attr = validateStream('a', specification, { a: 8 });
-  });
-  t.deepEqual(attr, { a: 8 });
-  t.throws(() => {
-    validateStream('a', specification, { a: 3 });
-  });
+  const attr = validateStream('a', specification, { a: 8 });
+  expect(attr).toEqual({ a: 8 });
+  expect(() => validateStream('a', specification, { a: 3 })).toThrow();
 });
 
-test('Transformation', (t) => {
+test('Transformation', () => {
   const specification = {
     a: {
       required: true,
       transform: x => 2 * x,
     },
   };
-  let attr;
-  t.notThrows(() => {
-    attr = validateStream('a', specification, { a: 8 });
-  });
-  t.deepEqual(attr, { a: 16 });
+  const attr = validateStream('a', specification, { a: 8 });
+  expect(attr).toEqual({ a: 16 });
 });

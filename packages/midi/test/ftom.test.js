@@ -1,34 +1,22 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import ftom from '../src/operator/ftom';
 import { makeEventsFromArray, collectEventsFor } from '../../prelude/test/helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../prelude/test/helper/assertions';
 
-test('Throws if the input stream has invalid attributes', async (t) => {
+test('Throws if the input stream has invalid attributes', async () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    ftom(a);
-  });
+  expect(() => ftom(a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    ftom(a);
-  });
+  expect(() => ftom(a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    ftom(a);
-  });
+  expect(() => ftom(a)).toThrow();
   a = withAttr({ format: 'scalar', size: 1 })(a);
-  t.notThrows(() => {
-    ftom(a);
-  });
+  ftom(a);
   a = withAttr({ format: 'vector', size: 10 })(a);
-  t.notThrows(() => {
-    ftom(a);
-  });
+  ftom(a);
 });
 
-test('Convert a scalar stream of frequencies to MIDI notes', async (t) => {
+test('Convert a scalar stream of frequencies to MIDI notes', async () => {
   const input = [
     65.4063913251,
     69.2956577442,
@@ -41,21 +29,21 @@ test('Convert a scalar stream of frequencies to MIDI notes', async (t) => {
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = ftom(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = ftom(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
+    expect(typeof value).toBe('number');
   });
   const expected = [36, 37, 38, 39, 48, 49];
-  t.true(allTrue(approxArrayEqual(result.map(x => x.value), expected, 1e-3)));
+  expect(result.length).toBe(expected.length);
+  result.map(x => x.value).forEach((res, i) => {
+    expect(res).toBeCloseTo(expected[i]);
+  });
 });
 
-test('Convert a vector stream of MIDI notes to frequencies', async (t) => {
+test('Convert a vector stream of MIDI notes to frequencies', async () => {
   const input = [
     [65.4063913251, 69.2956577442],
     [73.4161919794, 77.7817459305],
@@ -65,20 +53,20 @@ test('Convert a vector stream of MIDI notes to frequencies', async (t) => {
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = ftom(a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 2);
+  const stream = ftom(a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(input.length, stream);
   const expected = [
     [36, 37],
     [38, 39],
     [48, 49],
   ];
+  expect(result.length).toBe(expected.length);
   result.forEach(({ value }, i) => {
-    t.true(value instanceof Array);
-    t.true(allTrue(approxArrayEqual(value, expected[i], 1e-3)));
+    expect(value instanceof Array).toBeTruthy();
+    value.forEach((val, j) => {
+      expect(val).toBeCloseTo(expected[i][j]);
+    });
   });
 });

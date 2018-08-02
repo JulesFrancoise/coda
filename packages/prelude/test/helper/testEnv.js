@@ -6,6 +6,7 @@
 /** @author John Hann */
 
 import { newScheduler, newTimeline, currentTime, delay } from '@most/scheduler';
+// eslint-disable-next-line
 import { propagateEventTask, propagateEndTask, runEffects, tap } from '@most/core';
 import { disposeWith, disposeNone } from '@most/disposable';
 import VirtualTimer from './VirtualTimer';

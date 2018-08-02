@@ -1,61 +1,52 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import clip from '../../../src/operator/mapping/clip';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
-test('Throws if the input stream has no attributes', async (t) => {
+test('Throws if the input stream has no attributes', async () => {
   const a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    clip({}, a);
-  });
+  expect(() => clip({}, a)).toThrow();
 });
 
-test('With default options, clip to [0, 1]', async (t) => {
+test('With default options, clip to [0, 1]', async () => {
   const input = [0.4, 3, -1, 0.7];
   const a = withAttr({
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = clip({}, a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = clip({}, a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
-    t.true(value >= 0);
-    t.true(value <= 1);
+    expect(typeof value).toBe('number');
+    expect(value).toBeGreaterThanOrEqual(0);
+    expect(value).toBeLessThanOrEqual(1);
   });
   const expected = [0.4, 1, 0, 0.7];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Clip to [min, max]', async (t) => {
+test('Clip to [min, max]', async () => {
   const input = [0.4, 3, -2, 0.7, 5];
   const a = withAttr({
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = clip({ min: -1, max: 4 }, a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = clip({ min: -1, max: 4 }, a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
-    t.true(value >= -1);
-    t.true(value <= 4);
+    expect(typeof value).toBe('number');
+    expect(value).toBeGreaterThanOrEqual(-1);
+    expect(value).toBeLessThanOrEqual(4);
   });
   const expected = [0.4, 3, -1, 0.7, 4];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Applies to vector streams', async (t) => {
+test('Applies to vector streams', async () => {
   const input = [
     [0.4, 0.4],
     [3, 3],
@@ -67,18 +58,15 @@ test('Applies to vector streams', async (t) => {
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = clip({ min: -1, max: 4 }, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 2);
+  const stream = clip({ min: -1, max: 4 }, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
+    expect(value instanceof Array).toBeTruthy();
     value.forEach((v) => {
-      t.true(v >= -1);
-      t.true(v <= 4);
+      expect(v).toBeGreaterThanOrEqual(-1);
+      expect(v).toBeLessThanOrEqual(4);
     });
   });
   const expected = [
@@ -88,5 +76,5 @@ test('Applies to vector streams', async (t) => {
     [0.7, 4],
     [4, 4],
   ];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });

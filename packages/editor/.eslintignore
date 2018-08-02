@@ -1,4 +1,6 @@
 examples
+src/js/jshint.js
+src/js/sublime_keymap.js
 ../audio
 ../core
 ../max

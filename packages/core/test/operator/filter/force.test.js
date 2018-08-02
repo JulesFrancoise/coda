@@ -1,45 +1,34 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import { readFileSync } from 'fs';
 import force from '../../../src/operator/filter/force';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 import { approxArrayEqual, allTrue } from '../../../../prelude/test/helper/assertions';
 
-test('Throws if the input stream has invalid attributes', async (t) => {
+test('Throws if the input stream has invalid attributes', async () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    force({}, a);
-  });
+  expect(() => force({}, a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    force({}, a);
-  });
+  expect(() => force({}, a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    force({}, a);
-  });
+  expect(() => force({}, a)).toThrow();
   a = withAttr({
     type: 'emg',
     format: 'scalar',
     size: 1,
     samplerate: 200,
   })(a);
-  t.notThrows(() => {
-    force({}, a);
-  });
+  force({}, a);
   a = withAttr({
     type: 'emg',
     format: 'vector',
     size: 10,
     samplerate: 200,
   })(a);
-  t.notThrows(() => {
-    force({}, a);
-  });
+  force({}, a);
 });
 
-test('Extracts the force from a scalar stream of EMG Data', async (t) => {
+test('Extracts the force from a scalar stream of EMG Data', async () => {
   const emg = readFileSync('./test/data/emg.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
@@ -50,16 +39,13 @@ test('Extracts the force from a scalar stream of EMG Data', async (t) => {
     size: 1,
     samplerate: 200,
   })(makeEventsFromArray(0, emg));
-  let stream;
-  t.notThrows(() => {
-    stream = force({ logdiff: -2, logjump: -10 }, a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
-  t.is(stream.attr.samplerate, 200);
+  const stream = force({ logdiff: -2, logjump: -10 }, a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
+  expect(stream.attr.samplerate).toBe(200);
   const result = await collectEventsFor(emg.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
+    expect(typeof value).toBe('number');
   });
   const mubuForce = readFileSync('./test/data/force.txt', 'utf8')
     .split('\n')
@@ -71,10 +57,10 @@ test('Extracts the force from a scalar stream of EMG Data', async (t) => {
     0.02,
   ).reduce((y, x) => y + x, 0.0);
   // Check that 90% of the prediction is correct (to allow numerical errors)
-  t.true(percentCorrect / result.length > 0.9);
+  expect(percentCorrect / result.length > 0.9).toBeTruthy();
 });
 
-test('Extracts the force from a vector stream of EMG Data', async (t) => {
+test('Extracts the force from a vector stream of EMG Data', async () => {
   const emg = readFileSync('./test/data/emg.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
@@ -85,16 +71,13 @@ test('Extracts the force from a vector stream of EMG Data', async (t) => {
     size: 4,
     samplerate: 200,
   })(makeEventsFromArray(0, emg));
-  let stream;
-  t.notThrows(() => {
-    stream = force({ logdiff: -2, logjump: -10 }, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 4);
-  t.is(stream.attr.samplerate, 200);
+  const stream = force({ logdiff: -2, logjump: -10 }, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(4);
+  expect(stream.attr.samplerate).toBe(200);
   const result = await collectEventsFor(emg.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
+    expect(value instanceof Array).toBeTruthy();
   });
   const mubuForce = readFileSync('./test/data/force.txt', 'utf8')
     .split('\n')
@@ -104,5 +87,5 @@ test('Extracts the force from a vector stream of EMG Data', async (t) => {
     allTrue(approxArrayEqual(value, mubuForce[i], 0.02)))
     .reduce((y, x) => y + x, 0.0);
   // Check that 90% of the prediction is correct (to allow numerical errors)
-  t.true(percentCorrect / result.length > 0.9);
+  expect(percentCorrect / result.length > 0.9).toBeTruthy();
 });

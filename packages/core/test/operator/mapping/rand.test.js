@@ -1,46 +1,37 @@
-import test from 'ava';
 import rand from '../../../src/operator/mapping/rand';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
-test('Throws if the input stream has no attributes', async (t) => {
+test('Throws if the input stream has no attributes', async () => {
   const a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    rand({}, a);
-  });
+  expect(() => rand({}, a)).toThrow();
 });
 
-test('With default options, returns a scalar stream', async (t) => {
+test('With default options, returns a scalar stream', async () => {
   const input = [null, null, null];
   const a = makeEventsFromArray(0, input);
-  let stream;
-  t.notThrows(() => {
-    stream = rand({}, a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = rand({}, a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
+    expect(typeof value).toBe('number');
   });
 });
 
 
-test('With size > 1, returns a vector stream', async (t) => {
+test('With size > 1, returns a vector stream', async () => {
   const input = [null, null, null];
   const a = makeEventsFromArray(0, input);
-  let stream;
-  t.notThrows(() => {
-    stream = rand({ size: 3 }, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 3);
+  const stream = rand({ size: 3 }, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(3);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
-    t.is(value.length, 3);
+    expect(value instanceof Array).toBeTruthy();
+    expect(value.length).toBe(3);
     value.forEach((v) => {
-      t.is(typeof v, 'number');
+      expect(typeof v).toBe('number');
     });
   });
 });

@@ -11,8 +11,7 @@
     "dev": "cross-env BABEL_ENV=build NODE_ENV=development rollup -c -w",
     "build": "cross-env BABEL_ENV=build  NODE_ENV=production rollup -c",
     "lint": "eslint src test",
-    "test": "eslint src test && BABEL_ENV=test ava",
-    "test:coverage": "eslint src test && BABEL_ENV=test nyc --all --reporter=html ava --verbose",
+    "test": "jest",
     "benchmark": "ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
   },
   "dependencies": {
@@ -20,34 +19,10 @@
     "@most/scheduler": "^1.2.1"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
     "benchmark": "^2.1.4",
     "cross-env": "^5.2.0",
     "eslint": "^5.2.0",
+    "jest": "^23.4.2",
     "rollup": "^0.63.5"
-  },
-  "ava": {
-    "files": [
-      "test/**/*.test.js"
-    ],
-    "source": [
-      "**/*.{js}",
-      "!dist/**/*"
-    ],
-    "concurrency": 5,
-    "failFast": false,
-    "failWithoutAssertions": false,
-    "powerAssert": false,
-    "modules": true,
-    "require": [
-      "babel-register",
-      "babel-polyfill"
-    ],
-    "babel": "inherit"
-  },
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ]
   }
 }

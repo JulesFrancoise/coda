@@ -5,17 +5,13 @@
   "scripts": {
     "prepare": "npm run bootstrap && lerna run prepare",
     "bootstrap": "lerna bootstrap --hoist",
-    "clean": "lerna clean --yes",
     "build": "lerna run build",
     "watch": "NODE_ENV=development BABEL_ENV=build rollup -c -w",
-    "build-client": "lerna run build-client",
-    "dev": "concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgGreen.bold\" \"npm run watch\" \"cd packages/editor && yarn dev\"",
-    "dev2": "concurrently --kill-others \"npm run watch\" \"lerna run dev --scope=@coda/editor\"",
+    "dev": "concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run watch\" \"cd packages/editor && yarn dev\"",
     "lint": "lerna run lint",
     "release": "lerna publish",
-    "test": "lerna run test",
-    "test:unit": "lerna run test:unit",
-    "test:lint": "lerna run test:lint"
+    "test": "lerna run test --stream",
+    "clean": "lerna clean --yes && rm -rf `find packages -type d -name dist` && rm -rf `find packages -type d -name coverage`"
   },
   "repository": {
     "type": "git",
@@ -37,7 +33,6 @@
     "cross-env": "^5.2.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "lerna": "^2.11.0",
-    "nyc": "^11.7.3",
     "rimraf": "^2.6.2",
     "rollup": "^0.63.5",
     "rollup-plugin-analyzer": "^2.1.0",

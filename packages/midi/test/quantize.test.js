@@ -1,111 +1,88 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import { Scale, Note, PcSet } from 'tonal';
 import quantize from '../src/operator/quantize';
 import { makeEventsFromArray, collectEventsFor } from '../../prelude/test/helper/testEnv';
 
-test('Throws if the input stream has invalid attributes', async (t) => {
+test('Throws if the input stream has invalid attributes', async () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    quantize({}, a);
-  });
+  expect(() => quantize({}, a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    quantize({}, a);
-  });
+  expect(() => quantize({}, a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    quantize({}, a);
-  });
+  expect(() => quantize({}, a)).toThrow();
   a = withAttr({ format: 'scalar', size: 1 })(a);
-  t.notThrows(() => {
-    quantize({}, a);
-  });
+  quantize({}, a);
   a = withAttr({ format: 'vector', size: 100 })(a);
-  t.notThrows(() => {
-    quantize({}, a);
-  });
+  quantize({}, a);
 });
 
-test('Throws if the input stream has invalid parameters', async (t) => {
+test('Throws if the input stream has invalid parameters', async () => {
   let a = makeEventsFromArray(0, []);
   a = withAttr({ format: 'vector', size: 10 })(a);
-  t.throws(() => {
-    quantize({ scale: 'notAScale' }, a);
-  });
+  expect(() => quantize({ scale: 'notAScale' }, a)).toThrow();
 });
 
-test('Quantizes a scalar stream', async (t) => {
+test('Quantizes a scalar stream', async () => {
   const input = Array.from(Array(128), (_, i) => i + 0.2);
   const a = withAttr({
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
   const options = {
     scale: 'D aeolian',
     mode: 'floor',
   };
-  t.notThrows(() => {
-    stream = quantize(options, a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = quantize(options, a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(1, stream);
   result.forEach(({ value }) => {
-    t.true(PcSet.includes(Scale.notes(options.scale), Note.fromMidi(value)));
+    expect(PcSet.includes(Scale.notes(options.scale), Note.fromMidi(value))).toBeTruthy();
   });
 });
 
-
-test('Quantizes a vector stream', async (t) => {
+test('Quantizes a vector stream', async () => {
   const input = Array.from(Array(128), (_, i) => [i + 0.2, 127 - i]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
   const options = {
     scale: 'D bebop',
     mode: 'round',
   };
-  t.notThrows(() => {
-    stream = quantize(options, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 2);
+  const stream = quantize(options, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(1, stream);
   result.forEach(({ value }) => {
     value.forEach((v) => {
-      t.true(PcSet.includes(Scale.notes(options.scale), Note.fromMidi(v)));
+      expect(PcSet.includes(Scale.notes(options.scale), Note.fromMidi(v))).toBeTruthy();
     });
   });
 });
 
-test('Quantizes a vector stream to a given range', async (t) => {
+test('Quantizes a vector stream to a given range', async () => {
   const input = Array.from(Array(128), (_, i) => [i + 0.2, 127 - i]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
   const options = {
     scale: 'C major',
     mode: 'ceil',
     octavemin: 4,
     octavemax: 5,
   };
-  t.notThrows(() => {
-    stream = quantize(options, a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 2);
+  const stream = quantize(options, a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(1, stream);
   result.forEach(({ value }) => {
     value.forEach((v) => {
-      t.true(Note.oct(Note.fromMidi(v)) >= 4);
-      t.true(Note.oct(Note.fromMidi(v)) <= 5);
+      expect(Note.oct(Note.fromMidi(v)) >= 4).toBeTruthy();
+      expect(Note.oct(Note.fromMidi(v)) <= 5).toBeTruthy();
     });
   });
 });

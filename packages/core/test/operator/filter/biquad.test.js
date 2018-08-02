@@ -1,4 +1,3 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import biquad from '../../../src/operator/filter/biquad';
 import rand from '../../../src/operator/mapping/rand';
@@ -19,31 +18,21 @@ const filterTypes = [
   'highshelf',
 ];
 
-test('Throws if the input stream has invalid attributes', async (t) => {
+test('Throws if the input stream has invalid attributes', async () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    biquad({}, a);
-  });
+  expect(() => biquad({}, a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    biquad({}, a);
-  });
+  expect(() => biquad({}, a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    biquad({}, a);
-  });
+  expect(() => biquad({}, a)).toThrow();
   a = withAttr({ format: 'scalar', size: 1, samplerate: 100 })(a);
-  t.notThrows(() => {
-    biquad({}, a);
-  });
+  biquad({}, a);
   a = withAttr({ format: 'vector', size: 10, samplerate: 100 })(a);
-  t.notThrows(() => {
-    biquad({}, a);
-  });
+  biquad({}, a);
 });
 
-test('Filters a scalar stream', async (t) => {
+test('Filters a scalar stream', async () => {
   const input = new Array(100).fill(null);
   const a = withAttr({
     format: 'scalar',
@@ -51,21 +40,18 @@ test('Filters a scalar stream', async (t) => {
     samplerate: 100,
   })(makeEventsFromArray(0, input));
   filterTypes.forEach((filterType) => {
-    let stream;
-    t.notThrows(() => {
-      stream = biquad({ type: filterType, f0: 0.5 }, rand({}, a));
-    });
-    t.is(stream.attr.format, 'scalar');
-    t.is(stream.attr.size, 1);
+    const stream = biquad({ type: filterType, f0: 0.5 }, rand({}, a));
+    expect(stream.attr.format).toBe('scalar');
+    expect(stream.attr.size).toBe(1);
     collectEventsFor(input.length, stream).then((result) => {
       result.forEach(({ value }) => {
-        t.is(typeof value, 'number');
+        expect(typeof value).toBe('number');
       });
     });
   });
 });
 
-test('Filters a Vector stream', async (t) => {
+test('Filters a Vector stream', async () => {
   const input = new Array(100).fill(null);
   const a = withAttr({
     format: 'vector',
@@ -73,16 +59,13 @@ test('Filters a Vector stream', async (t) => {
     samplerate: 100,
   })(makeEventsFromArray(0, input));
   filterTypes.forEach((filterType) => {
-    let stream;
-    t.notThrows(() => {
-      stream = biquad({ type: filterType, f0: 0.5 }, rand({ size: 2 }, a));
-    });
-    t.is(stream.attr.format, 'vector');
-    t.is(stream.attr.size, 2);
+    const stream = biquad({ type: filterType, f0: 0.5 }, rand({ size: 2 }, a));
+    expect(stream.attr.format).toBe('vector');
+    expect(stream.attr.size).toBe(2);
     collectEventsFor(input.length, stream).then((result) => {
       result.forEach(({ value }) => {
-        t.true(value instanceof Array);
-        value.forEach(v => t.is(typeof v, 'number'));
+        expect(value instanceof Array).toBeTruthy();
+        value.forEach(v => expect(typeof v).toBe('number'));
       });
     });
   });

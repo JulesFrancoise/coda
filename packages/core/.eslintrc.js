@@ -3,6 +3,7 @@ module.exports = {
   parser: 'babel-eslint',
   env: {
     browser: true,
+    jest: true
   },
   extends: 'airbnb-base',
   // add your custom rules here

@@ -1,142 +1,104 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import reduce, { sum, prod, min, max, minmax } from '../../../src/operator/basic/reduce';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
 
-test('Throws if the input stream has invalid attributes', async (t) => {
+test('Throws if the input stream has invalid attributes', async () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    reduce((s, x) => s + x, 0, a);
-  });
+  expect(() => reduce((s, x) => s + x, 0, a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    reduce((s, x) => s + x, 0, a);
-  });
+  expect(() => reduce((s, x) => s + x, 0, a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    reduce((s, x) => s + x, 0, a);
-  });
+  expect(() => reduce((s, x) => s + x, 0, a)).toThrow();
   a = withAttr({ format: 'vector', size: 100 })(a);
-  t.notThrows(() => {
-    reduce((s, x) => s + x, 0, a);
-  });
+  reduce((s, x) => s + x, 0, a);
   [sum, prod, min, max, minmax].forEach((f) => {
     delete a.attr;
-    t.throws(() => {
-      f(a);
-    });
+    expect(() => f(a)).toThrow();
     a = withAttr({ format: 'wrong' })(a);
-    t.throws(() => {
-      f(a);
-    });
+    expect(() => f(a)).toThrow();
     a = withAttr({ format: 'scalar' })(a);
-    t.throws(() => {
-      f(a);
-    });
+    expect(() => f(a)).toThrow();
     a = withAttr({ format: 'vector', size: 100 })(a);
-    t.notThrows(() => {
-      f(a);
-    });
+    f(a);
   });
 });
 
-test('Reduce the values of a vector stream', async (t) => {
+test('Reduce the values of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = reduce((s, x) => s.concat([x]), [], a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = reduce((s, x) => s.concat([x]), [], a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(result.map(x => x.value), input);
+  expect(result.map(x => x.value)).toEqual(input);
 });
 
 
-test('[sum] sums the values of a vector stream', async (t) => {
+test('[sum] sums the values of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = sum(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = sum(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(result.map(x => x.value), input.map(([x, y]) => x + y));
+  expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => x + y));
 });
 
-test('[prod] multiplies the values of a vector stream', async (t) => {
+test('[prod] multiplies the values of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = prod(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = prod(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(result.map(x => x.value), input.map(([x, y]) => x * y));
+  expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => x * y));
 });
 
-test('[min] compute the minimum of a vector stream', async (t) => {
+test('[min] compute the minimum of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = min(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = min(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(result.map(x => x.value), input.map(([x, y]) => Math.min(x, y)));
+  expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => Math.min(x, y)));
 });
 
-test('[max] compute the maximum of a vector stream', async (t) => {
+test('[max] compute the maximum of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = max(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = max(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(result.map(x => x.value), input.map(([x, y]) => Math.max(x, y)));
+  expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => Math.max(x, y)));
 });
 
-test('[minmax] compute the min/max of a vector stream', async (t) => {
+test('[minmax] compute the min/max of a vector stream', async () => {
   const input = Array.from(Array(100), () => [Math.random(), Math.random()]);
   const a = withAttr({
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = minmax(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = minmax(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
-  t.deepEqual(
-    result.map(x => x.value),
-    input.map(([x, y]) => [Math.min(x, y), Math.max(x, y)]),
-  );
+  expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => [Math.min(x, y), Math.max(x, y)]));
 });

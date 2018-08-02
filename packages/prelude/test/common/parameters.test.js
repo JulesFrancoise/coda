@@ -1,7 +1,6 @@
-import test from 'ava';
 import parseParameters from '../../src/lib/parameters';
 
-test('Unknown parameters', (t) => {
+test('Unknown parameters', () => {
   const definitions = {
     a: {
       type: 'float',
@@ -9,36 +8,30 @@ test('Unknown parameters', (t) => {
     },
   };
   const values = { b: 2 };
-  t.throws(() => {
-    parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Unknown parameter type', (t) => {
+test('Unknown parameter type', () => {
   const definitions = {
     a: {
       type: 'unknown type',
     },
   };
   const values = {};
-  t.throws(() => {
-    parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Missing default', (t) => {
+test('Missing default', () => {
   const definitions = {
     a: {
       type: 'float',
     },
   };
   const values = { a: 3.2 };
-  t.throws(() => {
-    parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Boolean type', (t) => {
+test('Boolean type', () => {
   const definitions = {
     a: {
       type: 'boolean',
@@ -50,18 +43,13 @@ test('Boolean type', (t) => {
     },
   };
   let values = { a: true };
-  let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: true, b: true });
+  const params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: true, b: true });
   values = { a: true, b: 4.1 };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Integer type', (t) => {
+test('Integer type', () => {
   const definitions = {
     a: {
       type: 'integer',
@@ -76,22 +64,16 @@ test('Integer type', (t) => {
   };
   let values = { a: 3, b: 13 };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 3, b: 10 });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 3, b: 10 });
   values = { a: 3, b: -120 };
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 3, b: -23 });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 3, b: -23 });
   values = { a: 3.2 };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Float type', (t) => {
+test('Float type', () => {
   const definitions = {
     a: {
       type: 'float',
@@ -106,22 +88,16 @@ test('Float type', (t) => {
   };
   let values = { a: 3.2, b: 4.1 };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 3.2, b: 1 });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 3.2, b: 1 });
   values = { a: 3.2, b: -120 };
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 3.2, b: 0 });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 3.2, b: 0 });
   values = { a: false, b: 'blah' };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('String type', (t) => {
+test('String type', () => {
   const definitions = {
     a: {
       type: 'string',
@@ -130,22 +106,16 @@ test('String type', (t) => {
   };
   let values = { a: 'test' };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
   values = {};
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 'blah' });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 'blah' });
   values = { a: 12 };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Enum type', (t) => {
+test('Enum type', () => {
   const definitions = {
     a: {
       type: 'enum',
@@ -155,35 +125,25 @@ test('Enum type', (t) => {
   };
   let values = { a: 'deux' };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
   values = {};
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 'trois' });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 'trois' });
   values = { a: 'blah' };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
   values = { a: 12 };
-  t.throws(() => {
-    params = parseParameters(definitions, values);
-  });
+  expect(() => parseParameters(definitions, values)).toThrow();
   const definitions2 = {
     a: {
       type: 'enum',
       default: 'trois',
     },
   };
-  t.throws(() => {
-    params = parseParameters(definitions2, {});
-  });
+  expect(() => parseParameters(definitions2, {})).toThrow();
 });
 
-test('Any type', (t) => {
+test('Any type', () => {
   const definitions = {
     a: {
       type: 'any',
@@ -192,18 +152,14 @@ test('Any type', (t) => {
   };
   let values = { a: 'deux' };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
   values = {};
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: [1, 2, 3] });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: [1, 2, 3] });
 });
 
-test('Array type', (t) => {
+test('Array type', () => {
   const definitions = {
     a: {
       type: 'array<float>',
@@ -212,18 +168,18 @@ test('Array type', (t) => {
   };
   let values = { a: [3, 4, 5] };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
   values = {};
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: [1, 2] });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: [1, 2] });
+  values = { a: 1 };
+  expect(() => parseParameters(definitions, values)).toThrow();
+  values = { a: ['un', 'deux'] };
+  expect(() => parseParameters(definitions, values)).toThrow();
 });
 
-test('Multiple types', (t) => {
+test('Multiple types', () => {
   const definitions = {
     a: {
       type: 'float|string',
@@ -232,18 +188,12 @@ test('Multiple types', (t) => {
   };
   let values = { a: 'deux' };
   let params;
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
   values = {};
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, { a: 1 });
+  params = parseParameters(definitions, values);
+  expect(params).toEqual({ a: 1 });
   values = { a: 3 };
-  t.notThrows(() => {
-    params = parseParameters(definitions, values);
-  });
-  t.deepEqual(params, values);
+  params = parseParameters(definitions, values);
+  expect(params).toEqual(values);
 });

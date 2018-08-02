@@ -1,54 +1,39 @@
-import test from 'ava';
 import { withAttr } from '@coda/prelude';
 import accum from '../../../src/operator/mapping/accum';
 import { makeEventsFromArray, collectEventsFor } from '../../../../prelude/test/helper/testEnv';
-import { approxArrayEqual, allTrue } from '../../../../prelude/test/helper/assertions';
 
-test('Throws if the input stream has invalid attributes', (t) => {
+test('Throws if the input stream has invalid attributes', () => {
   let a = makeEventsFromArray(0, []);
   delete a.attr;
-  t.throws(() => {
-    accum(a);
-  });
+  expect(() => accum(a)).toThrow();
   a = withAttr({ format: 'wrong' })(a);
-  t.throws(() => {
-    accum(a);
-  });
+  expect(() => accum(a)).toThrow();
   a = withAttr({ format: 'scalar' })(a);
-  t.throws(() => {
-    accum(a);
-  });
+  expect(() => accum(a)).toThrow();
   a = withAttr({ format: 'scalar', size: 1 })(a);
-  t.notThrows(() => {
-    accum(a);
-  });
+  accum(a);
   a = withAttr({ format: 'vector', size: 10 })(a);
-  t.notThrows(() => {
-    accum(a);
-  });
+  accum(a);
 });
 
-test('Accumulate the values of a scalar stream', async (t) => {
+test('Accumulate the values of a scalar stream', async () => {
   const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const a = withAttr({
     format: 'scalar',
     size: 1,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = accum(a);
-  });
-  t.is(stream.attr.format, 'scalar');
-  t.is(stream.attr.size, 1);
+  const stream = accum(a);
+  expect(stream.attr.format).toBe('scalar');
+  expect(stream.attr.size).toBe(1);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.is(typeof value, 'number');
+    expect(typeof value).toBe('number');
   });
   const expected = [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55];
-  t.deepEqual(result.map(x => x.value), expected);
+  expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Computes a moving average on a vector stream', async (t) => {
+test('Computes a moving average on a vector stream', async () => {
   const input = [
     [1, 1],
     [2, 0.9],
@@ -65,16 +50,13 @@ test('Computes a moving average on a vector stream', async (t) => {
     format: 'vector',
     size: 2,
   })(makeEventsFromArray(0, input));
-  let stream;
-  t.notThrows(() => {
-    stream = accum(a);
-  });
-  t.is(stream.attr.format, 'vector');
-  t.is(stream.attr.size, 2);
+  const stream = accum(a);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }) => {
-    t.true(value instanceof Array);
-    value.forEach(v => t.is(typeof v, 'number'));
+    expect(value instanceof Array).toBeTruthy();
+    value.forEach(v => expect(typeof v).toBe('number'));
   });
   const expected = [
     [0, 0],
@@ -89,7 +71,9 @@ test('Computes a moving average on a vector stream', async (t) => {
     [45, 5.4],
     [55, 5.5],
   ];
-  for (let i = 0; i < expected.length; i += 1) {
-    t.true(allTrue(approxArrayEqual(result[i].value, expected[i], 1e-5)));
-  }
+  result.forEach(({ value }, i) => {
+    value.forEach((val, j) => {
+      expect(val).toBeCloseTo(expected[i][j]);
+    });
+  });
 });

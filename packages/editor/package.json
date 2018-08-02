@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "build": "webpack --config=webpack.prod.config.js",
-    "dev": "webpack-dev-server --config=webpack.dev.config.js --open"
+    "dev": "webpack-dev-server --config=webpack.dev.config.js --open",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@coda/audio": "^0.0.1",
