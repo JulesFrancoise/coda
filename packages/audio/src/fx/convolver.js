@@ -12,19 +12,29 @@ const definitions = {
     type: 'string',
     default: '',
   },
+  filePrefix: {
+    type: 'string',
+    default: '/media/',
+  },
+  fileExt: {
+    type: 'string',
+    default: 'flac',
+  },
 };
 
 /**
  * Convolver audio effect
  */
 class Convolver extends BaseAudioEffect {
-  constructor(file) {
+  constructor(options) {
     super();
     this.loader = new wavesLoaders.AudioBufferLoader();
+    this.filePrefix = options.filePrefix;
+    this.fileExt = options.fileExt;
     this.convolver = audioContext.createConvolver();
     this.input.connect(this.convolver);
     this.convolver.connect(this.wet);
-    this.defineParameter('file', file, x => this.load(x), 200);
+    this.defineParameter('file', options.file, x => this.load(x), 200);
   }
 
   /**
@@ -32,7 +42,7 @@ class Convolver extends BaseAudioEffect {
    * @param  {String} filename File name (in /media)
    */
   load(filename) {
-    const audioFile = `/media/${filename}.wav`;
+    const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
     this.loader.load(audioFile).then((loaded) => {
       this.convolver.buffer = loaded;
     }).catch((err) => {
@@ -45,11 +55,13 @@ class Convolver extends BaseAudioEffect {
 /**
  * Create a Convolver effect
  *
- * @param  {Object} [options={}]      Convolution parameters
- * @param  {String} [options.file=''] Default audio file
- * @return {Convolver}                Convolution engine
+ * @param  {Object} [options={}]            Convolution parameters
+ * @param  {String} [options.file='']       Default audio file
+ * @param  {String} [options.filePrefix=''] Address where audio files are stored
+ * @param  {String} [options.fileExt='']    Audio files extension
+ * @return {Convolver}                      Convolution engine
  */
 export default function convolver(options = {}) {
   const opts = parseParameters(definitions, options);
-  return new Convolver(opts.file);
+  return new Convolver(opts);
 }

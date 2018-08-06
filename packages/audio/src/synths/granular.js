@@ -17,6 +17,14 @@ const definitions = {
     type: 'string|array<string>',
     default: '',
   },
+  filePrefix: {
+    type: 'string',
+    default: '/media/',
+  },
+  fileExt: {
+    type: 'string',
+    default: 'flac',
+  },
   period: {
     type: 'float|array<float>',
     default: 0.01,
@@ -107,6 +115,8 @@ export class GranularEngine extends BaseAudioEngine {
     this.granularEngine.connect(this.output);
     this.audioScheduler = wavesAudio.getScheduler();
     this.loader = new wavesLoaders.AudioBufferLoader();
+    this.filePrefix = options.filePrefix;
+    this.fileExt = options.fileExt;
     this.defineParameter(
       'file',
       options.file,
@@ -200,7 +210,7 @@ export class GranularEngine extends BaseAudioEngine {
    * @return {GranularEngine} Granular engine instance
    */
   load(filename) {
-    const audioFile = `/media/${filename}.wav`;
+    const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
     this.loader.load(audioFile).then((loaded) => {
       this.granularEngine.buffer = loaded;
       this.position = this.position;
@@ -293,6 +303,8 @@ export class PolyGranularEngine extends PolyAudioEngine {
  * @param  {Object} [options={}] Granular synthesis parameters
  * @param  {Number} [options.voices=1] Number of voices (polyphony)
  * @param  {String} [options.file=''] Default audio file
+ * @param  {String} [options.filePrefix=''] Address where audio files are stored
+ * @param  {String} [options.fileExt=''] Audio files extension
  * @param  {Number} [options.period=0.01] Grain period
  * @param  {Number} [options.duration=0.1] Grain duration
  * @param  {Number} [options.position=0] Grain position
