@@ -49,11 +49,11 @@ const stopSynth = sandbox => (synthId) => {
  */
 const start = sandbox => async (streamId) => {
   const s = sandbox;
+  const stream = s[streamId];
   if (s.streamExists(streamId)) {
     s.cancelStream(streamId);
     await s.streams[streamId].effects;
   }
-  const stream = s[streamId];
   s[streamId] = codaCore.multicast(codaCore.takeWhile(
     () => s.streams[streamId] && s.streams[streamId].active,
     stream,
@@ -64,6 +64,7 @@ const start = sandbox => async (streamId) => {
   ).then(() => {
     sandbox.doc.getElementById(`stream-display-${streamId}`).remove();
     delete s.streams[streamId];
+    delete s[streamId];
   });
   s.streams[streamId] = {
     id: streamId,
