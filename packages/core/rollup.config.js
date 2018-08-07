@@ -35,6 +35,7 @@ export default [
       '@most/dom-event',
       'complex-js',
       'xmm',
+      'ml-pca',
     ],
     output: [
       {
@@ -50,6 +51,7 @@ export default [
           '@most/dom-event': 'mostDomEvent',
           'complex-js': 'complexJs',
           xmm: 'xmm',
+          'ml-pca': 'PCA',
         },
       },
       {

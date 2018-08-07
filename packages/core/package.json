@@ -20,6 +20,7 @@
     "@most/dom-event": "^2.0.0",
     "@most/scheduler": "^1.2.1",
     "complex-js": "^5.0.0",
+    "ml-pca": "^2.1.0",
     "xmm": "github:JulesFrancoise/xmmjs"
   },
   "devDependencies": {

@@ -27,6 +27,8 @@ import wavelet_ from './operator/spectral/wavelet';
 import scalelearn_ from './operator/ml/scalelearn';
 import scale2_ from './operator/ml/scale2';
 import clusterize_ from './operator/ml/clusterize';
+import pcafit_ from './operator/ml/pca_fit';
+import pcapredict_ from './operator/ml/pca_predict';
 
 /** @ignore */
 export const accum = stream =>
@@ -183,3 +185,11 @@ export const scale2 = (minmaxstream, source) =>
 /** @ignore */
 export const clusterize = (options, source) =>
   new Stream(clusterize_(options, source));
+
+/** @ignore */
+export const pcafit = source =>
+  new Stream(pcafit_(source));
+
+/** @ignore */
+export const pcapredict = (datastream, source) =>
+  new Stream(pcapredict_(datastream, source));

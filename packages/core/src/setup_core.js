@@ -27,6 +27,8 @@ import wavelet from './operator/spectral/wavelet';
 import scalelearn from './operator/ml/scalelearn';
 import scale2 from './operator/ml/scale2';
 import clusterize from './operator/ml/clusterize';
+import pcaFit from './operator/ml/pca_fit';
+import pcaPredict from './operator/ml/pca_predict';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -323,5 +325,21 @@ export default function setupCore(Stream) {
    */
   s.prototype.clusterize = function clusterize_(options) {
     return new Stream(clusterize(options, this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.pcafit = function pcafit_() {
+    return new Stream(pcaFit(this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.pcapredict = function pcapredict_(datastream) {
+    return new Stream(pcaPredict(datastream, this));
   };
 }
