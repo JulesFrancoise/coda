@@ -170,7 +170,6 @@ export default function looper(options, source) {
   const componentId = `ui${container.children.length}`;
   component.setAttribute('id', componentId);
   component.setAttribute('class', 'recorder');
-  component.appendChild(document.createElement('looper'));
   container.appendChild(component);
   const app = new Vue(looperComponent);
   app.$data.channels = attr.size;

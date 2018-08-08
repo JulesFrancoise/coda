@@ -1,5 +1,6 @@
 import { parseScript } from 'esprima';
 import { generate } from 'escodegen';
+import { currentTime } from '@most/scheduler';
 import vm from 'vm';
 import * as codaCore from '@coda/core';
 import * as codaAudio from '@coda/audio';
@@ -15,8 +16,7 @@ codaUi.setup(codaCore.Stream);
 const defaultScheduler = codaCore.newDefaultScheduler();
 
 const findStream = sandbox => (stream) => {
-  const streamId = Object.keys(sandbox.streams)
-    .map(id => sandbox.streams[id])
+  const streamId = Object.values(sandbox.streams)
     .filter(x => x.stream === stream)
     .map(x => x.id);
   return (streamId && streamId[0]) || null;
@@ -28,7 +28,7 @@ const streamExists = sandbox => streamId =>
 const cancelStream = sandbox => (streamId) => {
   const s = sandbox;
   if (Object.keys(sandbox.streams).includes(streamId)) {
-    s.streams[streamId].active = false;
+    s.streams[streamId].cancel();
   }
 };
 
@@ -50,28 +50,39 @@ const stopSynth = sandbox => (synthId) => {
 const start = sandbox => async (streamId) => {
   const s = sandbox;
   const stream = s[streamId];
+  // If a stream with the same name already exists, cancel it.
   if (s.streamExists(streamId)) {
     s.cancelStream(streamId);
     await s.streams[streamId].effects;
   }
-  s[streamId] = codaCore.multicast(codaCore.takeWhile(
-    () => s.streams[streamId] && s.streams[streamId].active,
-    stream,
-  ));
-  const effects = codaCore.runEffects(
-    s[streamId],
-    defaultScheduler,
-  ).then(() => {
-    sandbox.doc.getElementById(`stream-display-${streamId}`).remove();
-    delete s.streams[streamId];
-    delete s[streamId];
-  });
-  s.streams[streamId] = {
-    id: streamId,
-    stream: s[streamId],
-    effects,
-    active: true,
+  // Store stream information in the sanndbox
+  s.streams[streamId] = { id: streamId };
+  // Create a "canceller" stream to interrupt the processing when necessary
+  const cancellerStream = {
+    run(sink, scheduler) {
+      s.streams[streamId].cancel = () => {
+        try {
+          sink.event(currentTime(scheduler), null);
+        } catch (e) {
+          sink.error(currentTime(scheduler), e);
+        }
+      };
+      return {
+        dispose() {},
+      };
+    },
   };
+  // Multicast the stream (for multiple sinks) and merge with the canceller stream
+  s[streamId] = codaCore.multicast(codaCore.until(cancellerStream, stream));
+  // Run the stream
+  const effects = codaCore.runEffects(s[streamId], defaultScheduler)
+    .then(() => {
+      sandbox.doc.getElementById(`stream-display-${streamId}`).remove();
+      delete s.streams[streamId];
+      delete s[streamId];
+    });
+  s.streams[streamId].stream = s[streamId];
+  s.streams[streamId].effects = effects;
   const newDiv = document.createElement('div');
   newDiv.appendChild(document.createTextNode(streamId));
   newDiv.setAttribute('class', 'stream');
@@ -90,9 +101,10 @@ const registerSynth = sandbox => (synthId) => {
   };
 };
 
-const stop = sandbox => (stream) => {
-  const streamId = (typeof stream === 'string') ? stream :
-    sandbox.findStream(stream);
+const stop = sandbox => async (stream) => {
+  const streamId = (typeof stream === 'string')
+    ? stream
+    : sandbox.findStream(stream);
   if (streamId && sandbox.streamExists(streamId)) {
     sandbox.cancelStream(streamId);
   }

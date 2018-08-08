@@ -113,24 +113,36 @@ class RecorderSink {
     }
   }
 
+  /**
+   * Propagate a stream end event
+   * @param  {number} t Timestamp
+   */
   end(t) {
     return this.sink.end(t);
   }
 
+  /**
+   * Propagate a stream error event
+   * @param  {number} t Timestamp
+   * @param  {Error} e Error
+   */
   error(t, e) {
     return this.sink.error(t, e);
   }
 }
 
+/**
+ * Setup the DOM with for the recorder UI component
+ * @ignore
+ */
 function setupDom() {
-  const domContainer = document.getElementById('ui');
-  const domComponent = document.createElement('div');
-  const domComponentId = `ui${domContainer.children.length}`;
-  domComponent.setAttribute('id', domComponentId);
-  domComponent.setAttribute('class', 'recorder');
-  domComponent.appendChild(document.createElement('recorder'));
-  domContainer.appendChild(domComponent);
-  return domComponent;
+  const container = document.getElementById('ui');
+  const component = document.createElement('div');
+  const componentId = `ui${container.children.length}`;
+  component.setAttribute('id', componentId);
+  component.setAttribute('class', 'recorder');
+  container.appendChild(component);
+  return component;
 }
 
 /**

@@ -17,6 +17,7 @@
     "@coda/midi": "^0.0.1",
     "@coda/myo": "^0.0.1",
     "@coda/ui": "^0.0.1",
+    "@most/scheduler": "^1.2.1",
     "codemirror": "^5.37.0",
     "escodegen": "^1.9.1",
     "esprima": "^4.0.0"
