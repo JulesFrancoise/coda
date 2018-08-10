@@ -11,6 +11,7 @@
     "lint": "lerna run lint",
     "release": "lerna publish",
     "test": "lerna run test --stream",
+    "benchmark": "lerna run benchmark --stream",
     "clean": "lerna clean --yes && rm -rf `find packages -type d -name dist` && rm -rf `find packages -type d -name coverage`"
   },
   "repository": {

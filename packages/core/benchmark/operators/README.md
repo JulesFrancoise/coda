@@ -1,13 +1,13 @@
 # Benchmark / Operators
 
-Updated: 2018-5-16 13:56:42
+Updated: 2018-8-10 14:00:49
 
 | operator                     | op/s                    | Samples      | ms / frame          |
 |------------------------------|-------------------------|--------------|---------------------|
-| Baseline # 10000 x 20        |  24767.92 op/s ±  3.10% | (16 samples) |   0.0404 ms / frame |
-| Biquad # 10000 x 20          |  23328.15 op/s ±  3.71% | (16 samples) |   0.0429 ms / frame |
-| Force # 10000 x 20           |   2011.91 op/s ±  0.72% |  (6 samples) |   0.4970 ms / frame |
-| Kicks # 10000 x 20           |    553.58 op/s ±  6.61% |  (5 samples) |   1.8064 ms / frame |
-| Mvavrg # 10000 x 20          |  22900.75 op/s ±  3.94% | (16 samples) |   0.0437 ms / frame |
-| Scale # 10000 x 20           |  22089.70 op/s ±  5.74% | (15 samples) |   0.0453 ms / frame |
-| Slide # 10000 x 20           |  22312.75 op/s ±  3.55% | (16 samples) |   0.0448 ms / frame |
+| Baseline # 10000 x 20        |  23269.10 op/s ±  3.99% | (16 samples) |   0.0430 ms / frame |
+| Biquad # 10000 x 20          |  22305.86 op/s ±  3.66% | (15 samples) |   0.0448 ms / frame |
+| Force # 10000 x 20           |   1075.24 op/s ±  3.57% |  (5 samples) |   0.9300 ms / frame |
+| Kicks # 10000 x 20           |   1089.69 op/s ± 14.05% |  (5 samples) |   0.9177 ms / frame |
+| Mvavrg # 10000 x 20          |  22700.38 op/s ±  4.08% | (16 samples) |   0.0441 ms / frame |
+| Scale # 10000 x 20           |  21853.39 op/s ±  5.83% | (15 samples) |   0.0458 ms / frame |
+| Slide # 10000 x 20           |  21546.34 op/s ±  5.75% | (15 samples) |   0.0464 ms / frame |
