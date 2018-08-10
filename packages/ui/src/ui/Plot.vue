@@ -8,45 +8,22 @@
     <div slot="toolbar" class="toolbar">
       <div class="button" @click="changeLength(2)">* 2</div>
       <div class="button" @click="changeLength(0.5)">/ 2</div>
+      <div class="button" :class="stacked && 'active'" @click="changeDisplay('stack')">stacked</div>
+      <div class="button" @click="changeDisplay('fill')">{{fill}}</div>
     </div>
     <div class="plot">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        :viewBox="`0, -0.1, 5, 1.1`"
-        preserveAspectRatio="none"
-        style="width: 100%; height: 100px;"
-      >
-        <defs>
-          <linearGradient :id="`mars-plot-${plotId}-1`" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#25b478"></stop>
-            <stop offset="1" stop-color="#32699c"></stop>
-          </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-2`" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#b97742"></stop>
-            <stop offset="1" stop-color="#b94250"></stop>
-          </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-3`" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#949e25"></stop>
-            <stop offset="1" stop-color="#338b2b"></stop>
-          </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-4`" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#71c918"></stop>
-            <stop offset="1" stop-color="#c7b121"></stop>
-          </linearGradient>
-        </defs>
-        <g
-          v-for="(d, i) in path"
-          :key="`path${i}`"
-          :transform="stacked && `translate(0 ${i / channels}) scale(1, ${1 / channels})`"
-        >
-          <path
-            :d="d"
-            :stroke="`url(#mars-plot-${plotId}-${i % 4 + 1})`"
-            :fill="fill !== 'none' ? `url(#mars-plot-${plotId}-${i % 4 + 1})` : 'none'"
-            stroke-width="0.02"
-          />
-        </g>
-      </svg>
+      <canvas
+        ref="canvas"
+        width="700"
+        height="100"
+        style="width: 100%; height: 100px"
+      ></canvas>
+      <canvas
+        ref="tmpCanvas"
+        width="700"
+        height="100"
+        style="display: none;"
+      ></canvas>
     </div>
   </base-component>
 </template>
@@ -54,14 +31,18 @@
 <script>
 import BaseComponent from './BaseComponent.vue';
 
-let plotId = 0;
-
 export default {
   components: { BaseComponent },
+  mounted() {
+    this.canvas = this.$refs.canvas;
+    this.context = this.canvas.getContext('2d');
+    this.tmpCanvas = this.$refs.tmpCanvas;
+    this.tmpContext = this.tmpCanvas.getContext('2d');
+    this.context.lineJoin = 'round';
+    this.context.lineWidth = 2;
+  },
   data() {
-    plotId += 1;
     return {
-      plotId,
       legend: '',
       paused: false,
       channels: 1,
@@ -70,13 +51,16 @@ export default {
       min: +Infinity,
       max: -Infinity,
       stacked: false,
-      fill: 'none',
+      fill: false,
+      fillPos: 0,
+      previousFrame: [101],
     };
   },
   watch: {
     channels(k) {
       this.buffer = Array.from(new Array(this.length), () =>
         new Array(k).fill(NaN));
+      this.previousFrame = Array.from(Array(k), () => 101);
       this.min = +Infinity;
       this.max = -Infinity;
     },
@@ -89,59 +73,118 @@ export default {
         this.buffer = zeros.concat(this.buffer);
       }
     },
+    fill(mode) {
+      const scale = this.stacked ? this.canvas.height / this.channels : this.canvas.height;
+      if (mode === 'top') {
+        this.fillPos = scale;
+      } else if (mode === 'middle') {
+        this.fillPos = (0.5 * scale);
+      } else {
+        this.fillPos = 0;
+      }
+    },
   },
   methods: {
     push(elements) {
       if (this.paused) return;
-      elements.forEach((vector) => {
-        // const vec = this.channels === 1 ? [vector] : vector;
-        this.buffer.shift();
-        this.buffer.push(vector);
-        const minmax = vector
+      const n = elements.length;
+      const { width, height } = this.canvas;
+
+      // Draw the previous image on tmpCanvas
+      this.tmpContext.drawImage(this.canvas, 0, 0, width, height);
+      // Fill the new area in the main context
+      this.context.fillStyle = '#272822';
+      this.context.fillRect(width - (n * this.dx), 0, (n * this.dx), height);
+
+      // Update Min/Max
+      elements.forEach((frame) => {
+        const vec = this.channels === 1 ? [frame] : frame;
+        const minmax = vec
           .reduce(({ min, max }, x) => ({
             min: Math.min(min, x),
             max: Math.max(max, x),
           }), { min: this.min, max: this.max });
         this.max = minmax.max;
         this.min = minmax.min;
+        if (this.min >= this.max) {
+          this.min = 0;
+          this.max = 1;
+        }
       });
+
+      // Draw new lines
+      for (let channel = 0; channel < this.channels; channel += 1) {
+        const scale = this.stacked ? height / this.channels : height;
+        const offset = this.stacked ? height - ((this.channels - channel - 1) * scale) : height;
+        this.context.beginPath();
+        this.context.strokeStyle = this.color(channel);
+        if (this.fill !== 'none') {
+          this.context.fillStyle = this.color(channel);
+          this.context.moveTo(
+            width - (n * this.dx),
+            offset - this.fillPos,
+          );
+          this.context.lineTo(
+            width - (n * this.dx),
+            this.previousFrame[channel],
+          );
+        } else {
+          this.context.moveTo(
+            width - (n * this.dx),
+            this.previousFrame[channel],
+          );
+        }
+        for (let i = 0; i < n; i += 1) {
+          const y = this.channels === 1 ? elements[i] : elements[i][channel];
+          const yp = ((y - this.min)) / (this.max - this.min);
+          const px = width - ((n - i - 1) * this.dx);
+          const py = offset - (yp * scale);
+          this.previousFrame[channel] = py;
+          this.context.lineTo(px, py);
+        }
+        if (this.fill !== 'none') {
+          this.context.lineTo(
+            width,
+            offset - this.fillPos,
+          );
+          this.context.closePath();
+          this.context.fill();
+        }
+        this.context.stroke();
+      }
+
+      this.context.translate(-n * this.dx, 0);
+      // draw prev canvas before translation
+      this.context.drawImage(this.tmpCanvas, 0, 0, width, height, 0, 0, width, height);
+      // reset transformation matrix
+      this.context.setTransform(1, 0, 0, 1, 0, 0);
     },
     changeLength(factor) {
       this.length = Math.floor(this.length * factor);
     },
+    color(idx) {
+      const colors = ['#32699c', '#25b478', '#b94250', '#da7524', '#0abb9c', '#a822a3'];
+      return colors[idx % 6];
+    },
+    changeDisplay(type) {
+      if (type === 'stack') {
+        this.stacked = !this.stacked;
+      } else if (type === 'fill') {
+        if (this.fill === 'none') {
+          this.fill = 'bottom';
+        } else if (this.fill === 'bottom') {
+          this.fill = 'middle';
+        } else if (this.fill === 'middle') {
+          this.fill = 'top';
+        } else {
+          this.fill = 'none';
+        }
+      }
+    },
   },
   computed: {
-    pathTemplate() {
-      if (this.fill === 'none') {
-        return ['M ', ''];
-      } else if (this.fill === 'bottom') {
-        return ['M 0,1 L', ' L5,1 z'];
-      } else if (this.fill === 'top') {
-        return ['M 0,0 L', ' L5,0 z'];
-      }
-      return ['M 0,0.5 L', ' L5,0.5 z'];
-    },
-    path() {
-      if (this.channels > 1) {
-        const d = Array(this.channels).fill('');
-        for (let i = 0; i < this.channels; i += 1) {
-          d[i] = this.buffer
-            .reduce((p, x, j) => {
-              const y = 1 - ((x[i] - this.min) / (this.max - this.min));
-              return `${p} L${(j * 5) / this.length},${Number.isNaN(y) ? -0.11 : y}`;
-            }, '')
-            .slice(2);
-          d[i] = `${this.pathTemplate[0]}${d[i]}${this.pathTemplate[1]}`;
-        }
-        return d;
-      }
-      const d = this.buffer
-        .reduce((p, x, i) => {
-          const y = 1 - ((x - this.min) / (this.max - this.min));
-          return `${p} L${(i * 5) / this.length},${Number.isNaN(y) ? -0.11 : y}`;
-        }, '')
-        .slice(2);
-      return [`${this.pathTemplate[0]}${d}${this.pathTemplate[1]}`];
+    dx() {
+      return this.canvas.width / this.length;
     },
   },
 };
