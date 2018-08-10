@@ -9,7 +9,7 @@ html, body {
 
 #header {
   width: 100%;
-  height: 30px;
+  height: 32px;
   margin: 0;
   background: #1a1b16;
   color: #fff;
@@ -17,6 +17,7 @@ html, body {
   flex-direction: row;
   align-items: center;
   align-content: stretch;
+  border-bottom: 1px solid #8f8f8f;
 }
 
 #header .menu {
@@ -36,6 +37,11 @@ html, body {
 #header .menu span {
   margin-left: 10px;
   margin-right: 6px;
+}
+
+#header .menu select {
+  background-color: #1a1b16;
+  color: #fff;
 }
 
 #streams {
