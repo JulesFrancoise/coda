@@ -8,11 +8,11 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "dev": "cross-env BABEL_ENV=build NODE_ENV=development rollup -c -w",
-    "build": "cross-env BABEL_ENV=build  NODE_ENV=production rollup -c",
+    "dev": "cross-env NODE_ENV=development rollup -c -w",
+    "build": "cross-env NODE_ENV=production rollup -c",
     "lint": "eslint src test",
     "test": "jest",
-    "benchmark": "ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
+    "benchmark": "cross-env ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
   },
   "dependencies": {
     "@most/disposable": "^1.1.0",

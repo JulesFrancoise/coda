@@ -6,7 +6,7 @@
     "prepare": "npm run bootstrap && lerna run prepare",
     "bootstrap": "lerna bootstrap --hoist",
     "build": "lerna run build",
-    "watch": "NODE_ENV=development BABEL_ENV=build rollup -c -w",
+    "watch": "cross-env NODE_ENV=development BABEL_ENV=build rollup -c -w",
     "dev": "concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run watch\" \"cd packages/editor && yarn dev\"",
     "lint": "lerna run lint",
     "release": "lerna publish",
