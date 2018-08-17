@@ -149,4 +149,13 @@ export default class PolyAudioEngine extends BaseAudioEngine {
       }
     });
   }
+
+  /**
+   * Properly dispose the synthesizer (terminate parameter streams)
+   */
+  dispose() {
+    this.stop();
+    this.synths.forEach((synth) => { synth.dispose(); });
+    this.disposeFuncs.forEach((f) => { f(); });
+  }
 }

@@ -108,6 +108,7 @@ export default class BaseAudioEngine {
    * Properly dispose the synthesizer (terminate parameter streams)
    */
   dispose() {
+    this.stop();
     this.disposeFuncs.forEach((f) => { f(); });
   }
 }
