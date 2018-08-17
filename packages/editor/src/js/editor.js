@@ -107,57 +107,61 @@ CodeMirror.keyMap.playground = {
   },
 };
 
-const editor = CodeMirror(document.querySelector('#editor'), {
-  mode: 'javascript',
-  value: '// Welcome to the Solar Playground!\n// Love on the beat...',
-  keyMap: 'playground',
-  theme: 'monokai',
-  autofocus: true,
-  matchBrackets: true,
-  tabSize: 2,
-  lineNumbers: true,
-  allowDropFileTypes: ['text/javascript'],
-  autoCloseBrackets: true,
-  gutters: ['CodeMirror-lint-markers'],
-  lint: { esversion: 6 },
-  extraKeys: { 'Ctrl-Space': 'autocomplete' },
-  hintOptions: { hint: autocomplete },
-});
+function createEditor() {
+  const editor = CodeMirror(document.querySelector('#editor'), {
+    mode: 'javascript',
+    value: '// Welcome to the Solar Playground!\n// Love on the beat...',
+    keyMap: 'playground',
+    theme: 'monokai',
+    autofocus: true,
+    matchBrackets: true,
+    tabSize: 2,
+    lineNumbers: true,
+    allowDropFileTypes: ['text/javascript'],
+    autoCloseBrackets: true,
+    gutters: ['CodeMirror-lint-markers'],
+    lint: { esversion: 6 },
+    extraKeys: { 'Ctrl-Space': 'autocomplete' },
+    hintOptions: { hint: autocomplete },
+  });
 
-editor.on('drop', (data, e) => {
-  const { files } = e.dataTransfer;
-  if (files.length !== 1) return;
-  e.preventDefault();
-  e.stopPropagation();
-  const reader = new FileReader();
-  reader.readAsText(files[0]);
-  reader.onload = () => {
-    editor.setValue(reader.result);
+  editor.on('drop', (data, e) => {
+    const { files } = e.dataTransfer;
+    if (files.length !== 1) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const reader = new FileReader();
+    reader.readAsText(files[0]);
+    reader.onload = () => {
+      editor.setValue(reader.result);
+    };
+  });
+
+  editor.setSize(null, 'calc(100vh - 50px)');
+
+  const select = document.querySelector('select');
+
+  editor.loadCodeExample = async (example) => {
+    select.value = example;
+    let contents = null;
+    try {
+      const response = await fetch(`/examples/${example}.js`, { method: 'get' });
+      contents = await response.text();
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error Fetching example =>', e);
+    }
+    if (contents) {
+      editor.setValue(contents);
+    }
+    return contents;
   };
-});
 
-editor.setSize(null, 'calc(100vh - 50px)');
+  select.onchange = (e) => {
+    editor.loadCodeExample(e.target.value);
+  };
 
-const select = document.querySelector('select');
+  return editor;
+}
 
-editor.loadCodeExample = async (example) => {
-  select.value = example;
-  let contents = null;
-  try {
-    const response = await fetch(`/examples/${example}.js`, { method: 'get' });
-    contents = await response.text();
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('Error Fetching example =>', e);
-  }
-  if (contents) {
-    editor.setValue(contents);
-  }
-  return contents;
-};
-
-select.onchange = (e) => {
-  editor.loadCodeExample(e.target.value);
-};
-
-export default editor;
+export default createEditor;

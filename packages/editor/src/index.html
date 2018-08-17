@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="/css/lint.css">
   <link rel="stylesheet" href="/css/show-hint.css">
   <link rel="stylesheet" href="/css/main.css">
-  <script type="text/javascript" src="/jshint.js"></script>
+  <script async type="text/javascript" src="/jshint.js"></script>
+  <script async type="text/javascript" src="/solar.js"></script>
 </head>
 <body>
   <div id="header">
@@ -15,28 +16,16 @@
       <h1>CO/DA</h1>
       <span>demos:</span>
       <select>
-        <option>basic</option>
-        <option>biquad</option>
-        <option>cycle</option>
-        <option>mouse</option>
-        <option>delta</option>
-        <option>looper</option>
-        <option>myo</option>
-        <option>nodes</option>
-        <option>packing</option>
-        <option>plot</option>
-        <option>recorder</option>
-        <option>recognize</option>
-        <option>scalelearn</option>
-        <option>schmitt</option>
-        <option>transport</option>
-        <option>wavelet</option>
-        <option>kick_detection</option>
-        <option>granular</option>
-        <option>concatenative</option>
-        <option>convolver</option>
-        <option>autocomplete</option>
-        <option>pca</option>
+        <optgroup label="user examples">
+          <% _.forEach(htmlWebpackPlugin.options.userExamples, function(example) { %>
+      			<option><%- example %></option>
+      		<% }); %>
+        </optgroup>
+        <optgroup label="default examples">
+          <% _.forEach(htmlWebpackPlugin.options.defaultExamples, function(example) { %>
+      			<option><%- example %></option>
+      		<% }); %>
+        </optgroup>
       </select>
     </div>
     <div id="streams"></div>
@@ -49,6 +38,5 @@
     <div id="splitbar"></div>
     <div id="ui"></div>
   </div>
-  <script type="text/javascript" src="/solar.js"></script>
 </body>
 </html>

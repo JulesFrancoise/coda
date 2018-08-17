@@ -1,5 +1,5 @@
 import { initializeSandbox } from './js/sandbox';
-import editor from './js/editor';
+import createEditor from './js/editor';
 
 function ready(fn) {
   if (document.readyState !== 'loading') {
@@ -36,9 +36,10 @@ const setupSplit = () => {
 ready(() => {
   // window.onbeforeunload = () => 'Get out of the solar system?';
   const sandbox = initializeSandbox(document, console);
+  console.log('ready');
   const solar = {
     sandbox,
-    editor,
+    editor: createEditor(),
   };
   solar.editor.loadCodeExample('basic');
   setupSplit();

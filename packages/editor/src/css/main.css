@@ -39,11 +39,6 @@ html, body {
   margin-right: 6px;
 }
 
-#header .menu select {
-  background-color: #1a1b16;
-  color: #fff;
-}
-
 #streams {
   margin-left: 10px;
   margin-right: 10px;
