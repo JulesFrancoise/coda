@@ -39,6 +39,8 @@ const stopSynth = sandbox => (synthId) => {
   const s = sandbox;
   if (Object.keys(sandbox.synths).includes(synthId)) {
     s.synths[synthId].synth.dispose();
+    delete s.synths[synthId];
+    delete s[synthId];
   }
 };
 
@@ -92,12 +94,14 @@ const start = sandbox => async (streamId) => {
 
 const registerSynth = sandbox => (synthId) => {
   const s = sandbox;
+  const synth = s[synthId];
   if (s.synthExists(synthId)) {
     s.stopSynth(synthId);
   }
+  s[synthId] = synth;
   s.synths[synthId] = {
     id: synthId,
-    synth: s[synthId],
+    synth,
   };
 };
 
@@ -116,9 +120,12 @@ const clear = sandbox => async () => {
     return sandbox.streams[streamId].effects;
   });
   await Promise.all(proms);
-  Object.keys(sandbox.synths).forEach((synthId) => {
-    sandbox.synths[synthId].synth.stop();
+  const s = sandbox;
+  const syns = Object.keys(sandbox.synths);
+  syns.forEach((synthId) => {
     sandbox.synths[synthId].synth.dispose();
+    delete s.synths[synthId];
+    delete s[synthId];
   });
 };
 
