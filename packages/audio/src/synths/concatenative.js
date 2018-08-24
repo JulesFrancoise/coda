@@ -5,10 +5,10 @@ import BaseAudioEngine from '../core/base';
 import PolyAudioEngine from '../core/poly';
 
 /**
- * Parameter definitions
+ * Synthesizer parameters definitions
  * @ignore
  */
-const definitions = {
+export const definitions = {
   voices: {
     type: 'integer',
     default: 1,
@@ -32,6 +32,10 @@ const definitions = {
   periodRel: {
     type: 'float|array<float>',
     default: 1,
+  },
+  periodVar: {
+    type: 'float|array<float>',
+    default: 0,
   },
   durationAbs: {
     type: 'float|array<float>',
@@ -89,22 +93,25 @@ const definitions = {
  */
 export class ConcatenativeEngine extends BaseAudioEngine {
   /**
-  * @param  {Object} [options] Concatenative synthesis parameters
-  * @param  {String} [options.file=''] Default audio file
-  * @param  {Number} [options.periodAbs=0] Segment period (absolute, in s)
-  * @param  {Number} [options.periodRel=1] Segment period (relative to segment duration)
-  * @param  {Number} [options.durationAbs=1] Segment duration (absolute, in s)
-  * @param  {Number} [options.durationRel=1] Segment duration (relative to segment duration)
-  * @param  {Number} [options.index=0] Segment index
-  * @param  {Number} [options.positionVar=0] Segment position random variation
-  * @param  {Number} [options.attackAbs=0.001] Segment attack (absolute)
-  * @param  {Number} [options.attackRel=0] Segment attack (relative to duration)
-  * @param  {Number} [options.releaseAbs=0.001] Segment release (absolute)
-  * @param  {Number} [options.releaseRel=0] Segment release (relative to duration)
-  * @param  {Number} [options.resampling=0] Segment resampling
-  * @param  {Number} [options.resamplingVar=0] Segment resampling  random variation
-  * @param  {Number} [options.gain=0] Segment gain
-  * @param  {Number} [options.throttle=20] Throttle time for stream parameters
+   * @param  {Object} [options] Concatenative synthesis parameters
+   * @param  {String} [options.file=''] Default audio file
+   * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
+   * @param  {String} [options.fileExt='flac'] Audio files extension
+   * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
+   * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
+   * @param  {number} [options.periodVar=0] Segment period random variation
+   * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
+   * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
+   * @param  {number} [options.index=0] Segment index
+   * @param  {number} [options.positionVar=0] Segment position random variation
+   * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
+   * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
+   * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
+   * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
+   * @param  {number} [options.resampling=0] Segment resampling
+   * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
+   * @param  {number} [options.gain=0] Segment gain
+   * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
     super(options.throttle);
@@ -112,9 +119,9 @@ export class ConcatenativeEngine extends BaseAudioEngine {
     this.concatenativeEngine = new wavesAudio.SegmentEngine({
       periodAbs: options.periodAbs,
       periodRel: options.periodRel,
+      periodVar: options.periodVar,
       durationAbs: options.durationAbs,
       durationRel: options.durationRel,
-      index: options.index,
       positionVar: options.positionVar,
       attackAbs: options.attackAbs,
       attackRel: options.attackRel,
@@ -160,6 +167,13 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       },
     );
     this.defineParameter(
+      'periodVar',
+      options.periodVar,
+      (value) => {
+        this.concatenativeEngine.periodVar = value;
+      },
+    );
+    this.defineParameter(
       'durationAbs',
       options.durationAbs,
       (value) => {
@@ -187,6 +201,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.attackAbs,
       (value) => {
         this.concatenativeEngine.attackAbs = value;
+        this.concatenativeEngine.attackRel = 0;
       },
     );
     this.defineParameter(
@@ -194,6 +209,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.attackRel,
       (value) => {
         this.concatenativeEngine.attackRel = value;
+        this.concatenativeEngine.attackAbs = 0;
       },
     );
     this.defineParameter(
@@ -201,6 +217,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.releaseAbs,
       (value) => {
         this.concatenativeEngine.releaseAbs = value;
+        this.concatenativeEngine.releaseRel = 0;
       },
     );
     this.defineParameter(
@@ -208,6 +225,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.releaseRel,
       (value) => {
         this.concatenativeEngine.releaseRel = value;
+        this.concatenativeEngine.releaseAbs = 0;
       },
     );
     this.defineParameter(
@@ -235,22 +253,27 @@ export class ConcatenativeEngine extends BaseAudioEngine {
 
   /**
    * Load a new audio file
-   * @param  {String} filename File name (in /media)
+   *
+   * @todo Code example
+   *
+   * @param  {String} filename Audio file name
    * @return {ConcatenativeEngine} Concatenative engine instance
    */
-  load(filename) {
+  async load(filename) {
     const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
     const descFile = `${this.filePrefix}${filename}.json`;
-    this.loader.load([audioFile, descFile]).then(([buffer, markers]) => {
+    try {
+      const [buffer, markers] = await this.loader.load([audioFile, descFile]);
       this.concatenativeEngine.buffer = buffer;
       this.concatenativeEngine.positionArray = markers.time;
       this.concatenativeEngine.durationArray = markers.duration;
+      this.markers = markers;
       this.segmentIndex = this.segmentIndex;
       this.start();
-    }).catch((err) => {
+    } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('[concatenative] Error loading file: ', err);
-    });
+      console.log(`[concatenative] Error loading file: "${filename}"`);
+    }
     return this;
   }
 
@@ -281,23 +304,35 @@ export class ConcatenativeEngine extends BaseAudioEngine {
  * Polyphonic concatenative engine definition
  */
 export class PolyConcatenativeEngine extends PolyAudioEngine {
+  /**
+   * @param  {Object} [options] Concatenative synthesis parameters
+   * @param  {number} [options.voices=1] Number of voices (polyphony)
+   * @param  {String} [options.file=''] Default audio file
+   * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
+   * @param  {String} [options.fileExt='flac'] Audio files extension
+   * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
+   * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
+   * @param  {number} [options.periodVar=0] Segment period random variation
+   * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
+   * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
+   * @param  {number} [options.index=0] Segment index
+   * @param  {number} [options.positionVar=0] Segment position random variation
+   * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
+   * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
+   * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
+   * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
+   * @param  {number} [options.resampling=0] Segment resampling
+   * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
+   * @param  {number} [options.gain=0] Segment gain
+   * @param  {number} [options.throttle=20] Throttle time for stream parameters
+   */
   constructor(options) {
-    const individualOptions = Array.from(Array(options.voices), (_, i) => {
-      const opt = {};
-      Object.keys(options).forEach((name) => {
-        if (Array.isArray(options[name])) {
-          opt[name] = options[name][i];
-        } else {
-          opt[name] = options[name];
-        }
-      });
-      return opt;
-    });
-    super(options.voices, ConcatenativeEngine, individualOptions);
+    super(options.voices, ConcatenativeEngine, options);
     this.defineParameter('file', options.file);
     this.defineParameter('index', options.index);
     this.defineParameter('periodAbs', options.periodAbs);
     this.defineParameter('periodRel', options.periodRel);
+    this.defineParameter('periodVar', options.periodVar);
     this.defineParameter('durationAbs', options.durationAbs);
     this.defineParameter('durationRel', options.durationRel);
     this.defineParameter('positionVar', options.positionVar);
@@ -309,50 +344,34 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
     this.defineParameter('resamplingVar', options.resamplingVar);
     this.defineParameter('gain', options.gain);
   }
-
-  /**
-   * Start the synthesizer
-   * @return {ConcatenativeEngine} Concatenative engine instance
-   */
-  start() {
-    this.synths.forEach((x) => {
-      x.start();
-    });
-  }
-
-  /**
-   * Stop the synthesizer
-   * @return {ConcatenativeEngine} Concatenative engine instance
-   */
-  stop() {
-    this.synths.forEach((x) => {
-      x.stop();
-    });
-  }
 }
 
 /**
  * Create a polyphonic concatenative synthesizer
  *
+ * @todo Code example + Description of markers file structure
+ *
  * @param  {Object} [options={}] Concatenative synthesis parameters
- * @param  {Number} [options.voices=1] Number of voices (polyphony)
- * @param  {String} [options.file=''] Default audio file
- * @param  {String} [options.filePrefix=''] Address where audio files are stored
- * @param  {String} [options.fileExt=''] Audio files extension
- * @param  {Number} [options.periodAbs=0] Segment period (absolute, in s)
- * @param  {Number} [options.periodRel=1] Segment period (relative to segment duration)
- * @param  {Number} [options.durationAbs=1] Segment duration (absolute, in s)
- * @param  {Number} [options.durationRel=1] Segment duration (relative to segment duration)
- * @param  {Number} [options.index=0] Segment index
- * @param  {Number} [options.positionVar=0] Segment position random variation
- * @param  {Number} [options.attackAbs=0.001] Segment attack (absolute)
- * @param  {Number} [options.attackRel=0] Segment attack (relative to duration)
- * @param  {Number} [options.releaseAbs=0.001] Segment release (absolute)
- * @param  {Number} [options.releaseRel=0] Segment release (relative to duration)
- * @param  {Number} [options.resampling=0] Segment resampling
- * @param  {Number} [options.resamplingVar=0] Segment resampling  random variation
- * @param  {Number} [options.gain=0] Segment gain
- * @param  {Number} [options.throttle=20] Throttle time for stream parameters
+ * @param  {number} [options.voices=1] NNumber of voices (polyphony)
+ * @param  {String} [options.file=''] Default audio file. Each audio file must be associated with
+ * a JSON file containing the associated markers.
+ * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
+ * @param  {String} [options.fileExt='flac'] Audio files extension
+ * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
+ * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
+ * @param  {number} [options.periodVar=0] Segment period random variation
+ * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
+ * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
+ * @param  {number} [options.index=0] Segment index
+ * @param  {number} [options.positionVar=0] Segment position random variation
+ * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
+ * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
+ * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
+ * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
+ * @param  {number} [options.resampling=0] Segment resampling
+ * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
+ * @param  {number} [options.gain=0] Segment gain
+ * @param  {number} [options.throttle=20] Throttle time for stream parameters
  * @return {ConcatenativeEngine}      Concatenative synthesis engine
  */
 export default function concatenative(options = {}) {

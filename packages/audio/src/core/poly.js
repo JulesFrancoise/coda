@@ -7,10 +7,26 @@ import BaseAudioEngine from './base';
  * Base architecture for Polyphonic Audio engines accepting stream parameters
  */
 export default class PolyAudioEngine extends BaseAudioEngine {
+  /**
+   * @param {Number}   [voices=1]     Number of voices (polyphony)
+   * @param {Function} MonoSynthClass Monophonic Synthesizer class
+   * @param {Object}   options        Synth options
+   */
   constructor(voices = 1, MonoSynthClass, options) {
     super();
     this.voices = voices;
-    this.synths = Array.from(Array(voices), (_, i) => new MonoSynthClass(options[i]));
+    const individualOptions = Array.from(Array(voices), (_, i) => {
+      const opt = {};
+      Object.keys(options).forEach((name) => {
+        if (Array.isArray(options[name])) {
+          opt[name] = options[name][i];
+        } else {
+          opt[name] = options[name];
+        }
+      });
+      return opt;
+    });
+    this.synths = Array.from(Array(voices), (_, i) => new MonoSynthClass(individualOptions[i]));
     this.synths.forEach((synth) => {
       synth.connect(this.output);
     });
@@ -147,6 +163,26 @@ export default class PolyAudioEngine extends BaseAudioEngine {
         await stream;
         stream = null;
       }
+    });
+  }
+
+  /**
+   * Start the synthesizer
+   * @return {ConcatenativeEngine} Concatenative engine instance
+   */
+  start() {
+    this.synths.forEach((x) => {
+      x.start();
+    });
+  }
+
+  /**
+   * Stop the synthesizer
+   * @return {ConcatenativeEngine} Concatenative engine instance
+   */
+  stop() {
+    this.synths.forEach((x) => {
+      x.stop();
     });
   }
 
