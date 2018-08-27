@@ -41,7 +41,6 @@ class TrainerSink {
         p.pushOutput(buffer.dataout[i]);
       }
     });
-    console.log('this.trainingSet', this.trainingSet);
     this.worker.postMessage({
       type: this.modelType,
       trainingSet: this.trainingSet,
