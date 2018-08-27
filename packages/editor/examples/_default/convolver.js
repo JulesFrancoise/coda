@@ -6,11 +6,9 @@ synth = granular({
 });
 
 conv = convolver({ file: 'reverb-StJohnChurch' });
-del = delayy();
 
 synth.connect(conv);
-conv.connect(del);
-del.connect();
+conv.connect();
 
 conv.file = 'reverb-LadyChapel';
 conv.file = 'reverb-CarPark';
