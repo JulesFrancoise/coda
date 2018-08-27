@@ -250,18 +250,7 @@ export class GranularEngine extends BaseAudioEngine {
  */
 export class PolyGranularEngine extends PolyAudioEngine {
   constructor(options) {
-    const individualOptions = Array.from(Array(options.voices), (_, i) => {
-      const opt = {};
-      Object.keys(options).forEach((name) => {
-        if (Array.isArray(options[name])) {
-          opt[name] = options[name][i];
-        } else {
-          opt[name] = options[name];
-        }
-      });
-      return opt;
-    });
-    super(options.voices, GranularEngine, individualOptions);
+    super(options.voices, GranularEngine, options);
     this.defineParameter('file', options.file);
     this.defineParameter('position', options.position);
     this.defineParameter('period', options.period);
