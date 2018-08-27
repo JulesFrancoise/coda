@@ -29,6 +29,8 @@ import scale2 from './operator/ml/scale2';
 import clusterize from './operator/ml/clusterize';
 import pcaFit from './operator/ml/pca_fit';
 import pcaPredict from './operator/ml/pca_predict';
+import predict from './operator/ml/predict';
+import trainregression from './operator/ml/trainregression';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -244,6 +246,22 @@ export default function setupCore(Stream) {
    */
   s.prototype.recognize = function recognize_(options) {
     return new Stream(recognize(options, this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.trainregression = function trainregression_(options) {
+    return new Stream(trainregression(options, this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.predict = function predict_(options) {
+    return new Stream(predict(options, this));
   };
 
   /**

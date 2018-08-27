@@ -22,6 +22,8 @@ import scale_ from './operator/mapping/scale';
 import autoscale_ from './operator/mapping/autoscale';
 import train_ from './operator/ml/train';
 import recognize_ from './operator/ml/recognize';
+import trainregression_ from './operator/ml/trainregression';
+import predict_ from './operator/ml/predict';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
 import scalelearn_ from './operator/ml/scalelearn';
@@ -141,6 +143,14 @@ export const slide = (options, stream) =>
 /** @ignore */
 export const recognize = (options, stream) =>
   new Stream(recognize_(options, stream));
+
+/** @ignore */
+export const trainregression = (containerId, options, source) =>
+  new Stream(trainregression_(containerId, options, source));
+
+/** @ignore */
+export const predict = (options, stream) =>
+  new Stream(predict_(options, stream));
 
 /** @ignore */
 export const train = (containerId, options, source) =>

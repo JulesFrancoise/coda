@@ -3,15 +3,15 @@
   "private": true,
   "description": "Live-coding for movement interaction",
   "scripts": {
-    "prepare": "npm run bootstrap && lerna run prepare",
-    "bootstrap": "lerna bootstrap --hoist",
-    "build": "lerna run build",
-    "watch": "NODE_ENV=development BABEL_ENV=build rollup -c -w",
-    "dev": "concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run watch\" \"cd packages/editor && yarn dev\"",
-    "lint": "lerna run lint",
-    "release": "lerna publish",
-    "test": "lerna run test --stream",
-    "clean": "lerna clean --yes && rm -rf `find packages -type d -name dist` && rm -rf `find packages -type d -name coverage`"
+    "prepare": "npm run bootstrap && cross-env lerna run prepare",
+    "bootstrap": "cross-env lerna bootstrap --hoist",
+    "build": "cross-env lerna run build",
+    "watch": "cross-env NODE_ENV=development BABEL_ENV=build rollup -c -w",
+    "dev": "cross-env concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run watch\" \"cd packages/editor && yarn dev\"",
+    "lint": "cross-env lerna run lint",
+    "release": "cross-env lerna publish",
+    "test": "cross-env lerna run test --stream",
+    "clean": "cross-env lerna clean --yes && rm -rf `find packages -type d -name dist` && rm -rf `find packages -type d -name coverage`"
   },
   "repository": {
     "type": "git",

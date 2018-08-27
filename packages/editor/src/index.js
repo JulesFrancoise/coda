@@ -40,6 +40,6 @@ ready(() => {
     sandbox,
     editor,
   };
-  solar.editor.loadCodeExample('basic');
+  solar.editor.loadCodeExample('current');
   setupSplit();
 });
