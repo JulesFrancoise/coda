@@ -34,11 +34,7 @@ class Tremolo extends BaseAudioEffect {
   constructor(options) {
     super();
     this.tremolo = new tuna.Tremolo(options);
-    this.sine = audioContext.createOscillator();
-    this.sine.type = 'square';
-    this.sine.frequency.setValueAtTime(3000, audioContext.currentTime); // value in hertz
-    this.sine.connect(this.tremolo);
-    // this.input.connect(this.tremolo);
+    this.input.connect(this.tremolo);
     this.tremolo.connect(audioContext.destination);
     this.defineParameter('intensity', options.intensity, (x) => {
       this.tremolo.intensity = x;
@@ -49,7 +45,6 @@ class Tremolo extends BaseAudioEffect {
     this.defineParameter('stereoPhase', options.stereoPhase, (x) => {
       this.tremolo.stereoPhase = x;
     });
-    this.sine.start();
   }
 }
 
