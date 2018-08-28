@@ -136,8 +136,8 @@ class ScaleLearnVectorSink {
  * @param  {Stream|String} source     Recorder source, or data container name.
  * @return {Stream}        Scalar stream ([min, max])
  */
-export default function scalelearn(source) {
-  const attr = validateStream('scalelearn', specification, source.attr);
+export default function scaleTrain(source) {
+  const attr = validateStream('scaleTrain', specification, source.attr);
   if (attr.format === 'vector') {
     return {
       attr,

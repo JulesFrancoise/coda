@@ -36,7 +36,6 @@ const setupSplit = () => {
 ready(() => {
   // window.onbeforeunload = () => 'Get out of the solar system?';
   const sandbox = initializeSandbox(document, console);
-  console.log('ready');
   const solar = {
     sandbox,
     editor: createEditor(),

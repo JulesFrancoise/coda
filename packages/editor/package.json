@@ -15,6 +15,7 @@
     "@coda/core": "^0.0.1",
     "@coda/max": "^0.0.1",
     "@coda/midi": "^0.0.1",
+    "@coda/ml": "^0.0.1",
     "@coda/myo": "^0.0.1",
     "@coda/ui": "^0.0.1",
     "@most/scheduler": "^1.2.1",

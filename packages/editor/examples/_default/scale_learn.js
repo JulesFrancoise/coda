@@ -1,5 +1,5 @@
 // =====
-// Clusterize
+// Scalelearn
 // =====
 //
 // TODO: Write description
@@ -14,9 +14,7 @@ a = periodic(20)
 // Setup a data recorder
 b = a.recorder({ name: 'data' });
 
-// Dynamically train when changes occur in the recorder
-model = b.train({ type: 'GMM', gaussians: 3 });
-
-// Perform real-time recognition
-c = a.clusterize({ model })
-  .plot({ stacked: true, fill: 'bottom', legend: 'weights' })
+// Learn data scale from recordings
+minmax = b.scaleTrain();
+c = a.scalePredict(minmax)
+  .plot({ legend: 'Scaled data' });

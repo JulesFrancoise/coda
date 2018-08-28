@@ -11,6 +11,7 @@ import configAudio from './packages/audio/rollup.config';
 import configCore from './packages/core/rollup.config';
 import configMax from './packages/max/rollup.config';
 import configMidi from './packages/midi/rollup.config';
+import configMl from './packages/ml/rollup.config';
 import configMyo from './packages/myo/rollup.config';
 import configPrelude from './packages/prelude/rollup.config';
 import configUi from './packages/ui/rollup.config';
@@ -27,20 +28,22 @@ function fixConfiguration(config, path) {
 }
 
 fixConfiguration(configAudio, 'packages/audio');
-fixConfiguration(configCore[0], 'packages/core');
-fixConfiguration(configCore[1], 'packages/core');
+fixConfiguration(configCore, 'packages/core');
 fixConfiguration(configMax, 'packages/max');
 fixConfiguration(configMidi, 'packages/midi');
+fixConfiguration(configMl[0], 'packages/ml');
+fixConfiguration(configMl[1], 'packages/ml');
 fixConfiguration(configMyo, 'packages/myo');
 fixConfiguration(configPrelude, 'packages/prelude');
 fixConfiguration(configUi, 'packages/ui');
 
 export default [
   configAudio,
-  configCore[0],
-  configCore[1],
+  configCore,
   configMax,
   configMidi,
+  configMl[0],
+  configMl[1],
   configMyo,
   configPrelude,
   configUi,

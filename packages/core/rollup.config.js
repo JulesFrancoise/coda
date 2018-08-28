@@ -23,51 +23,34 @@ if (process.env.NODE_ENV === 'production') {
   ]);
 }
 
-export default [
-  {
-    input: 'src/index.js',
-    plugins,
-    external: [
-      '@coda/prelude',
-      '@most/prelude',
-      '@most/core',
-      '@most/scheduler',
-      '@most/dom-event',
-      'complex-js',
-      'xmm',
-      'ml-pca',
-    ],
-    output: [
-      {
-        file: pkg.main,
-        format: 'umd',
-        name: 'codaCore',
-        sourcemap: true,
-        globals: {
-          '@coda/prelude': 'codaPrelude',
-          '@most/prelude': 'mostPrelude',
-          '@most/core': 'mostCore',
-          '@most/scheduler': 'mostScheduler',
-          '@most/dom-event': 'mostDomEvent',
-          'complex-js': 'complexJs',
-          xmm: 'xmm',
-          'ml-pca': 'PCA',
-        },
-      },
-      {
-        file: pkg.module,
-        format: 'es',
-        sourcemap: true,
-      },
-    ],
-  },
-  {
-    input: 'src/operator/ml/xmm.worker.js',
-    plugins,
-    output: {
-      file: 'dist/xmm.worker.js',
+export default {
+  input: 'src/index.js',
+  plugins,
+  external: [
+    '@coda/prelude',
+    '@most/core',
+    '@most/scheduler',
+    '@most/dom-event',
+    'complex-js',
+  ],
+  output: [
+    {
+      file: pkg.main,
       format: 'umd',
+      name: 'codaCore',
+      sourcemap: true,
+      globals: {
+        '@coda/prelude': 'codaPrelude',
+        '@most/core': 'mostCore',
+        '@most/scheduler': 'mostScheduler',
+        '@most/dom-event': 'mostDomEvent',
+        'complex-js': 'complexJs',
+      },
+    },
+    {
+      file: pkg.module,
+      format: 'es',
       sourcemap: true,
     },
-  },
-];
+  ],
+};

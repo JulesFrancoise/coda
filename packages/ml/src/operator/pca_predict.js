@@ -76,7 +76,7 @@ class PCASink {
  * @param  {Stream} source          input data stream
  * @return {Stream}
  */
-export default function pcapredict(datastream, source) {
+export default function pcaPredict(datastream, source) {
   const attr = validateStream('pca predict', specification, source.attr);
   if (attr.size !== datastream.attr.size) {
     throw new Error('The dimension of the datastream does not match the input stream\'s attributes');

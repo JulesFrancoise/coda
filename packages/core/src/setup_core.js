@@ -20,15 +20,8 @@ import dbtoa from './operator/mapping/dbtoa';
 import rand from './operator/mapping/rand';
 import scale from './operator/mapping/scale';
 import autoscale from './operator/mapping/autoscale';
-import train from './operator/ml/train';
-import recognize from './operator/ml/recognize';
 import kicks from './operator/spectral/kicks';
 import wavelet from './operator/spectral/wavelet';
-import scalelearn from './operator/ml/scalelearn';
-import scale2 from './operator/ml/scale2';
-import clusterize from './operator/ml/clusterize';
-import pcaFit from './operator/ml/pca_fit';
-import pcaPredict from './operator/ml/pca_predict';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -234,22 +227,6 @@ export default function setupCore(Stream) {
    * @param  {Object} options Options
    * @return {Stream}
    */
-  s.prototype.train = function train_(options) {
-    return new Stream(train(options, this));
-  };
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  s.prototype.recognize = function recognize_(options) {
-    return new Stream(recognize(options, this));
-  };
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
   s.prototype.slide = function slide_(options) {
     return new Stream(slide(options, this));
   };
@@ -302,44 +279,5 @@ export default function setupCore(Stream) {
    */
   s.prototype.wavelet = function wavelet_(options) {
     return new Stream(wavelet(options, this));
-  };
-
-  /**
-   * @return {Stream}
-   */
-  s.prototype.scalelearn = function scalelearn_() {
-    return new Stream(scalelearn(this));
-  };
-
-  /**
-   * @param  {Stream} minmaxstream    stream of extremum
-   * @return {Stream}
-   */
-  s.prototype.scale2 = function scale2_(minmaxstream) {
-    return new Stream(scale2(minmaxstream, this));
-  };
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  s.prototype.clusterize = function clusterize_(options) {
-    return new Stream(clusterize(options, this));
-  };
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  s.prototype.pcafit = function pcafit_() {
-    return new Stream(pcaFit(this));
-  };
-
-  /**
-   * @param  {Object} options Options
-   * @return {Stream}
-   */
-  s.prototype.pcapredict = function pcapredict_(datastream) {
-    return new Stream(pcaPredict(datastream, this));
   };
 }

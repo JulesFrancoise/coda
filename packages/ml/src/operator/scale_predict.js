@@ -93,8 +93,8 @@ class ScalerSink {
  * @param  {Stream} source          input data stream
  * @return {Stream}
  */
-export default function scale2(minmaxstream, source) {
-  const attr = validateStream('scale2', specification, source.attr);
+export default function scalePredict(minmaxstream, source) {
+  const attr = validateStream('scalePredict', specification, source.attr);
   if (attr.size !== minmaxstream.attr.size) {
     throw new Error('The dimension of the min/max stream does not match the input stream\'s attributes');
   }

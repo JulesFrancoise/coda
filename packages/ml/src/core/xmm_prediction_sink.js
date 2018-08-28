@@ -1,0 +1,72 @@
+import * as xmm from 'xmm';
+
+/**
+ * Model Listener Sink
+ * @private
+ */
+class ModelListenerSink {
+  constructor(recognizer) {
+    this.recognizer = recognizer;
+  }
+
+  event(t, x) {
+    this.recognizer.updateModel(x);
+  }
+
+  end(t) {
+    return this.recognizer.end(t);
+  }
+
+  error(t, e) {
+    return this.recognizer.error(t, e);
+  }
+}
+
+/**
+ * Recognizer sink
+ * @private
+ */
+export default class XmmPredictionSink {
+  /**
+   * @param {Stream} model       Stream of model parameters
+   * @param {Function} fetchOutput Function used to fetch the output parameters
+   * from the results object of the prediction
+   * @param {Object} sink        Sink
+   * @param {Object} scheduler   Scheduler
+   */
+  constructor(model, fetchOutput, sink, scheduler) {
+    this.sink = sink;
+    this.scheduler = scheduler;
+    if (model.attr.type === 'gmm') {
+      this.predictorFactory = xmm.MulticlassGMMPredictor;
+    } else if (model.attr.type === 'hmm') {
+      this.predictorFactory = xmm.MulticlassHMMPredictor;
+    } else if (model.attr.type === 'hhmm') {
+      this.predictorFactory = xmm.HierarchicalHMMPredictor;
+    } else {
+      throw new Error('`recognize` module: unknown model type');
+    }
+    this.predictor = null;
+    this.fetchOutput = fetchOutput;
+    model.run(new ModelListenerSink(this), scheduler);
+  }
+
+  updateModel(params) {
+    this.predictor = this.predictorFactory(params);
+    this.predictor.reset();
+  }
+
+  event(t, x) {
+    if (!this.predictor) return;
+    this.predictor.predict(x);
+    this.sink.event(t, this.fetchOutput(this.predictor.results, this.predictor));
+  }
+
+  end(t) {
+    return this.sink.end(t);
+  }
+
+  error(t, e) {
+    return this.sink.error(t, e);
+  }
+}

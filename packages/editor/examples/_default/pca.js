@@ -38,9 +38,9 @@ b = pack(unpack(a).concat(unpack(a.add(bruit))))
 c = b.recorder({ name: 'data' });
 
 //  Fit the model dynamically when changes occur in the recorder
-model = c.pcafit();
+model = c.pcaTrain();
 
 // Projection of the new stream on the new space reduced to 'nbreduce' dimensions
-d = b.pcapredict(model)
+d = b.pcaPredict(model)
 	.map(x => x.slice(0, nbreduce))
   .plot({ fill: 'bottom', stacked: true, legend: 'PCA reduction' });

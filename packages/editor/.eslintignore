@@ -5,6 +5,7 @@ src/js/sublime_keymap.js
 ../core
 ../max
 ../midi
+../ml
 ../myo
 ../prelude
 ../ui

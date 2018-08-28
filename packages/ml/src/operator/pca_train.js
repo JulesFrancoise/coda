@@ -18,10 +18,6 @@ const specification = {
  */
 class PCASink {
   constructor(containerId, sink) {
-    /**
-     * event sink
-     * @type {Object}
-     */
     this.sink = sink;
     this.pca = null;
     this.container = getContainer(containerId);
@@ -29,11 +25,6 @@ class PCASink {
 
   event(t, x) {
     if (x.type !== 'record' || x.value) return;
-    // let dataset = [];
-    // Object.keys(this.container.buffers).forEach((bufferIndex) => {
-    //   const buffer = this.container.buffers[bufferIndex];
-    //   dataset = dataset.concat(buffer.data);
-    // });
     const dataset = Object.values(this.container.buffers)
       .reduce((arr, y) => arr.concat(y.data), []);
     this.pca = new PCA(dataset);
@@ -65,7 +56,7 @@ class PCASink {
  * @param  {Stream|String} source     Recorder source, or data container name.
  * @return {Stream}
  */
-export default function pcafit(source) {
+export default function pcaTrain(source) {
   const attr = validateStream('PCA', specification, source.attr);
   return {
     attr,

@@ -20,15 +20,8 @@ import dbtoa_ from './operator/mapping/dbtoa';
 import rand_ from './operator/mapping/rand';
 import scale_ from './operator/mapping/scale';
 import autoscale_ from './operator/mapping/autoscale';
-import train_ from './operator/ml/train';
-import recognize_ from './operator/ml/recognize';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
-import scalelearn_ from './operator/ml/scalelearn';
-import scale2_ from './operator/ml/scale2';
-import clusterize_ from './operator/ml/clusterize';
-import pcafit_ from './operator/ml/pca_fit';
-import pcapredict_ from './operator/ml/pca_predict';
 
 /** @ignore */
 export const accum = stream =>
@@ -139,14 +132,6 @@ export const slide = (options, stream) =>
   new Stream(slide_(options, stream));
 
 /** @ignore */
-export const recognize = (options, stream) =>
-  new Stream(recognize_(options, stream));
-
-/** @ignore */
-export const train = (containerId, options, source) =>
-  new Stream(train_(containerId, options, source));
-
-/** @ignore */
 export const std = stream =>
   new Stream(meanstd_.std(stream));
 
@@ -173,23 +158,3 @@ export const pack = streams =>
 /** @ignore */
 export const wavelet = (options, stream) =>
   new Stream(wavelet_(options, stream));
-
-/** @ignore */
-export const scalelearn = source =>
-  new Stream(scalelearn_(source));
-
-/** @ignore */
-export const scale2 = (minmaxstream, source) =>
-  new Stream(scale2_(minmaxstream, source));
-
-/** @ignore */
-export const clusterize = (options, source) =>
-  new Stream(clusterize_(options, source));
-
-/** @ignore */
-export const pcafit = source =>
-  new Stream(pcafit_(source));
-
-/** @ignore */
-export const pcapredict = (datastream, source) =>
-  new Stream(pcapredict_(datastream, source));

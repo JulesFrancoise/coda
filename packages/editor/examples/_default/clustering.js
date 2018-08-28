@@ -1,5 +1,5 @@
 // =====
-// Recorder: UI Component to record fragments of data to various buffers
+// Clustering
 // =====
 //
 // TODO: Write description
@@ -15,8 +15,8 @@ a = periodic(20)
 b = a.recorder({ name: 'data' });
 
 // Dynamically train when changes occur in the recorder
-model = b.train({ type: 'GMM', gaussians: 3 });
+model = b.gmmTrain({ gaussians: 3, ignoreLabels: true });
 
 // Perform real-time recognition
-c = a.recognize({ model })
-  .plot({ fill: 'bottom', stacked: true, legend: 'HMM recognition' });
+c = a.gmmPredict({ model, output: 'beta' })
+  .plot({ stacked: true, fill: 'bottom', legend: 'weights' })

@@ -1,6 +1,6 @@
 {
-  "name": "@coda/core",
-  "description": "Movement Analysis with Reactive Streams",
+  "name": "@coda/ml",
+  "description": "Machine Learning modules for coda",
   "version": "0.0.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
@@ -11,18 +11,16 @@
     "dev": "cross-env NODE_ENV=development rollup -c -w",
     "build": "cross-env NODE_ENV=production rollup -c",
     "lint": "eslint src test",
-    "test": "jest",
-    "benchmark": "cross-env ls benchmark/*/index.js | BABEL_ENV=test xargs -n1 babel-node"
+    "test": "jest"
   },
   "dependencies": {
     "@coda/prelude": "^0.0.1",
     "@most/core": "^1.3.2",
-    "@most/dom-event": "^2.0.0",
     "@most/scheduler": "^1.2.1",
-    "complex-js": "^5.0.0"
+    "ml-pca": "^2.1.0",
+    "xmm": "github:JulesFrancoise/xmmjs"
   },
   "devDependencies": {
-    "benchmark": "^2.1.4",
     "cross-env": "^5.2.0",
     "eslint": "^5.2.0",
     "jest": "^23.4.2",

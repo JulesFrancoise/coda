@@ -45,7 +45,7 @@ module.exports = {
       { from: './media/**/*.json', to: './media/', flatten: true },
       { from: './src/css', to: './css' },
       { from: './src/js/jshint.js', to: './jshint.js' },
-      { from: './node_modules/@coda/core/dist/xmm.worker.js', to: './xmm.worker.js' },
+      { from: './node_modules/@coda/ml/dist/xmm.worker.js', to: './xmm.worker.js' },
     ]),
   ],
 };
