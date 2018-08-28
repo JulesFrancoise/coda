@@ -21,8 +21,10 @@ export default class XmmTrainerSink {
     this.modelType = configuration.type;
     this.ignoreLabels = configuration.ignoreLabels;
     this.configuration = configuration;
+    this.bimodal = this.container.attributes.bimodal;
     this.trainingSet = xmm.TrainingSet({
       inputDimension: this.container.attributes.size,
+      outputDimension: this.bimodal ? this.container.attributes.sizeOut : 0,
     });
     this.worker = new Worker('xmm.worker.js');
     this.worker.onmessage = (e) => {
@@ -42,9 +44,15 @@ export default class XmmTrainerSink {
     Object.keys(this.container.buffers).forEach((bufferIndex) => {
       const buffer = this.container.buffers[bufferIndex];
       const p = this.trainingSet.push(bufferIndex, this.ignoreLabels ? 'def' : buffer.label);
-      buffer.data.forEach((frame) => {
-        p.push(frame);
-      });
+      if (this.bimodal) {
+        buffer.datain.forEach((frame, i) => {
+          p.push(frame.concat(buffer.dataout[i]));
+        });
+      } else {
+        buffer.data.forEach((frame) => {
+          p.push(frame);
+        });
+      }
     });
     if (this.trainingSet.empty()) return;
     this.worker.postMessage({

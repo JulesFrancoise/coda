@@ -28,6 +28,7 @@ const definitions = type => ({
       'smoothedLogLikelihoods',
       'smoothedNormalizedLikelihoods',
       'likeliest',
+      'outputValues',
     ].concat((type === 'gmm')
       ? ['beta']
       : ['alpha', 'progress']),
