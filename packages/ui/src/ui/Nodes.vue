@@ -258,6 +258,11 @@ export default {
         this.mouse.selected = false;
         this.mouse.dragging = false;
       }
+      this.$emit('move', {
+        index: this.nodeIndex,
+        coords: [this.nodes[this.nodeIndex].x, this.nodes[this.nodeIndex].y],
+        label: this.nodes[this.nodeIndex].label,
+      });
     },
   },
 };

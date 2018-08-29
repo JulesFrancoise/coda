@@ -124,6 +124,20 @@ class NodesSink {
     });
   }
 
+  moveNode(node) {
+    if (Object.keys(this.container.buffers).includes(node.index.toString())) {
+      this.coordnodes = node.coords;
+      this.bufferIndex = node.index;
+      const n = this.container.buffers[node.index].dataout.length;
+      this.container.buffers[node.index].dataout = Array.from(Array(n), () => node.coords);
+      this.sink.event(currentTime(this.scheduler), {
+        type: 'change',
+        bufferIndex: this.bufferIndex,
+        coordnodes: this.coordnodes,
+      });
+    }
+  }
+
   remove(bufferIndex) {
     this.recording = false;
     this.bufferIndex = 0;
@@ -222,6 +236,9 @@ export default function nodes(options, source) {
       const nodesSink = new NodesSink(app.setBufferData, container, params, sink, scheduler);
       app.$on('record', (recording, node) => {
         nodesSink.record(recording, node);
+      });
+      app.$on('move', (node) => {
+        nodesSink.moveNode(node);
       });
       app.$on('remove', (bufferIndex) => {
         nodesSink.remove(bufferIndex);
