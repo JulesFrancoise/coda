@@ -4,6 +4,7 @@ import heatmap from './ui/heatmap';
 import plot from './ui/plot';
 import recorder from './ui/recorder';
 import looper from './ui/looper';
+import nodes from './ui/nodes';
 
 export default function setup(Stream, containerId = null) {
   const s = Stream;
@@ -37,6 +38,14 @@ export default function setup(Stream, containerId = null) {
    */
   s.prototype.recorder = function recorder_(options) {
     return new Stream(recorder(options, this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.nodes = function nodes_(options) {
+    return new Stream(nodes(options, this));
   };
 
 
