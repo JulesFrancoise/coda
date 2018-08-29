@@ -1,6 +1,7 @@
 <template>
   <base-component
     type="nodes"
+    class="nodes"
     :title="legend"
     height="200"
     @pause="paused => this.paused = paused"
@@ -269,6 +270,9 @@ export default {
 </script>
 
 <style scoped>
+.nodes {
+  min-height: 316px;
+}
 .nodes_buttons, .nodeinfo {
   margin: 0 4px;
   padding: 0 4px;

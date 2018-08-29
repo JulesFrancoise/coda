@@ -61,7 +61,7 @@ const xmmPredictFactory = type =>
     return {
       attr: {
         format: 'vector',
-        size: 1,
+        size: (params.output === 'outputValues') ? 2 : 1,
         varsize: true,
       },
       run(sink, scheduler) {
