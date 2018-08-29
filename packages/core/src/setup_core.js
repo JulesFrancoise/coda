@@ -22,6 +22,7 @@ import scale from './operator/mapping/scale';
 import autoscale from './operator/mapping/autoscale';
 import kicks from './operator/spectral/kicks';
 import wavelet from './operator/spectral/wavelet';
+import adaptive from './operator/mapping/adaptive';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -279,5 +280,13 @@ export default function setupCore(Stream) {
    */
   s.prototype.wavelet = function wavelet_(options) {
     return new Stream(wavelet(options, this));
+  };
+
+  /**
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.adaptive = function adaptive_(options) {
+    return new Stream(adaptive(options, this));
   };
 }

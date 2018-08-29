@@ -22,6 +22,7 @@ import scale_ from './operator/mapping/scale';
 import autoscale_ from './operator/mapping/autoscale';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
+import adaptive_ from './operator/mapping/adaptive';
 
 /** @ignore */
 export const accum = stream =>
@@ -158,3 +159,7 @@ export const pack = streams =>
 /** @ignore */
 export const wavelet = (options, stream) =>
   new Stream(wavelet_(options, stream));
+
+/** @ignore */
+export const adaptive = (options, stream) =>
+  new Stream(adaptive_(options, stream));
