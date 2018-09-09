@@ -34,8 +34,22 @@ const definitions = {
 
 /**
  * Overdrive audio effect
+ *
+ * @extends BaseAudioEffect
+ *
+ * @property {Number|Stream<Number>} outputGain     Output Gain
+ * @property {Number|Stream<Number>} drive          Drive
+ * @property {Number|Stream<Number>} amount         Amount
+ * @property {Number|Stream<Number>} algorithmIndex Type of Overdrive Algorithm (0-5)
  */
 class Overdrive extends BaseAudioEffect {
+  /**
+   * @param {Object} [options={}]               Effect optionss
+   * @param {Number} [options.outputGain=0.5]   Output Gain
+   * @param {Number} [options.drive=0.7]        Drive
+   * @param {Number} [options.amount=1]         Amount
+   * @param {Number} [options.algorithmIndex=0] Type of Overdrive Algorithm (0-5)
+   */
   constructor(options) {
     super();
     this.overdrive = new tuna.Overdrive(options);
@@ -59,8 +73,14 @@ class Overdrive extends BaseAudioEffect {
 /**
  * Create a Overdrive effect
  *
- * @param  {Object} [options={}] Overdrive parameters
- * @return {Overdrive}              Overdrive engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}]               Effect options
+ * @param {Number} [options.outputGain=0.5]   Output Gain
+ * @param {Number} [options.drive=0.7]        Drive
+ * @param {Number} [options.amount=1]         Amount
+ * @param {Number} [options.algorithmIndex=0] Type of Overdrive Algorithm (0-5)
+ * @return {Overdrive} Overdrive engine
  */
 export default function overdrive(options = {}) {
   const opts = parseParameters(definitions, options);

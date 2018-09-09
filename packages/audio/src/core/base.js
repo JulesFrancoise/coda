@@ -7,7 +7,15 @@ import { newDefaultScheduler } from '@most/scheduler';
  */
 export default class BaseAudioEngine {
   constructor() {
+    /**
+     * Output AudioNode
+     * @type {GainNode}
+     */
     this.output = audioContext.createGain();
+    /**
+     * Set of functions used to dispose the synthesizer
+     * @type {Array<Function>}
+     */
     this.disposeFuncs = [];
   }
 
@@ -20,13 +28,13 @@ export default class BaseAudioEngine {
   }
 
   /**
-   * Connnect the audio engine to a given destination (AudioNode or Engin)
+   * Connect the audio engine to a given destination (AudioNode or Engine). By default, the
+   * destination is the audio context destination
    * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
    * @return {BaseAudioEngine}
    */
   connect(destination = null) {
     if (destination) {
-      // eslint-disable-next-line no-underscore-dangle
       if (destination.isCompositeAudioNode) {
         this.output.connect(destination.input);
       } else {
@@ -39,13 +47,13 @@ export default class BaseAudioEngine {
   }
 
   /**
-   * Disconnnect the audio engine to a given destination (AudioNode or Engin)
+   * Disconnect the audio engine from a given destination (AudioNode or Engine). By default, the
+   * destination is the audio context destination
    * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
    * @return {BaseAudioEngine}
    */
   disconnect(destination = null) {
     if (destination) {
-      // eslint-disable-next-line no-underscore-dangle
       if (destination.isCompositeAudioNode) {
         this.output.disconnect(destination.input);
       } else {
@@ -58,12 +66,12 @@ export default class BaseAudioEngine {
   }
 
   /**
-   * Add a new parameter to the Synth. The parameter accepts either fixed values
-   * or streams of values
+   * Add a new parameter to the Synth. The parameter accepts either fixed values or streams of
+   * values
    * @param {String}   name         Parameter name
    * @param {*}        defaultValue Default value
-   * @param {Function} callback     Callback function, called whenever a new
-   * value is available for the parameter
+   * @param {Function} callback     Callback function, called whenever a new value is available
+   * for the parameter
    */
   defineParameter(name, defaultValue, callback, throttleTime = 20) {
     let current = defaultValue;
@@ -105,7 +113,7 @@ export default class BaseAudioEngine {
   }
 
   /**
-   * Properly dispose the synthesizer (terminate parameter streams)
+   * Properly dispose the synthesizer (terminates parameter streams).
    */
   dispose() {
     this.stop();

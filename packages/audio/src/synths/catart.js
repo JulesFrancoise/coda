@@ -5,7 +5,6 @@ import { definitions as concatDefs, ConcatenativeEngine } from './concatenative'
 
 /**
  * Synthesizer parameter definitions
- * @type {Object}
  * @ignore
  */
 const definitions = {
@@ -27,6 +26,29 @@ const definitions = {
 /**
  * Catart-style descriptor-driven corpus-based concatenative synthesis
  * @extends ConcatenativeEngine
+ *
+ * @property {String|Stream<String>} file Default audio file
+ * @property {String|Stream<String>} filePrefix Address where audio files are stored
+ * @property {String|Stream<String>} fileExt Audio files extension
+ * @property {Array<string>|Array<Stream<string>>} descriptors List of descriptors to consider
+ * @property {Array<Number>|Array<Stream<Number>>} target Target descriptors for driving
+ * the synthesis
+ * @property {Number|Stream<Number>} k Number of KNN Neighbors (randomized inn segment playback)
+ * @property {Number|Stream<Number>} periodAbs Segment period (absolute, in s)
+ * @property {Number|Stream<Number>} periodRel Segment period (relative to segment duration)
+ * @property {Number|Stream<Number>} periodVar Segment period random variation
+ * @property {Number|Stream<Number>} durationAbs Segment duration (absolute, in s)
+ * @property {Number|Stream<Number>} durationRel Segment duration (relative to segment duration)
+ * @property {Number|Stream<Number>} index Segment index
+ * @property {Number|Stream<Number>} positionVar Segment position random variation
+ * @property {Number|Stream<Number>} attackAbs Segment attack (absolute)
+ * @property {Number|Stream<Number>} attackRel Segment attack (relative to duration)
+ * @property {Number|Stream<Number>} releaseAbs Segment release (absolute)
+ * @property {Number|Stream<Number>} releaseRel Segment release (relative to duration)
+ * @property {Number|Stream<Number>} resampling Segment resampling
+ * @property {Number|Stream<Number>} resamplingVar Segment resampling  random variation
+ * @property {Number|Stream<Number>} gain Segment gain
+ * @property {Number|Stream<Number>} throttle Throttle time for stream parameters
  */
 export class CatartEngine extends ConcatenativeEngine {
   /**
@@ -35,23 +57,23 @@ export class CatartEngine extends ConcatenativeEngine {
    * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
    * @param  {String} [options.fileExt='flac'] Audio files extension
    * @param  {Array<string>} [options.descriptors=['loudness']] List of descriptors to consider
-   * @param  {Array<number>} [options.target=[0]] Target descriptors for driving the synthesis
-   * @param  {number} [options.k=1] Number of KNN Neighbors (randomized inn segment playback)
-   * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
-   * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
-   * @param  {number} [options.periodVar=0] Segment period random variation
-   * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
-   * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
-   * @param  {number} [options.index=0] Segment index
-   * @param  {number} [options.positionVar=0] Segment position random variation
-   * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
-   * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
-   * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
-   * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
-   * @param  {number} [options.resampling=0] Segment resampling
-   * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
-   * @param  {number} [options.gain=0] Segment gain
-   * @param  {number} [options.throttle=20] Throttle time for stream parameters
+   * @param  {Array<Number>} [options.target=[0]] Target descriptors for driving the synthesis
+   * @param  {Number} [options.k=1] Number of KNN Neighbors (randomized inn segment playback)
+   * @param  {Number} [options.periodAbs=0] Segment period (absolute, in s)
+   * @param  {Number} [options.periodRel=1] Segment period (relative to segment duration)
+   * @param  {Number} [options.periodVar=0] Segment period random variation
+   * @param  {Number} [options.durationAbs=1] Segment duration (absolute, in s)
+   * @param  {Number} [options.durationRel=1] Segment duration (relative to segment duration)
+   * @param  {Number} [options.index=0] Segment index
+   * @param  {Number} [options.positionVar=0] Segment position random variation
+   * @param  {Number} [options.attackAbs=0.001] Segment attack (absolute)
+   * @param  {Number} [options.attackRel=0] Segment attack (relative to duration)
+   * @param  {Number} [options.releaseAbs=0.001] Segment release (absolute)
+   * @param  {Number} [options.releaseRel=0] Segment release (relative to duration)
+   * @param  {Number} [options.resampling=0] Segment resampling
+   * @param  {Number} [options.resamplingVar=0] Segment resampling  random variation
+   * @param  {Number} [options.gain=0] Segment gain
+   * @param  {Number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
     super(options);
@@ -74,7 +96,7 @@ export class CatartEngine extends ConcatenativeEngine {
       'target',
       options.target,
       (value) => {
-        this.predict((typeof value === 'number') ? [value] : value);
+        this.predict((typeof value === 'Number') ? [value] : value);
       },
     );
   }
@@ -118,7 +140,7 @@ export class CatartEngine extends ConcatenativeEngine {
    * Update the min/max bounds of the descriptor data for normalizing the target descriptors
    * @private
    *
-   * @param  {Array<Array<number>>} data descriptor data
+   * @param  {Array<Array<Number>>} data descriptor data
    */
   updateNormalization(data) {
     const dim = data[0].length - 1;
@@ -137,9 +159,9 @@ export class CatartEngine extends ConcatenativeEngine {
   }
 
   /**
-   * Estimate the nearest neighbors from a target value, and select an audio segment. If the number
+   * Estimate the nearest neighbors from a target value, and select an audio segment. If the Number
    * of neighbors `k` is > 1, then a segment is randomly selected from the k nearest segments.
-   * @param  {Array<number>} v Target descriptors
+   * @param  {Array<Number>} v Target descriptors
    */
   predict(v) {
     if (!this.knn) return;
@@ -153,32 +175,70 @@ export class CatartEngine extends ConcatenativeEngine {
 
 /**
  * Polyphonic Catart-style descriptor-driven corpus-based concatenative synthesis
+ *
+ * @property {String|Array<String>|Stream<String>|Array<Stream<String>>} file Default audio file
+ * @property {Array<string>|Stream<Array<string>>} descriptors List of descriptors to consider
+ * @property {Array<Number>|Stream<Array<Number>>} target Target descriptors for driving
+ * the synthesis
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} k Number of KNN
+ * Neighbors (randomized in segment playback)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} periodAbs Segment period
+ * (absolute, in s)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} periodRel Segment period
+ * (relative to segment duration)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} periodVar Segment period
+ * random variation
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} durationAbs Segment
+ * duration (absolute, in s)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} durationRel Segment
+ * duration (relative to segment duration)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} index Segment index
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} positionVar Segment
+ * position random variation
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} attackAbs Segment attack
+ * (absolute)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} attackRel Segment attack
+ * (relative to duration)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} releaseAbs Segment
+ * release (absolute)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} releaseRel Segment
+ * release (relative to duration)
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} resampling Segment
+ * resampling
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} resamplingVar Segment
+ * resampling  random variation
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} gain Segment gain
+ * @property {Number|Array<Number>|Stream<Number>|Array<Stream<Number>>} throttle Throttle time
+ * for stream parameters
  */
 export class PolyCatartEngine extends PolyAudioEngine {
   /**
    * @param  {Object} [options] Concatenative synthesis parameters
-   * @param  {number} [options.voices=1] Number of voices (polyphony)
-   * @param  {String} [options.file=''] Default audio file
+   * @param  {Number} [options.voices=1] Number of voices (polyphony)
+   * @param  {String|Array<String>} [options.file=''] Default audio file
    * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
    * @param  {String} [options.fileExt='flac'] Audio files extension
    * @param  {Array<string>} [options.descriptors=['loudness']] List of descriptors to consider
-   * @param  {Array<number>} [options.target=[0]] Target descriptors for driving the synthesis
-   * @param  {number} [options.k=1] Number of KNN Neighbors (randomized inn segment playback)
-   * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
-   * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
-   * @param  {number} [options.periodVar=0] Segment period random variation
-   * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
-   * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
-   * @param  {number} [options.index=0] Segment index
-   * @param  {number} [options.positionVar=0] Segment position random variation
-   * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
-   * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
-   * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
-   * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
-   * @param  {number} [options.resampling=0] Segment resampling
-   * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
-   * @param  {number} [options.gain=0] Segment gain
-   * @param  {number} [options.throttle=20] Throttle time for stream parameters
+   * @param  {Array<Number>} [options.target=[0]] Target descriptors for driving the synthesis
+   * @param  {Number|Array<Number>} [options.k=1] Number of KNN Neighbors (randomized in
+   * segment playback)
+   * @param  {Number|Array<Number>} [options.periodAbs=0] Segment period (absolute, in s)
+   * @param  {Number|Array<Number>} [options.periodRel=1] Segment period (relative to
+   * segment duration)
+   * @param  {Number|Array<Number>} [options.periodVar=0] Segment period random variation
+   * @param  {Number|Array<Number>} [options.durationAbs=1] Segment duration (absolute, in s)
+   * @param  {Number|Array<Number>} [options.durationRel=1] Segment duration (relative to
+   * segment duration)
+   * @param  {Number|Array<Number>} [options.index=0] Segment index
+   * @param  {Number|Array<Number>} [options.positionVar=0] Segment position random variation
+   * @param  {Number|Array<Number>} [options.attackAbs=0.001] Segment attack (absolute)
+   * @param  {Number|Array<Number>} [options.attackRel=0] Segment attack (relative to duration)
+   * @param  {Number|Array<Number>} [options.releaseAbs=0.001] Segment release (absolute)
+   * @param  {Number|Array<Number>} [options.releaseRel=0] Segment release (relative to duration)
+   * @param  {Number|Array<Number>} [options.resampling=0] Segment resampling
+   * @param  {Number|Array<Number>} [options.resamplingVar=0] Segment resampling  random variation
+   * @param  {Number|Array<Number>} [options.gain=0] Segment gain
+   * @param  {Number|Array<Number>} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
     const descriptors = Array(options.voices).fill(options.descriptors);
@@ -209,31 +269,34 @@ export class PolyCatartEngine extends PolyAudioEngine {
  *
  * @todo Code example + Description of markers file structure
  *
- * @param  {Object} [options={}] Concatenative synthesis parameters
- * @param  {number} [options.voices=1] NNumber of voices (polyphony)
- * @param  {String} [options.file=''] Default audio file. Each audio file must be associated with
- * a JSON file containing the associated markers.
- * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
- * @param  {String} [options.fileExt='flac'] Audio files extension
- * @param  {Array<string>} [options.descriptors=['loudness']] List of descriptors to consider
- * @param  {Array<number>} [options.target=[0]] Target descriptors for driving the synthesis
- * @param  {number} [options.k=1] Number of KNN Neighbors (randomized inn segment playback)
- * @param  {number} [options.periodAbs=0] Segment period (absolute, in s)
- * @param  {number} [options.periodRel=1] Segment period (relative to segment duration)
- * @param  {number} [options.periodVar=0] Segment period random variation
- * @param  {number} [options.durationAbs=1] Segment duration (absolute, in s)
- * @param  {number} [options.durationRel=1] Segment duration (relative to segment duration)
- * @param  {number} [options.index=0] Segment index
- * @param  {number} [options.positionVar=0] Segment position random variation
- * @param  {number} [options.attackAbs=0.001] Segment attack (absolute)
- * @param  {number} [options.attackRel=0] Segment attack (relative to duration)
- * @param  {number} [options.releaseAbs=0.001] Segment release (absolute)
- * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
- * @param  {number} [options.resampling=0] Segment resampling
- * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
- * @param  {number} [options.gain=0] Segment gain
- * @param  {number} [options.throttle=20] Throttle time for stream parameters
- * @return {ConcatenativeEngine}      Concatenative synthesis engine
+ * @param {Object} [options={}] Concatenative synthesis parameters
+ * @param {Number} [options.voices=1] Number of voices (polyphony)
+ * @param {String|Array<String>} [options.file=''] Default audio file. Each audio file must be
+ * associated with a JSON file containing the associated markers.
+ * @param {String} [options.filePrefix='/media/'] Address where audio files are stored
+ * @param {String} [options.fileExt='flac'] Audio files extension
+ * @param {Array<string>} [options.descriptors=['loudness']] List of descriptors to consider
+ * @param {Array<Number>} [options.target=[0]] Target descriptors for driving the synthesis
+ * @param {Number|Array<Number>} [options.k=1] Number of KNN Neighbors (randomized in segment
+ * playback)
+ * @param {Number|Array<Number>} [options.periodAbs=0] Segment period (absolute, in s)
+ * @param {Number|Array<Number>} [options.periodRel=1] Segment period (relative to segment
+ * duration)
+ * @param {Number|Array<Number>} [options.periodVar=0] Segment period random variation
+ * @param {Number|Array<Number>} [options.durationAbs=1] Segment duration (absolute, in s)
+ * @param {Number|Array<Number>} [options.durationRel=1] Segment duration (relative to
+ * segment duration)
+ * @param {Number|Array<Number>} [options.index=0] Segment index
+ * @param {Number|Array<Number>} [options.positionVar=0] Segment position random variation
+ * @param {Number|Array<Number>} [options.attackAbs=0.001] Segment attack (absolute)
+ * @param {Number|Array<Number>} [options.attackRel=0] Segment attack (relative to duration)
+ * @param {Number|Array<Number>} [options.releaseAbs=0.001] Segment release (absolute)
+ * @param {Number|Array<Number>} [options.releaseRel=0] Segment release (relative to duration)
+ * @param {Number|Array<Number>} [options.resampling=0] Segment resampling
+ * @param {Number|Array<Number>} [options.resamplingVar=0] Segment resampling  random variation
+ * @param {Number|Array<Number>} [options.gain=0] Segment gain
+ * @param {Number|Array<Number>} [options.throttle=20] Throttle time for stream parameters
+ * @return {PolyCatartEngine} Concatenative synthesis engine
  */
 export default function catart(options = {}) {
   const opts = parseParameters(definitions, options);

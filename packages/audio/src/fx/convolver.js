@@ -24,8 +24,18 @@ const definitions = {
 
 /**
  * Convolver audio effect
+ *
+ * @extends BaseAudioEffect
+ *
+ * @property {String|Stream<String>} file Convolution audio file
  */
 class Convolver extends BaseAudioEffect {
+  /**
+   * @param  {Object} [options={}]            Convolution parameters
+   * @param  {String} [options.file='']       Default audio file
+   * @param  {String} [options.filePrefix=''] Address where audio files are stored
+   * @param  {String} [options.fileExt='']    Audio files extension
+   */
   constructor(options) {
     super();
     this.loader = new wavesLoaders.AudioBufferLoader();
@@ -59,7 +69,7 @@ class Convolver extends BaseAudioEffect {
  * @param  {String} [options.file='']       Default audio file
  * @param  {String} [options.filePrefix=''] Address where audio files are stored
  * @param  {String} [options.fileExt='']    Audio files extension
- * @return {Convolver}                      Convolution engine
+ * @return {Convolver} Convolution engine
  */
 export default function convolver(options = {}) {
   const opts = parseParameters(definitions, options);

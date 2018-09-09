@@ -48,8 +48,26 @@ const definitions = {
 
 /**
  * Compressor audio effect
+ * @extends BaseAudioEffect
+ * @property {Number|Stream<Number>} threshold  Threshold (dB)
+ * @property {Number|Stream<Number>} makeupGain Makeup Gain
+ * @property {Number|Stream<Number>} attack     Attack time (ms)
+ * @property {Number|Stream<Number>} release    Release time (ms)
+ * @property {Number|Stream<Number>} ratio      Compression Ratio
+ * @property {Number|Stream<Number>} knee       Knee
+ * @property {Number|Stream<Number>} automakeup Automakeup
  */
 class Compressor extends BaseAudioEffect {
+  /**
+   * @param {Object} options                   Effect options
+   * @param {Number} [options.threshold=-1]    Threshold (dB)
+   * @param {Number} [options.makeupGain=1]    Makeup Gain
+   * @param {Number} [options.attack=1]        Attack time (ms)
+   * @param {Number} [options.release=0]       Release time (ms)
+   * @param {Number} [options.ratio=4]         Compression Ratio
+   * @param {Number} [options.knee=5]          Knee
+   * @param {Number} [options.automakeup=true] Automakeup
+   */
   constructor(options) {
     super();
     this.compressor = new tuna.Compressor(options);
@@ -82,8 +100,17 @@ class Compressor extends BaseAudioEffect {
 /**
  * Create a Compressor effect
  *
- * @param  {Object} [options={}] Compressor parameters
- * @return {Compressor}              Compressor engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} options                   Effect options
+ * @param {Number} [options.threshold=-1]    Threshold (dB)
+ * @param {Number} [options.makeupGain=1]    Makeup Gain
+ * @param {Number} [options.attack=1]        Attack time (ms)
+ * @param {Number} [options.release=0]       Release time (ms)
+ * @param {Number} [options.ratio=4]         Compression Ratio
+ * @param {Number} [options.knee=5]          Knee
+ * @param {Number} [options.automakeup=true] Automakeup
+ * @return {Compressor} Compressor engine
  */
 export default function compressor(options = {}) {
   const opts = parseParameters(definitions, options);

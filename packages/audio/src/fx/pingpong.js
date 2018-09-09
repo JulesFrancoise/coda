@@ -36,8 +36,22 @@ const definitions = {
 
 /**
  * PingPongDelay audio effect
+ *
+ * @extends BaseAudioEffect
+ *
+ * @property {Number|Stream<Number>} level     Level
+ * @property {Number|Stream<Number>} feedback  Feedback
+ * @property {Number|Stream<Number>} timeLeft  Left delay time (ms)
+ * @property {Number|Stream<Number>} timeRight Left delay time (ms)
  */
 class PingPongDelay extends BaseAudioEffect {
+  /**
+   * @param {Object} [options={}]            Effect options
+   * @param {Number} [options.level=0.5]     Level
+   * @param {Number} [options.feedback=0.3]  Feedback
+   * @param {Number} [options.timeLeft=150]  Left delay time (ms)
+   * @param {Number} [options.timeRight=200] Left delay time (ms)
+   */
   constructor(options) {
     super();
     this.pingpong = new tuna.PingPongDelay(options);
@@ -61,8 +75,14 @@ class PingPongDelay extends BaseAudioEffect {
 /**
  * Create a PingPongDelay effect
  *
- * @param  {Object} [options={}] PingPongDelay parameters
- * @return {PingPongDelay}              PingPongDelay engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}]            Effect options
+ * @param {Number} [options.level=0.5]     Level
+ * @param {Number} [options.feedback=0.3]  Feedback
+ * @param {Number} [options.timeLeft=150]  Left delay time (ms)
+ * @param {Number} [options.timeRight=200] Left delay time (ms)
+ * @return {PingPongDelay} PingPongDelay engine
  */
 export default function pingpong(options = {}) {
   const opts = parseParameters(definitions, options);

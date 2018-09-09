@@ -23,10 +23,24 @@ const definitions = {
 
 /**
  * Chorus audio effect
+ * @extends BaseAudioEffect
+ * @property {Number|Stream<Number>} rate Chorus rate (Hz)
+ * @property {Number|Stream<Number>} feedback Feedback level
+ * @property {Number|Stream<Number>} delay Delay time (s)
  */
 class Chorus extends BaseAudioEffect {
+  /**
+   * @param {Object} options                Effect options
+   * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
+   * @param {Number} [options.feedback=0.2] Feedback level
+   * @param {Number} [options.delay=0.0045] Delay time (s)
+   */
   constructor(options) {
     super();
+    /**
+     * Chorus engine (from the Tuna library)
+     * @type {tuna.Chorus}
+     */
     this.chorus = new tuna.Chorus(options);
     this.input.connect(this.chorus);
     this.chorus.connect(this.wet);
@@ -45,8 +59,13 @@ class Chorus extends BaseAudioEffect {
 /**
  * Create a Chorus effect
  *
- * @param  {Object} [options={}] Chorus parameters
- * @return {Chorus}              Chorus engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}]          Effect options
+ * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
+ * @param {Number} [options.feedback=0.2] Feedback level
+ * @param {Number} [options.delay=0.0045] Delay time (s)
+ * @return {Chorus} Chorus engine
  */
 export default function chorus(options = {}) {
   const opts = parseParameters(definitions, options);

@@ -18,8 +18,16 @@ const definitions = {
 
 /**
  * Panner audio effect
+ *
+ * @extends BaseAudioEffect
+ *
+ * @property {Number|Stream<Number>} pan Pan position (-1 < 1)
  */
 class Panner extends BaseAudioEffect {
+  /**
+   * @param {Object} [options={}]    Effect options
+   * @param {Number} [options.pan=0] Pan position (-1 < 1)
+   */
   constructor(options) {
     super();
     this.panner = new tuna.Panner(options);
@@ -34,8 +42,11 @@ class Panner extends BaseAudioEffect {
 /**
  * Create a Panner effect
  *
- * @param  {Object} [options={}] Panner parameters
- * @return {Panner}              Panner engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}]    Effect options
+ * @param {Number} [options.pan=0] Pan position (-1 < 1)
+ * @return {Panner} Panner engine
  */
 export default function panner(options = {}) {
   const opts = parseParameters(definitions, options);

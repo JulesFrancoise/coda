@@ -30,10 +30,24 @@ const definitions = {
 
 /**
  * Bitcrusher audio effect
+ * @extends BaseAudioEffect
+ * @property {Number|Stream<Number>} bits Number of bits (decimation)
+ * @property {Number|Stream<Number>} normfreq Normalized downsampling frequency
+ * @property {Number|Stream<Number>} bufferSize Buffer size
  */
 class Bitcrusher extends BaseAudioEffect {
+  /**
+   * @param {Object} options                   Effect options
+   * @param {Number} [options.bits=16]         Number of bits (decimation)
+   * @param {Number} [options.normfreq=0.1]    Normalized downsampling frequency
+   * @param {Number} [options.bufferSize=4096] Buffer size
+   */
   constructor(options) {
     super();
+    /**
+     * Bitcrusher engine (from the Tuna library)
+     * @type {tuna.Bitcrusher}
+     */
     this.bitcrusher = new tuna.Bitcrusher(options);
     this.input.connect(this.bitcrusher);
     this.bitcrusher.connect(audioContext.destination);
@@ -50,10 +64,15 @@ class Bitcrusher extends BaseAudioEffect {
 }
 
 /**
- * Create a Bitcrusher effect
+ * Create a Bitcrusher audio effect.
  *
- * @param  {Object} [options={}] Bitcrusher parameters
- * @return {Bitcrusher}              Bitcrusher engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param  {Object} [options={}]              Bitcrusher parameters
+ * @param  {Number} [options.bits=16]         Number of bits (decimation)
+ * @param  {Number} [options.normfreq=0.1]    Normalized downsampling frequency
+ * @param  {Number} [options.bufferSize=4096] Buffer size
+ * @return {Bitcrusher}                       Bitcrusher engine
  */
 export default function bitcrusher(options = {}) {
   const opts = parseParameters(definitions, options);

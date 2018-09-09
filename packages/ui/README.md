@@ -12,9 +12,9 @@ TODO
 
 ### Credits
 
-Mars has been developed at [LIMSI-CNRS](https://www.limsi.fr/en/) by [Jules Françoise](https://www.julesfrancoise.com), and is released under the MIT Licence.
+Coda has been developed at [LIMSI-CNRS](https://www.limsi.fr/en/) by [Jules Françoise](https://www.julesfrancoise.com), and is released under the MIT Licence.
 
-Mars would not exist without the tremendous work of other open-source contributors. Mars relies on several existing libraries:
+Coda would not exist without the tremendous work of other open-source contributors. Coda relies on several existing libraries:
 - [Most](https://github.com/mostjs/core): Monadic Event Stream
 - [Waves-LFO](https://github.com/wavesjs/waves-lfo): Ircam's Low Frequency Operators
 - [Vue](https://vuejs.org): The Progressive

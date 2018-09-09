@@ -44,8 +44,21 @@ const definitions = {
 
 /**
  * AudioFilter audio effect
+ * @property {Number|Stream<Number>} frequency  Cutoff Frequency (Hz)
+ * @property {Number|Stream<Number>} Q          Q factor (resonance)
+ * @property {Number|Stream<Number>} gain       Filter gain
+ * @property {String|Stream<String>} filterType Filter type (lowpass, highpass, bandpass, lowshelf,
+ * highshelf, peaking, notch, allpass)
  */
 class AudioFilter extends BaseAudioEffect {
+  /**
+   * @param {Object} [options={}]         AudioFilter parameters
+   * @param {Number} [options.frequency=440] Cutoff Frequency (Hz)
+   * @param {Number} [options.Q=1] Q factor (resonance)
+   * @param {Number} [options.gain=0] Filter gain
+   * @param {String} [options.filterType='lowpass'] Filter type (lowpass, highpass, bandpass,
+   * lowshelf, highshelf, peaking, notch, allpass)
+   */
   constructor(options) {
     super();
     this.filt = new tuna.AudioFilter(options);
@@ -67,10 +80,17 @@ class AudioFilter extends BaseAudioEffect {
 }
 
 /**
- * Create a AudioFilter effect
+ * Create an Audio Filter effect
  *
- * @param  {Object} [options={}] AudioFilter parameters
- * @return {AudioFilter}              AudioFilter engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}] AudioFilter parameters
+ * @param {Number} [options.frequency=440] Cutoff Frequency (Hz)
+ * @param {Number} [options.Q=1] Q factor (resonance)
+ * @param {Number} [options.gain=0] Filter gain
+ * @param {String} [options.filterType='lowpass'] Filter type (lowpass, highpass, bandpass,
+ * lowshelf, highshelf, peaking, notch, allpass)
+ * @return {AudioFilter} AudioFilter engine
  */
 export default function filt(options = {}) {
   const opts = parseParameters(definitions, options);

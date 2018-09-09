@@ -29,8 +29,20 @@ const definitions = {
 
 /**
  * Tremolo audio effect
+ *
+ * @extends BaseAudioEffect
+ *
+ * @property {Number|Stream<Number>} intensity   Intensity
+ * @property {Number|Stream<Number>} rate        Rate
+ * @property {Number|Stream<Number>} stereoPhase Stereo Phase (deg)
  */
 class Tremolo extends BaseAudioEffect {
+  /**
+   * @param {Object} [options={}]            Effect options
+   * @param {Number} [options.intensity=0.3] intensity
+   * @param {Number} [options.rate=4]        Rate
+   * @param {Number} [options.stereoPhase=0] Stereo Phase (deg)
+   */
   constructor(options) {
     super();
     this.tremolo = new tuna.Tremolo(options);
@@ -51,8 +63,13 @@ class Tremolo extends BaseAudioEffect {
 /**
  * Create a Tremolo effect
  *
- * @param  {Object} [options={}] Tremolo parameters
- * @return {Tremolo}              Tremolo engine
+ * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
+ *
+ * @param {Object} [options={}]            Effect options
+ * @param {Number} [options.intensity=0.3] intensity
+ * @param {Number} [options.rate=4]        Rate
+ * @param {Number} [options.stereoPhase=0] Stereo Phase (deg)
+ * @return {Tremolo} Tremolo engine
  */
 export default function tremolo(options = {}) {
   const opts = parseParameters(definitions, options);

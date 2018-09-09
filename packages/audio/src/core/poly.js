@@ -14,6 +14,10 @@ export default class PolyAudioEngine extends BaseAudioEngine {
    */
   constructor(voices = 1, MonoSynthClass, options) {
     super();
+    /**
+     * Number of voices (polyphony)
+     * @type {Number}
+     */
     this.voices = voices;
     const individualOptions = Array.from(Array(voices), (_, i) => {
       const opt = {};
@@ -26,6 +30,10 @@ export default class PolyAudioEngine extends BaseAudioEngine {
       });
       return opt;
     });
+    /**
+     * Synthesizers
+     * @type {Array}
+     */
     this.synths = Array.from(Array(voices), (_, i) => new MonoSynthClass(individualOptions[i]));
     this.synths.forEach((synth) => {
       synth.connect(this.output);
@@ -68,7 +76,7 @@ export default class PolyAudioEngine extends BaseAudioEngine {
   }
 
   /**
-   * Disconnnect the audio engine to a given destination (AudioNode or Engin)
+   * Disconnnect the audio engine to a given destination (AudioNode or Engine)
    * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
    * @return {BaseAudioEngine}
    */
