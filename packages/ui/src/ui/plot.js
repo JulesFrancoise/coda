@@ -64,7 +64,7 @@ class PlotSink {
     this.app = vueApp;
     this.legend = params.legend;
     this.app.$data.legend = params.legend;
-    this.app.$data.length = params.duration * attr.samplerate;
+    this.app.$data.length = Math.floor(params.duration * attr.samplerate);
     this.app.$data.channels = attr.size;
     this.app.$data.stacked = params.stacked;
     this.app.$data.fill = params.fill;

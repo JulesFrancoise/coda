@@ -38,8 +38,6 @@ export default {
     this.context = this.canvas.getContext('2d');
     this.tmpCanvas = this.$refs.tmpCanvas;
     this.tmpContext = this.tmpCanvas.getContext('2d');
-    this.context.lineJoin = 'round';
-    this.context.lineWidth = 2;
   },
   data() {
     return {
@@ -72,6 +70,10 @@ export default {
           Array(this.channels).fill(NaN));
         this.buffer = zeros.concat(this.buffer);
       }
+      this.canvas.width = Math.ceil(700 / this.length) * this.length;
+      this.tmpCanvas.width = Math.ceil(700 / this.length) * this.length;
+      this.canvas.height = Math.floor(this.canvas.width / 7);
+      this.tmpCanvas.height = Math.floor(this.tmpCanvas.width / 7);
     },
     fill(mode) {
       const scale = this.stacked ? this.canvas.height / this.channels : this.canvas.height;
@@ -94,7 +96,7 @@ export default {
       this.tmpContext.drawImage(this.canvas, 0, 0, width, height);
       // Fill the new area in the main context
       this.context.fillStyle = '#272822';
-      this.context.fillRect(width - (n * this.dx), 0, (n * this.dx), height);
+      this.context.fillRect(width - ((n + 1) * this.dx), 0, ((n + 1) * this.dx), height);
 
       // Update Min/Max
       elements.forEach((frame) => {
@@ -113,6 +115,8 @@ export default {
       });
 
       // Draw new lines
+      this.context.lineJoin = 'round';
+      this.context.lineWidth = 2;
       for (let channel = 0; channel < this.channels; channel += 1) {
         const scale = this.stacked ? height / this.channels : height;
         const offset = this.stacked ? height - ((this.channels - channel - 1) * scale) : height;
