@@ -1,0 +1,10 @@
+examples
+../packages/audio
+../packages/core
+../packages/max
+../packages/midi
+../packages/ml
+../packages/myo
+../packages/prelude
+../packages/sandbox
+../packages/ui

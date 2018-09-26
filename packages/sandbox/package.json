@@ -1,0 +1,35 @@
+{
+  "name": "@coda/sandbox",
+  "description": "CO/DA Sanndbox for live-coding",
+  "version": "0.0.1",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development rollup -c -w",
+    "build": "cross-env NODE_ENV=production rollup -c && npm run copy-workers",
+    "copy-workers": "cp ./node_modules/@coda/ml/dist/xmm.worker* ./dist",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@coda/audio": "^0.0.1",
+    "@coda/core": "^0.0.1",
+    "@coda/max": "^0.0.1",
+    "@coda/midi": "^0.0.1",
+    "@coda/ml": "^0.0.1",
+    "@coda/myo": "^0.0.1",
+    "@coda/ui": "^0.0.1",
+    "@most/scheduler": "^1.2.1",
+    "escodegen": "^1.11.0",
+    "esprima": "^4.0.1"
+  },
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "rollup": "^0.63.5",
+    "rollup-plugin-node-builtins": "^2.1.2"
+  }
+}

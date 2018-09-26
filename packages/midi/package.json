@@ -16,7 +16,7 @@
   "dependencies": {
     "@coda/prelude": "^0.0.1",
     "@most/core": "^1.3.2",
-    "tonal": "^1.1.3"
+    "tonal": "^2.0.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

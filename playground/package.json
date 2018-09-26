@@ -1,0 +1,30 @@
+{
+  "name": "@coda/playground",
+  "version": "0.0.1",
+  "description": "A live-coding editor playground for Coda",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node prepare.js && vue-cli-service serve",
+    "build": "node prepare.js && vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@coda/sandbox": "^0.0.1",
+    "codemirror": "^5.40.0",
+    "jshint": "^2.9.6",
+    "vue": "^2.5.17",
+    "vue-codemirror": "^4.0.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.3",
+    "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-service": "^3.0.3",
+    "@vue/eslint-config-airbnb": "^3.0.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-html": "^4.0.3",
+    "copy-webpack-plugin": "^4.5.2",
+    "vue-template-compiler": "^2.5.17"
+  }
+}

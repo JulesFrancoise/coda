@@ -14,6 +14,7 @@ import configMidi from './packages/midi/rollup.config';
 import configMl from './packages/ml/rollup.config';
 import configMyo from './packages/myo/rollup.config';
 import configPrelude from './packages/prelude/rollup.config';
+import configSandbox from './packages/sandbox/rollup.config';
 import configUi from './packages/ui/rollup.config';
 
 function fixConfiguration(config, path) {
@@ -35,6 +36,7 @@ fixConfiguration(configMl[0], 'packages/ml');
 fixConfiguration(configMl[1], 'packages/ml');
 fixConfiguration(configMyo, 'packages/myo');
 fixConfiguration(configPrelude, 'packages/prelude');
+fixConfiguration(configSandbox, 'packages/sandbox');
 fixConfiguration(configUi, 'packages/ui');
 
 export default [
@@ -46,5 +48,6 @@ export default [
   configMl[1],
   configMyo,
   configPrelude,
+  configSandbox,
   configUi,
 ];
