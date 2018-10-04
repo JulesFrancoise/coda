@@ -55,6 +55,10 @@ const specification = {
   },
 };
 
+/**
+ * Recorder sink
+ * @private
+ */
 class RecorderSink {
   constructor(updateUI, container, params, sink, scheduler) {
     this.updateUI = updateUI;

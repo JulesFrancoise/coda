@@ -34,7 +34,7 @@ const definitions = {
 
 /**
  * Overdrive audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} outputGain     Output Gain

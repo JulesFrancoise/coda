@@ -24,7 +24,7 @@ const definitions = {
 
 /**
  * Convolver audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {String|Stream<String>} file Convolution audio file

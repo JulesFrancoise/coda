@@ -1,5 +1,3 @@
-/* esdoc-ignore */
-
 export { default as parseParameters } from './lib/parameters';
 export { default as validateStream } from './lib/validation';
 export { default as withAttr } from './lib/with_attr';

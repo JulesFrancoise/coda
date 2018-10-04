@@ -10,6 +10,9 @@
 import { euclidean } from 'ml-distance-euclidean';
 import KDTree from './kdtree';
 
+/**
+ * @ignore
+ */
 export default class KNN {
   /**
    * @param {Array} dataset

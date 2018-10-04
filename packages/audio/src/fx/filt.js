@@ -44,6 +44,7 @@ const definitions = {
 
 /**
  * AudioFilter audio effect
+ * @private
  * @property {Number|Stream<Number>} frequency  Cutoff Frequency (Hz)
  * @property {Number|Stream<Number>} Q          Q factor (resonance)
  * @property {Number|Stream<Number>} gain       Filter gain

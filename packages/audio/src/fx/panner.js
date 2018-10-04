@@ -18,7 +18,7 @@ const definitions = {
 
 /**
  * Panner audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} pan Pan position (-1 < 1)

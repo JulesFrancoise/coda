@@ -4,6 +4,7 @@ import { newDefaultScheduler } from '@most/scheduler';
 
 /**
  * Base architecture for Audio engines accepting stream parameters
+ * @private
  */
 export default class BaseAudioEngine {
   constructor() {

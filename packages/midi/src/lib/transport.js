@@ -10,6 +10,7 @@ const transports = {};
 
 /**
  * Setup a new named transport, given a BPM value.
+ * @private
  *
  * @param  {String} name      Transport name
  * @param  {Number} [bpm=120] Transport BPM

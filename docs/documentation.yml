@@ -1,0 +1,165 @@
+toc:
+  - name: Basic Operators [@coda/core]
+    description: |
+      TODO
+  - elementwise
+  - add
+  - sub
+  - mul
+  - div
+  - pack
+  - pak
+  - unpack
+  - slide
+  - select
+  - mean
+  - meanstd
+  - std
+  - reduce
+  - sum
+  - prod
+  - min
+  - max
+  - minmax
+  - withAttr
+  - name: Core Mapping Operators (@coda/core)
+    description: |
+      TODO
+  - accum
+  - adaptive
+  - atodb
+  - autoscale
+  - dbtoa
+  - clip
+  - cycle
+  - delta
+  - rand
+  - scale
+  - schmitt
+  - wavelet
+  - kicks
+  - biquad
+  - mvavrg
+  - force
+  - name: Myo Armband (@coda/myo)
+    description: |
+      TODO
+  - myo
+  - name: Max communication (@coda/max)
+    description: |
+      TODO
+  - fromMax
+  - toMax
+  - name: Machine Learning (@coda/ml)
+    description: |
+      TODO
+  - gmmTrain
+  - gmmPredict
+  - hmmTrain
+  - hmmPredict
+  - hhmmTrain
+  - hhmmPredict
+  - pcaTrain
+  - pcaPredict
+  - scaleTrain
+  - scalePredict
+  - name: MIDI operators (@coda/midi)
+    description: |
+      Blah
+  - ftom
+  - mtof
+  - quantize
+  - transport
+  - setupTransport
+  - removeTransport
+  - getTransport
+  - name: User Interface components (@coda/ui)
+    description: |
+      UI stuff
+  - plot
+  - heatmap
+  - looper
+  - recorder
+  - nodes
+  - name: Audio Synths (@coda/audio)
+    description: |
+      Audio Synthesizers from waves-js/waves-audio
+  - granular
+  - concatenative
+  - catart
+  - name: Audio Effects (@coda/audio)
+    description: |
+      Audio effects from Tuna
+  - bitcrusher
+  - chorus
+  - compressor
+  - convolver
+  - filt
+  - moogFilter
+  - overdrive
+  - panner
+  - phaser
+  - pingpong
+  - tremolo
+  - name: most operators (@most/core)
+    description: |
+      All operators from \@most/core: https://github.com/mostjs/core
+  - empty
+  - never
+  - now
+  - at
+  - periodic
+  - throwError
+  - startWith
+  - continueWith
+  - map
+  - constant
+  - tap
+  - ap
+  - scan
+  - loop
+  - withItems
+  - zipItems
+  - switchLatest
+  - join
+  - chain
+  - concatMap
+  - mergeConcurrently
+  - mergeMapConcurrently
+  - merge
+  - combine
+  - zip
+  - sample
+  - snapshot
+  - filter
+  - skipRepeats
+  - skipRepeatsWith
+  - slice
+  - take
+  - skip
+  - takeWhile
+  - skipWhile
+  - skipAfter
+  - until
+  - since
+  - during
+  - delay
+  - withLocalTime
+  - throttle
+  - debounce
+  - fromPromise
+  - awaitPromises
+  - recoverWith
+  - multicast
+  - click
+  - dblclick
+  - mousedown
+  - mouseup
+  - mousemove
+  - mouseover
+  - mouseenter
+  - mouseout
+  - mouseleave
+  - name: Misc
+    description: |
+      Unclassified operators

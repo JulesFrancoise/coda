@@ -1,0 +1,1 @@
+**coda** is a Javascript library and live-coding environment for designing movement-based interactions in the browser. **coda** integrates several bindings to common sensing devices (such as the Myo armband), a collection of low-level signal processing operator, and a number of movement analysis, recognition, and interaction design tools.

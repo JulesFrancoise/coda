@@ -9,6 +9,7 @@ import nodes from './ui/nodes';
 export default function setup(Stream, containerId = null) {
   const s = Stream;
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -17,6 +18,7 @@ export default function setup(Stream, containerId = null) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -25,6 +27,7 @@ export default function setup(Stream, containerId = null) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -33,6 +36,7 @@ export default function setup(Stream, containerId = null) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -41,6 +45,7 @@ export default function setup(Stream, containerId = null) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */

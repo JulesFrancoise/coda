@@ -77,6 +77,7 @@ const definitions = {
 
 /**
  * Granular engine definition
+ * @private
  * @extends BaseEngine
  */
 export class GranularEngine extends BaseAudioEngine {
@@ -247,6 +248,7 @@ export class GranularEngine extends BaseAudioEngine {
 
 /**
  * Polyphonic granular engine definition
+ * @private
  */
 export class PolyGranularEngine extends PolyAudioEngine {
   constructor(options) {

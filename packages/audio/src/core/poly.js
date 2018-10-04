@@ -5,6 +5,7 @@ import BaseAudioEngine from './base';
 
 /**
  * Base architecture for Polyphonic Audio engines accepting stream parameters
+ * @private
  */
 export default class PolyAudioEngine extends BaseAudioEngine {
   /**

@@ -36,7 +36,7 @@ const definitions = {
 
 /**
  * PingPongDelay audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} level     Level

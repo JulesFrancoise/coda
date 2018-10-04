@@ -18,6 +18,7 @@ const specification = {
 
 /**
  * Base class for data sink (for scalar or vector streams)
+ * @private
  */
 export default class DataSink extends BaseSink {
   /**

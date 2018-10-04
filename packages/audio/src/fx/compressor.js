@@ -48,6 +48,7 @@ const definitions = {
 
 /**
  * Compressor audio effect
+ * @private
  * @extends BaseAudioEffect
  * @property {Number|Stream<Number>} threshold  Threshold (dB)
  * @property {Number|Stream<Number>} makeupGain Makeup Gain

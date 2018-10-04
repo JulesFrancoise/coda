@@ -27,6 +27,7 @@ import adaptive from './operator/mapping/adaptive';
 export default function setupCore(Stream) {
   const s = Stream;
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.accum = function accum_() {
@@ -35,6 +36,7 @@ export default function setupCore(Stream) {
 
   /**
    * @todo check signature
+   * @ignore
    * @return {Stream}
    */
   s.prototype.add = function add_(streams) {
@@ -42,6 +44,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.atodb = function atodb_() {
@@ -49,6 +52,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -57,6 +61,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -65,6 +70,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Array} buffer Buffer
    * @return {Stream}
    */
@@ -73,6 +79,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -81,6 +88,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.div = function div_(streams) {
@@ -88,6 +96,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.dbtoa = function dbtoa_() {
@@ -95,6 +104,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Function} f function
    * @param {Stream} second second stream
    * @return {Stream}
@@ -104,6 +114,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -112,6 +123,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -120,6 +132,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.max = function max_() {
@@ -127,6 +140,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.mean = function mean_() {
@@ -134,6 +148,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.meanstd = function meanstd_() {
@@ -141,6 +156,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.min = function min_() {
@@ -148,6 +164,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.minmax = function minmax_() {
@@ -155,6 +172,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.mul = function mul_(streams) {
@@ -162,6 +180,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -170,6 +189,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.prod = function prod_() {
@@ -177,6 +197,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -185,6 +206,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Function} reducer reducer
    * @param {*} initial initial value
    * @return {Stream}
@@ -194,6 +216,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -202,6 +225,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.autoscale = function autoscale_() {
@@ -209,6 +233,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -217,6 +242,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Array} indices Indices
    * @return {Stream}
    */
@@ -225,6 +251,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -233,6 +260,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.std = function std_() {
@@ -240,6 +268,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.sub = function sub_(streams) {
@@ -247,6 +276,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.sum = function sum_() {
@@ -254,6 +284,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.pak = function pak_(sources) {
@@ -261,6 +292,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.pack = function pack_(sources) {
@@ -268,6 +300,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.unpack = function unpack_() {
@@ -275,6 +308,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -283,6 +317,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */

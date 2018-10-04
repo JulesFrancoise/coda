@@ -37,6 +37,9 @@ class MinmaxListenerSink {
 }
 
 
+/**
+ * @private
+ */
 class ScalerSink {
   /**
    * @param {Stream} minimaxstream      Stream of extremum

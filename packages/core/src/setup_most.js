@@ -5,6 +5,7 @@ export default function setupMost(Stream) {
   const s = Stream;
 
   /**
+   * @ignore
    * @param  {*} x
    * @return {Stream}
    */
@@ -13,6 +14,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @return {Stream}
    */
@@ -21,6 +23,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @return {Stream}
    */
@@ -29,6 +32,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {*} x
    * @return {Stream}
    */
@@ -37,6 +41,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @return {Stream}
    */
@@ -45,6 +50,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream<Function>} fs
    * @return {Stream}
    */
@@ -53,6 +59,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {*} initial
    * @return {Stream}
@@ -62,6 +69,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} stepper
    * @param  {*} seed
    * @return {Stream}
@@ -71,6 +79,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Array} items
    * @return {Stream}
    */
@@ -79,6 +88,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {Array} items
    * @return {Stream}
@@ -88,6 +98,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.switchLatest = function switchLatest_() {
@@ -95,6 +106,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.join = function join_() {
@@ -102,6 +114,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @return {Stream}
    */
@@ -110,6 +123,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @return {Stream}
    */
@@ -118,6 +132,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number} concurrency
    * @return {Stream}
    */
@@ -126,6 +141,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {Number} concurrency
    * @return {Stream}
@@ -135,6 +151,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} stream1
    * @return {Stream}
    */
@@ -143,6 +160,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {Stream} stream1
    * @return {Stream}
@@ -152,6 +170,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {Stream} stream1
    * @return {Stream}
@@ -161,6 +180,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} sampler
    * @return {Stream}
    */
@@ -169,6 +189,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} values
    * @return {Stream}
    */
@@ -178,6 +199,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} f
    * @param  {Stream} values
    * @return {Stream}
@@ -187,6 +209,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} p
    * @return {Stream}
    */
@@ -195,6 +218,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.skipRepeats = function skipRepeats_() {
@@ -202,6 +226,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} equals
    * @return {Stream}
    */
@@ -210,6 +235,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number]} start
    * @param  {Number]} end
    * @return {Stream}
@@ -219,6 +245,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number} n
    * @return {Stream}
    */
@@ -227,6 +254,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number} n
    * @return {Stream}
    */
@@ -235,6 +263,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} p
    * @return {Stream}
    */
@@ -243,6 +272,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} p
    * @return {Stream}
    */
@@ -251,6 +281,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Function} p
    * @return {Stream}
    */
@@ -259,6 +290,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} signal
    * @return {Stream}
    */
@@ -267,6 +299,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} signal
    * @return {Stream}
    */
@@ -275,6 +308,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} timeWindow
    * @return {Stream}
    */
@@ -283,6 +317,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number} delayTime
    * @return {Stream}
    */
@@ -291,6 +326,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Number} origin
    * @return {Stream}
    */
@@ -299,6 +335,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Number} period period
    * @return {Stream}
    */
@@ -307,6 +344,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Number} period period
    * @return {Stream}
    */
@@ -315,6 +353,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.awaitPromises = function awaitPromises_() {
@@ -322,6 +361,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @param {Function} f function that returns a stream
    * @return {Stream}
    */
@@ -330,6 +370,7 @@ export default function setupMost(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.multicast = function multicast_() {

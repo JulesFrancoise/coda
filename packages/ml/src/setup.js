@@ -10,6 +10,7 @@ export default function setupCore(Stream) {
   const s = Stream;
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.scaleTrain = function scaleTrain_() {
@@ -17,6 +18,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Stream} minmaxstream    stream of extremum
    * @return {Stream}
    */
@@ -25,6 +27,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -33,6 +36,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -41,6 +45,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -49,6 +54,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -57,6 +63,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -65,6 +72,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -73,6 +81,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */
@@ -81,6 +90,7 @@ export default function setupCore(Stream) {
   };
 
   /**
+   * @ignore
    * @param  {Object} options Options
    * @return {Stream}
    */

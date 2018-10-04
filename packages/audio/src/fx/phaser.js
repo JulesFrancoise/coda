@@ -39,7 +39,7 @@ const definitions = {
 
 /**
  * Phaser audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} rate                    Rate

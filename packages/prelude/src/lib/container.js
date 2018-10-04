@@ -3,6 +3,7 @@ let nextContainer = 0;
 
 /**
  * Generate a new container id
+ * @private
  * @return {String} ContainerId
  */
 export function generateContainerId() {
@@ -14,6 +15,7 @@ export function generateContainerId() {
 
 /**
  * Register a new shared data container
+ * @private
  * @param  {String} id         Container Id
  * @param  {Object} attributes Container attributes
  * @return {Object}            The created container
@@ -31,6 +33,7 @@ export function registerContainer(id, attributes) {
 
 /**
  * Access a container by Id
+ * @private
  * @param  {String} id         Container Id
  * @return {Object}            The container
  */

@@ -37,6 +37,7 @@ const definitions = type => ({
 
 /**
  * XMM Recognition operator factory
+ * @private
  * @param  {String} [type] Model type ('gmm', 'hmm', 'hhmm').
  * @return {Function}      Recognition function
  */

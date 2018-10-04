@@ -3,6 +3,8 @@ import BaseAudioEngine from './base';
 
 /**
  * Base architecture for Audio Effects engines accepting stream parameters
+ * @private
+ * @property {Number|Stream<Number>} drywet Dry/wet level
  */
 export default class BaseAudioEffect extends BaseAudioEngine {
   constructor() {
@@ -25,9 +27,6 @@ export default class BaseAudioEffect extends BaseAudioEngine {
     this.input.connect(this.dry);
     this.dry.connect(this.output);
     this.wet.connect(this.output);
-    /**
-     * drywet: Dry/wet level
-     */
     this.defineParameter('drywet', 1, (value) => {
       this.dry.gain.setValueAtTime(1 - value, audioContext.currentTime);
       this.wet.gain.setValueAtTime(value, audioContext.currentTime);

@@ -89,6 +89,7 @@ export const definitions = {
 
 /**
  * Concatenative engine definition
+ * @private
  * @extends BaseEngine
  */
 export class ConcatenativeEngine extends BaseAudioEngine {
@@ -302,6 +303,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
 
 /**
  * Polyphonic concatenative engine definition
+ * @private
  */
 export class PolyConcatenativeEngine extends PolyAudioEngine {
   /**

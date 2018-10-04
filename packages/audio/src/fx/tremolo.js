@@ -29,7 +29,7 @@ const definitions = {
 
 /**
  * Tremolo audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} intensity   Intensity

@@ -2,7 +2,7 @@
  * Check if the specification is respected for a given attribute and value,
  * and clip if relevant.
  *
- * @ignore
+ * @private
  *
  * @param  {String}        operator      Stream Operator Name (for logging)
  * @param  {String}        attribute     Attribute name

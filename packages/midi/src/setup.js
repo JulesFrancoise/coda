@@ -7,6 +7,7 @@ export default function setup(Stream) {
   const s = Stream;
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.ftom = function ftom_() {
@@ -14,6 +15,7 @@ export default function setup(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.mtof = function mtof_() {
@@ -21,6 +23,7 @@ export default function setup(Stream) {
   };
 
   /**
+   * @ignore
    * @return {Stream}
    */
   s.prototype.quantize = function quantize_(options) {

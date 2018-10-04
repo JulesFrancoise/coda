@@ -1,4 +1,4 @@
-/**
+/*
  * Based on Ircam's Waves-LFO, Biquad operator:
  * @see {@link https://github.com/wavesjs/waves-lfo/blob/master/src/common/operator/Biquad.js}
  *

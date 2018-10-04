@@ -30,7 +30,7 @@ const definitions = {
 
 /**
  * MoogFilter audio effect
- *
+ * @private
  * @extends BaseAudioEffect
  *
  * @property {Number|Stream<Number>} cutoff Cutoff frequency (Hz)

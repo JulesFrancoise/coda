@@ -23,6 +23,7 @@ const definitions = {
 
 /**
  * Chorus audio effect
+ * @private
  * @extends BaseAudioEffect
  * @property {Number|Stream<Number>} rate Chorus rate (Hz)
  * @property {Number|Stream<Number>} feedback Feedback level

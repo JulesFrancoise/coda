@@ -25,6 +25,7 @@ const definitions = {
 
 /**
  * Catart-style descriptor-driven corpus-based concatenative synthesis
+ * @private
  * @extends ConcatenativeEngine
  *
  * @property {String|Stream<String>} file Default audio file
@@ -96,7 +97,7 @@ export class CatartEngine extends ConcatenativeEngine {
       'target',
       options.target,
       (value) => {
-        this.predict((typeof value === 'Number') ? [value] : value);
+        this.predict((typeof value === 'number') ? [value] : value);
       },
     );
   }
@@ -175,7 +176,7 @@ export class CatartEngine extends ConcatenativeEngine {
 
 /**
  * Polyphonic Catart-style descriptor-driven corpus-based concatenative synthesis
- *
+ * @private
  * @property {String|Array<String>|Stream<String>|Array<Stream<String>>} file Default audio file
  * @property {Array<string>|Stream<Array<string>>} descriptors List of descriptors to consider
  * @property {Array<Number>|Stream<Array<Number>>} target Target descriptors for driving

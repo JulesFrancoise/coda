@@ -52,6 +52,7 @@ const hmmDefinitions = {
 
 /**
  * Factory function for XMM training operators
+ * @private
  * @param  {String} type        Model Type
  * @param  {Object} definitions Training parameters definitions
  * @return {Function}           Training operator

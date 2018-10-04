@@ -1,5 +1,6 @@
 /**
  * Base sinks for implementing CO/DA modules
+ * @private
  */
 export default class BaseStream {
   /**
