@@ -24,6 +24,9 @@ export default {
       code: '// Welcome to the playground...',
     };
   },
+  mounted() {
+    this.load('basic');
+  },
   methods: {
     async load(example) {
       let contents = null;

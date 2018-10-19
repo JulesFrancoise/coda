@@ -27,7 +27,6 @@ export default {
   name: 'MyHeader',
   data() {
     const defaultExample = 'basic';
-    this.$emit('load', defaultExample);
     return {
       selected: defaultExample,
       userExamples: process.env.VUE_APP_USER_EXAMPLES.split(':'),
