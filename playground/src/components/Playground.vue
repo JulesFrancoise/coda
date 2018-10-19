@@ -9,8 +9,9 @@
       v-if="editable"
     >
       <editor
-        :code="code"
+        v-model="value"
         @run="run"
+        @value="x => $emit('value', x)"
       />
       <div class="console" :class="consoleError && 'error'">{{consoleMsg}}</div>
     </div>
@@ -41,7 +42,7 @@ export default {
     MyHeader,
   },
   props: {
-    code: {
+    value: {
       type: String,
       default: '// Welcome to the playground...',
     },

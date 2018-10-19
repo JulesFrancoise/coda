@@ -4,7 +4,7 @@
     <playground
       width="100%"
       height="calc(100vh - 33px)"
-      :code="code"
+      v-model="code"
     ></playground>
   </div>
 </template>

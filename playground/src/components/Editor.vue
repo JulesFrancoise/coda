@@ -1,6 +1,7 @@
 <template>
   <codemirror
-    v-model="code"
+    :value="value"
+    @input="x => $emit('value', x)"
     :options="cmOptions"
     @keyHandled="onKeyHandled"
   ></codemirror>
@@ -109,7 +110,7 @@ export default {
     codemirror,
   },
   props: {
-    code: {
+    value: {
       type: String,
       default: '// Welcome to the playground...',
     },
