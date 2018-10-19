@@ -65,4 +65,35 @@ header .menu a.nuxt-link-active {
   color: rgb(40, 102, 167);
 }
 
+@media (max-width: 800px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header .title {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #dedede;
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+
+  header .title h1, header .title .subtitle {
+    margin: 0 auto;
+  }
+
+  header .menu {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  header .menu a {
+    margin-left: 0;
+    padding: 5px;
+  }
+}
+
+
 </style>

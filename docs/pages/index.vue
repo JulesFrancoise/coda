@@ -29,15 +29,9 @@ runEffects(continuousWaveletTransform, newDefaultScheduler());"
 
 <script>
 import CodeExample from '../components/CodeExample.vue';
-import content from './index.md';
 
 export default {
   components: { CodeExample },
-  computed: {
-    content() {
-      return content;
-    },
-  },
 };
 </script>
 
