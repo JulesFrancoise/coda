@@ -13,12 +13,12 @@ const gmmDefinitions = {
   },
   regularizationAbs: {
     type: 'float',
-    default: 0.1,
+    default: 1e-10,
     min: 0,
   },
   regularizationRel: {
     type: 'float',
-    default: 1e-10,
+    default: 1e-1,
     min: 0,
   },
   covarianceMode: {
