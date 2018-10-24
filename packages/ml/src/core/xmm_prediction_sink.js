@@ -34,7 +34,7 @@ export default class XmmPredictionSink {
    * @param {Object} sink        Sink
    * @param {Object} scheduler   Scheduler
    */
-  constructor(model, fetchOutput, sink, scheduler) {
+  constructor(model, fetchOutput, likelihoodWindow, sink, scheduler) {
     this.sink = sink;
     this.scheduler = scheduler;
     if (model.attr.type === 'gmm') {
@@ -48,11 +48,13 @@ export default class XmmPredictionSink {
     }
     this.predictor = null;
     this.fetchOutput = fetchOutput;
+    this.likelihoodWindow = likelihoodWindow;
     model.run(new ModelListenerSink(this), scheduler);
   }
 
   updateModel(params) {
     this.predictor = this.predictorFactory(params);
+    this.predictor.setLikelihoodWindow(this.likelihoodWindow);
     this.predictor.reset();
   }
 

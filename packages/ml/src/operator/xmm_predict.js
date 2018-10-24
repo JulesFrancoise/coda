@@ -69,6 +69,7 @@ const xmmPredictFactory = type =>
         const trainerSink = new XmmPredictionSink(
           model,
           fetchOutput,
+          params.likelihoodWindow,
           sink,
           scheduler,
         );
