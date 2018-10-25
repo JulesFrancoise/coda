@@ -38,6 +38,7 @@ export default {
     this.context = this.canvas.getContext('2d');
     this.tmpCanvas = this.$refs.tmpCanvas;
     this.tmpContext = this.tmpCanvas.getContext('2d');
+    this.updateCanvasDims();
   },
   data() {
     return {
@@ -70,10 +71,7 @@ export default {
           Array(this.channels).fill(NaN));
         this.buffer = zeros.concat(this.buffer);
       }
-      this.canvas.width = Math.ceil(700 / this.length) * this.length;
-      this.tmpCanvas.width = Math.ceil(700 / this.length) * this.length;
-      this.canvas.height = Math.floor(this.canvas.width / 7);
-      this.tmpCanvas.height = Math.floor(this.tmpCanvas.width / 7);
+      this.updateCanvasDims();
     },
     fill(mode) {
       const scale = this.stacked ? this.canvas.height / this.channels : this.canvas.height;
@@ -162,6 +160,12 @@ export default {
       this.context.drawImage(this.tmpCanvas, 0, 0, width, height, 0, 0, width, height);
       // reset transformation matrix
       this.context.setTransform(1, 0, 0, 1, 0, 0);
+    },
+    updateCanvasDims() {
+      this.canvas.width = Math.ceil(700 / this.length) * this.length;
+      this.tmpCanvas.width = Math.ceil(700 / this.length) * this.length;
+      this.canvas.height = Math.floor(this.canvas.width / 7);
+      this.tmpCanvas.height = Math.floor(this.tmpCanvas.width / 7);
     },
     changeLength(factor) {
       this.length = Math.floor(this.length * factor);
