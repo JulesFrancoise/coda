@@ -21,7 +21,8 @@
     "element-ui": "^2.4.8",
     "nuxt": "^1.4.2",
     "prismjs": "^1.15.0",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-ionicons": "^2.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

@@ -1,58 +1,49 @@
 toc:
-  - name: Basic Operators [@coda/core]
+  - name: "@coda/core"
     description: |
-      TODO
-  - elementwise
-  - add
-  - sub
-  - mul
-  - div
-  - pack
-  - pak
-  - unpack
-  - slide
-  - select
-  - mean
-  - meanstd
-  - std
-  - reduce
-  - sum
-  - prod
-  - min
-  - max
-  - minmax
-  - withAttr
-  - name: Core Mapping Operators (@coda/core)
-    description: |
-      TODO
+      Core operators
   - accum
   - adaptive
+  - add
   - atodb
   - autoscale
-  - dbtoa
+  - biquad
   - clip
   - cycle
+  - dbtoa
   - delta
+  - div
+  - elementwise
+  - force
+  - kicks
+  - max
+  - mean
+  - meanstd
+  - min
+  - minmax
+  - mul
+  - mvavrg
+  - pack
+  - pak
+  - prod
   - rand
+  - reduce
   - scale
   - schmitt
+  - select
+  - slide
+  - std
+  - sub
+  - sum
+  - unpack
   - wavelet
-  - kicks
-  - biquad
-  - mvavrg
-  - force
-  - name: Myo Armband (@coda/myo)
-    description: |
-      TODO
+  - withAttr
+  - name: "@coda/myo"
   - myo
-  - name: Max communication (@coda/max)
-    description: |
-      TODO
+  - name: "@coda/max"
   - fromMax
   - toMax
-  - name: Machine Learning (@coda/ml)
-    description: |
-      TODO
+  - name: "@coda/ml"
   - gmmTrain
   - gmmPredict
   - hmmTrain
@@ -63,47 +54,37 @@ toc:
   - pcaPredict
   - scaleTrain
   - scalePredict
-  - name: MIDI operators (@coda/midi)
-    description: |
-      Blah
+  - name: "@coda/midi"
   - ftom
   - mtof
   - quantize
   - transport
   - setupTransport
-  - removeTransport
   - getTransport
-  - name: User Interface components (@coda/ui)
-    description: |
-      UI stuff
-  - plot
+  - removeTransport
+  - name: "@coda/ui"
   - heatmap
   - looper
-  - recorder
   - nodes
-  - name: Audio Synths (@coda/audio)
-    description: |
-      Audio Synthesizers from waves-js/waves-audio
-  - granular
-  - concatenative
-  - catart
-  - name: Audio Effects (@coda/audio)
-    description: |
-      Audio effects from Tuna
+  - plot
+  - recorder
+  - name: "@coda/audio"
   - bitcrusher
+  - catart
   - chorus
   - compressor
+  - concatenative
   - convolver
   - filt
+  - granular
   - moogFilter
   - overdrive
   - panner
   - phaser
   - pingpong
+  - sampler
   - tremolo
-  - name: most operators (@most/core)
-    description: |
-      All operators from \@most/core: https://github.com/mostjs/core
+  - name: "@most/core"
   - empty
   - never
   - now

@@ -108,7 +108,7 @@ export default {
   components: { ApiParagraph, CodeExample },
   props: {
     entry: Object,
-    allEntries: Object,
+    allEntries: Array,
   },
   computed: {
     params() {
@@ -155,9 +155,7 @@ export default {
       return '';
     },
     findEntry(name) {
-      return Object.values(this.allEntries)
-        .reduce((x, y) => x.concat(y), [])
-        .find(x => x.name === name);
+      return this.allEntries.find(x => x.name === name);
     },
   },
 };
@@ -176,7 +174,7 @@ export default {
 h2.name {
   color: #0f5595;
   margin-bottom: 4px;
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 h4 {
   color: #878787;

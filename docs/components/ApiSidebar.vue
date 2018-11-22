@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="fixed && 'fixed'">
     <input type="text" name="" placeholder="Search..." @input="filter">
     <div
       v-for="(section, key, i) in api"
@@ -15,7 +15,7 @@
           v-show="!search || f.name.includes(search)"
           :key="`outline-section-${i}-${j}`"
         >
-          <a :href="`#${f.name}`">
+          <a :href="`/api/${f.name}`">
             <span class="hash"># </span>{{f.name}}
           </a>
         </li>
@@ -29,6 +29,7 @@ export default {
   name: 'api-sidebar',
   props: {
     api: Object,
+    fixed: Boolean,
   },
   data() {
     return { search: false };
@@ -46,6 +47,16 @@ export default {
   width: 250px !important;
   margin: 10px;
   border-right: 1px solid #dedede;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  width: 250px !important;
+  height: calc(100vh - 120px);
+  overflow: auto;
+  position: fixed;
+  top: 85px;
+  height: calc(100vh - 95px);
+  overflow: auto;
 }
 input {
   width: calc(100% - 10px);
@@ -53,15 +64,18 @@ input {
   margin-bottom: 10px;
 }
 .api-section {
-  font-size: 1.2em;
+  font-size: 0.8em;
+  font-weight: 600;
   display: block;
   color: rgb(53, 73, 94);
 }
 ul.section-detail {
   list-style: none;
+  margin: 0;
   padding-left: 10px;
 }
 .hash {
-  color: #bdbdbd
+  color: #bdbdbd;
+  font-size: 0.8em;
 }
 </style>

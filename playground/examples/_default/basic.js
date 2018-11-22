@@ -1,11 +1,10 @@
-// Welcome to the Solar Playground!
+// Welcome to the CO/DA Playground!
 //
-// Solar is a live-coding editor dedicated to interactive audio applications
-// using movement as an input modality. Solar relies on the MARS library for
-// movement analysis and processing using reactive streams, and on the Tone.js
-// library for sound synthesis.
+// This live-coding editor is dedicated to interactive audio applications
+// using movement as an input modality. It relies on the CO/DA library for
+// movement analysis, processing, recognition, and for sound synthesis.
 //
-// The mars library uses a stream formalism with a fluent api. Operators on a
+// The CO/DA library uses a stream formalism with a fluent api. Operators on a
 // stream can be chained using dot-notation, as in the following example.
 //
 // In this example, a periodic source is generating a stream of periodic events

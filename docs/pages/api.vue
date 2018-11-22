@@ -1,39 +1,8 @@
 <template>
   <div class="container">
-    <api-sidebar :api="api"></api-sidebar>
-    <div class="right">
-      <section
-        v-for="(section, key, i) in api"
-        :key="`api-section-${i}`"
-      >
-        <h1 class="section-title">{{key}}</h1>
-        <api-entry
-          v-for="(entry, j) in section"
-          :id="entry.name"
-          :key="`api-entry-${i}-${j}`"
-          :entry="entry"
-          :allEntries="api"
-        ></api-entry>
-      </section>
-      <div class="playground-container" v-if="playground">
-        <div class="playground-header">
-          <button type="button" name="run">Run</button>
-        </div>
-        <div class="playground">
-          <div id="playground-left">
-            <div id="editor">
-              <pre>run(snippet, uiContainer) {
-    console.log('this.$runCodeSnippet', this.$runCodeSnippet);
-    this.$runCodeSnippet(snippet, uiContainer, this);
-    console.log(snippet, uiContainer);
-    this.running = true;
-  };</pre>
-            </div>
-            <div id="console"></div>
-          </div>
-          <div id="ui"></div>
-        </div>
-      </div>
+    <api-sidebar :api="api" :fixed="fixed"></api-sidebar>
+    <div class="right" :class="fixed && 'fixed'">
+      <nuxt-child/>
     </div>
   </div>
 </template>
@@ -56,10 +25,11 @@ const structuredApi = api.reduce((s, entry) => {
 }, {});
 
 export default {
+  layout: 'fixed',
   components: { ApiSidebar, ApiEntry },
   data() {
     return {
-      playground: false,
+      fixed: false,
     };
   },
   computed: {
@@ -67,21 +37,33 @@ export default {
       return structuredApi;
     },
   },
+  mounted() {
+    if (process.browser) {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+  },
+  methods: {
+    handleScroll(e) {
+      this.fixed = e.pageY > 100;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: row;
-  background: #f5f5f5;
+  /* background: #f5f5f5; */
+  margin-top: 80px !important;
 }
 .right {
   position: relative;
   padding: 5px;
-  width: calc(100% - 250px);
+  width: calc(100% - 280px);
+  margin-left: 270px;
 }
-.api_entry_container {
+.right.fixed {
+}
+.api_entry {
   padding: 10px;
 }
 .section-title {
@@ -90,46 +72,6 @@ export default {
   background: #fff;
   padding: 12px;
   margin-bottom: 8px;
-}
-.playground-container {
-  position: fixed;
-  bottom: -10px;
-  right: 20px;
-  height: 250px;
-  width: calc(100vw - 310px);
-  background-color: #35495e;
-  border-radius: 10px;
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-}
-.playground {
-  display: flex;
-  flex-direction: row;
-}
-#playground-left {
-  display: flex;
-  flex-direction: column;
-  border-right: 2px solid #c1c1c1;
-}
-#editor {
-  margin: 4px;
-  color: white;
-  height: 224px;
-}
-#console {
-  padding-left: 10px;
-  background: black;
-  color: white;
-  height: 16px;
-}
-.playground-header {
-  height: 24px;
-  color: #dedede;
-  background-color: #203e5e;
-  width: 100%;
-  display: block;
-  z-index: 5;
 }
 #ui {
   overflow: auto;
