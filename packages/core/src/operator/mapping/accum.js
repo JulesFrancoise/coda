@@ -1,5 +1,5 @@
 import { validateStream, withAttr } from '@coda/prelude';
-import { scan } from '@most/core';
+import { scan, skip } from '@most/core';
 
 /**
  * Stream I/O Attributes Specification
@@ -31,15 +31,18 @@ function sumVector(x, y) {
  * @return {Stream}          Stream of filtered values
  *
  * @example
- * import * from 'mars';
- *
- * const process = periodic(100).rand().accum().tap(log)
- * runEffects(process.take(10), newDefaultScheduler());
+ * // generate a constant unit signal sampled at 1Hz, and accumulate
+ * // the results (sliced at 10 iterations)
+ * const process = periodic(1000)
+ *   .constant(1).withAttr({ format: 'scalar', size: 1 })
+ *   .accum()
+ *   .take(10)
+ *   .tap(log);
  */
 export default function accum(source) {
   const attr = validateStream('accum', specification, source.attr);
   const accumFn = (attr.format === 'scalar') ? (x, y) => x + y : sumVector;
   const accumInit = (attr.format === 'scalar') ?
     0 : new Array(attr.size).fill(0);
-  return withAttr(attr)(scan(accumFn, accumInit, source));
+  return withAttr(attr)(skip(1, scan(accumFn, accumInit, source)));
 }
