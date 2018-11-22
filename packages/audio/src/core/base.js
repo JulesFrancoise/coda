@@ -88,7 +88,7 @@ export default class BaseAudioEngine {
           await stream;
           stream = null;
         }
-        if (value.isStream) {
+        if (value && value.isStream) {
           running = true;
           stream = runEffects(
             takeWhile(
