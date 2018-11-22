@@ -8,12 +8,12 @@ const definitions = {
   duration: {
     required: true,
     type: 'float',
-    default: 30,
+    default: 15,
   },
   refresh: {
     required: true,
     type: 'float',
-    default: 3,
+    default: 1,
   },
 };
 
@@ -129,7 +129,7 @@ class AdaptiveScaleSink {
   }
 
   scaleScalar(x) {
-    return (x - this.min) / (this.max - this.min);
+    return Math.min(1, (x - this.min) / (this.max - this.min));
   }
 
   scaleVector(x) {
@@ -144,6 +144,7 @@ class AdaptiveScaleSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp
