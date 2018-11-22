@@ -25,6 +25,10 @@ export const definitions = {
     type: 'string',
     default: 'flac',
   },
+  repeat: {
+    type: 'boolean|array<boolean>',
+    default: true,
+  },
   periodAbs: {
     type: 'float|array<float>',
     default: 0,
@@ -81,9 +85,13 @@ export const definitions = {
     type: 'float|array<float>',
     default: 1,
   },
+  cyclic: {
+    type: 'boolean|array<boolean>',
+    default: 1,
+  },
   throttle: {
     type: 'float',
-    default: 20,
+    default: false,
   },
 };
 
@@ -131,6 +139,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       resampling: options.resampling,
       resamplingVar: options.resamplingVar,
       gain: options.gain,
+      cyclic: options.cyclic,
     });
     this.concatenativeEngine.connect(this.output);
     this.audioScheduler = wavesAudio.getScheduler();
@@ -149,6 +158,17 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.index,
       (value) => {
         this.concatenativeEngine.segmentIndex = value;
+        if (!this.repeat) {
+          this.concatenativeEngine.trigger();
+        }
+      },
+    );
+    this.defineParameter(
+      'repeat',
+      options.repeat,
+      () => {
+        this.stop();
+        this.start();
       },
     );
     this.defineParameter(
@@ -250,6 +270,13 @@ export class ConcatenativeEngine extends BaseAudioEngine {
         this.concatenativeEngine.gain = value;
       },
     );
+    this.defineParameter(
+      'cyclic',
+      options.cyclic,
+      (value) => {
+        this.concatenativeEngine.cyclic = value;
+      },
+    );
   }
 
   /**
@@ -284,8 +311,10 @@ export class ConcatenativeEngine extends BaseAudioEngine {
    */
   start() {
     if (this.running) return this;
-    this.audioScheduler.add(this.concatenativeEngine);
-    this.running = true;
+    if (this.repeat) {
+      this.audioScheduler.add(this.concatenativeEngine);
+      this.running = true;
+    }
     return this;
   }
 
