@@ -17,6 +17,7 @@
           >{{example}}</option>
         </optgroup>
       </select>
+      <button type="button" name="run" @click="runScript">run</button>
     </div>
     <div id="streams"></div>
   </div>
@@ -36,6 +37,11 @@ export default {
   watch: {
     selected(filename) {
       this.$emit('load', filename);
+    },
+  },
+  methods: {
+    runScript() {
+      this.$emit('run');
     },
   },
 };

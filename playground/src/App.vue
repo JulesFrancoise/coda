@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <my-header @load="load" />
+    <my-header @load="load" @run="run" ref="header" />
     <playground
       width="100%"
       height="calc(100vh - 33px)"
       v-model="code"
+      ref="playground"
     ></playground>
   </div>
 </template>
@@ -25,7 +26,10 @@ export default {
     };
   },
   mounted() {
-    this.load('basic');
+    const example = 'basic';
+    this.load(example);
+    this.$refs.header.selected = example;
+    // window.onbeforeunload = () => '';
   },
   methods: {
     async load(example) {
@@ -41,6 +45,9 @@ export default {
         this.code = contents;
       }
       return contents;
+    },
+    run() {
+      this.$refs.playground.run(this.code);
     },
   },
 };
