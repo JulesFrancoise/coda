@@ -1,3 +1,7 @@
+const api = require('./pages/api.json');
+
+const apiEntries = api.filter(x => x.kind !== 'note').map(x => x.name);
+
 module.exports = {
   /*
   ** Headers of the page
@@ -92,5 +96,9 @@ module.exports = {
         });
       }
     },
+  },
+
+  generate: {
+    routes: apiEntries.map(x => `/api/${x}`),
   },
 };
