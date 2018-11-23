@@ -82,9 +82,23 @@ export function max(source) {
  * @return {Stream}        Scalar stream ([min, max])
  */
 export function minmax(source) {
-  return reduce(
+  return withAttr({ format: 'vector', size: 2 })(reduce(
     (s, x) => [Math.min(s[0], x), Math.max(s[1], x)],
     [+Infinity, -Infinity],
     source,
-  );
+  ));
+}
+
+/**
+ * Compute the norm of a vector
+ *
+ * @param  {Stream} source Source vector stream
+ * @return {Stream}        Scalar stream (norm)
+ */
+export function norm(source) {
+  return withAttr({ format: 'scalar', size: 1 })(map(x => Math.sqrt(x), reduce(
+    (s, x) => s + (x ** 2),
+    0,
+    source,
+  )));
 }

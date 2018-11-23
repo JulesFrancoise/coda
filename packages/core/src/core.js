@@ -101,6 +101,10 @@ export const mvavrg = (options, stream) =>
   new Stream(mvavrg_(options, stream));
 
 /** @ignore */
+export const norm = stream =>
+  new Stream(reduce_.norm(stream));
+
+/** @ignore */
 export const prod = stream =>
   new Stream(reduce_.prod(stream));
 

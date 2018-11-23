@@ -6,7 +6,7 @@ import pack from './operator/basic/pack';
 import schmitt from './operator/basic/schmitt';
 import select from './operator/basic/select';
 import slide from './operator/basic/slide';
-import reduce, { min, max, minmax, sum, prod } from './operator/basic/reduce';
+import reduce, { min, max, minmax, sum, prod, norm } from './operator/basic/reduce';
 import unpack from './operator/basic/unpack';
 import biquad from './operator/filter/biquad';
 import force from './operator/filter/force';
@@ -186,6 +186,14 @@ export default function setupCore(Stream) {
    */
   s.prototype.mvavrg = function mvavrg_(options) {
     return new Stream(mvavrg(options, this));
+  };
+
+  /**
+   * @ignore
+   * @return {Stream}
+   */
+  s.prototype.norm = function norm_() {
+    return new Stream(norm(this));
   };
 
   /**
