@@ -119,7 +119,6 @@ export default {
     return {
       cmOptions: {
         mode: 'javascript',
-        value: '// Welcome to the Solar Playground!\n// Love on the beat...',
         keyMap: 'playground', // playground
         theme: 'monokai',
         autofocus: true,

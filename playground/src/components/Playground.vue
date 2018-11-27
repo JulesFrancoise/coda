@@ -9,9 +9,9 @@
       v-if="editable"
     >
       <editor
-        v-model="value"
-        @run="run"
+        :value="value"
         @value="x => $emit('value', x)"
+        @run="run"
       />
       <div class="console" :class="consoleError && 'error'">{{consoleMsg}}</div>
     </div>
