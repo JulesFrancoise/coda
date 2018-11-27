@@ -4,7 +4,8 @@
     <playground
       width="100%"
       height="calc(100vh - 33px)"
-      v-model="code"
+      :value="code"
+      @value="x => code = x"
       ref="playground"
     ></playground>
   </div>

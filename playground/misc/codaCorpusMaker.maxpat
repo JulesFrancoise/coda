@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 958.0, 787.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 34.0, 79.0, 1372.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,14 +39,25 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-32",
+					"linecount" : 5,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 757.0, 60.0, 478.0, 76.0 ],
+					"text" : "mubu.process #0-corpus audio basic:scale:onseg:select @name markers @scale.func log @scale.base 10 @scale.inmin 1 @scale.inmax 10 @scale.outmin 0 @scale.outmax 10 @scale.colindex 1 @scale.numcols 1 @onseg.colindex 1 @onseg.numcols 1 @onseg.mean 1 @onseg.threshold 2. @onseg.duration 1 @info gui \"interface markers\" @process 0 @progressoutput input @select.cols LoudnessMean Duration"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-42",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 68.0, 624.0, 47.0, 22.0 ],
-					"presentation_rect" : [ 69.0, 624.0, 0.0, 0.0 ],
-					"style" : "",
 					"text" : "/ 1000."
 				}
 
@@ -58,7 +70,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 19.0, 598.0, 47.0, 22.0 ],
-					"style" : "",
 					"text" : "/ 1000."
 				}
 
@@ -70,8 +81,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 685.349976, 817.0, 40.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 685.34997599999997, 817.0, 40.0, 22.0 ],
 					"text" : "zl reg"
 				}
 
@@ -83,7 +93,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 831.0, 979.0, 34.0, 22.0 ],
-					"style" : "",
 					"text" : "print"
 				}
 
@@ -95,8 +104,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 706.349976, 1047.0, 98.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 1047.0, 98.0, 22.0 ],
 					"text" : "prepend append"
 				}
 
@@ -108,8 +116,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1048.349976, 856.0, 57.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 1048.34997599999997, 856.0, 57.0, 22.0 ],
 					"text" : "zl slice 2"
 				}
 
@@ -121,8 +128,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 706.349976, 978.0, 40.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 978.0, 40.0, 22.0 ],
 					"text" : "zl reg"
 				}
 
@@ -134,8 +140,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 706.349976, 949.0, 30.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 949.0, 30.0, 22.0 ],
 					"text" : "t b l"
 				}
 
@@ -147,8 +152,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 706.349976, 1013.0, 41.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 1013.0, 41.0, 22.0 ],
 					"text" : "zl join"
 				}
 
@@ -161,8 +165,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 706.349976, 1081.0, 652.0, 35.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 1081.0, 652.0, 35.0 ],
 					"text" : "mubu.track container markers @predef 1 @timetagged 1 @maxsize 9999 @info gui \"interface markers\" @matrixcols 10 @matrixcolnames duration frequency energy periodicity AC1 loudness centroid spread skewness kurtosis"
 				}
 
@@ -174,8 +177,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 706.349976, 914.0, 174.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 914.0, 174.0, 22.0 ],
 					"text" : "vexpr $f1 / $f2 @scalarmode 1"
 				}
 
@@ -188,7 +190,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 880.0, 647.0, 127.0, 22.0 ],
-					"style" : "",
 					"text" : "0. 0. 0. 0. 0. 0. 0. 0. 0."
 				}
 
@@ -200,8 +201,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 706.349976, 660.0, 29.5, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 660.0, 29.5, 22.0 ],
 					"text" : "+ 0"
 				}
 
@@ -213,8 +213,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 742.349976, 628.0, 29.5, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 742.34997599999997, 628.0, 29.5, 22.0 ],
 					"text" : "- 1"
 				}
 
@@ -226,8 +225,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "int" ],
-					"patching_rect" : [ 684.599976, 588.0, 30.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 588.0, 30.0, 22.0 ],
 					"text" : "t b i"
 				}
 
@@ -239,8 +237,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "bang", "bang", "int" ],
-					"patching_rect" : [ 684.599976, 628.0, 40.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 628.0, 40.0, 22.0 ],
 					"text" : "uzi"
 				}
 
@@ -253,8 +250,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1008.0, 783.0, 50.0, 22.0 ],
-					"style" : ""
+					"patching_rect" : [ 1008.0, 783.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -266,7 +262,6 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 1007.0, 739.0, 39.0, 22.0 ],
-					"style" : "",
 					"text" : "zl len"
 				}
 
@@ -279,7 +274,6 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 880.0, 763.0, 40.0, 22.0 ],
-					"style" : "",
 					"text" : "zl reg"
 				}
 
@@ -291,8 +285,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "" ],
-					"patching_rect" : [ 684.599976, 450.0, 40.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 450.0, 40.0, 22.0 ],
 					"text" : "t l b l"
 				}
 
@@ -304,8 +297,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 706.349976, 763.0, 90.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 763.0, 90.0, 22.0 ],
 					"text" : "vexpr $f1 + $f2"
 				}
 
@@ -317,8 +309,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 706.349976, 695.0, 44.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 695.0, 44.0, 22.0 ],
 					"text" : "get $1"
 				}
 
@@ -330,8 +321,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 706.349976, 728.0, 155.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 706.34997599999997, 728.0, 155.0, 22.0 ],
 					"text" : "mubu.track container descr"
 				}
 
@@ -343,8 +333,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 684.599976, 520.0, 73.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 520.0, 73.0, 22.0 ],
 					"text" : "getindex $1"
 				}
 
@@ -356,8 +345,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 684.599976, 554.0, 155.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 554.0, 155.0, 22.0 ],
 					"text" : "mubu.track container descr"
 				}
 
@@ -369,8 +357,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 874.099976, 486.0, 113.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 874.09997599999997, 486.0, 113.0, 22.0 ],
 					"text" : "route sampleperiod"
 				}
 
@@ -382,8 +369,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 684.599976, 351.0, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 684.59997599999997, 351.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -394,8 +381,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 841.599976, 520.0, 51.5, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 841.59997599999997, 520.0, 51.5, 22.0 ],
 					"text" : "/ 1."
 				}
 
@@ -407,8 +393,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 845.099976, 421.0, 155.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 845.09997599999997, 421.0, 155.0, 22.0 ],
 					"text" : "mubu.track container descr"
 				}
 
@@ -420,8 +405,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "float" ],
-					"patching_rect" : [ 684.599976, 486.0, 176.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 486.0, 176.0, 22.0 ],
 					"text" : "unpack 0. 0."
 				}
 
@@ -433,8 +417,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 684.599976, 391.0, 41.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 391.0, 41.0, 22.0 ],
 					"text" : "dump"
 				}
 
@@ -446,8 +429,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 684.599976, 421.0, 145.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 421.0, 145.0, 22.0 ],
 					"text" : "mubu.track container seg"
 				}
 
@@ -459,21 +441,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 684.599976, 276.0, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 684.5999755859375, 249.0, 24.0, 24.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-17",
+					"linecount" : 4,
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "int", "" ],
-					"patching_rect" : [ 684.599976, 314.0, 217.0, 22.0 ],
-					"style" : "",
-					"text" : "mubu.usual.onseg container audio seg"
+					"patching_rect" : [ 684.5999755859375, 287.0, 653.0, 62.0 ],
+					"text" : "mubu.process container audio slice:fft:sum:scale:onseg @name seg @prepad 0 @slice.size 1024 @slice.hop 256 @slice.norm power @fft.mode power @fft.weighting itur468 @sum.colname Loudness @scale.inmin 1 @scale.inmax 10 @scale.outmin 0 @scale.outmax 10 @scale.func log @scale.base 10 @onseg.duration 1 @onseg.min 1 @onseg.max 1 @onseg.mean 1 @onseg.stddev 1 @onseg.startisonset 1 @info gui \"interface markers, autobounds 1\""
 				}
 
 			}
@@ -485,7 +467,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 418.0, 1000.0, 149.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append kurtosis %f"
 				}
 
@@ -498,7 +479,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 377.0, 967.0, 160.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append skewness %f"
 				}
 
@@ -511,7 +491,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 342.0, 934.0, 144.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append spread %f"
 				}
 
@@ -524,7 +503,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 298.0, 899.0, 150.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append centroid %f"
 				}
 
@@ -537,7 +515,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 271.0, 859.0, 155.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append loudness %f"
 				}
 
@@ -550,7 +527,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 236.0, 826.0, 130.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append AC1 %f"
 				}
 
@@ -563,7 +539,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 195.0, 793.0, 161.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append periodicity %f"
 				}
 
@@ -576,7 +551,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.0, 760.0, 144.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append energy %f"
 				}
 
@@ -589,7 +563,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 116.0, 725.0, 160.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append frequency %f"
 				}
 
@@ -602,7 +575,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 81.0, 692.0, 151.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append duration %f"
 				}
 
@@ -614,8 +586,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 334.599976, 456.0, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 334.599976000000026, 456.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -640,13 +612,13 @@
 					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "dictionary", "", "", "" ],
-					"patching_rect" : [ 334.599976, 509.0, 170.0, 22.0 ],
+					"patching_rect" : [ 334.599976000000026, 509.0, 170.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
-						"parameter_enable" : 0
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
 					}
 ,
-					"style" : "",
 					"text" : "dict markerDefault @embed 1"
 				}
 
@@ -659,7 +631,6 @@
 					"numoutlets" : 11,
 					"outlettype" : [ "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float" ],
 					"patching_rect" : [ 42.0, 543.0, 196.0, 22.0 ],
-					"style" : "",
 					"text" : "unpack 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0."
 				}
 
@@ -672,7 +643,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 46.0, 660.0, 130.0, 22.0 ],
-					"style" : "",
 					"text" : "sprintf append time %f"
 				}
 
@@ -684,8 +654,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 42.0, 441.0, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 42.0, 441.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -697,7 +667,6 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "dump", "bang" ],
 					"patching_rect" : [ 42.0, 474.0, 57.0, 22.0 ],
-					"style" : "",
 					"text" : "t dump b"
 				}
 
@@ -709,13 +678,13 @@
 					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "dictionary", "", "", "" ],
-					"patching_rect" : [ 334.599976, 543.0, 95.0, 22.0 ],
+					"patching_rect" : [ 334.599976000000026, 543.0, 95.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 0,
-						"parameter_enable" : 0
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
 					}
 ,
-					"style" : "",
 					"text" : "dict markerData"
 				}
 
@@ -728,7 +697,6 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 42.0, 509.0, 169.0, 22.0 ],
-					"style" : "",
 					"text" : "mubu.track container markers"
 				}
 
@@ -740,8 +708,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 684.599976, 156.0, 24.0, 24.0 ],
-					"style" : ""
+					"parameter_enable" : 0,
+					"patching_rect" : [ 684.59997599999997, 156.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -753,7 +721,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 42.0, 60.0, 93.0, 22.0 ],
-					"style" : "",
 					"text" : "readtrack audio"
 				}
 
@@ -768,8 +735,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 684.599976, 108.0, 265.0, 35.0 ],
-					"style" : "",
+					"patching_rect" : [ 684.59997599999997, 108.0, 265.0, 35.0 ],
 					"text" : "mubu.track container audio @samplerate audio @maxsize 60s @predef yes @matrixcols 1"
 				}
 
@@ -779,14 +745,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-96",
-					"linecount" : 5,
+					"linecount" : 3,
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "int", "" ],
-					"patching_rect" : [ 684.599976, 191.0, 351.0, 76.0 ],
-					"style" : "",
-					"text" : "mubu.process container audio descr @name descr @onseg.colindex 1 @onseg.numcols 1 @onseg.mean 1 @onseg.threshold 0.01 @onseg.duration 1 @info gui \"interface markers\" @process 0 @progressoutput input @onseg.maxsize 1000."
+					"patching_rect" : [ 684.5999755859375, 191.0, 674.0, 49.0 ],
+					"text" : "mubu.process container audio descr:scale @name descr @scale.func log @scale.base 10 @scale.inmin 1 @scale.inmax 10 @scale.outmin 0 @scale.outmax 10 @scale.colindex 1 @scale.numcols 1 @info gui \"interface markers\" @process 0 @progressoutput input @onseg.maxsize 1000."
 				}
 
 			}
@@ -808,7 +773,7 @@
 					"cursor_shape" : "bar",
 					"cursor_size" : 3,
 					"cursor_visible" : 1,
-					"domain_bounds" : [ 0.0, 2821.723356 ],
+					"domain_bounds" : [ 0.0, 219946.235827664408134 ],
 					"domainruler_bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"domainruler_fgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"domainruler_grid" : 0,
@@ -865,8 +830,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 524.599976, 509.0, 36.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 524.59997599999997, 509.0, 36.0, 22.0 ],
 					"text" : "write"
 				}
 
@@ -878,8 +842,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 845.099976, 391.0, 99.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 845.09997599999997, 391.0, 99.0, 22.0 ],
 					"text" : "getsampleperiod"
 				}
 
@@ -891,8 +854,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 830.349976, 1047.0, 50.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 830.34997599999997, 1047.0, 50.0, 22.0 ],
 					"text" : "clear"
 				}
 
@@ -1436,13 +1398,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "mubu.usual.onseg.maxpat",
-				"bootpath" : "~/Documents/Max 7/Packages/MuBu For Max/patchers",
-				"patcherrelativepath" : "../../../../../../Max 7/Packages/MuBu For Max/patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "mubu.mxo",
 				"type" : "iLaX"
 			}
