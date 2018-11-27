@@ -772,3 +772,51 @@ export const mouseout = (node, capture = false) =>
  */
 export const mouseleave = (node, capture = false) =>
   createPointerStream('mouseleave', node, capture);
+
+/**
+ * Create a stream of DOM touchstart events
+ *
+ * @param  {HTMLElement}  node       DOM Node
+ * @param  {Boolean} [capture=false] use capture
+ * @return {Stream}
+ *
+ * @see https://github.com/mostjs/dom-event
+ */
+export const touchstart = (node, capture = false) =>
+  createPointerStream('touchstart', node, capture);
+
+/**
+ * Create a stream of DOM touchend events
+ *
+ * @param  {HTMLElement}  node       DOM Node
+ * @param  {Boolean} [capture=false] use capture
+ * @return {Stream}
+ *
+ * @see https://github.com/mostjs/dom-event
+ */
+export const touchend = (node, capture = false) =>
+  createPointerStream('touchend', node, capture);
+
+/**
+ * Create a stream of DOM touchmove events
+ *
+ * @param  {HTMLElement}  node       DOM Node
+ * @param  {Boolean} [capture=false] use capture
+ * @return {Stream}
+ *
+ * @see https://github.com/mostjs/dom-event
+ */
+export const touchmove = (node, capture = false) =>
+  createPointerStream('touchmove', node, capture);
+
+/**
+ * Create a stream of DOM touchcancel events
+ *
+ * @param  {HTMLElement}  node       DOM Node
+ * @param  {Boolean} [capture=false] use capture
+ * @return {Stream}
+ *
+ * @see https://github.com/mostjs/dom-event
+ */
+export const touchcancel = (node, capture = false) =>
+  createPointerStream('touchcancel', node, capture);
