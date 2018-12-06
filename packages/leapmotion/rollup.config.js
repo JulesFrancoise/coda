@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import babel from 'rollup-plugin-babel';
-import builtins from 'rollup-plugin-node-builtins';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 // import { plugin as analyze } from 'rollup-plugin-analyzer';
@@ -9,7 +8,6 @@ import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
 let plugins = [
-  builtins(),
   resolve(),
   commonjs(),
   babel({
@@ -28,20 +26,29 @@ if (process.env.NODE_ENV === 'production') {
 export default {
   input: 'src/index.js',
   plugins,
-  // external: [
-  //   '@coda/audio',
-  //   '@coda/core',
-  //   '@coda/max',
-  //   '@coda/midi',
-  //   '@coda/ml',
-  //   '@coda/myo',
-  //   '@coda/ui',
-  // ],
-  output: {
-    file: pkg.main,
-    format: 'umd',
-    name: 'Playground',
-    exports: 'named',
-    sourcemap: true,
-  },
+  external: [
+    '@coda/prelude',
+    '@coda/core',
+    '@most/scheduler',
+    'leapjs',
+  ],
+  output: [
+    {
+      file: pkg.main,
+      format: 'umd',
+      name: 'codaLeap',
+      sourcemap: true,
+      globals: {
+        '@coda/prelude': 'codaPrelude',
+        '@coda/core': 'codaCore',
+        '@most/scheduler': 'mostScheduler',
+        leapjs: 'leapjs',
+      },
+    },
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: true,
+    },
+  ],
 };

@@ -38,6 +38,8 @@ toc:
   - unpack
   - wavelet
   - withAttr
+  - name: "@coda/leapmotion"
+  - leapmotion
   - name: "@coda/myo"
   - myo
   - name: "@coda/max"

@@ -1,0 +1,26 @@
+{
+  "name": "@coda/leapmotion",
+  "description": "Leap Motion data source for CO/DA",
+  "version": "0.0.1",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development rollup -c -w",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@coda/core": "^0.0.1",
+    "@coda/prelude": "^0.0.1",
+    "@most/scheduler": "^1.2.1",
+    "leapjs": "^0.6.4"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "rollup": "^0.63.5"
+  }
+}

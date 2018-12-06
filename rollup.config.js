@@ -9,6 +9,7 @@ import pkg from './package.json';
 
 import configAudio from './packages/audio/rollup.config';
 import configCore from './packages/core/rollup.config';
+import configLeap from './packages/leapmotion/rollup.config';
 import configMax from './packages/max/rollup.config';
 import configMidi from './packages/midi/rollup.config';
 import configMl from './packages/ml/rollup.config';
@@ -30,6 +31,7 @@ function fixConfiguration(config, path) {
 
 fixConfiguration(configAudio, 'packages/audio');
 fixConfiguration(configCore, 'packages/core');
+fixConfiguration(configLeap, 'packages/leapmotion');
 fixConfiguration(configMax, 'packages/max');
 fixConfiguration(configMidi, 'packages/midi');
 fixConfiguration(configMl[0], 'packages/ml');
@@ -42,6 +44,7 @@ fixConfiguration(configUi, 'packages/ui');
 export default [
   configAudio,
   configCore,
+  configLeap,
   configMax,
   configMidi,
   configMl[0],

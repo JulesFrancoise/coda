@@ -8,7 +8,6 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development rollup -c -w",
-    "build0": "cross-env NODE_ENV=production rollup -c && npm run copy-workers",
     "build": "webpack",
     "copy-workers": "cp ./node_modules/@coda/ml/dist/xmm.worker* ./dist",
     "lint": "eslint src"
@@ -16,6 +15,7 @@
   "dependencies": {
     "@coda/audio": "^0.0.1",
     "@coda/core": "^0.0.1",
+    "@coda/leapmotion": "^0.0.1",
     "@coda/max": "^0.0.1",
     "@coda/midi": "^0.0.1",
     "@coda/ml": "^0.0.1",
@@ -27,8 +27,6 @@
     "babel-preset-env": "^1.7.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.2.0",
-    "rollup": "^0.63.5",
-    "rollup-plugin-node-builtins": "^2.1.2",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.2"
   }

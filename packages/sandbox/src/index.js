@@ -9,6 +9,7 @@ import * as codaMax from '@coda/max';
 import * as codaMidi from '@coda/midi';
 import * as codaMl from '@coda/ml';
 import * as codaMyo from '@coda/myo';
+import * as codaLeapmotion from '@coda/leapmotion';
 
 codaMax.setup(codaCore.Stream);
 codaMidi.setup(codaCore.Stream);
@@ -196,6 +197,7 @@ export default function createSandbox(uiContainer, logCallback) {
     codaMidi,
     codaMl,
     codaMyo,
+    codaLeapmotion,
     { streams: {}, synths: {} },
   );
   const sandbox = vm.createContext(s);

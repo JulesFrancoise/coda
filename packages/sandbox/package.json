@@ -16,6 +16,7 @@
   "dependencies": {
     "@coda/audio": "^0.0.1",
     "@coda/core": "^0.0.1",
+    "@coda/leapmotion": "^0.0.1",
     "@coda/max": "^0.0.1",
     "@coda/midi": "^0.0.1",
     "@coda/ml": "^0.0.1",

@@ -1,6 +1,7 @@
 examples
 ../packages/audio
 ../packages/core
+../packages/leapmotion
 ../packages/max
 ../packages/midi
 ../packages/ml

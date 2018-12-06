@@ -31,6 +31,7 @@ export default {
   external: [
     '@coda/audio',
     '@coda/core',
+    '@coda/leapmotion',
     '@coda/max',
     '@coda/midi',
     '@coda/ml',
@@ -50,6 +51,7 @@ export default {
       globals: {
         '@coda/audio': 'codaAudio',
         '@coda/core': 'codaCore',
+        '@coda/leapmotion': 'codaLeapmotion',
         '@coda/max': 'codaMax',
         '@coda/midi': 'codaMidi',
         '@coda/ml': 'codaMl',

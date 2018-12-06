@@ -242,6 +242,9 @@ function tryEvent(t, x, sink) {
  * - `pose/pose_off`: beginning and end of the gestures recognized by the factory
  * myo classification (string)
  *
+ * @warning This operator only works locally. The Myo must be properly configured,
+ * and the Myo Connect middleware must tbe installed and Running.
+ *
  * @param  {String} [name=''] Name of the armband
  * @return {Object}           An object containing a set of streams, of the
  * form:
@@ -255,9 +258,24 @@ function tryEvent(t, x, sink) {
  * }
  * ```
  *
- * @todo Make an example and add credits
+ * @see For more information about the Myo Device, see https://support.getmyo.com/hc/en-us. For details on the `myo.js` API, see https://github.com/thalmiclabs/myo.js
  *
- * @see {@link https://github.com/thalmiclabs/myo.js}
+ * @example
+ * // Connect to the default myo armband. You can specify the device name in argument.
+ * m = myo();
+ *
+ * // Plot the data streams from the IMU
+ * acc = m.acc.plot({ legend: 'Accelerometer data' });
+ * gyro = m.gyro.plot({ legend: 'Gyroscopes data' });
+ * quat = m.quat.plot({ legend: 'Quaternion data (orientation)' });
+ *
+ * // Plot the EMG data and compute and estimate of the force
+ * emg = myo().emg
+ *   .plot({ stacked: true, legend: 'Raw EMG data' })
+ *   .force()
+ *   .mvavrg({ size: 9 })
+ *   .plot({ stacked: true, fill: 'bottom', legend: 'Force estimation from the EMG (contraction)' });
+
  */
 export default function myo(name = '') {
   const deviceList = Myo.myos.map(x => x.name);
