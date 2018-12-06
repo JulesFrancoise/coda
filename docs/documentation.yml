@@ -12,6 +12,8 @@ toc:
   - cycle
   - dbtoa
   - delta
+  - devicemotion
+  - distance
   - div
   - elementwise
   - force
@@ -144,6 +146,10 @@ toc:
   - mouseenter
   - mouseout
   - mouseleave
+  - touchcancel
+  - touchend
+  - touchmove
+  - touchstart
   - name: Misc
     description: |
       Unclassified operators

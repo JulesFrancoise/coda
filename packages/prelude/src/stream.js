@@ -7,6 +7,8 @@
  *
  * Streams are composed of a set of attributes (`attr`) and a `run` method
  * called by the most core `runEffects` method.
+ *
+ * @private
  */
 export default class Stream {
   /**

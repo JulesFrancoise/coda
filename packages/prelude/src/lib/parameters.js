@@ -1,16 +1,21 @@
-/**
- * Simplified version of @ircam/parameters
- * @see {@link https://github.com/ircam-jstools/parameters}
- *
- * The @ircam/parameters library has been developed at Ircam – Centre Pompidou
- * and is released under the BSD-3-Clause license.
- *
- * @author Benjamin Matuszewski
- */
+//
+// Simplified version of @ircam/parameters
+// @see {@link https://github.com/ircam-jstools/parameters}
+//
+// The @ircam/parameters library has been developed at Ircam – Centre Pompidou
+// and is released under the BSD-3-Clause license.
+//
+// @author Benjamin Matuszewski
+//
 
 /**
  * Clip parameter values
  * @ignore
+ *
+ * @param  {Number} value             value
+ * @param  {Number} [lower=-Infinity] lower bound
+ * @param  {Number} [upper=+Infinity] upper bound
+ * @return {Number}                   Clipped value
  */
 function clipVal(value, lower = -Infinity, upper = +Infinity) {
   return Math.max(lower, Math.min(upper, value));

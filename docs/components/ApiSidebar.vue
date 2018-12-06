@@ -1,14 +1,13 @@
 <template>
   <div class="sidebar" :class="fixed && 'fixed'">
     <input type="text" name="" placeholder="Search..." @input="filter">
-    <div
-      v-for="(section, key, i) in api"
-      :key="`outline-section-${i}`"
-    >
-      <a
-        class="api-section"
-        href="javascript:void(0)"
-      >{{key}}</a>
+    <el-collapse v-model=sections>
+      <el-collapse-item
+        v-for="(section, key, i) in api"
+        :key="`outline-section-${i}`"
+        :title="key"
+        :name="key"
+      >
       <ul class="section-detail">
         <li
           v-for="(f, j) in section"
@@ -20,7 +19,8 @@
           </a>
         </li>
       </ul>
-    </div>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 
@@ -32,11 +32,15 @@ export default {
     fixed: Boolean,
   },
   data() {
-    return { search: false };
+    return {
+      search: false,
+      sections: [],
+    };
   },
   methods: {
     filter(e) {
       this.search = e.target.value || false;
+      this.sections = e.target.value ? Object.keys(this.api) : [];
     },
   },
 };

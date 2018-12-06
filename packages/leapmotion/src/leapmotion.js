@@ -159,7 +159,7 @@ function createRawStream(manager, samplePeriod = 0) {
  * structure.
  *
  * @warning This operator only works locally. The Leap Motion must be properly configured,
- * and the Leap Motion middleware must tbe installed and Running.
+ * and the Leap Motion middleware must be installed and Running.
  *
  * @param  {Object} [options={}]        Options
  * @param  {Number} [options.period=10] Sampling period, if resampling is desired.
