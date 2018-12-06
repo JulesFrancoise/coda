@@ -42,5 +42,5 @@ model = c.pcaTrain();
 
 // Projection of the new stream on the new space reduced to 'nbreduce' dimensions
 d = b.pcaPredict(model)
-	.map(x => x.slice(0, nbreduce))
+  .map(x => x.slice(0, nbreduce))
   .plot({ fill: 'bottom', stacked: true, legend: 'PCA reduction' });

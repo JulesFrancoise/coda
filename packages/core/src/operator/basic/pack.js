@@ -29,8 +29,13 @@ const specification = {
 /**
  * Pack a vector of scalar streams to a stream of vectors.
  *
- * @param  {Array<Stream>} [sources] Input streams (scalar)
+ * @param  {Array<Stream>} sources Input streams (scalar)
  * @return {Stream}   Stream of concatenated values
+ *
+ * @example
+ * a = periodic(100).constant(2);
+ * b = periodic(100).rand();
+ * c = pack([a, b]).plot();
  */
 export default function pack(sources) {
   const attr = validateStream('pack', specification, sources[0].attr);

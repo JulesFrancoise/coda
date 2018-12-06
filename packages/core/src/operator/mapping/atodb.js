@@ -25,8 +25,14 @@ const specification = {
  * The `atob` operator converts a stream of scalar or vector values from
  * amplitude to deciBels.
  *
- * @param  {Stream} source Input stream (amplitude values)
- * @return {Stream}        Scaled stream (dB values)
+ * @param {Stream} source Input stream (amplitude values)
+ * @return {Stream} Scaled stream (dB values)
+ *
+ * @example
+ * db = now([0, 0.5, 1])
+ *   .tap(x => console.log(`Amplitude: [${x}]`))
+ *   .atodb()
+ *   .tap(x => console.log(`deciBels: [${x}]`));
  */
 export default function atodb(source) {
   const attr = validateStream('atodb', specification, source.attr);

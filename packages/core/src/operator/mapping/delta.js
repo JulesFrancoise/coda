@@ -77,6 +77,17 @@ function deltaFilterVector(frameSize, filterSize, samplerate) {
  * @param  {Number} [options.size=3]   Window size (should be odd, minimum: 3)
  * @param  {Stream} source             Input stream
  * @return {Stream}                    Scaled stream
+ *
+ * @example
+ * // Compute mouse velocity/acceleration from a resampled version of the mouse position
+ * a = mousemove(doc)
+ *   .resample(periodic(10))
+ *   .mvavrg({ size: 5 })
+ *   .plot({ legend: 'Mouse Position'})
+ *   .delta({ size: 5 })
+ *   .plot({ legend: 'Mouse velocity' })
+ *   .delta({ size: 5 })
+ *   .plot({ legend: 'Mouse acceleration' });
  */
 export default function delta(options = {}, source) {
   const attr = validateStream('delta', specification, source.attr);

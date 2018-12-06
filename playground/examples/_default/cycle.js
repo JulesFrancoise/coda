@@ -9,13 +9,6 @@
 // (in this case, the buffer is defined as an array of the string's characters).
 //
 
-synth = new DuoSynth().toMaster();
-
 a = periodic(125)
   .cycle(['A2', 'C3', 'A5', 'D1'])
-  .tap((n) => { synth.triggerAttackRelease(n); })
   .tap(log);
-
-clear();
-
-synth.triggerRelease();

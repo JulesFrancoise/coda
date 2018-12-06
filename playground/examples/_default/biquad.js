@@ -3,7 +3,6 @@
 // =====
 //
 // Biquad FIR filter for data stream processing.
-// See: http://marsjs.netlify.com/function/index.html#static-function-biquad
 //
 
 a = periodic(10)

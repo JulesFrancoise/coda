@@ -11,3 +11,5 @@ npm-debug.log
 dist
 
 pages/api.json
+
+static/coda.js

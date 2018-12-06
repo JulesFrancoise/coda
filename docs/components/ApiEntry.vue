@@ -154,7 +154,7 @@ export default {
   methods: {
     signature(entry, includeName = true) {
       const params = entry.params
-        .map(x => `${x.name}${x.type && ': '}${x.type && x.type.name}`)
+        .map(x => `${x.name}: ${x.type && this.formatType(x.type)}`)
         .join(', ');
       const ret = entry.returns && entry.returns.length
         && entry.returns[0].type
@@ -171,6 +171,9 @@ export default {
         }
         if (t.type === 'TypeApplication') {
           return `${this.formatType(t.expression)}<${t.applications.map(this.formatType)}>`;
+        }
+        if (t.type === 'AllLiteral') {
+          return '*';
         }
         if (t.type === 'UnionType') {
           return t.elements.map(this.formatType)
@@ -200,11 +203,13 @@ export default {
 }
 h2.name {
   color: #0f5595;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
   /* font-size: 18px; */
 }
 h4 {
+  font-size: 1.1em;
   color: #878787;
+  margin-top: 16px;
 }
 .signature {
   font-family: Source Code Pro, monospace;

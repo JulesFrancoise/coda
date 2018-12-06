@@ -48,14 +48,17 @@ function clipVector(min, max) {
 }
 
 /**
- * Clip operator factory function. The scale operator clips an incoming
- * stream of scalar or vector to a given range.
+ * Clip an incoming stream of scalar or vector to a given range.
  *
- * @param  {Object} [options={}]       Scaling options
+ * @param  {Object} [options={}]     Scaling options
  * @param  {Number} [options.min=0]  Minimum of the range
  * @param  {Number} [options.max=1]  Maximum of the range
- * @param  {Stream} source             Input stream
- * @return {Stream}                    Scaled stream
+ * @param  {Stream} source           Input stream
+ * @return {Stream}                  Clipped stream
+ *
+ * @example
+ * s = periodic(20).rand().biquad({ f0: 1, q: 5 }).plot({ legend: 'original signal' });
+ * c = s.clip({ min: 0.3, max: 0.8 }).plot({ legend: 'original signal' });
  */
 export default function clip(options = {}, source) {
   const attr = validateStream('clip', specification, source.attr);

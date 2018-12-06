@@ -43,10 +43,9 @@ function indicesValid(a, size) {
  * indices
  *
  * @example
- * import * from 'mars';
- *
- * const process = periodic(10).rand({ size: 5 }).select([0, 4, 3, 0]).tap(log);
- * runEffects(process.take(5), newDefaultScheduler());
+ * a = periodic(100).rand({ size: 5 }).plot({ stacked: true });
+ * b = a.select([0, 0, 2]).plot({ stacked: true });
+ * c = a.select(1).plot();
  */
 export default function select(indices, source) {
   const idx = (typeof indices === 'number') ? [indices] : indices;

@@ -133,14 +133,14 @@ class AutoScaleVectorSink {
 
 /**
  * Automatically scale an incoming stream of scalar or vector values to the
- * [0; 1] range.
+ * \[0; 1\] range.
+ *
  * @param  {Stream} source             Input stream
  * @return {Stream}                    Scaled stream
  *
  * @example
- * const source = periodic(100).rand().scale({ outmin: -30, outmax: 200 });
- * const scaled = autoscale(a).tap(console.log);
- * runEffects(scaled, newDefaultScheduler());
+ * const source = periodic(200).rand().scale({ outmin: -30, outmax: 200 });
+ * const scaled = source.autoscale().tap(console.log);
  */
 export default function autoscale(source) {
   const attr = validateStream('autoscale', specification, source.attr);

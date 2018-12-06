@@ -151,6 +151,10 @@ function scalogramVector(size, params, samplerate) {
  * - `aggressive2`: Aggressive optimisation (level 2)
  * @param  {Stream} source Scalar or Vector Stream
  * @return {Stream} Stream of Scalogram frames
+ *
+ * @example
+ * m = mousemove(doc).resample(periodic(10)).plot({ legend: 'mouse position' });
+ * w = m.wavelet().heatmap({ legend: 'Wavelet Transform of the mouse position' });
  */
 export default function wavelet(options = {}, source) {
   const baseAttr = validateStream('wavelet', specification, source.attr);

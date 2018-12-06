@@ -28,12 +28,8 @@ const specification = (format, size) => ({
  * @return {Stream}        Output stream of combined values
  *
  * @example
- * const a = periodic(100).rand();
- * const b = periodic(100).rand();
  * const norm = (x, y) => Math.sqrt(x * x + y * y);
- * const c = elementwise(norm, a, b).tap(console.log);
- * runEffects(c, newDefaultScheduler());
- *
+ * const c = elementwise(norm, now([4, 2]), now([3, 1])).tap(console.log);
  */
 export default function elementwise(f, first, second) {
   const attr = validateStream('elementwise', specification(), first.attr);
@@ -55,10 +51,9 @@ export default function elementwise(f, first, second) {
  * @return {Stream}        Output stream of summed values
  *
  * @example
- * const a = periodic(100).rand().biquad({ f0: 0.2 });
- * const b = periodic(100).rand().biquad({ f0: 0.2 });
- * const c = a.add(b).tap(console.log);
- * runEffects(c, newDefaultScheduler());
+ * const c = add(now(3), now(2)).tap(console.log);
+ * // This is equivalent to:
+ * // const c = now(3).add(now(2)).tap(console.log);
  */
 export function add(first, second) {
   return elementwise((a, b) => a + b, first, second);
@@ -75,10 +70,9 @@ export function add(first, second) {
  * @return {Stream}        Output stream of subtracted values
  *
  * @example
- * const a = periodic(100).rand().biquad({ f0: 0.2 });
- * const b = periodic(100).rand().biquad({ f0: 0.2 });
- * const c = a.sub(b).tap(console.log);
- * runEffects(c, newDefaultScheduler());
+ * const c = sub(now(7), now(3)).tap(console.log);
+ * // This is equivalent to:
+ * // const c = now(7).sub(now(3)).tap(console.log);
  */
 export function sub(first, second) {
   return elementwise((a, b) => a - b, first, second);
@@ -93,6 +87,11 @@ export function sub(first, second) {
  * @param  {Stream} first  The main source stream
  * @param  {Stream} second The secondary stream to combine
  * @return {Stream}        Output stream of multiplied values
+ *
+ * @example
+ * const c = mul(now(7), now(3)).tap(console.log);
+ * // This is equivalent to:
+ * // const c = now(7).mul(now(3)).tap(console.log);
  */
 export function mul(first, second) {
   return elementwise((a, b) => a * b, first, second);
@@ -107,6 +106,11 @@ export function mul(first, second) {
  * @param  {Stream} first  The main source stream
  * @param  {Stream} second The secondary stream to combine
  * @return {Stream}        Output stream of divided values
+ *
+ * @example
+ * const c = div(now(9), now(2)).tap(console.log);
+ * // This is equivalent to:
+ * // const c = now(9).div(now(2)).tap(console.log);
  */
 export function div(first, second) {
   return elementwise((a, b) => a / b, first, second);

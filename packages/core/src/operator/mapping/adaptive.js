@@ -157,13 +157,25 @@ class AdaptiveScaleSink {
 }
 
 /**
- * Automatically scale an incoming stream of scalar or vector values over the X seconds to the
- * [0; 1] range.
+ * Automatically scale an incoming stream of scalar or vector values over the X previous
+ * seconds to the \[0; 1\] range.
+ *
  * @param  {Object} [options={}] Adaptive scaling Options
- * @param  {Scalar} [options.duration=30] Duration in seconds
- * @param  {Scalar} [options.refresh=3] Refresh duration in seconds to compute min/max
- * @param  {Stream} source             Input stream
- * @return {Stream}                    Scaled stream
+ * @param  {Scalar} [options.duration=30] Duration (s) of the sliding window on which to
+ * compute the min/max bounds
+ * @param  {Scalar} [options.refresh=3] Refresh duration (s) to compute min/max
+ * @param  {Stream} source Input stream
+ * @return {Stream} Scaled stream
+ *
+ * @example
+ * // Generate a random signal and apply adaptive scaling
+ * a = periodic(10)
+ *   .rand({size : 2})
+ *   .biquad({ f0: 1 })
+ *   .plot()
+ *   .adaptive({ duration: 10, refresh: 2 })
+ *   .plot();
+
  */
 export default function adaptive(options = {}, source) {
   const attr = validateStream('adaptive', specification, source.attr);

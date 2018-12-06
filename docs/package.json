@@ -6,10 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "copylib": "cp ../packages/all/dist/index.js ./static/coda.js",
     "dev": "yarn doc --watch & nuxt",
-    "build": "yarn doc && nuxt build",
+    "build": "yarn copylib && yarn doc && nuxt build",
     "start": "yarn doc && nuxt start",
-    "generate": "yarn doc && nuxt generate",
+    "generate": "yarn copylib && yarn doc && nuxt generate",
     "doc": "documentation build ../packages/**/src/index.js -f json -o pages/api.json --sort-order alpha --config documentation.yml",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"

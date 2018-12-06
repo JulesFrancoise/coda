@@ -29,16 +29,14 @@ const specification = {
 /**
  * Unpack a stream of vectors to a vector of scalar streams.
  *
- * @param  {Stream} [source] Input stream (vectorial)
+ * @param  {Stream} source Input stream (vectorial)
  * @return {Array}   Array of scalar streams
  *
  * @example
- * import * from 'mars';
- *
- * const [s1, s2, s3] = periodic(100).rand({ size: 3 }).unpack();
- * runEffects(s1.tap(log).take(10), newDefaultScheduler());
- * runEffects(s2.tap(log).take(10), newDefaultScheduler());
- * runEffects(s3.tap(log).take(10), newDefaultScheduler());
+ * s = periodic(20).rand({ size: 2 }).plot({ legend: 'Original Signal'});
+ * [s1, s2] = s.unpack();
+ * a1 = s1.plot({ legend: 'First channel' });
+ * a2 = s2.plot({ legend: 'Second channel' });
  */
 export default function unpack(source) {
   const attr = validateStream('unpack', specification, source.attr);

@@ -95,16 +95,20 @@ function normalizeBuffer(buffer) {
  * in an output event sampled from the buffer passed in argument. The buffer
  * can either contain an array or a string.
  *
- * @param  {Array|String} buffer Buffer content to cycle through. The buffer
+ * @param {Array|String} buffer Buffer content to cycle through. The buffer
  * should be an Array or a string. If a string is passed as buffer, the cycle
  * iterates over the characters of the string. If an array is passed, the cycle
  * periodically iterates over the values of the array.
- * @param  {Stream} source Input stream (trigger)
+ * @param {Stream} source Input stream (trigger)
  * @return {Stream}        Output Stream, sampled from the buffer, with
  * corresponding attributes (e.g. using an array of numbers as a buffer
  * will result in a stream with attributes `{ format: 'scalar', size: 1 }`).
  *
- * @todo Example
+ * @example
+ * a = periodic(250)
+ *   .cycle(['A2', 'C3', 'A5', 'D1'])
+ *   .take(8)
+ *   .tap(log);
  */
 export default function cycle(buffer, source) {
   const { buffer: buf, ...streamAttr } = normalizeBuffer(buffer);

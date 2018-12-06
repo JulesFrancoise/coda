@@ -12,7 +12,7 @@
  * Clip parameter values
  * @ignore
  */
-function clip(value, lower = -Infinity, upper = +Infinity) {
+function clipVal(value, lower = -Infinity, upper = +Infinity) {
   return Math.max(lower, Math.min(upper, value));
 }
 
@@ -36,7 +36,7 @@ const paramTemplates = {
       if (!(typeof value === 'number' && Math.floor(value) === value)) {
         throw new Error(`Invalid value for integer param "${name}": ${value}`);
       }
-      return clip(value, definition.min, definition.max);
+      return clipVal(value, definition.min, definition.max);
     },
   },
   float: {
@@ -45,7 +45,7 @@ const paramTemplates = {
       if (typeof value !== 'number') {
         throw new Error(`Invalid value for float param "${name}": ${value}`);
       }
-      return clip(value, definition.min, definition.max);
+      return clipVal(value, definition.min, definition.max);
     },
   },
   string: {

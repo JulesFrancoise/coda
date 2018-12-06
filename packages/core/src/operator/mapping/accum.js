@@ -27,14 +27,14 @@ function sumVector(x, y) {
 /**
  * Accumulate the values of a scalar or vector stream
  *
- * @param  {Stream} [source] Input stream (scalar or vectorial)
- * @return {Stream}          Stream of filtered values
+ * @param  {Stream} source   Input stream (scalar or vectorial)
+ * @return {Stream}          Stream of accumulated values
  *
  * @example
  * // generate a constant unit signal sampled at 1Hz, and accumulate
  * // the results (sliced at 10 iterations)
- * const process = periodic(1000)
- *   .constant(1).withAttr({ format: 'scalar', size: 1 })
+ * const process = periodic(500)
+ *   .constant(1)
  *   .accum()
  *   .take(10)
  *   .tap(log);

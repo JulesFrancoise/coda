@@ -98,18 +98,14 @@ class SlidingWindowSink {
 /**
  * Compute a sliding window on a scalar or vector stream
  *
- * @todo Array: should we have rows/cols instead of size?
- *
  * @param  {Object} [options] Sliding Window options
  * @param  {String} [options.size=1] Sliding Window size in frames
  * @param  {Stream} [source] Input stream (scalar or vectorial)
  * @return {Stream}          Stream of sliding windows
  *
  * @example
- * import * from 'mars';
- *
- * const process = periodic(100).rand().slide({ size: 20 }).tap(log)
- * runEffects(process.take(10), newDefaultScheduler());
+ * noise = periodic(100).rand().take(10);
+ * w = noise.slide({ size: 4 }).tap(log)
  */
 export default function slide(options, source) {
   const params = parseParameters(definitions, options);

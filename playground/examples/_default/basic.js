@@ -22,7 +22,7 @@ a = periodic(10)
   .rand()
   .scale({ outmax: 1000 })
   .plot({ legend: 'Raw Signal'})
-	.biquad({ f0: 1 })
+  .biquad({ f0: 1 })
   .plot({ legend: 'Filtered Signal'});
 
 // Stop the stream

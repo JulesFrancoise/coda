@@ -66,6 +66,11 @@ function scaleVector(inmin, inmax, outmin, outmax) {
  * @param  {Number} [options.outmax=1] Maximum of the range of the output
  * @param  {Stream} source             Input stream
  * @return {Stream}                    Scaled stream
+ *
+ * @example
+ * a = periodic(50).rand();
+ * b = a.scale({ outmin: -1, outmax: 3 });
+ * c = pack([a, b]).plot();
  */
 export default function scale(options = {}, source) {
   const attr = validateStream('scale', specification, source.attr);

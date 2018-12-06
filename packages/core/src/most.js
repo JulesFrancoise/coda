@@ -32,7 +32,7 @@ export const now = (x) => {
   if (typeof x === 'number') {
     attr.format = 'scalar';
     attr.size = 1;
-  } else if (x instanceof Array && x.length > 0 && typeof x[0] === 'number') {
+  } else if (Array.isArray(x) && x.length > 0 && typeof x[0] === 'number') {
     attr.format = 'vector';
     attr.size = x.length;
   }

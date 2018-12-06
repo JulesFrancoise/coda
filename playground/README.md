@@ -1,21 +1,15 @@
-# playground
+# coda.js playground
 
-## Project setup
-```
-yarn install
-```
+This package contains the source code for the CO/DA playground, a live-coding editor built upon the main CO/DA library.
 
-### Compiles and hot-reloads for development
+To run a development server, run from the main repository:
+
 ```
-yarn run serve
+yarn dev # or npm run dev
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+To build the application, run:
 
-### Lints and fixes files
 ```
-yarn run lint
+yarn build # or npm run build
 ```

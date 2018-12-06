@@ -63,10 +63,8 @@ function movingAverage(size) {
  * @return {Stream}          Stream of filtered values
  *
  * @example
- * import * from 'mars';
- *
- * const process = periodic(100).rand().mvavrg({ size: 20 }).tap(log)
- * runEffects(process.take(10), newDefaultScheduler());
+ * noise = periodic(10).rand().plot();
+ * filtered = noise.mvavrg({ size: 20 }).plot();
  */
 export default function mvavrg(options, source) {
   const attr = validateStream('mvavrg', specification, source.attr);

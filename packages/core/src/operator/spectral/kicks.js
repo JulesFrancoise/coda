@@ -60,7 +60,7 @@ const specification = {
  * @param  {Object} [options.threshold={40}] Upper Threshold for kick detection
  * @param  {Object} [options.thresholdRelease={30}] Release threshold
  * @param  {Stream} source       Source Stream (scalar or vector)
- * @return {Stream}              BInary Kick detection stream
+ * @return {Stream}              Binary Kick detection stream
  */
 export default function kicks(options = {}, source) {
   validateStream('kicks', specification, source.attr);

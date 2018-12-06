@@ -23,6 +23,7 @@ toc:
   - minmax
   - mul
   - mvavrg
+  - norm
   - pack
   - pak
   - prod

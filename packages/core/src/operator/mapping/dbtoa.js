@@ -27,6 +27,12 @@ const specification = {
  *
  * @param  {Stream} source Input stream (dB values)
  * @return {Stream}  Scaled stream (amplitude values)
+ *
+ * @example
+ * a = now([0, -6, -Infinity])
+ *   .tap(x => console.log(`deciBels: [${x}]`))
+ *   .dbtoa()
+ *   .tap(x => console.log(`Amplitude: [${x}]`));
  */
 export default function dbtoa(source) {
   const attr = validateStream('dbtoa', specification, source.attr);

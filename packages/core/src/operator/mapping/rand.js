@@ -42,18 +42,16 @@ function randVect(n) {
 
 /**
  * The rand operator generates a stream of scalars or vectors with random
- * values uniformally distributed over [0; 1].
+ * values uniformally distributed over \[0; 1\].
  *
  * @param  {Object} [options={}]       Scaling options
- * @param  {Number} [options.dim=1]    Dimension of the output stream
+ * @param  {Number} [options.size=1]   Dimension of the output stream
  * @param  {Stream} source             Input stream
  * @return {Stream}                    Scaled stream
  *
  * @example
- * import * from 'mars';
- *
- * const process = periodic(100).rand().tap(log);
- * runEffects(process.take(10), newDefaultScheduler());
+ * randValues = periodic(500).rand().tap(console.log);
+ * noise = periodic(10).rand({ size: 3 }).plot();
  */
 export default function rand(options = {}, source) {
   const params = parseParameters(definitions, options);

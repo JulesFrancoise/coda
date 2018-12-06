@@ -1,7 +1,7 @@
 /**
  * Attach attributes to an existing stream
  *
- * @param  {Object} attr                   Attributes
+ * @param  {Object} attr Attributes
  * @return {Function}    function
  */
 export default function withAttr(attr) {

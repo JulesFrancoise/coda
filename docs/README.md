@@ -1,6 +1,4 @@
-# mars-docs
-
-> mars.js documentation
+# coda.js documentation website
 
 ## Build Setup
 

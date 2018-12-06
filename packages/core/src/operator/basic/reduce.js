@@ -29,6 +29,11 @@ const specification = {
  * @param  {*}        initial initial value
  * @param  {Stream}   source  Source vector stream
  * @return {Stream}           Scalar stream
+ *
+ * @example
+ * r = now([1, 2, 3])
+ *   .reduce((s, x) => s + x, 0)
+ *   .tap(console.log);
  */
 export default function reduce(reducer, initial, source) {
   const attr = validateStream('reduce', specification, source.attr);
@@ -40,6 +45,9 @@ export default function reduce(reducer, initial, source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (sum of the vector values)
+ *
+ * @example
+ * s = now([1, 2, 3]).sum().tap(console.log);
  */
 export function sum(source) {
   return reduce((s, x) => s + x, 0, source);
@@ -50,6 +58,9 @@ export function sum(source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (product of the vector values)
+ *
+ * @example
+ * s = now([1, 2, 3]).prod().tap(console.log);
  */
 export function prod(source) {
   return reduce((s, x) => s * x, 1, source);
@@ -60,6 +71,9 @@ export function prod(source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (frame minimum)
+ *
+ * @example
+ * s = now([1, 2, 3, -4]).min().tap(console.log);
  */
 export function min(source) {
   return reduce((s, x) => Math.min(s, x), +Infinity, source);
@@ -70,6 +84,9 @@ export function min(source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (frame maximum)
+ *
+ * @example
+ * s = now([1, 2, 3, -4]).max().tap(console.log);
  */
 export function max(source) {
   return reduce((s, x) => Math.max(s, x), -Infinity, source);
@@ -79,7 +96,10 @@ export function max(source) {
  * Compute the minimum and maximum of each frame of a vector stream
  *
  * @param  {Stream} source Source vector stream
- * @return {Stream}        Scalar stream ([min, max])
+ * @return {Stream}        Scalar stream \(\[min, max\]\)
+ *
+ * @example
+ * s = now([1, 2, 3, -4]).minmax().tap(console.log);
  */
 export function minmax(source) {
   return withAttr({ format: 'vector', size: 2 })(reduce(
@@ -94,6 +114,9 @@ export function minmax(source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (norm)
+ *
+ * @example
+ * s = now([1, 2, 3]).norm().tap(console.log);
  */
 export function norm(source) {
   return withAttr({ format: 'scalar', size: 1 })(map(x => Math.sqrt(x), reduce(

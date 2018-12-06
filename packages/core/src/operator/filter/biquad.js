@@ -209,21 +209,24 @@ function calculateCoefs(samplerate, type, gain, f0, q) {
 }
 
 /**
- * Biquad Filter Module, based on Ircam's Waves-LFOI Module.
+ * Biquad Filter, based on Ircam's Waves-LFO Module.
  *
- * @see {@link https://github.com/wavesjs/waves-lfo}
+ * @see https://github.com/wavesjs/waves-lfo
  *
- * @param  {Object} [options] Filter options
+ * @param  {Object} options Filter options
  * @param  {String} [options.type='lowpass'] Type of filter. Available options:
- * 'lowpass', 'highpass', 'bandpass_constant_skirt', 'bandpass',
- * 'bandpass_constant_peak', 'notch', 'allpass', 'peaking', 'lowshelf',
+ * - 'lowpass', 'highpass', 'bandpass_constant_skirt', 'bandpass',
+ * - 'bandpass_constant_peak', 'notch', 'allpass', 'peaking', 'lowshelf',
  * 'highshelf'.
- * @param  {Stream} [source] Input stream (scalar or vectorial)
- * @return {Stream}          Stream of filtered values
+ * @param  {Number} [options.f0=1] Filter cutoff frequency (Hz)
+ * @param  {Number} [options.gain=1] Filter gain
+ * @param  {Number} [options.q=1] Filter resonance
+ * @param  {Stream} source Input stream (scalar or vectorial)
+ * @return {Stream} Stream of filtered values
  *
  * @example
- * const process = periodic(100).rand().biquad({ f0: 0.2 }).tap(log)
- * runEffects(process.take(10), newDefaultScheduler());
+ * const noise = periodic(20).rand().plot({ legend: 'Random Signal' });
+ * const filtered = noise.biquad({ f0: 0.8 }).plot({ legend: 'Filtered Signal' });
  */
 export default function biquad(options, source) {
   const attr = validateStream('biquad', specification, source.attr);

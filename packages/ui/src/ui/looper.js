@@ -160,7 +160,9 @@ class LooperSink {
  * 'thru' or 'recording' modes), or loop of the recorded buffer (in playing
  * mode)
  *
- * @todo Example
+ * @example
+ * data = periodic(10).rand().mvavrg({ size: 30 }).plot();
+ * l = data.looper().plot();
  */
 export default function looper(options, source) {
   const params = parseParameters(definitions, options);

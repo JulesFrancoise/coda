@@ -329,15 +329,24 @@ function bayesianFilter(
 }
 
 /**
- * Force computation from EMG data, using bayesian filtering techniques.
+ * Estimate the force (muscular contraction) from EMG data, using bayesian filtering techniques.
  *
- * @param  {Object} [options] Filter Options
+ * @see Sanger, Terence D. "Bayesian filtering of myoelectric signals." Journal of
+ * neurophysiology 97.2 (2007): 1839-1845.
+ *
+ * @param  {Object} options Filter Options
  * @param  {number} [options.logdiff=-1] Logarithm of the diffusion rate
  * @param  {number} [options.logjump=-1] Logarithm of the jump probability
- * @param  {Stream} [source]  Input stream of EMG data (scalar or vector)
+ * @param  {Stream} source  Input stream of EMG data (scalar or vector)
  * @return {Stream}         Stream of force from the EMG
  *
- * @todo Improve description and add references
+ * @example
+ * fake = periodic(5)
+ *   .rand()
+ *   .scale({ outmin: -1 })
+ *   .mul(periodic(10).rand().biquad({ f0: 0.5, q: 12 }))
+ *   .plot();
+ * f = fake.withAttr({ type: 'emg' }).force().plot();
  */
 export default function force(options, source) {
   const attr = validateStream('force', specification, source.attr);

@@ -37,6 +37,13 @@ export default function setupMost(Stream) {
    * @return {Stream}
    */
   s.prototype.constant = function constant_(x) {
+    if (typeof x === 'number') {
+      this.attr.format = 'scalar';
+      this.attr.size = 1;
+    } else if (x instanceof Array && x.length > 0 && typeof x[0] === 'number') {
+      this.attr.format = 'vector';
+      this.attr.size = x.length;
+    }
     return this.createWithAttr(most.constant(x, this));
   };
 

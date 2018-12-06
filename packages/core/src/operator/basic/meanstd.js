@@ -27,6 +27,9 @@ const specification = {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (mean of the vector values)
+ *
+ * @example
+ * m = now([1, 2, 3]).mean().tap(console.log);
  */
 export function mean(source) {
   const attr = validateStream('mean', specification, source.attr);
@@ -39,6 +42,9 @@ export function mean(source) {
  *
  * @param  {Stream} source Source vector stream
  * @return {Stream}        Scalar stream (std of the vector values)
+ *
+ * @example
+ * m = now([1, 2, 3]).std().tap(console.log);
  */
 export function std(source) {
   const attr = validateStream('std', specification, source.attr);
@@ -54,7 +60,10 @@ export function std(source) {
  * Compute the mean and standard deviation of the values of a vector stream
  *
  * @param  {Stream} source Source vector stream
- * @return {Stream}        Scalar stream ([mean, std] of the vector values)
+ * @return {Stream}        Scalar stream \(\[mean, std\] of the vector values\)
+ *
+ * @example
+ * m = now([1, 2, 3, 4, 5]).meanstd().tap(console.log);
  */
 export function meanstd(source) {
   const attr = validateStream('meanstd', specification, source.attr);

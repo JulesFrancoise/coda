@@ -63,7 +63,7 @@ function triggerScalar(down, up) {
  * with hysteresis. It triggers 1 if the value exceeds the `up` threshold, and
  * 0 if the values becomes lower to the `down` threshold.
  *
- * @see {@link https://en.wikipedia.org/wiki/Schmitt_trigger}
+ * @see https://en.wikipedia.org/wiki/Schmitt_trigger
  *
  * @param  {object}  [options={}]               Schmitt trigger options
  * @param  {number}  [options.up=0.9]           Ascending threshold
@@ -75,8 +75,13 @@ function triggerScalar(down, up) {
  * `options.continuous = true`, then the output stream contains as many events
  * as the input stream.
  *
- * @todo Example
- *
+ * @example
+ * a = periodic(10)
+ *   .rand()
+ *   .biquad({ f0: 5 })
+ *   .plot({ legend: 'Raw Signal'})
+ *   .schmitt({ up: 0.6, down: 0.4, continuous: true })
+ *   .plot({ legend: 'Schmitt Trigger', fill: 'bottom' });
  */
 export default function schmitt(options, source) {
   const attr = validateStream('schmitt', specification, source.attr);

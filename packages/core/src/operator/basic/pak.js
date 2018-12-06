@@ -26,10 +26,16 @@ const specification = {
 };
 
 /**
- * Pack a vector of scalar streams to a stream of vectors.
+ * Pack a vector of scalar streams to a stream of vectors. This operator is similar to `pack`
+ * except that it triggers an event when an event occurs on any of the incoming streams.
  *
- * @param  {Array<Stream>} [sources] Input streams (scalar)
+ * @param  {Array<Stream>} sources Input streams (scalar)
  * @return {Stream}   Stream of concatenated values
+ *
+ * @example
+ * a = periodic(200).rand();
+ * b = periodic(10).rand();
+ * c = pak([a, b]).plot();
  */
 export default function pak(sources) {
   const attr = validateStream('pak', specification, sources[0].attr);

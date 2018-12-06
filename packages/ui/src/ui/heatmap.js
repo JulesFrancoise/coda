@@ -90,6 +90,9 @@ class HeatmapSink {
  * @param  {string} [options.legend=''] Plot legend
  * @param  {Stream} source  Input stream (scalar or vector)
  * @return {Stream}         Scalogram stream
+ *
+ * @example
+ * noise = periodic(20).rand({ size: 20 }).heatmap();
  */
 export default function heatmap(options, source) {
   const params = parseParameters(definitions, options);
