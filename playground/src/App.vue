@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    const example = 'leapmotion';
+    const example = 'basic';
     this.load(example);
     this.$refs.header.selected = example;
     // window.onbeforeunload = () => '';

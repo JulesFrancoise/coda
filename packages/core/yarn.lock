@@ -18,6 +18,13 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@ircam/motion-input@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@ircam/motion-input/-/motion-input-1.0.7.tgz#0fb58cfe17313c5307bad6ea5c75ce3e556efb10"
+  integrity sha512-NhIS4bX+I1a12R3KQ0Wh05xf3DdQjXLN9udfFJgAFgDuM/N6LqNE3awAcwVu3fpd8qMHUJozYdhU/mBmqckLoQ==
+  dependencies:
+    platform "1.3.4"
+
 "@most/core@^1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@most/core/-/core-1.3.2.tgz#0b2b489ef84dd61075150037afd794e258f09f8c"
@@ -3016,6 +3023,11 @@ pkg-dir@^2.0.0:
   integrity sha1-9tXREJ4Z1j7fQo4L1X4Sd3YVM0s=
   dependencies:
     find-up "^2.1.0"
+
+platform@1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.4.tgz#6f0fb17edaaa48f21442b3a975c063130f1c3ebd"
+  integrity sha1-bw+xftqqSPIUQrOpdcBjEw8cPr0=
 
 platform@^1.3.3:
   version "1.3.5"

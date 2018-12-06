@@ -28,6 +28,7 @@ export default {
   plugins,
   external: [
     '@coda/prelude',
+    '@ircam/motion-input',
     '@most/core',
     '@most/scheduler',
     '@most/dom-event',
@@ -41,6 +42,7 @@ export default {
       sourcemap: true,
       globals: {
         '@coda/prelude': 'codaPrelude',
+        '@ircam/motion-input': 'motionInput',
         '@most/core': 'mostCore',
         '@most/scheduler': 'mostScheduler',
         '@most/dom-event': 'mostDomEvent',

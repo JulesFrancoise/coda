@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@coda/prelude": "^0.0.1",
+    "@ircam/motion-input": "^1.0.7",
     "@most/core": "^1.3.2",
     "@most/dom-event": "^2.0.0",
     "@most/scheduler": "^1.2.1",

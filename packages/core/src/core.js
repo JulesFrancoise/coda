@@ -24,6 +24,7 @@ import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
 import adaptive_ from './operator/mapping/adaptive';
 import distance_ from './operator/basic/distance';
+import devicemotion_ from './sources/devicemotion';
 
 /** @ignore */
 export const accum = stream =>
@@ -172,3 +173,13 @@ export const adaptive = (options, stream) =>
 /** @ignore */
 export const distance = (first, second) =>
   new Stream(distance_(first, second));
+
+/** @ignore */
+export const devicemotion = () => {
+  const dm = devicemotion_();
+  return {
+    accelerationG: new Stream(dm.accelerationG),
+    acceleration: new Stream(dm.acceleration),
+    orientation: new Stream(dm.orientation),
+  };
+};
