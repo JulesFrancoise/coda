@@ -37,7 +37,7 @@ const specification = (format, size) => ({
  */
 export default function elementwise(f, first, second) {
   const attr = validateStream('elementwise', specification(), first.attr);
-  validateStream('add', specification(attr.format, attr.size), second.attr);
+  validateStream('elementwise', specification(attr.format, attr.size), second.attr);
   const fGen = attr.format === 'scalar' ?
     (x, y) => f(y, x) :
     (x, y) => y.map((a, i) => f(a, x[i]));

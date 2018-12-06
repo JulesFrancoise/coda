@@ -23,6 +23,7 @@ import autoscale from './operator/mapping/autoscale';
 import kicks from './operator/spectral/kicks';
 import wavelet from './operator/spectral/wavelet';
 import adaptive from './operator/mapping/adaptive';
+import distance from './operator/basic/distance';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -39,8 +40,8 @@ export default function setupCore(Stream) {
    * @ignore
    * @return {Stream}
    */
-  s.prototype.add = function add_(streams) {
-    return new Stream(add(this, streams));
+  s.prototype.add = function add_(second) {
+    return new Stream(add(this, second));
   };
 
   /**
@@ -91,8 +92,8 @@ export default function setupCore(Stream) {
    * @ignore
    * @return {Stream}
    */
-  s.prototype.div = function div_(streams) {
-    return new Stream(div(this, streams));
+  s.prototype.div = function div_(second) {
+    return new Stream(div(this, second));
   };
 
   /**
@@ -175,8 +176,8 @@ export default function setupCore(Stream) {
    * @ignore
    * @return {Stream}
    */
-  s.prototype.mul = function mul_(streams) {
-    return new Stream(mul(this, streams));
+  s.prototype.mul = function mul_(second) {
+    return new Stream(mul(this, second));
   };
 
   /**
@@ -279,8 +280,8 @@ export default function setupCore(Stream) {
    * @ignore
    * @return {Stream}
    */
-  s.prototype.sub = function sub_(streams) {
-    return new Stream(sub(this, streams));
+  s.prototype.sub = function sub_(second) {
+    return new Stream(sub(this, second));
   };
 
   /**
@@ -331,5 +332,14 @@ export default function setupCore(Stream) {
    */
   s.prototype.adaptive = function adaptive_(options) {
     return new Stream(adaptive(options, this));
+  };
+
+  /**
+   * @ignore
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.distance = function distance_(second) {
+    return new Stream(distance(this, second));
   };
 }

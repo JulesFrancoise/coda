@@ -23,14 +23,15 @@ import autoscale_ from './operator/mapping/autoscale';
 import kicks_ from './operator/spectral/kicks';
 import wavelet_ from './operator/spectral/wavelet';
 import adaptive_ from './operator/mapping/adaptive';
+import distance_ from './operator/basic/distance';
 
 /** @ignore */
 export const accum = stream =>
   new Stream(accum_(stream));
 
 /** @ignore */
-export const add = (source, streams) =>
-  new Stream(elementwise_.add(source, streams));
+export const add = (first, second) =>
+  new Stream(elementwise_.add(first, second));
 
 /** @ignore */
 export const atodb = stream =>
@@ -53,8 +54,8 @@ export const delta = (options, stream) =>
   new Stream(delta_(options, stream));
 
 /** @ignore */
-export const div = stream =>
-  new Stream(elementwise_.div(stream));
+export const div = (first, second) =>
+  new Stream(elementwise_.div(first, second));
 
 /** @ignore */
 export const dbtoa = stream =>
@@ -93,8 +94,8 @@ export const minmax = stream =>
   new Stream(reduce_.minmax(stream));
 
 /** @ignore */
-export const mul = stream =>
-  new Stream(elementwise_.mul(stream));
+export const mul = (first, second) =>
+  new Stream(elementwise_.mul(first, second));
 
 /** @ignore */
 export const mvavrg = (options, stream) =>
@@ -141,8 +142,8 @@ export const std = stream =>
   new Stream(meanstd_.std(stream));
 
 /** @ignore */
-export const sub = stream =>
-  new Stream(elementwise_.sub(stream));
+export const sub = (first, second) =>
+  new Stream(elementwise_.sub(first, second));
 
 /** @ignore */
 export const sum = stream =>
@@ -167,3 +168,7 @@ export const wavelet = (options, stream) =>
 /** @ignore */
 export const adaptive = (options, stream) =>
   new Stream(adaptive_(options, stream));
+
+/** @ignore */
+export const distance = (first, second) =>
+  new Stream(distance_(first, second));
