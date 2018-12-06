@@ -1,13 +1,40 @@
 <template>
   <div class="api_entry">
-    <h2 class="name"># {{entry.name}}</h2>
+    <h2 class="name"># {{entry.name}} <span style="color: #9f9f9f;">{{signature(entry, false)}}</span></h2>
     <div class="api_entry_container">
       <api-paragraph
         v-for="(d, k) in entry.description.children"
         :key="`api-entry-desc-${k}`"
         :data="d"
       ></api-paragraph>
-      <div class="signature">{{signature(entry)}}</div>
+      <el-alert
+        class="alert"
+        v-for="(w, k) in entry.tags.filter(x => x.title === 'warning')"
+        :key="`api-entry-warn-${k}`"
+        title="Warning"
+        type="warning"
+        :description="w.description"
+        show-icon>
+      </el-alert>
+      <el-alert
+        class="alert"
+        v-for="(w, k) in entry.tags.filter(x => x.title === 'see')"
+        :key="`api-entry-see-${k}`"
+        title="See also"
+        type="success"
+        :description="w.description"
+        show-icon>
+      </el-alert>
+      <el-alert
+        class="alert"
+        v-for="(w, k) in entry.tags.filter(x => x.title === 'todo')"
+        :key="`api-entry-todo-${k}`"
+        title="TODO"
+        type="info"
+        :description="w.description"
+        show-icon>
+      </el-alert>
+      <!-- <div class="signature">{{signature(entry)}}</div> -->
       <h4>Parameters</h4>
       <table>
         <thead>
@@ -125,14 +152,14 @@ export default {
     },
   },
   methods: {
-    signature(entry) {
+    signature(entry, includeName = true) {
       const params = entry.params
         .map(x => `${x.name}${x.type && ': '}${x.type && x.type.name}`)
         .join(', ');
       const ret = entry.returns && entry.returns.length
         && entry.returns[0].type
         && `: ${entry.returns[0].type.name}`;
-      return `${entry.name}(${params})${ret}`;
+      return `${includeName ? entry.name : ''}(${params})${ret}`;
     },
     formatType(t) {
       if (t) {
@@ -189,5 +216,10 @@ h4 {
 }
 ul.classMethod {
   list-style: none;
+}
+
+.alert {
+  width: calc(100% - 40px);
+  margin: 10px auto;
 }
 </style>

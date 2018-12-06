@@ -8,16 +8,26 @@
       <span v-if="paragraph.type === 'text'">
         {{paragraph.value}}
       </span>
+      <span v-else-if="paragraph.type === 'code'">
+        <pre>{{paragraph.value}}</pre>
+      </span>
       <span v-else-if="paragraph.type === 'link'">
         <a :href="paragraph.jsdoc ? `#${paragraph.url}` : paragraph.url" :target="paragraph.jsdoc ? '' : '_blank'">{{paragraph.children[0].value}}</a>
       </span>
       <span v-else-if="paragraph.type === 'inlineCode'">
         <code>{{paragraph.value}}</code>
       </span>
+      <span v-else-if="paragraph.type === 'html'" v-html="paragraph.value">
+      </span>
       <span v-else>
         WHAAAAAATTTTTT???
         {{paragraph}}
       </span>
+    </span>
+    <span
+      v-if="data.type === 'code'"
+    >
+      <pre>{{data.value}}</pre>
     </span>
     <ul v-if="data.type === 'list'">
       <li
@@ -31,6 +41,7 @@
         ></api-paragraph>
       </li>
     </ul>
+    <br>
   </span>
 </template>
 
