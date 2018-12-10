@@ -1,30 +1,36 @@
 {
   "name": "@coda/playground",
   "version": "0.0.1",
+  "private": true,
   "description": "A live-coding editor playground for Coda",
   "author": "Jules Françoise <me@julesfrancoise.com>",
-  "license": "MIT",
-  "private": true,
   "scripts": {
-    "dev": "node prepare.js && vue-cli-service serve",
     "build": "node prepare.js && vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "node prepare.js && vue-cli-service serve --mode=development",
+    "start": "node prepare.js && vue-cli-service serve --mode=production",
+    "server": "node server/index.js"
   },
   "dependencies": {
     "@coda/sandbox": "^0.0.1",
     "codemirror": "^5.40.0",
+    "express": "^4.16.4",
     "jshint": "^2.9.6",
+    "@ircam/motion-input": "^1.0.7",
     "vue": "^2.5.17",
-    "vue-codemirror": "^4.0.5"
+    "vue-codemirror": "^4.0.5",
+    "vue-router": "^3.0.1",
+    "ws": "^6.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
     "@vue/cli-plugin-eslint": "^3.0.3",
     "@vue/cli-service": "^3.0.3",
     "@vue/eslint-config-airbnb": "^3.0.3",
+    "copy-webpack-plugin": "^4.5.2",
     "eslint": "^4.19.1",
     "eslint-plugin-html": "^4.0.3",
-    "copy-webpack-plugin": "^4.5.2",
     "vue-template-compiler": "^2.5.17"
-  }
+  },
+  "license": "MIT"
 }

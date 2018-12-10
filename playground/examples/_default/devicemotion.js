@@ -8,17 +8,17 @@
 
 dm = devicemotion();
 
-s1 = dm.accelerationG
+s1 = dm.accG
   .resample(periodic(10))
   .mvavrg({ size: 7 })
   .plot({ legend: 'Acceleration Including Gravity' });
 
-s2 = dm.acceleration
+s2 = dm.acc
   .resample(periodic(10))
   .mvavrg({ size: 7 })
   .plot({ legend: 'Acceleration' });
 
-s3 = dm.orientation
+s3 = dm.gyro
   .resample(periodic(10))
   .mvavrg({ size: 7 })
-  .plot({ legend: 'Orientation' });
+  .plot({ legend: 'Rotation Rates' });

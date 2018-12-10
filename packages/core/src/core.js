@@ -25,6 +25,7 @@ import wavelet_ from './operator/spectral/wavelet';
 import adaptive_ from './operator/mapping/adaptive';
 import distance_ from './operator/basic/distance';
 import devicemotion_ from './sources/devicemotion';
+import smartphone_ from './sources/smartphone';
 
 /** @ignore */
 export const accum = stream =>
@@ -178,8 +179,18 @@ export const distance = (first, second) =>
 export const devicemotion = () => {
   const dm = devicemotion_();
   return {
-    accelerationG: new Stream(dm.accelerationG),
-    acceleration: new Stream(dm.acceleration),
-    orientation: new Stream(dm.orientation),
+    accG: new Stream(dm.accG),
+    acc: new Stream(dm.acc),
+    gyro: new Stream(dm.gyro),
+  };
+};
+
+/** @ignore */
+export const smartphone = (name) => {
+  const sm = smartphone_(name);
+  return {
+    acc: new Stream(sm.acc),
+    accG: new Stream(sm.accG),
+    gyro: new Stream(sm.gyro),
   };
 };

@@ -31,7 +31,7 @@ class DeviceMotionSource {
      * Callback for orientation datas
      * @type {Function}
      */
-    this.orientationCallback = () => {};
+    this.rotationRateCallback = () => {};
   }
 
   init() {
@@ -39,26 +39,26 @@ class DeviceMotionSource {
       .init([
         'accelerationIncludingGravity',
         'acceleration',
-        'orientation',
+        'rotationRate',
       ])
       .then(([
         accelerationIncludingGravity,
         acceleration,
-        orientation,
+        rotationRate,
       ]) => {
-        if (accelerationIncludingGravity.isValid) {
+        if (accelerationIncludingGravity.isProvided && accelerationIncludingGravity.isValid) {
           accelerationIncludingGravity.addListener((val) => {
             this.accelerationIncludingGravityCallback(val);
           });
         }
-        if (acceleration.isValid) {
+        if (acceleration.isProvided && acceleration.isValid) {
           acceleration.addListener((val) => {
             this.accelerationCallback(val);
           });
         }
-        if (orientation.isValid) {
-          orientation.addListener((val) => {
-            this.orientationCallback(val);
+        if (rotationRate.isProvided && rotationRate.isValid) {
+          rotationRate.addListener((val) => {
+            this.rotationRateCallback(val);
           });
         }
       })
@@ -113,9 +113,9 @@ function createStream(type, callback, deviceMotionSource) {
 
 /**
  * Create streams from the DeviceMotion API. Three streams are created:
- * - `accelerationG`: acceleration including gravity
- * - `acceleration`: acceleration without gravity
- * - `orientation`: orientation
+ * - `acc`: acceleration without gravity
+ * - `accG`: acceleration including gravity
+ * - `gyro`: gyroscopes (rotation rates)
  *
  * @todo check why some descriptors do not run sometimes (multiple streams)
  *
@@ -124,39 +124,39 @@ function createStream(type, callback, deviceMotionSource) {
  * @see https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
  *
  * @return {Object} Devicemotion data structure, including the following streams:
- * - `accelerationG`: acceleration including gravity
- * - `acceleration`: acceleration without gravity
- * - `orientation`: orientation
+ * - `acc`: acceleration without gravity
+ * - `accG`: acceleration including gravity
+ * - `gyro`: gyroscopes (rotation rates)
  *
  * @example
  * dm = devicemotion();
  *
- * s1 = dm.accelerationG
+ * s1 = dm.accG
  *   .plot({ legend: 'Acceleration Including Gravity' });
  *
- * s2 = dm.acceleration
+ * s2 = dm.acc
  *   .plot({ legend: 'Acceleration' });
  *
- * s3 = dm.orientation
- *   .plot({ legend: 'Orientation' });
+ * s3 = dm.gyro
+ *   .plot({ legend: 'Rotation Rates' });
  */
 export default function devicemotion() {
   const dm = new DeviceMotionSource();
   dm.init();
   return {
-    accelerationG: createStream(
+    accG: createStream(
       'acceleration',
       'accelerationIncludingGravityCallback',
       dm,
     ),
-    acceleration: createStream(
+    acc: createStream(
       'acceleration',
       'accelerationCallback',
       dm,
     ),
-    orientation: createStream(
-      'orientation',
-      'orientationCallback',
+    gyro: createStream(
+      'rotationRate',
+      'rotationRateCallback',
       dm,
     ),
   };

@@ -8,6 +8,7 @@
     "build": "lerna run build --stream --ignore @coda/docs",
     "watch": "cross-env NODE_ENV=development BABEL_ENV=build rollup -c -w",
     "dev": "concurrently --kill-others -p \"[{name}]\" -n \"libs,editor\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run watch\" \"cd playground && yarn dev\"",
+    "socket": "node playground/server.js",
     "doc": "cd docs && yarn generate",
     "doc:dev": "cd docs && yarn dev",
     "lint": "lerna run lint",

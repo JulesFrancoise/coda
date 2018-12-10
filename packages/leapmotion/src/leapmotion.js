@@ -147,8 +147,6 @@ function createRawStream(manager, samplePeriod = 0) {
 }
 
 /**
- * @todo Throw an error when the Leap Motion middleware is not running
- *
  * The `leapmotion` source operator listens to the data streamed by the Leap Motion
  * device.<br>
  *
@@ -157,6 +155,8 @@ function createRawStream(manager, samplePeriod = 0) {
  * middleware, as well as a `hands` entry containing a nested structure of data streams (hand
  * position, velocity, finger attributes, etc). See below for details on the content of this
  * structure.
+ *
+ * @todo Throw an error when the Leap Motion middleware is not running
  *
  * @warning This operator only works locally. The Leap Motion must be properly configured,
  * and the Leap Motion middleware must be installed and Running.
