@@ -950,13 +950,6 @@
   dependencies:
     consola "^2.0.7"
 
-"@nuxtjs/font-awesome@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/font-awesome/-/font-awesome-1.0.3.tgz#66a88c8d9b0883dca992e3dd72e53fce22fcc418"
-  integrity sha512-uAIYnt2pNaec7MRQcoXyakX2M6gSi7HyWY2NYgDHdu19PKAD+VEASjItFKLkhlosWnMs9wTv3vPvk5NcwQ6f5A==
-  dependencies:
-    font-awesome "^4.7.0"
-
 "@nuxtjs/markdownit-loader@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/markdownit-loader/-/markdownit-loader-1.1.1.tgz#7223b49064a176394f6f82aad3bf622069004799"
@@ -4371,11 +4364,6 @@ flush-write-stream@^1.0.0, flush-write-stream@^1.0.2:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
-
-font-awesome@^4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
-  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -9283,11 +9271,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-awesome@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vue-awesome/-/vue-awesome-3.2.0.tgz#885a64eab6fba6f51ba9b6565f2747ac0e35a2cc"
-  integrity sha512-wQf8Baxo3d8ijwxYRhYrbnMtw27B9IVc3fSEN/NIWWgJTBvaT3chfpVnVaXanOMBmSR/tmsjgtYvrQMIZt2edA==
-
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -9305,11 +9288,6 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
   integrity sha512-AA86yKZ5uOKz87/q1UpngEXhbRkaYg1b7HMMVRobNV1IVKqZe8oLIzo6iMocVwZXnYitlGwf2k4ZRLOZlS8oPQ==
 
-vue-ionicons@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/vue-ionicons/-/vue-ionicons-2.2.1.tgz#2837b1af7bce53154e1e951cc677fec1e9dbbc47"
-  integrity sha512-0gyUeYWWcL6xP2ajG7MJlaPMH6j83YV533/6E560d9O3HkGyKuKWdUnKCArznrQcFFgPumHTfj5AoLDdeOx4bg==
-
 vue-loader@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.4.2.tgz#812bb26e447dd3b84c485eb634190d914ce125e2"
@@ -9320,11 +9298,6 @@ vue-loader@^15.4.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-material-design-icons@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/vue-material-design-icons/-/vue-material-design-icons-2.4.0.tgz#a4d0833f76d5214e6075074cbf695eda9daca613"
-  integrity sha512-aDTH+MD1KFpKNDUCQFUf6HoidxXjMYHzW84E2tC7FBTJ5SwaSCWgZJDUdDIkpt4N2oOCy/FGJmWE7X3gHdLOPQ==
 
 vue-meta@^1.5.6:
   version "1.5.6"
