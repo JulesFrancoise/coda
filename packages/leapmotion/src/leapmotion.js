@@ -218,7 +218,7 @@ function createRawStream(manager, samplePeriod = 0) {
  * rightIndex = leap.hands.right.index.tipPosition;
  * thumb2index = rightThumb.distance(rightIndex).plot({ legend: 'thumb-index distance' });
  */
-export default function leapmotion({ period = 10 }) {
+export default function leapmotion({ period = 0 } = {}) {
   const manager = new LeapMotionManager();
   const createHandDesc = (hand, h2x, attr) => createStream(hand, h2x, attr, manager, period);
   const createFinger = (hand, finger) => ({

@@ -65,6 +65,7 @@ module.exports = {
   loading: { color: '#3B8070' },
   modules: [
     '@nuxtjs/markdownit',
+    '@nuxtjs/font-awesome',
   ],
   plugins: [
     '~plugins/element.js',

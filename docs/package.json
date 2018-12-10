@@ -20,10 +20,9 @@
     "@nuxtjs/markdownit": "^1.2.1",
     "documentation": "^8.1.0",
     "element-ui": "^2.4.8",
-    "nuxt": "^1.4.2",
+    "nuxt": "^2.3.4",
     "prismjs": "^1.15.0",
-    "vue": "^2.5.17",
-    "vue-ionicons": "^2.2.1"
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
