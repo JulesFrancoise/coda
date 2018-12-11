@@ -13,5 +13,15 @@ module.exports = {
       ]),
     ],
   },
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      filename: 'index.html',
+    },
+    signin: {
+      entry: 'src/main.js',
+      filename: 'device/index.html',
+    },
+  },
   css: { extract: false },
 };
