@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    const example = 'smartphone';
+    const example = 'basic';
     this.load(example);
     this.$refs.header.selected = example;
     // window.onbeforeunload = () => '';

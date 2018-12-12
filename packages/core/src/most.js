@@ -6,7 +6,7 @@ import { domEvent } from '@most/dom-event';
  * Create a Stream containing no events and ends immediately.
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#empty}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#empty
  */
 export const empty = () =>
   new Stream(withAttr({})(most.empty()));
@@ -15,7 +15,7 @@ export const empty = () =>
  * Create a Stream containing no events and never ends.
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#never}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#never
  */
 export const never = () =>
   new Stream(withAttr({})(most.never()));
@@ -25,7 +25,11 @@ export const never = () =>
  * @param  {*} x event data
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#now}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#now
+ *
+ * @example
+ * // Log the array [1, 2] to the console right away
+ * a = now([1, 2]).tap(log)
  */
 export const now = (x) => {
   const attr = {};
@@ -45,7 +49,11 @@ export const now = (x) => {
  * @param  {*} x event data
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#at}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#at
+ *
+ * @example
+ * // Log the array [1, 2] to the console after 1 second
+ * a = at(1000, [1, 2]).tap(log)
  */
 export const at = (t, x) => {
   const attr = {};
@@ -66,7 +74,11 @@ export const at = (t, x) => {
  * @param  {Number} period period (ms)
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#periodic}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#periodic
+ *
+ * @example
+ * // Generate a periodic signal with 500 ms interval and randomize the stream values.
+ * a = periodic(500).map(() => Math.random()).tap(log);
  */
 export const periodic = period =>
   new Stream(withAttr({ samplerate: 1000 / period })(most.periodic(period)));
@@ -78,7 +90,7 @@ export const periodic = period =>
  * @param  {Error} error Error
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#throwerror}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#throwerror
  */
 export const throwError = error =>
   new Stream(withAttr({})(most.throwError(error)));
@@ -89,7 +101,7 @@ export const throwError = error =>
  * @param  {Stream} source Source Stream
  * @return {Stream} The source stream starting with the start element
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#startwith}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#startwith
  */
 export const startWith = (x, source) => {
   const attr = {};
@@ -111,7 +123,7 @@ export const startWith = (x, source) => {
  * @param  {Stream} source Source Stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html?highlight=continuewith#cont}inuewith
+ * @see https://mostcore.readthedocs.io/en/latest/api.html?highlight=continuewith#cont}inuewit
  */
 export const continueWith = (f, source) =>
   new Stream(withAttr(source.attr)(most.continueWith(f, source)));
@@ -123,7 +135,14 @@ export const continueWith = (f, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#map}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#map
+ *
+ * @example
+ * // Apply a function (in this example, double) to all events in a stream
+ * f = x => 2 * x;
+ * a = periodic(500).constant(1).accum()
+ *   .map(f)
+ *   .tap(log)
  */
 export const map = (f, source) =>
   new Stream(withAttr(source.attr)(most.map(f, source)));
@@ -135,7 +154,7 @@ export const map = (f, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#constant}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#constant
  */
 export const constant = (x, source) => {
   const attr = { ...source.attr };
@@ -159,7 +178,10 @@ export const constant = (x, source) => {
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#tap}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#tap
+ * @example
+ * // Apply a function with side effects, to log the values to the console
+ * a = periodic(500).rand().tap(log);
  */
 export const tap = (f, source) =>
   new Stream(withAttr(source.attr)(most.tap(f, source)));
@@ -173,7 +195,7 @@ export const tap = (f, source) =>
  * @param  {Stream}           source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#ap}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#ap
  */
 export const ap = (fs, source) =>
   new Stream(withAttr(source.attr)(most.ap(fs, source)));
@@ -186,7 +208,13 @@ export const ap = (fs, source) =>
  * @param  {Stream}   source  Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#scan}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#scan
+ *
+ * @example
+ * // Accumulate the values of a constant stream
+ * a = periodic(500).constant(2)
+ *   .scan((s, x) => s + x, 0)
+ *   .tap(log);
  */
 export const scan = (f, initial, source) =>
   new Stream(withAttr(source.attr)(most.scan(f, initial, source)));
@@ -204,7 +232,7 @@ export const scan = (f, initial, source) =>
  * @param  {Stream}   source  Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#loop}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#loop
  */
 export const loop = (stepper, seed, source) =>
   new Stream(withAttr(source.attr)(most.loop(stepper, seed, source)));
@@ -218,7 +246,7 @@ export const loop = (stepper, seed, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#withitems}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#withitems
  */
 export const withItems = (items, source) =>
   new Stream(withAttr(source.attr)(most.withItems(items, source)));
@@ -233,7 +261,7 @@ export const withItems = (items, source) =>
  * @param  {Stream}   source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#zipitems}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#zipitems
  */
 export const zipItems = (f, items, source) =>
   new Stream(withAttr(source.attr)(most.zipItems(f, items, source)));
@@ -245,7 +273,7 @@ export const zipItems = (f, items, source) =>
  * @param  {Stream} source higher-order stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#switchlatest}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#switchlatest
  */
 export const switchLatest = source =>
   new Stream(withAttr(source.attr)(most.switchLatest(source)));
@@ -257,7 +285,7 @@ export const switchLatest = source =>
  * @param  {Stream} source higher-order Stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#join}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#join
  */
 export const join = source =>
   new Stream(withAttr(source.attr)(most.join(source)));
@@ -269,7 +297,7 @@ export const join = source =>
  * @param  {Stream}   source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#chain}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#chain
  */
 export const chain = (f, source) =>
   new Stream(withAttr(source.attr)(most.chain(f, source)));
@@ -285,7 +313,7 @@ export const chain = (f, source) =>
  * @param  {Stream}   source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#concatmap}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#concatmap
  */
 export const concatMap = (f, source) =>
   new Stream(withAttr(source.attr)(most.concatMap(f, source)));
@@ -300,7 +328,7 @@ export const concatMap = (f, source) =>
  * @param  {Stream} source      Higher-order stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#mergeconcurrently}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#mergeconcurrently
  */
 export const mergeConcurrently = (concurrency, source) =>
   new Stream(withAttr(source.attr)(most.mergeConcurrently(concurrency, source)));
@@ -316,7 +344,7 @@ export const mergeConcurrently = (concurrency, source) =>
  * @param  {Stream} source        event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#mergemapconcurrently}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#mergemapconcurrently
  */
 export const mergeMapConcurrently = (f, concurrency, source) =>
   new Stream(withAttr(source.attr)(most.mergeMapConcurrently(f, concurrency, source)));
@@ -333,7 +361,12 @@ export const mergeMapConcurrently = (f, concurrency, source) =>
  * @param  {Stream} source  Event stream 2
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#merge}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#merge
+ *
+ * @example
+ * a = periodic(500).take(3).constant('a');
+ * b = periodic(100).take(3).constant(2);
+ * c = a.merge(b).tap(log);
  */
 export const merge = (stream1, source) =>
   new Stream(withAttr(source.attr)(most.merge(stream1, source)));
@@ -350,7 +383,7 @@ export const merge = (stream1, source) =>
  * @param  {Stream} source  Event stream 2
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#combine}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#combine
  */
 export const combine = (f, stream1, source) =>
   new Stream(withAttr(source.attr)(most.combine(f, stream1, source)));
@@ -363,7 +396,7 @@ export const combine = (f, stream1, source) =>
  * @param  {Stream} source  Event stream 2
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#zip}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#zip
  */
 export const zip = (f, stream1, source) =>
   new Stream(withAttr(source.attr)(most.zip(f, stream1, source)));
@@ -377,9 +410,31 @@ export const zip = (f, stream1, source) =>
  * @param  {Stream} sampler Sampler stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#sample}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#sample
+ *
+ * @example
+ * // Sample a noise signal from a stream of click events
+ * noise = periodic(20).rand().plot({ legend: 'noise' });
+ * click = click(doc).sample(noise).tap(log);
  */
 export const sample = (source, sampler) =>
+  new Stream(withAttr(source.attr)(most.sample(source, sampler)));
+
+/**
+ * Like `sample`, but the value stream and sampler streams are switched
+ *
+ * @param  {Stream} sampler Sampler stream
+ * @param  {Stream} source  value stream
+ * @return {Stream}
+ *
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#sample
+ *
+ * @example
+ * // Sample a noise signal from a stream of click events
+ * noise = periodic(20).rand().plot({ legend: 'noise' });
+ * click = noise.resample(click(doc)).tap(log);
+ */
+export const resample = (sampler, source) =>
   new Stream(withAttr(source.attr)(most.sample(source, sampler)));
 
 /**
@@ -392,7 +447,7 @@ export const sample = (source, sampler) =>
  * @param  {Stream}   source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#snapshot}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#snapshot
  */
 export const snapshot = (f, values, source) =>
   new Stream(withAttr(source.attr)(most.snapshot(f, values, source)));
@@ -404,7 +459,9 @@ export const snapshot = (f, values, source) =>
  * @param  {Stream} source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#filter}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#filter
+ * @example
+ * a = periodic(200).rand().filter(x => x > 0.8).tap(log);
  */
 export const filter = (p, source) =>
   new Stream(withAttr(source.attr)(most.filter(p, source)));
@@ -415,7 +472,7 @@ export const filter = (p, source) =>
  * @param  {Stream} source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#skiprepeats}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#skiprepeats
  */
 export const skipRepeats = source =>
   new Stream(withAttr(source.attr)(most.skipRepeats(source)));
@@ -427,7 +484,7 @@ export const skipRepeats = source =>
  * @param  {Stream} source   Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#skiprepeatswith}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#skiprepeatswith
  */
 export const skipRepeatsWith = (equals, source) =>
   new Stream(withAttr(source.attr)(most.skipRepeatsWith(equals, source)));
@@ -441,7 +498,7 @@ export const skipRepeatsWith = (equals, source) =>
  * @param  {Stream} source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#id48}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#id48
  */
 export const slice = (start, end, source) =>
   new Stream(withAttr(source.attr)(most.slice(start, end, source)));
@@ -453,7 +510,7 @@ export const slice = (start, end, source) =>
  * @param  {Stream} source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#take}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#take
  */
 export const take = (n, source) =>
   new Stream(withAttr(source.attr)(most.take(n, source)));
@@ -465,7 +522,7 @@ export const take = (n, source) =>
  * @param  {Stream} source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#skip}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#skip
  */
 export const skip = (n, source) =>
   new Stream(withAttr(source.attr)(most.skip(n, source)));
@@ -477,7 +534,7 @@ export const skip = (n, source) =>
  * @param  {Stream}   source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#takewhile}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#takewhile
  */
 export const takeWhile = (p, source) =>
   new Stream(withAttr(source.attr)(most.takeWhile(p, source)));
@@ -489,7 +546,7 @@ export const takeWhile = (p, source) =>
  * @param  {Stream}   source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#skipwhile}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#skipwhile
  */
 export const skipWhile = (p, source) =>
   new Stream(withAttr(source.attr)(most.skipWhile(p, source)));
@@ -501,7 +558,7 @@ export const skipWhile = (p, source) =>
  * @param  {Stream}   source Source event stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#skipafter}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#skipafter
  */
 export const skipAfter = (p, source) =>
   new Stream(withAttr(source.attr)(most.skipAfter(p, source)));
@@ -513,7 +570,7 @@ export const skipAfter = (p, source) =>
  * @param  {Stream} source    Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#until}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#until
  */
 export const until = (endSignal, source) =>
   new Stream(withAttr(source.attr)(most.until(endSignal, source)));
@@ -525,7 +582,7 @@ export const until = (endSignal, source) =>
  * @param  {Stream} source      Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#since}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#since
  */
 export const since = (startSignal, source) =>
   new Stream(withAttr(source.attr)(most.since(startSignal, source)));
@@ -547,7 +604,7 @@ export const during = (timeWindow, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#id57}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#id57
  */
 export const delay = (delayTime, source) =>
   new Stream(withAttr(source.attr)(most.delay(delayTime, source)));
@@ -564,7 +621,7 @@ export const delay = (delayTime, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#withlocaltime}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#withlocaltime
  */
 export const withLocalTime = (origin, source) =>
   new Stream(withAttr(source.attr)(most.withLocalTime(origin, source)));
@@ -576,7 +633,7 @@ export const withLocalTime = (origin, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#throttle}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#throttle
  */
 export const throttle = (period, source) =>
   new Stream(withAttr(source.attr)(most.throttle(period, source)));
@@ -592,7 +649,7 @@ export const throttle = (period, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#debounce}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#debounce
  */
 export const debounce = (period, source) =>
   new Stream(withAttr(source.attr)(most.debounce(period, source)));
@@ -603,7 +660,7 @@ export const debounce = (period, source) =>
  * @param  {Promise} promise [description]
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#frompromise}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#frompromise
  */
 export const fromPromise = promise =>
   new Stream(withAttr({})(most.fromPromise(promise)));
@@ -614,7 +671,7 @@ export const fromPromise = promise =>
  * @param  {Stream} source Stream of promises
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#awaitpromises}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#awaitpromises
  */
 export const awaitPromises = source =>
   new Stream(withAttr({})(most.awaitPromises(source)));
@@ -626,7 +683,7 @@ export const awaitPromises = source =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#recoverwith}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#recoverwith
  */
 export const recoverWith = (f, source) =>
   new Stream(withAttr(source.attr)(most.recoverWith(f, source)));
@@ -638,7 +695,7 @@ export const recoverWith = (f, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  *
- * @see {@link https://mostcore.readthedocs.io/en/latest/api.html#multicast}
+ * @see https://mostcore.readthedocs.io/en/latest/api.html#multicast
  */
 export const multicast = source =>
   new Stream(withAttr(source.attr)(most.multicast(source)));

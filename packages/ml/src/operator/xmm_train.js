@@ -13,7 +13,7 @@ const gmmDefinitions = {
   },
   regularizationAbs: {
     type: 'float',
-    default: 1e-10,
+    default: 1e-2,
     min: 0,
   },
   regularizationRel: {
