@@ -18,5 +18,5 @@ synth = catart({
   file: 'drum-loop',
 }).connect();
 
-synth.periodAbs = 0.15;
-synth.target = e; // modulate the sound's energy with the movement
+synth.periodAbs = 0.15; // Fixed tempo for playing segments
+synth.target = e; // modulate the sound's target energy with the movement's energy

@@ -16,9 +16,8 @@ acc = sm.accG
 rec = acc.recorder();
 
 // Train a GMM Model from recording events
-hhmm = rec.hhmmTrain({ regularizationAbs: 0.3 });
+hmm = rec.hmmTrain({ regularizationAbs: 0.3 });
 
 // Compute continuous recognition on the acceleration stream
-results = acc.hhmmPredict({ model: hhmm, output: 'all' });
-likelihoods = results.map(x => x.smoothedNormalizedLikelihoods).plot({ legend: 'Likelihoods' });
-progress = results.map(x => x.progress).plot({ legend: 'Time progression' });
+likelihoods = acc.hmmPredict({ model: hmm })
+  .plot({ legend: 'Likelihoods' });
