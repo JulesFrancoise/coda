@@ -116,6 +116,7 @@ toc:
   - combine
   - zip
   - sample
+  - resample
   - snapshot
   - filter
   - skipRepeats
