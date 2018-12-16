@@ -54,7 +54,7 @@ class Overdrive extends BaseAudioEffect {
     super();
     this.overdrive = new tuna.Overdrive(options);
     this.input.connect(this.overdrive);
-    this.overdrive.connect(this.wet);
+    this.overdrive.connect(this.wetNode);
     this.defineParameter('outputGain', options.outputGain, (x) => {
       this.overdrive.outputGain = x;
     });

@@ -73,7 +73,7 @@ class Compressor extends BaseAudioEffect {
     super();
     this.compressor = new tuna.Compressor(options);
     this.input.connect(this.compressor);
-    this.compressor.connect(this.wet);
+    this.compressor.connect(this.wetNode);
     this.defineParameter('threshold', options.threshold, (x) => {
       this.compressor.threshold = x;
     });

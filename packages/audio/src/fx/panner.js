@@ -32,7 +32,7 @@ class Panner extends BaseAudioEffect {
     super();
     this.panner = new tuna.Panner(options);
     this.input.connect(this.panner);
-    this.panner.connect(audioContext.destination);
+    this.panner.connect(this.wetNode);
     this.defineParameter('pan', options.pan, (x) => {
       this.panner.pan = x;
     });

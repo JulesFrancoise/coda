@@ -4,7 +4,8 @@ import BaseAudioEngine from './base';
 /**
  * Base architecture for Audio Effects engines accepting stream parameters
  * @private
- * @property {Number|Stream<Number>} drywet Dry/wet level
+ * @property {Number|Stream<Number>} dry Dry level (direct audio)
+ * @property {Number|Stream<Number>} wet Wet level (effect audio)
  */
 export default class BaseAudioEffect extends BaseAudioEngine {
   constructor() {
@@ -18,18 +19,20 @@ export default class BaseAudioEffect extends BaseAudioEngine {
      * Output dry level
      * @type {GainNode}
      */
-    this.dry = audioContext.createGain();
+    this.dryNode = audioContext.createGain();
     /**
      * Output wet level
      * @type {GainNode}
      */
-    this.wet = audioContext.createGain();
-    this.input.connect(this.dry);
-    this.dry.connect(this.output);
-    this.wet.connect(this.output);
-    this.defineParameter('drywet', 1, (value) => {
-      this.dry.gain.setValueAtTime(1 - value, audioContext.currentTime);
-      this.wet.gain.setValueAtTime(value, audioContext.currentTime);
+    this.wetNode = audioContext.createGain();
+    this.input.connect(this.dryNode);
+    this.dryNode.connect(this.output);
+    this.wetNode.connect(this.output);
+    this.defineParameter('dry', 0, (value) => {
+      this.dryNode.gain.setValueAtTime(value, audioContext.currentTime);
+    });
+    this.defineParameter('wet', 1, (value) => {
+      this.wetNode.gain.setValueAtTime(value, audioContext.currentTime);
     });
   }
 

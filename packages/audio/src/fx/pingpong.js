@@ -56,7 +56,7 @@ class PingPongDelay extends BaseAudioEffect {
     super();
     this.pingpong = new tuna.PingPongDelay(options);
     this.input.connect(this.pingpong);
-    this.pingpong.connect(audioContext.destination);
+    this.pingpong.connect(this.wetNode);
     this.defineParameter('level', options.level, (x) => {
       this.pingpong.wetLevel = x;
     });

@@ -41,9 +41,7 @@ class Convolver extends BaseAudioEffect {
     this.loader = new wavesLoaders.AudioBufferLoader();
     this.filePrefix = options.filePrefix;
     this.fileExt = options.fileExt;
-    this.convolver = audioContext.createConvolver();
-    this.input.connect(this.convolver);
-    this.convolver.connect(this.wet);
+    this.convolver = null;
     this.defineParameter('file', options.file, x => this.load(x), 200);
   }
 
@@ -54,7 +52,14 @@ class Convolver extends BaseAudioEffect {
   load(filename) {
     const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
     this.loader.load(audioFile).then((loaded) => {
+      if (this.convolver) {
+        this.input.disconnect(this.convolver);
+        this.convolver.disconnect(this.wetNode);
+      }
+      this.convolver = audioContext.createConvolver();
       this.convolver.buffer = loaded;
+      this.input.connect(this.convolver);
+      this.convolver.connect(this.wetNode);
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log('[convolver] Error loading file: ', err);

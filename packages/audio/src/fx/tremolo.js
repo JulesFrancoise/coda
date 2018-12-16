@@ -47,7 +47,7 @@ class Tremolo extends BaseAudioEffect {
     super();
     this.tremolo = new tuna.Tremolo(options);
     this.input.connect(this.tremolo);
-    this.tremolo.connect(audioContext.destination);
+    this.tremolo.connect(this.wetNode);
     this.defineParameter('intensity', options.intensity, (x) => {
       this.tremolo.intensity = x;
     });

@@ -1,5 +1,4 @@
 import { parseParameters } from '@coda/prelude';
-import { audioContext } from 'waves-audio';
 import BaseAudioEffect from '../core/effect';
 import tuna from '../lib/tuna';
 
@@ -30,7 +29,6 @@ const definitions = {
 
 /**
  * Bitcrusher audio effect
- * @private
  * @extends BaseAudioEffect
  * @property {Number|Stream<Number>} bits Number of bits (decimation)
  * @property {Number|Stream<Number>} normfreq Normalized downsampling frequency
@@ -51,7 +49,7 @@ class Bitcrusher extends BaseAudioEffect {
      */
     this.bitcrusher = new tuna.Bitcrusher(options);
     this.input.connect(this.bitcrusher);
-    this.bitcrusher.connect(audioContext.destination);
+    this.bitcrusher.connect(this.wetNode);
     this.defineParameter('bits', options.bits, (x) => {
       this.bitcrusher.bits = x;
     });

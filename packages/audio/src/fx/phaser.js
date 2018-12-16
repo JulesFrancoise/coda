@@ -61,7 +61,7 @@ class Phaser extends BaseAudioEffect {
     super();
     this.phaser = new tuna.Phaser(options);
     this.input.connect(this.phaser);
-    this.phaser.connect(this.wet);
+    this.phaser.connect(this.wetNode);
     this.defineParameter('rate', options.rate, (x) => {
       this.phaser.rate = x;
     });

@@ -48,7 +48,7 @@ class MoogFilter extends BaseAudioEffect {
     super();
     this.moogFilter = new tuna.MoogFilter(options);
     this.input.connect(this.moogFilter);
-    this.moogFilter.connect(audioContext.destination);
+    this.moogFilter.connect(this.wetNode);
     this.defineParameter('cutoff', options.cutoff, (x) => {
       this.moogFilter.cutoff = x;
     });

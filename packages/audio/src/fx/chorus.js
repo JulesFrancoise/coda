@@ -44,7 +44,7 @@ class Chorus extends BaseAudioEffect {
      */
     this.chorus = new tuna.Chorus(options);
     this.input.connect(this.chorus);
-    this.chorus.connect(this.wet);
+    this.chorus.connect(this.wetNode);
     this.defineParameter('rate', options.rate, (x) => {
       this.chorus.rate = x;
     });
