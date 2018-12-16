@@ -49,6 +49,7 @@ const definitions = {
  * @property {Number|Stream<Number>} resampling Segment resampling
  * @property {Number|Stream<Number>} resamplingVar Segment resampling  random variation
  * @property {Number|Stream<Number>} gain Segment gain
+ * @property {Boolean|Stream<Boolean>} [options.repeat=true] Allow segment repeat
  * @property {Number|Stream<Number>} throttle Throttle time for stream parameters
  */
 export class CatartEngine extends ConcatenativeEngine {
@@ -74,18 +75,14 @@ export class CatartEngine extends ConcatenativeEngine {
    * @param  {Number} [options.resampling=0] Segment resampling
    * @param  {Number} [options.resamplingVar=0] Segment resampling  random variation
    * @param  {Number} [options.gain=0] Segment gain
+   * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {Number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
     super(options);
     this.knn = null;
-    this.defineParameter(
-      'descriptors',
-      options.descriptors,
-      () => {
-        this.updateKNN();
-      },
-    );
+    this.descriptors = options.descriptors;
+    this.previousIndex = -1;
     this.defineParameter(
       'k',
       options.k,
@@ -95,11 +92,13 @@ export class CatartEngine extends ConcatenativeEngine {
     );
     this.defineParameter(
       'target',
+      // this.descriptors.length,
       options.target,
       (value) => {
         this.predict((typeof value === 'number') ? [value] : value);
       },
     );
+    this.updateKNN();
   }
 
   /**
@@ -131,32 +130,27 @@ export class CatartEngine extends ConcatenativeEngine {
     const len = this.markers.time.length;
     const descData = new Array(len);
     for (let i = 0; i < len; i += 1) {
-      descData[i] = this.descriptors.map(desc => this.markers[desc][i]).concat([i]);
+      descData[i] = this.descriptors.map(desc => this.markers[desc][i]);
     }
-    this.knn = new KNN(descData, { k: this.k });
-    this.updateNormalization(descData);
-  }
-
-  /**
-   * Update the min/max bounds of the descriptor data for normalizing the target descriptors
-   * @private
-   *
-   * @param  {Array<Array<Number>>} data descriptor data
-   */
-  updateNormalization(data) {
-    const dim = data[0].length - 1;
-    const start = {
-      min: Array.from(Array(dim), () => +Infinity),
-      max: Array.from(Array(dim), () => -Infinity),
-    };
-    this.bounds = data.reduce((a, v) => {
+    // Normalize data
+    const dim = descData[0].length;
+    const bounds = descData.reduce((a, v) => {
       const mm = a;
       for (let i = 0; i < dim; i += 1) {
         if (v[i] > a.max[i]) mm.max[i] = v[i];
         if (v[i] < a.min[i]) mm.min[i] = v[i];
       }
       return mm;
-    }, start);
+    }, {
+      min: Array.from(Array(dim), () => +Infinity),
+      max: Array.from(Array(dim), () => -Infinity),
+    });
+    descData.forEach((v, j) => {
+      descData[j] = v.map((x, i) =>
+        ((x - bounds.min[i]) / (bounds.max[i] - bounds.min[i])))
+        .concat([j]);
+    });
+    this.knn = new KNN(descData, { k: this.k });
   }
 
   /**
@@ -166,11 +160,16 @@ export class CatartEngine extends ConcatenativeEngine {
    */
   predict(v) {
     if (!this.knn) return;
-    const scaledV = v.map((x, i) =>
-      this.bounds.min[i] + (x * (this.bounds.max[i] - this.bounds.min[i])));
-    const segments = this.knn.predict(scaledV);
+    const segments = this.knn.predict(v);
     const { index } = segments[(this.k > 1) ? Math.floor(Math.random() * this.k) : 0];
-    this.concatenativeEngine.segmentIndex = index;
+    if (this.repeat) {
+      this.concatenativeEngine.segmentIndex = index;
+    } else {
+      if (this.previousIndex === index) return;
+      this.concatenativeEngine.segmentIndex = index;
+      this.concatenativeEngine.trigger();
+      this.previousIndex = index;
+    }
   }
 }
 
@@ -249,6 +248,7 @@ export class PolyCatartEngine extends PolyAudioEngine {
     this.defineParameter('target', options.target);
     this.defineParameter('k', options.k);
     this.defineParameter('index', options.index);
+    this.defineParameter('repeat', options.repeat);
     this.defineParameter('periodAbs', options.periodAbs);
     this.defineParameter('periodRel', options.periodRel);
     this.defineParameter('periodVar', options.periodVar);
@@ -262,6 +262,7 @@ export class PolyCatartEngine extends PolyAudioEngine {
     this.defineParameter('resampling', options.resampling);
     this.defineParameter('resamplingVar', options.resamplingVar);
     this.defineParameter('gain', options.gain);
+    this.defineParameter('cyclic', options.cyclic);
   }
 }
 
@@ -296,10 +297,11 @@ export class PolyCatartEngine extends PolyAudioEngine {
  * @param {Number|Array<Number>} [options.resampling=0] Segment resampling
  * @param {Number|Array<Number>} [options.resamplingVar=0] Segment resampling  random variation
  * @param {Number|Array<Number>} [options.gain=0] Segment gain
+ * @param  {Boolean} [options.repeat=true] Allow segment repeat
  * @param {Number|Array<Number>} [options.throttle=20] Throttle time for stream parameters
  * @return {PolyCatartEngine} Concatenative synthesis engine
  */
 export default function catart(options = {}) {
   const opts = parseParameters(definitions, options);
-  return new PolyCatartEngine(opts);
+  return new CatartEngine(opts);
 }

@@ -120,6 +120,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
    * @param  {number} [options.resampling=0] Segment resampling
    * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
    * @param  {number} [options.gain=0] Segment gain
+   * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
@@ -166,9 +167,9 @@ export class ConcatenativeEngine extends BaseAudioEngine {
     this.defineParameter(
       'repeat',
       options.repeat,
-      () => {
+      (value) => {
         this.stop();
-        this.start();
+        this.start(value);
       },
     );
     this.defineParameter(
@@ -297,7 +298,8 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       this.concatenativeEngine.durationArray = markers.duration;
       this.markers = markers;
       this.segmentIndex = this.segmentIndex;
-      this.start();
+      this.stop();
+      this.start(this.repeat);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(`[concatenative] Error loading file: "${filename}"`);
@@ -309,9 +311,9 @@ export class ConcatenativeEngine extends BaseAudioEngine {
    * Start the synthesizer
    * @return {ConcatenativeEngine} Concatenative engine instance
    */
-  start() {
+  start(repeat) {
     if (this.running) return this;
-    if (this.repeat) {
+    if (repeat) {
       this.audioScheduler.add(this.concatenativeEngine);
       this.running = true;
     }
@@ -355,12 +357,14 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
    * @param  {number} [options.resampling=0] Segment resampling
    * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
    * @param  {number} [options.gain=0] Segment gain
+   * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
     super(options.voices, ConcatenativeEngine, options);
     this.defineParameter('file', options.file);
     this.defineParameter('index', options.index);
+    this.defineParameter('repeat', options.repeat);
     this.defineParameter('periodAbs', options.periodAbs);
     this.defineParameter('periodRel', options.periodRel);
     this.defineParameter('periodVar', options.periodVar);
@@ -374,6 +378,7 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
     this.defineParameter('resampling', options.resampling);
     this.defineParameter('resamplingVar', options.resamplingVar);
     this.defineParameter('gain', options.gain);
+    this.defineParameter('cyclic', options.cyclic);
   }
 }
 
@@ -402,6 +407,7 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
  * @param  {number} [options.resampling=0] Segment resampling
  * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
  * @param  {number} [options.gain=0] Segment gain
+ * @param  {Boolean} [options.repeat=true] Allow segment repeat
  * @param  {number} [options.throttle=20] Throttle time for stream parameters
  * @return {ConcatenativeEngine}      Concatenative synthesis engine
  */
