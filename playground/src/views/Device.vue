@@ -20,7 +20,8 @@ import MotionInput from '@ircam/motion-input';
 
 export default {
   data() {
-    const host = (window.location.hostname === 'localhost')
+    const isIP = (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.hostname));
+    const host = isIP
       ? `ws://${window.location.hostname}:9090`
       : 'wss://codaws.glitch.me/';
     const socket = new WebSocket(host);
@@ -47,9 +48,7 @@ export default {
     },
     onMsg(json) {
       const m = JSON.parse(json.data);
-      console.log('onMsg', m);
       if (m.type === 'id') {
-        console.log('New id: ', m.id);
         this.id = m.id;
       } else if (m.type === 'success') {
         this.connected = true;
