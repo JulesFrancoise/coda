@@ -1,4 +1,5 @@
 import { validateStream } from '@coda/prelude';
+import { disposeBoth } from '@most/disposable';
 
 /**
  * Stream I/O Attributes Specification
@@ -47,10 +48,10 @@ class ScalerSink {
    * @param {String} typestream         Format stream (scalar or vector)
    * @param {Object} scheduler          Scheduler
    */
-  constructor(minmaxstream, sink, attr, scheduler) {
+  constructor(minmaxstream, sink, attr) {
     this.sink = sink;
     this.attr = attr;
-    minmaxstream.run(new MinmaxListenerSink(this), scheduler);
+    this.minmaxStream = new MinmaxListenerSink(this);
     if (attr.format === 'vector') { // A revoir
       this.min = Array.from(Array(attr.size), () => 0);
       this.max = Array.from(Array(attr.size), () => 1);
@@ -104,7 +105,11 @@ export default function scalePredict(minmaxstream, source) {
   return {
     attr,
     run(sink, scheduler) {
-      return source.run(new ScalerSink(minmaxstream, sink, attr, scheduler), scheduler);
+      const scalerSink = new ScalerSink(minmaxstream, sink, attr, scheduler);
+      const minmaxDisposable = minmaxstream.run(scalerSink.minmaxStream, scheduler);
+      const dataDisposable = source.run(scalerSink, scheduler);
+
+      return disposeBoth(minmaxDisposable, dataDisposable);
     },
   };
 }

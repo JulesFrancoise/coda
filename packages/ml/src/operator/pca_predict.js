@@ -1,5 +1,6 @@
 import PCA from 'ml-pca';
 import { validateStream } from '@coda/prelude';
+import { disposeBoth } from '@most/disposable';
 
 /**
  * Stream I/O Attributes Specification
@@ -44,9 +45,9 @@ class PCASink {
    * @param {Object} sink              Sink
    * @param {Object} scheduler         Scheduler
    */
-  constructor(datastream, sink, scheduler) {
+  constructor(datastream, sink) {
     this.sink = sink;
-    datastream.run(new PCAListenerSink(this), scheduler);
+    this.pcaParamStream = new PCAListenerSink(this);
     this.pca = null;
   }
 
@@ -76,15 +77,19 @@ class PCASink {
  * @param  {Stream} source          input data stream
  * @return {Stream}
  */
-export default function pcaPredict(datastream, source) {
-  const attr = validateStream('pca predict', specification, source.attr);
-  if (attr.size !== datastream.attr.size) {
-    throw new Error('The dimension of the datastream does not match the input stream\'s attributes');
+export default function pcaPredict(pcaParamStream, source) {
+  const attr = validateStream('pcaPredict', specification, source.attr);
+  if (attr.size !== pcaParamStream.attr.size) {
+    throw new Error('The dimension of the PCA Trainer Stream does not match the input stream\'s attributes');
   }
   return {
     attr,
     run(sink, scheduler) {
-      return source.run(new PCASink(datastream, sink, scheduler), scheduler);
+      const pcaPredictionSink = new PCASink(pcaParamStream, sink, scheduler);
+      const pcaParamsDisposable = pcaParamStream.run(pcaPredictionSink.pcaParamStream, scheduler);
+      const dataDisposable = source.run(pcaPredictionSink, scheduler);
+
+      return disposeBoth(pcaParamsDisposable, dataDisposable);
     },
   };
 }

@@ -149,7 +149,6 @@ export default function plot(options, source) {
         dispose() {
           app.$destroy();
           app.$el.remove();
-          // plotSink.end();
         },
       };
       return disposeBoth(disposeSource, disposeThis);

@@ -32,11 +32,9 @@ export default class XmmPredictionSink {
    * @param {Function} fetchOutput Function used to fetch the output parameters
    * from the results object of the prediction
    * @param {Object} sink        Sink
-   * @param {Object} scheduler   Scheduler
    */
-  constructor(model, fetchOutput, likelihoodWindow, sink, scheduler) {
+  constructor(model, fetchOutput, likelihoodWindow, sink) {
     this.sink = sink;
-    this.scheduler = scheduler;
     if (model.attr.type === 'gmm') {
       this.predictorFactory = xmm.MulticlassGMMPredictor;
     } else if (model.attr.type === 'hmm') {
@@ -49,7 +47,7 @@ export default class XmmPredictionSink {
     this.predictor = null;
     this.fetchOutput = fetchOutput;
     this.likelihoodWindow = likelihoodWindow;
-    model.run(new ModelListenerSink(this), scheduler);
+    this.modelStream = new ModelListenerSink(this);
   }
 
   updateModel(params) {

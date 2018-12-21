@@ -1,4 +1,5 @@
 import { parseParameters } from '@coda/prelude';
+import { disposeBoth } from '@most/disposable';
 import XmmPredictionSink from '../core/xmm_prediction_sink';
 
 /**
@@ -66,15 +67,17 @@ const xmmPredictFactory = type =>
         varsize: true,
       },
       run(sink, scheduler) {
-        const trainerSink = new XmmPredictionSink(
+        const predictionSink = new XmmPredictionSink(
           model,
           fetchOutput,
           params.likelihoodWindow,
           sink,
           scheduler,
         );
+        const modelDisposable = model.run(predictionSink.modelStream, scheduler);
+        const dataDisposable = source.run(predictionSink, scheduler);
 
-        return source.run(trainerSink, scheduler);
+        return disposeBoth(modelDisposable, dataDisposable);
       },
     };
   };

@@ -16,6 +16,7 @@
   "dependencies": {
     "@coda/prelude": "^0.0.1",
     "@most/core": "^1.3.2",
+    "@most/disposable": "^1.2.1",
     "@most/scheduler": "^1.2.1",
     "ml-pca": "^2.1.0",
     "xmm": "github:JulesFrancoise/xmmjs"

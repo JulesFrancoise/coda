@@ -196,7 +196,6 @@ export default function recorder(options, source) {
         dispose() {
           app.$destroy();
           app.$el.remove();
-          recorderSink.end();
         },
       };
       return disposeBoth(disposeSource, disposeThis);
