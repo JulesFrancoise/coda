@@ -114,8 +114,7 @@ export default {
       }
     },
     run(code) {
-      const ret = this.runSnippet(code);
-      if (ret) console.log(`> ${ret}`); // eslint-disable-line no-console
+      this.runSnippet(code);
     },
   },
 };

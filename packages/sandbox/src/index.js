@@ -153,34 +153,56 @@ const clear = sandbox => async () => {
  * @private
  * @param  {string} code The JavaScript code to compile and run.
  */
-const runInSandbox = sandbox => function run(code) {
+const runInSandbox = sandbox => async function run(code) {
   // const s = sandbox;
   // 1. Parse the JS code to track assignments
   try {
     const { body } = parseScript(code);
+    const statements = [];
+    const assignedVariables = [];
+    // Parse statements and variable assignments
     body.forEach(({ expression, declarations }) => {
       const statement = generate(declarations ? declarations[0] : expression);
-      vm.runInContext(statement, sandbox);
-      const assignedVariables = [];
+      let assignment = null;
       if (declarations) {
-        declarations.forEach((x) => {
-          assignedVariables.push(x.id.name);
-        });
+        if (declarations.length > 1) {
+          throw new Error('THERE ARE MORE THAN 2 ASSIGNMENTS !#!???!?');
+        }
+        assignment = declarations[0].id.name;
       } else if (expression.type === 'AssignmentExpression') {
-        assignedVariables.push(generate(expression.left));
+        assignment = generate(expression.left);
       }
-      assignedVariables.forEach((varName) => {
-        try {
-          const isStream = !!sandbox[varName].isStream;
-          const isSynth = !!sandbox[varName].isSynth;
-          if (isStream) {
-            // Run stream
-            start(sandbox)(varName);
-          } else if (isSynth) {
-            registerSynth(sandbox)(varName);
-          }
-        } catch (e) {} // eslint-disable-line
+      // Avoid running multiple assignments in the same code block
+      const alreadyAssigned = statements.map(x => x[1]).indexOf(assignment);
+      if (alreadyAssigned >= 0) {
+        statements[alreadyAssigned][1] = null;
+      }
+      assignedVariables.push(assignment);
+      statements.push([statement, assignment]);
+    });
+    // Cancel all streams that are assigned to existing variables
+    const canceledStreams = assignedVariables
+      .filter(varName => sandbox[varName]
+        && !!sandbox[varName].isStream
+        && sandbox.streamExists(varName))
+      .map((streamId) => {
+        sandbox.cancelStream(streamId);
+        return sandbox.streams[streamId].effects;
       });
+    await Promise.all(canceledStreams);
+    // Execute statements and run streams
+    statements.forEach(([statement, assignment]) => {
+      vm.runInContext(statement, sandbox);
+      try {
+        const isStream = !!sandbox[assignment].isStream;
+        const isSynth = !!sandbox[assignment].isSynth;
+        if (isStream) {
+          // Run stream
+          start(sandbox)(assignment);
+        } else if (isSynth) {
+          registerSynth(sandbox)(assignment);
+        }
+      } catch (e) {} // eslint-disable-line
     });
   } catch (e) {
     sandbox.err(e); // eslint-disable-line no-console
