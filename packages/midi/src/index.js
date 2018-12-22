@@ -5,7 +5,7 @@ import mtof_ from './operator/mtof';
 import quantize_ from './operator/quantize';
 import transport_ from './source/transport';
 
-export { default as setup } from './setup';
+import setup from './setup';
 
 export const ftom = stream =>
   new Stream(ftom_(stream));
@@ -18,3 +18,5 @@ export const quantize = (options, stream) =>
 
 export const transport = name =>
   new Stream(transport_(name));
+
+export default setup;

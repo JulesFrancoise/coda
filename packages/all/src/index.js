@@ -7,10 +7,11 @@ import * as codaMl from '@coda/ml';
 import * as codaMyo from '@coda/myo';
 import * as codaLeapmotion from '@coda/leapmotion';
 
-codaMax.setup(codaCore.Stream);
-codaMidi.setup(codaCore.Stream);
-codaMl.setup(codaCore.Stream);
-codaUi.setup(codaCore.Stream, 'ui');
+codaCore.Stream
+  .use(codaMax.default)
+  .use(codaMidi.default)
+  .use(codaMl.default)
+  .use(codaUi.default, 'ui');
 
 export default {
   ...codaCore,

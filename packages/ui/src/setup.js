@@ -1,5 +1,5 @@
 /* esdoc-ignore */
-import { setupUI } from './lib/ui';
+import { setUiContainer } from './lib/ui';
 import heatmap from './ui/heatmap';
 import plot from './ui/plot';
 import recorder from './ui/recorder';
@@ -54,5 +54,5 @@ export default function setup(Stream, containerId = null) {
   };
 
 
-  if (containerId) setupUI(containerId);
+  if (containerId) setUiContainer(containerId);
 }

@@ -5,8 +5,9 @@ import looper_ from './ui/looper';
 import plot_ from './ui/plot';
 import recorder_ from './ui/recorder';
 import nodes_ from './ui/nodes';
+import setup from './setup';
 
-export { default as setup } from './setup';
+export { setUiContainer } from './lib/ui';
 
 export const heatmap = (options, stream) =>
   new Stream(heatmap_(options, stream));
@@ -22,3 +23,5 @@ export const looper = (options, stream) =>
 
 export const nodes = (options, stream) =>
   new Stream(nodes_(options, stream));
+
+export default setup;

@@ -14,8 +14,7 @@ import {
   hmmPredict as hmmPredict_,
   hhmmPredict as hhmmPredict_,
 } from './operator/xmm_predict';
-
-export { default as setup } from './setup';
+import setup from './setup';
 
 /** @ignore */
 export const scaleTrain = source =>
@@ -56,3 +55,5 @@ export const hhmmTrain = (options, source) =>
 /** @ignore */
 export const hhmmPredict = (options, source) =>
   new Stream(hhmmPredict_(options, source));
+
+export default setup;

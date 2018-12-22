@@ -2,7 +2,7 @@ const uiSettings = {
   container: 'ui',
 };
 
-export function setupUI(containerId) {
+export function setUiContainer(containerId) {
   uiSettings.container = containerId;
 }
 

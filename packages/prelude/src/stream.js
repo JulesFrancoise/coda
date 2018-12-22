@@ -54,4 +54,9 @@ export default class Stream {
     this.attr = Object.assign(this.attr, attributes);
     return this;
   }
+
+  static use(module, ...args) {
+    module(Stream, ...args);
+    return Stream;
+  }
 }

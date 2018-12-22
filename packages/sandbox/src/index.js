@@ -11,9 +11,10 @@ import * as codaMl from '@coda/ml';
 import * as codaMyo from '@coda/myo';
 import * as codaLeapmotion from '@coda/leapmotion';
 
-codaMax.setup(codaCore.Stream);
-codaMidi.setup(codaCore.Stream);
-codaMl.setup(codaCore.Stream);
+codaCore.Stream
+  .use(codaMax.default)
+  .use(codaMidi.default)
+  .use(codaMl.default);
 
 const defaultScheduler = codaCore.newDefaultScheduler();
 
@@ -210,7 +211,7 @@ const runInSandbox = sandbox => async function run(code) {
 };
 
 export default function createSandbox(uiContainer, logCallback) {
-  codaUi.setup(codaCore.Stream, uiContainer);
+  codaCore.Stream.use(codaUi.default, uiContainer);
   const s = Object.assign(
     codaCore,
     codaAudio,
