@@ -97,8 +97,8 @@ test('[minmax] compute the min/max of a vector stream', async () => {
     size: 2,
   })(makeEventsFromArray(0, input));
   const stream = minmax(a);
-  expect(stream.attr.format).toBe('scalar');
-  expect(stream.attr.size).toBe(1);
+  expect(stream.attr.format).toBe('vector');
+  expect(stream.attr.size).toBe(2);
   const result = await collectEventsFor(input.length, stream);
   expect(result.map(x => x.value)).toEqual(input.map(([x, y]) => [Math.min(x, y), Math.max(x, y)]));
 });

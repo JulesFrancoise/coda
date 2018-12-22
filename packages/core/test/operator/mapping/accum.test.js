@@ -29,11 +29,11 @@ test('Accumulate the values of a scalar stream', async () => {
   result.forEach(({ value }) => {
     expect(typeof value).toBe('number');
   });
-  const expected = [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55];
+  const expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55];
   expect(result.map(x => x.value)).toEqual(expected);
 });
 
-test('Computes a moving average on a vector stream', async () => {
+test('Accumulate the values of a vector stream', async () => {
   const input = [
     [1, 1],
     [2, 0.9],
@@ -59,7 +59,6 @@ test('Computes a moving average on a vector stream', async () => {
     value.forEach(v => expect(typeof v).toBe('number'));
   });
   const expected = [
-    [0, 0],
     [1, 1],
     [3, 1.9],
     [6, 2.7],
