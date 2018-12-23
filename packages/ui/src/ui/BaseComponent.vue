@@ -68,6 +68,8 @@ export default {
 
 <style scoped>
 .component {
+  font-family: monospace;
+  box-sizing: border-box;
   position: relative;
   display: block;
   width: calc(100% - 10px);
@@ -82,10 +84,11 @@ export default {
   min-height: 0;
 }
 .header {
+  box-sizing: border-box;
   font-size: 9px;
-  width: calc(100% - 4px);
+  width: 100%;
   margin: 0;
-  height: 16px;
+  height: 17px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -101,6 +104,7 @@ export default {
   border-bottom: none;
 }
 .toolbar, .common_tools {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -108,6 +112,7 @@ export default {
   align-content: center;
 }
 .title {
+  box-sizing: border-box;
   margin-right: 4px;
   display: flex;
   flex-direction: row;
@@ -116,17 +121,18 @@ export default {
   align-content: center;
 }
 .button {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  margin: 2px 1px;
+  margin: 1px 1px;
   border: 1px solid #696969;
   text-align: center;
   color: white;
-  padding: 2px 4px;
+  padding: 1px 4px;
   font-size: 9px;
-  height: 8px;
+  height: 13px;
   cursor: pointer;
   border-radius: 8px;
   transition: color linear 0.3s, background-color linear 0.3s;
@@ -156,8 +162,8 @@ export default {
   padding: 2px 2px;
   font-size: 8px;
   cursor: pointer;
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
   border-radius: 6px;
 }
 .common_tools .button:hover {
