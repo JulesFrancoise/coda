@@ -7,6 +7,7 @@
         :key="`outline-section-${i}`"
         :title="key"
         :name="key"
+        v-show="!search || section.filter(f => f.name.includes(search)).length > 0"
       >
       <ul class="section-detail">
         <li
@@ -32,9 +33,13 @@ export default {
     fixed: Boolean,
   },
   data() {
+    const entry = (this.$route.params && this.$route.params.entry) || 'accum';
+    const sections = Object.keys(this.api)
+      .map(x => this.api[x].map(y => y.name).includes(entry) && x)
+      .filter(x => !!x);
     return {
       search: false,
-      sections: [],
+      sections,
     };
   },
   methods: {
