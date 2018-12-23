@@ -99,7 +99,8 @@ class SlidingWindowSink {
  * Compute a sliding window on a scalar or vector stream
  *
  * @param  {Object} [options] Sliding Window options
- * @param  {String} [options.size=1] Sliding Window size in frames
+ * @param  {Number} [options.size=1] Sliding Window size in frames
+ * @param  {Number} [options.hop=1]  Hop size in frames
  * @param  {Stream} [source] Input stream (scalar or vectorial)
  * @return {Stream}          Stream of sliding windows
  *

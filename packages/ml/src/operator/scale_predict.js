@@ -93,7 +93,7 @@ class ScalerSink {
 /**
  * Compute real-time scaling from a data stream.
  *
- * @param  {Stream} minmaxstream    stream of extremum
+ * @param  {Stream} minmaxstream    stream of extremum values (from scaleTrain)
  * @param  {Stream} source          input data stream
  * @return {Stream}
  */

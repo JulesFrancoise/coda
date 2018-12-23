@@ -94,7 +94,7 @@ export class GranularEngine extends BaseAudioEngine {
   * @param  {Number} [options.releaseRel=0.5] Grain release (relative to duration)
   * @param  {Number} [options.resampling=0] Grain resampling
   * @param  {Number} [options.resamplingVar=0] Grain resampling  random variation
-  * @param  {Number} [options.gain=0] Grain gain
+  * @param  {Number} [options.gain=1] Grain gain
   * @param  {Number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
@@ -306,7 +306,7 @@ export class PolyGranularEngine extends PolyAudioEngine {
  * @param  {Number} [options.releaseRel=0.5] Grain release (relative to duration)
  * @param  {Number} [options.resampling=0] Grain resampling
  * @param  {Number} [options.resamplingVar=0] Grain resampling  random variation
- * @param  {Number} [options.gain=0] Grain gain
+ * @param  {Number} [options.gain=1] Grain gain
  * @param  {Number} [options.throttle=20] Throttle time for stream parameters
  * @return {GranularEngine}      Granular synthesis engine
  */

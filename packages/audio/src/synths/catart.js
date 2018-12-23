@@ -74,7 +74,7 @@ export class CatartEngine extends ConcatenativeEngine {
    * @param  {Number} [options.releaseRel=0] Segment release (relative to duration)
    * @param  {Number} [options.resampling=0] Segment resampling
    * @param  {Number} [options.resamplingVar=0] Segment resampling  random variation
-   * @param  {Number} [options.gain=0] Segment gain
+   * @param  {Number} [options.gain=1] Segment gain
    * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {Number} [options.throttle=20] Throttle time for stream parameters
    */

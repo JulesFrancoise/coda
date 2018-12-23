@@ -60,7 +60,7 @@ export class SamplerEngine extends BaseAudioEngine {
    * @param  {String} [options.fileExt='flac'] Audio files extension
    * @param  {number} [options.fadeTime=600] Fade time for chaining segments
    * @param  {number} [options.cyclic=false] Loop mode
-   * @param  {number} [options.gain=0] Gain
+   * @param  {number} [options.gain=1] Gain
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
@@ -185,7 +185,7 @@ export class PolySamplerEngine extends PolyAudioEngine {
    * @param  {String} [options.fileExt='flac'] Audio files extension
    * @param  {number} [options.fadeTime=600] Fade time for chaining segments
    * @param  {number} [options.cyclic=false] Loop mode
-   * @param  {number} [options.gain=0] Segment gain
+   * @param  {number} [options.gain=1] Segment gain
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
   constructor(options) {
@@ -205,14 +205,13 @@ export class PolySamplerEngine extends PolyAudioEngine {
  * @todo Code example + Description of markers file structure
  *
  * @param  {Object} [options={}] Sampler synthesis parameters
- * @param  {number} [options.voices=1] NNumber of voices (polyphony)
  * @param  {String} [options.file=''] Default audio file. Each audio file must be associated with
  * a JSON file containing the associated markers.
  * @param  {String} [options.filePrefix='/media/'] Address where audio files are stored
  * @param  {String} [options.fileExt='flac'] Audio files extension
  * @param  {number} [options.fadeTime=600] Fade time for chaining segments
  * @param  {number} [options.cyclic=false] Loop mode
- * @param  {number} [options.gain=0] Segment gain
+ * @param  {number} [options.gain=1] Segment gain
  * @param  {number} [options.throttle=20] Throttle time for stream parameters
  * @return {SamplerEngine}      Sampler synthesis engine
  */

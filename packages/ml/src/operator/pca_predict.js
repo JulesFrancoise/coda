@@ -71,10 +71,10 @@ class PCASink {
 }
 
 /**
- * Compute real-time pca projection from a data stream.
+ * Compute real-time PCA projection from a data stream.
  *
- * @param  {Stream} datastream
- * @param  {Stream} source          input data stream
+ * @param  {Stream} pcaParamStream PCA Parameter stream (from pcaTrain)
+ * @param  {Stream} source input data stream
  * @return {Stream}
  */
 export default function pcaPredict(pcaParamStream, source) {

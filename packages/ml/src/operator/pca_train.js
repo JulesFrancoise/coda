@@ -51,9 +51,9 @@ class PCASink {
 
 
 /**
- * Fit the model with X
+ * Estimate Principal Component Analysis from a set of recordings
  *
- * @param  {Stream|String} source     Recorder source, or data container name.
+ * @param  {Stream} source Recorder source
  * @return {Stream}
  */
 export default function pcaTrain(source) {

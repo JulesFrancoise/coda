@@ -92,8 +92,8 @@ const xmmTrainFactory = (type, definitions) =>
  * Train a Gaussian Mixture Model for recognition from a stream of recording events
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.gaussians=3] Number of gaussian components
- * @param  {Number} [options.regularizationAbs=0.1] Absolute regularization
- * @param  {Number} [options.regularizationRel=1e-10] Relative regularization
+ * @param  {Number} [options.regularizationAbs=0.01] Absolute regularization
+ * @param  {Number} [options.regularizationRel=0.1] Relative regularization
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters
@@ -105,8 +105,8 @@ export const gmmTrain = xmmTrainFactory('gmm', gmmDefinitions);
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.states=5] Number of hidden states
  * @param  {Number} [options.gaussians=1] Number of gaussian components per state
- * @param  {Number} [options.regularizationAbs=0.1] Absolute regularization
- * @param  {Number} [options.regularizationRel=1e-10] Relative regularization
+ * @param  {Number} [options.regularizationAbs=0.01] Absolute regularization
+ * @param  {Number} [options.regularizationRel=0.1] Relative regularization
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters
@@ -118,8 +118,8 @@ export const hmmTrain = xmmTrainFactory('hmm', hmmDefinitions);
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.states=5] Number of hidden states
  * @param  {Number} [options.gaussians=1] Number of gaussian components per state
- * @param  {Number} [options.regularizationAbs=0.1] Absolute regularization
- * @param  {Number} [options.regularizationRel=1e-10] Relative regularization
+ * @param  {Number} [options.regularizationAbs=0.01] Absolute regularization
+ * @param  {Number} [options.regularizationRel=0.1] Relative regularization
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters

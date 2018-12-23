@@ -161,9 +161,9 @@ class AdaptiveScaleSink {
  * seconds to the \[0; 1\] range.
  *
  * @param  {Object} [options={}] Adaptive scaling Options
- * @param  {Scalar} [options.duration=30] Duration (s) of the sliding window on which to
+ * @param  {Scalar} [options.duration=15] Duration (s) of the sliding window on which to
  * compute the min/max bounds
- * @param  {Scalar} [options.refresh=3] Refresh duration (s) to compute min/max
+ * @param  {Scalar} [options.refresh=1] Refresh duration (s) to compute min/max
  * @param  {Stream} source Input stream
  * @return {Stream} Scaled stream
  *

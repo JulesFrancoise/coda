@@ -37,10 +37,9 @@ function indicesValid(a, size) {
 /**
  * Select the channels of a numeric stream from a set of indices
  *
- * @param  {Array} indices  The array of indices
- * @param  {Stream} source  The input stream (scalar or vector)
- * @return {Stream}         The stream of vectors with values at the selected
- * indices
+ * @param  {Number|Array} indices The index or array of indices
+ * @param  {Stream} source The input stream (scalar or vector)
+ * @return {Stream} The stream of vectors with values at the selected indices
  *
  * @example
  * a = periodic(100).rand({ size: 5 }).plot({ stacked: true });

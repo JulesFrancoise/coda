@@ -119,7 +119,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
    * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
    * @param  {number} [options.resampling=0] Segment resampling
    * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
-   * @param  {number} [options.gain=0] Segment gain
+   * @param  {number} [options.gain=1] Segment gain
    * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
@@ -356,7 +356,7 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
    * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
    * @param  {number} [options.resampling=0] Segment resampling
    * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
-   * @param  {number} [options.gain=0] Segment gain
+   * @param  {number} [options.gain=1] Segment gain
    * @param  {Boolean} [options.repeat=true] Allow segment repeat
    * @param  {number} [options.throttle=20] Throttle time for stream parameters
    */
@@ -406,7 +406,7 @@ export class PolyConcatenativeEngine extends PolyAudioEngine {
  * @param  {number} [options.releaseRel=0] Segment release (relative to duration)
  * @param  {number} [options.resampling=0] Segment resampling
  * @param  {number} [options.resamplingVar=0] Segment resampling  random variation
- * @param  {number} [options.gain=0] Segment gain
+ * @param  {number} [options.gain=1] Segment gain
  * @param  {Boolean} [options.repeat=true] Allow segment repeat
  * @param  {number} [options.throttle=20] Throttle time for stream parameters
  * @return {ConcatenativeEngine}      Concatenative synthesis engine

@@ -335,8 +335,8 @@ function bayesianFilter(
  * neurophysiology 97.2 (2007): 1839-1845.
  *
  * @param  {Object} options Filter Options
- * @param  {number} [options.logdiff=-1] Logarithm of the diffusion rate
- * @param  {number} [options.logjump=-1] Logarithm of the jump probability
+ * @param  {number} [options.logdiff=-2] Logarithm of the diffusion rate
+ * @param  {number} [options.logjump=-30] Logarithm of the jump probability
  * @param  {Stream} source  Input stream of EMG data (scalar or vector)
  * @return {Stream}         Stream of force from the EMG
  *

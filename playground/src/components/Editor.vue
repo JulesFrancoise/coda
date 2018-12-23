@@ -156,7 +156,7 @@ export default {
     },
   },
 };
-</script>s
+</script>
 
 <style>
 .vue-codemirror {

@@ -133,8 +133,8 @@ class ScaleLearnVectorSink {
 /**
  * Return the extremum values of a recorder stream
  *
- * @param  {Stream|String} source     Recorder source, or data container name.
- * @return {Stream}        Scalar stream ([min, max])
+ * @param  {Stream} source Recorder source
+ * @return {Stream} Scalar stream ([min, max])
  */
 export default function scaleTrain(source) {
   const attr = validateStream('scaleTrain', specification, source.attr);
