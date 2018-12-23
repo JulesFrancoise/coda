@@ -23,6 +23,7 @@
         title="See also"
         type="success"
         :description="w.description"
+        v-linkified
         show-icon>
       </el-alert>
       <el-alert

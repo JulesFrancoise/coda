@@ -29,6 +29,7 @@ const definitions = {
 
 /**
  * Bitcrusher audio effect
+ * @private
  * @extends BaseAudioEffect
  * @property {Number|Stream<Number>} bits Number of bits (decimation)
  * @property {Number|Stream<Number>} normfreq Normalized downsampling frequency

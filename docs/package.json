@@ -22,7 +22,8 @@
     "element-ui": "^2.4.8",
     "nuxt": "^2.3.4",
     "prismjs": "^1.15.0",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-linkify": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

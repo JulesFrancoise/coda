@@ -69,6 +69,7 @@ module.exports = {
   plugins: [
     '~plugins/element.js',
     '~plugins/prism.js',
+    '~plugins/linkify.js',
     { src: '~plugins/sandbox.js', ssr: false },
   ],
 
