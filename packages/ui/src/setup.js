@@ -1,4 +1,3 @@
-/* esdoc-ignore */
 import { setUiContainer } from './lib/ui';
 import heatmap from './ui/heatmap';
 import plot from './ui/plot';

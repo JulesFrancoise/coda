@@ -1,6 +1,6 @@
 import { withAttr } from '@coda/prelude';
 import { iterations, size } from './options';
-import scale from '../../src/operator/mapping/scale';
+import scale from '../../src/operator/scale';
 import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({

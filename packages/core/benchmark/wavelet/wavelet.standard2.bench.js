@@ -1,6 +1,6 @@
 import { withAttr } from '@coda/prelude';
 import { iterations, size, params } from './options';
-import wavelet from '../../src/operator/spectral/wavelet';
+import wavelet from '../../src/operator/wavelet';
 import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({

@@ -1,0 +1,13 @@
+{
+	"time" : [0],
+	"duration" : [1],
+	"frequency" : [0],
+  "energy": [0],
+  "periodicity": [0],
+  "AC1": [0],
+  "loudness": [0],
+  "centroid": [0],
+  "spread": [0],
+  "skewness": [0],
+  "kurtosis": [0]
+}

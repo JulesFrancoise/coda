@@ -1,4 +1,3 @@
-/* esdoc-ignore */
 import { Stream } from '@coda/prelude';
 import scaleTrain_ from './operator/scale_train';
 import scalePredict_ from './operator/scale_predict';
@@ -14,46 +13,45 @@ import {
   hmmPredict as hmmPredict_,
   hhmmPredict as hhmmPredict_,
 } from './operator/xmm_predict';
-import setup from './setup';
 
-/** @ignore */
-export const scaleTrain = source =>
-  new Stream(scaleTrain_(source));
+export function scaleTrain(source) {
+  return new Stream(scaleTrain_(source));
+}
 
-/** @ignore */
-export const scalePredict = (minmaxstream, source) =>
-  new Stream(scalePredict_(minmaxstream, source));
+export function scalePredict(minmaxstream, source) {
+  return new Stream(scalePredict_(minmaxstream, source));
+}
 
-/** @ignore */
-export const pcaTrain = source =>
-  new Stream(pcaTrain_(source));
+export function pcaTrain(source) {
+  return new Stream(pcaTrain_(source));
+}
 
-/** @ignore */
-export const pcapredict = (datastream, source) =>
-  new Stream(pcapredict_(datastream, source));
+export function pcapredict(datastream, source) {
+  return new Stream(pcapredict_(datastream, source));
+}
 
-/** @ignore */
-export const gmmTrain = (options, source) =>
-  new Stream(gmmTrain_(options, source));
+export function gmmTrain(options, source) {
+  return new Stream(gmmTrain_(options, source));
+}
 
-/** @ignore */
-export const gmmPredict = (options, source) =>
-  new Stream(gmmPredict_(options, source));
+export function gmmPredict(options, source) {
+  return new Stream(gmmPredict_(options, source));
+}
 
-/** @ignore */
-export const hmmTrain = (options, source) =>
-  new Stream(hmmTrain_(options, source));
+export function hmmTrain(options, source) {
+  return new Stream(hmmTrain_(options, source));
+}
 
-/** @ignore */
-export const hmmPredict = (options, source) =>
-  new Stream(hmmPredict_(options, source));
+export function hmmPredict(options, source) {
+  return new Stream(hmmPredict_(options, source));
+}
 
-/** @ignore */
-export const hhmmTrain = (options, source) =>
-  new Stream(hhmmTrain_(options, source));
+export function hhmmTrain(options, source) {
+  return new Stream(hhmmTrain_(options, source));
+}
 
-/** @ignore */
-export const hhmmPredict = (options, source) =>
-  new Stream(hhmmPredict_(options, source));
+export function hhmmPredict(options, source) {
+  return new Stream(hhmmPredict_(options, source));
+}
 
-export default setup;
+export { default as _setup } from './setup';

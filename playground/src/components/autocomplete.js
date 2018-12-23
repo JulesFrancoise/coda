@@ -3,7 +3,7 @@ import CodeMirror from 'codemirror';
 
 const sandbox = { a: 1, flow: 2 };
 
-const solarCompletions = {
+const codaCompletions = {
   // basic
   add: 'add(stream)',
   sub: 'sub(stream)',
@@ -43,7 +43,6 @@ const solarCompletions = {
   wavelet: 'wavelet({ frequencyMin: 1, frequencyMax: 50, bandsPerOctave: 4, carrier: 5, optimisation: \'standard2\' })',
   // sources
   myo: 'myo()',
-  transport: 'transport(\'4n\')',
   // ui
   plot: 'plot({ legend: \'\', stacked: false, fill: \'none\', duration: 5 })',
   heatmap: 'heatmap({ legend: \'\', duration: 5 })',
@@ -78,7 +77,7 @@ export default function autocomplete(cm) {
       const word = token.string;
       const sandBoxItems = Object.keys(sandbox)
         .reduce((a, c) => Object.assign(a, { [c]: c }), {});
-      const completions = Object.assign(sandBoxItems, solarCompletions);
+      const completions = Object.assign(sandBoxItems, codaCompletions);
       const comp = Object.keys(completions)
         .filter(s => s.indexOf(word) === 0)
         .map(s => completions[s]);

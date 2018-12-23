@@ -1,9 +1,9 @@
 # Benchmark / Circular Buffer
 
-Updated: 2018-8-10 14:00:29
+Updated: 2018-12-23 11:43:25
 
 | optimisation                 | op/s                    | Samples      | ms / frame          |
 |------------------------------|-------------------------|--------------|---------------------
-| CircularBuffer # 10000 x 1   |    274.52 op/s ±  0.73% | (80 samples) |   0.0004 ms / frame |
-| CircularBuffer / values # 10000 x 1 |     78.33 op/s ±  0.98% | (63 samples) |   0.0013 ms / frame |
-| PushShift # 10000 x 1        |    104.48 op/s ±  0.92% | (71 samples) |   0.0010 ms / frame |
+| CircularBuffer # 10000 x 1   |    431.62 op/s ±  0.21% | (87 samples) |   0.0002 ms / frame |
+| CircularBuffer / values # 10000 x 1 |    198.16 op/s ±  4.23% | (77 samples) |   0.0005 ms / frame |
+| PushShift # 10000 x 1        |    344.72 op/s ±  6.71% | (80 samples) |   0.0003 ms / frame |

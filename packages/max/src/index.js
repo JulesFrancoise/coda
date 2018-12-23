@@ -1,11 +1,13 @@
-/* esdoc-ignore */
 import { Stream } from '@coda/prelude';
 import fromMax_ from './frommax';
 import toMax_ from './tomax';
-import setup from './setup';
 
-export const fromMax = options => new Stream(fromMax_(options));
+export function fromMax(options) {
+  return new Stream(fromMax_(options));
+}
 
-export const toMax = (options, stream) => new Stream(toMax_(options, stream));
+export function toMax(options, stream) {
+  return new Stream(toMax_(options, stream));
+}
 
-export default setup;
+export { default as _setup } from './setup';

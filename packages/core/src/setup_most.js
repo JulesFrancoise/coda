@@ -1,4 +1,3 @@
-/* esdoc-ignore */
 import * as most from '@most/core';
 
 export default function setupMost(Stream) {

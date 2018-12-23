@@ -1,6 +1,6 @@
 import { withAttr } from '@coda/prelude';
 import { iterations, size } from './options';
-import mvavrg from '../../src/operator/filter/mvavrg';
+import mvavrg from '../../src/operator/mvavrg';
 import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({

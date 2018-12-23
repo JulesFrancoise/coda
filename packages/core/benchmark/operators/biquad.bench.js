@@ -1,6 +1,6 @@
 import { withAttr } from '@coda/prelude';
 import { iterations, size } from './options';
-import biquad from '../../src/operator/filter/biquad';
+import biquad from '../../src/operator/biquad';
 import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({

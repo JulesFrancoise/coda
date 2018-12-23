@@ -84,7 +84,7 @@ const definitions = {
   },
   channel: {
     type: 'string',
-    default: 'mars',
+    default: 'data',
   },
   size: {
     type: 'integer',
@@ -109,7 +109,7 @@ function tryEvent(t, x, sink) {
  *
  * @param  {Object}  [options={}]                   Options
  * @param  {string} [options.hostname='localhost'] Hostname (ws server)
- * @param  {string} [options.channel='mars']       Channel name
+ * @param  {string} [options.channel='data']       Channel name
  * @return {Stream}                                 Unchanged stream
  */
 export default function fromMax(options = {}) {

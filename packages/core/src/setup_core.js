@@ -1,29 +1,26 @@
-/* esdoc-ignore */
-import elementwise, { add, sub, mul, div } from './operator/basic/elementwise';
-import { mean, std, meanstd } from './operator/basic/meanstd';
-import pak from './operator/basic/pak';
-import pack from './operator/basic/pack';
-import schmitt from './operator/basic/schmitt';
-import select from './operator/basic/select';
-import slide from './operator/basic/slide';
-import reduce, { min, max, minmax, sum, prod, norm } from './operator/basic/reduce';
-import unpack from './operator/basic/unpack';
-import biquad from './operator/filter/biquad';
-import force from './operator/filter/force';
-import mvavrg from './operator/filter/mvavrg';
-import accum from './operator/mapping/accum';
-import atodb from './operator/mapping/atodb';
-import clip from './operator/mapping/clip';
-import cycle from './operator/mapping/cycle';
-import delta from './operator/mapping/delta';
-import dbtoa from './operator/mapping/dbtoa';
-import rand from './operator/mapping/rand';
-import scale from './operator/mapping/scale';
-import autoscale from './operator/mapping/autoscale';
-import kicks from './operator/spectral/kicks';
-import wavelet from './operator/spectral/wavelet';
-import adaptive from './operator/mapping/adaptive';
-import distance from './operator/basic/distance';
+import elementwise, { add, sub, mul, div } from './operator/elementwise';
+import { mean, std, meanstd } from './operator/meanstd';
+import pak from './operator/pak';
+import pack from './operator/pack';
+import schmitt from './operator/schmitt';
+import select from './operator/select';
+import slide from './operator/slide';
+import reduce, { min, max, minmax, sum, prod, norm } from './operator/reduce';
+import unpack from './operator/unpack';
+import biquad from './operator/biquad';
+import force from './operator/force';
+import mvavrg from './operator/mvavrg';
+import accum from './operator/accum';
+import clip from './operator/clip';
+import cycle from './operator/cycle';
+import delta from './operator/delta';
+import rand from './operator/rand';
+import scale from './operator/scale';
+import autoscale from './operator/autoscale';
+import kicks from './operator/kicks';
+import wavelet from './operator/wavelet';
+import adaptive from './operator/adaptive';
+import distance from './operator/distance';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -42,14 +39,6 @@ export default function setupCore(Stream) {
    */
   s.prototype.add = function add_(second) {
     return new Stream(add(this, second));
-  };
-
-  /**
-   * @ignore
-   * @return {Stream}
-   */
-  s.prototype.atodb = function atodb_() {
-    return new Stream(atodb(this));
   };
 
   /**
@@ -94,14 +83,6 @@ export default function setupCore(Stream) {
    */
   s.prototype.div = function div_(second) {
     return new Stream(div(this, second));
-  };
-
-  /**
-   * @ignore
-   * @return {Stream}
-   */
-  s.prototype.dbtoa = function dbtoa_() {
-    return new Stream(dbtoa(this));
   };
 
   /**

@@ -1,7 +1,5 @@
-/* esdoc-ignore */
-
 /**
- * Base class for the mars fluent stream API, that wraps all `mars` methods.
+ * Base class for the coda.js fluent stream API, that wraps all methods.
  * For the documentation of each member, see the dedicated static function of
  * the same name.
  *
@@ -55,8 +53,15 @@ export default class Stream {
     return this;
   }
 
+  /**
+   * Extend the Stream prototype with a given coda.js module
+   * @param  {Object} module Coda.js module
+   * @param  {Object} args   Optional Arguments
+   * @return {Stream}        Stream prototype
+   */
   static use(module, ...args) {
-    module(Stream, ...args);
+    // eslint-disable-next-line no-underscore-dangle
+    module._setup(Stream, ...args);
     return Stream;
   }
 }

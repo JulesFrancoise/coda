@@ -30,19 +30,19 @@
         style="width: 100%; height: 100px;"
       >
         <defs>
-          <linearGradient :id="`mars-plot-${plotId}-1`" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient :id="`coda-plot-${plotId}-1`" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#25b478"></stop>
             <stop offset="1" stop-color="#32699c"></stop>
           </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-2`" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient :id="`coda-plot-${plotId}-2`" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#b97742"></stop>
             <stop offset="1" stop-color="#b94250"></stop>
           </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-3`" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient :id="`coda-plot-${plotId}-3`" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#949e25"></stop>
             <stop offset="1" stop-color="#338b2b"></stop>
           </linearGradient>
-          <linearGradient :id="`mars-plot-${plotId}-4`" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient :id="`coda-plot-${plotId}-4`" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#71c918"></stop>
             <stop offset="1" stop-color="#c7b121"></stop>
           </linearGradient>
@@ -54,8 +54,8 @@
         >
           <path
             :d="d"
-            :stroke="`url(#mars-plot-${plotId}-${i % 4 + 1})`"
-            :fill="fill !== 'none' ? `url(#mars-plot-${plotId}-${i % 4 + 1})` : 'none'"
+            :stroke="`url(#coda-plot-${plotId}-${i % 4 + 1})`"
+            :fill="fill !== 'none' ? `url(#coda-plot-${plotId}-${i % 4 + 1})` : 'none'"
             stroke-width="0.02"
           />
         </g>

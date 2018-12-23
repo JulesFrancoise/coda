@@ -40,7 +40,7 @@ const definitions = {
   },
   channel: {
     type: 'string',
-    default: 'mars',
+    default: 'data',
   },
 };
 
@@ -64,7 +64,7 @@ const specification = {
  *
  * @param  {Object}  [options={}]                   Options
  * @param  {Stringn} [options.hostname='localhost'] Hostname (ws server)
- * @param  {Stringn} [options.channel='mars']       Channel name
+ * @param  {Stringn} [options.channel='data']       Channel name
  * @param  {Stream}  source                         Source stream
  * @return {Stream}                                 Unchanged stream
  */

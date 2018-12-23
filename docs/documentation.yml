@@ -5,14 +5,11 @@ toc:
   - accum
   - adaptive
   - add
-  - atodb
   - autoscale
   - biquad
   - clip
   - cycle
-  - dbtoa
   - delta
-  - devicemotion
   - distance
   - div
   - elementwise
@@ -41,10 +38,11 @@ toc:
   - unpack
   - wavelet
   - withAttr
-  - name: "@coda/leapmotion"
+  - name: "@coda/sensors"
+  - devicemotion
   - leapmotion
-  - name: "@coda/myo"
   - myo
+  - smartphone
   - name: "@coda/max"
   - fromMax
   - toMax
@@ -60,13 +58,11 @@ toc:
   - scaleTrain
   - scalePredict
   - name: "@coda/midi"
+  - atodb
+  - dbtoa
   - ftom
   - mtof
   - quantize
-  - transport
-  - setupTransport
-  - getTransport
-  - removeTransport
   - name: "@coda/ui"
   - heatmap
   - looper

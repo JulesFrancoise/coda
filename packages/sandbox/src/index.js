@@ -8,13 +8,12 @@ import * as codaUi from '@coda/ui';
 import * as codaMax from '@coda/max';
 import * as codaMidi from '@coda/midi';
 import * as codaMl from '@coda/ml';
-import * as codaMyo from '@coda/myo';
-import * as codaLeapmotion from '@coda/leapmotion';
+import * as codaSensors from '@coda/sensors';
 
 codaCore.Stream
-  .use(codaMax.default)
-  .use(codaMidi.default)
-  .use(codaMl.default);
+  .use(codaMax)
+  .use(codaMidi)
+  .use(codaMl);
 
 const defaultScheduler = codaCore.newDefaultScheduler();
 
@@ -211,7 +210,7 @@ const runInSandbox = sandbox => async function run(code) {
 };
 
 export default function createSandbox(uiContainer, logCallback) {
-  codaCore.Stream.use(codaUi.default, uiContainer);
+  codaCore.Stream.use(codaUi, uiContainer);
   const s = Object.assign(
     codaCore,
     codaAudio,
@@ -219,8 +218,7 @@ export default function createSandbox(uiContainer, logCallback) {
     codaMax,
     codaMidi,
     codaMl,
-    codaMyo,
-    codaLeapmotion,
+    codaSensors,
     { streams: {}, synths: {} },
   );
   const sandbox = vm.createContext(s);

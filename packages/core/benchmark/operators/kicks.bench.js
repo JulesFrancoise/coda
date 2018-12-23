@@ -1,6 +1,6 @@
 import { withAttr } from '@coda/prelude';
 import { iterations, size } from './options';
-import kicks from '../../src/operator/spectral/kicks';
+import kicks from '../../src/operator/kicks';
 import { makeRandomEvents, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 const a = withAttr({

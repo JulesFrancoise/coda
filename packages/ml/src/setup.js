@@ -1,4 +1,3 @@
-/* esdoc-ignore */
 import scaleTrain from './operator/scale_train';
 import scalePredict from './operator/scale_predict';
 import pcaTrain from './operator/pca_train';

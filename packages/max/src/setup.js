@@ -1,4 +1,3 @@
-/* esdoc-ignore */
 import toMax from './tomax';
 
 export default function setup(Stream) {

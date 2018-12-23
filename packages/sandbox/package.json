@@ -16,11 +16,10 @@
   "dependencies": {
     "@coda/audio": "^0.0.1",
     "@coda/core": "^0.0.1",
-    "@coda/leapmotion": "^0.0.1",
     "@coda/max": "^0.0.1",
     "@coda/midi": "^0.0.1",
     "@coda/ml": "^0.0.1",
-    "@coda/myo": "^0.0.1",
+    "@coda/sensors": "^0.0.1",
     "@coda/ui": "^0.0.1",
     "@most/scheduler": "^1.2.1",
     "escodegen": "^1.11.0",

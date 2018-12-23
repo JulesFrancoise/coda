@@ -1,11 +1,10 @@
 examples
 ../packages/audio
 ../packages/core
-../packages/leapmotion
 ../packages/max
 ../packages/midi
 ../packages/ml
-../packages/myo
 ../packages/prelude
+../packages/sensors
 ../packages/sandbox
 ../packages/ui
