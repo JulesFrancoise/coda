@@ -8,6 +8,7 @@ import {
 import { disposeBoth } from '@most/disposable';
 import { currentTime } from '@most/scheduler';
 import nodesComponent from './Nodes.vue';
+import uiSettings from '../lib/ui';
 
 /**
  * Parameter definitions
@@ -192,7 +193,7 @@ class NodesSink {
  * @ignore
  */
 function setupDom() {
-  const container = document.getElementById('ui');
+  const container = document.getElementById(uiSettings.container);
   const component = document.createElement('div');
   const componentId = `ui${container.children.length}`;
   component.setAttribute('id', componentId);

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { parseParameters, validateStream } from '@coda/prelude';
 import { disposeBoth } from '@most/disposable';
 import looperComponent from './Looper.vue';
+import uiSettings from '../lib/ui';
 
 /**
  * Parameter definitions
@@ -167,7 +168,7 @@ class LooperSink {
 export default function looper(options, source) {
   const params = parseParameters(definitions, options);
   const attr = validateStream('looper', specification, source.attr);
-  const container = document.getElementById('ui');
+  const container = document.getElementById(uiSettings.container);
   const component = document.createElement('div');
   const componentId = `ui${container.children.length}`;
   component.setAttribute('id', componentId);
