@@ -13,3 +13,4 @@ dist
 pages/api.json
 
 static/coda.js
+static/xmm.worker.js

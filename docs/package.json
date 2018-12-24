@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "copylib": "cp ../packages/all/dist/index.js ./static/coda.js",
-    "dev": "yarn doc --watch & nuxt",
+    "copylib": "cp ../packages/all/dist/index.js ./static/coda.js && cp ../packages/ml/dist/xmm.worker.js ./static/xmm.worker.js",
+    "dev": "yarn copylib &&  yarn doc --watch & nuxt",
     "build": "yarn copylib && yarn doc && nuxt build",
     "start": "yarn doc && nuxt start",
     "generate": "yarn copylib && yarn doc && nuxt generate",

@@ -89,7 +89,12 @@ const xmmTrainFactory = (type, definitions) =>
   };
 
 /**
- * Train a Gaussian Mixture Model for recognition from a stream of recording events
+ * Train a Gaussian Mixture Model for recognition from a stream of recording events.
+ *
+ * @warning The XMM Training operators (gmmTrain, hmmTrain, hhmmTrain)
+ * use a web worker for training. Make sure to copy the file `@coda/ml/dist/xmm.worker.js` to
+ * the root of your application.
+ *
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.gaussians=3] Number of gaussian components
  * @param  {Number} [options.regularizationAbs=0.01] Absolute regularization
@@ -97,11 +102,33 @@ const xmmTrainFactory = (type, definitions) =>
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.gmmTrain({ gaussians: 3 });
+ *
+ * // Perform real-time recognition
+ * c = a.gmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'GMM-based recognition' });
  */
 export const gmmTrain = xmmTrainFactory('gmm', gmmDefinitions);
 
 /**
  * Train a Hidden Markov Model for recognition from a stream of recording events
+ *
+ * @warning The XMM Training operators (gmmTrain, hmmTrain, hhmmTrain)
+ * use a web worker for training. Make sure to copy the file `@coda/ml/dist/xmm.worker.js` to
+ * the root of your application.
+ *
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.states=5] Number of hidden states
  * @param  {Number} [options.gaussians=1] Number of gaussian components per state
@@ -110,11 +137,33 @@ export const gmmTrain = xmmTrainFactory('gmm', gmmDefinitions);
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.hmmTrain({ states: 5 });
+ *
+ * // Perform real-time recognition
+ * c = a.hmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
  */
 export const hmmTrain = xmmTrainFactory('hmm', hmmDefinitions);
 
 /**
- * Train a Hierarchical Hidden Markov Model for recognition from a stream of recording events
+ * Train a Hierarchical Hidden Markov Model for recognition from a stream of recording events.
+ *
+ * @warning The XMM Training operators (gmmTrain, hmmTrain, hhmmTrain)
+ * use a web worker for training. Make sure to copy the file `@coda/ml/dist/xmm.worker.js` to
+ * the root of your application.
+ *
  * @param  {Object} [options={}] Training parameters
  * @param  {Number} [options.states=5] Number of hidden states
  * @param  {Number} [options.gaussians=1] Number of gaussian components per state
@@ -123,5 +172,22 @@ export const hmmTrain = xmmTrainFactory('hmm', hmmDefinitions);
  * @param  {String} [options.covarianceMode='full'] Type of covariance matrix
  * @param  {Stream} source       Source stream (recording events)
  * @return {Stream}              Stream of model parameters
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.hhmmTrain({ states: 5 });
+ *
+ * // Perform real-time recognition
+ * c = a.hhmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
  */
 export const hhmmTrain = xmmTrainFactory('hhmm', hmmDefinitions);

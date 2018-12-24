@@ -26,7 +26,8 @@ export default class XmmTrainerSink {
       inputDimension: this.container.attributes.size,
       outputDimension: this.bimodal ? this.container.attributes.sizeOut : 0,
     });
-    this.worker = new Worker('xmm.worker.js');
+    this.worker = new Worker('/xmm.worker.js');
+    let workerConnected = false;
     this.worker.onmessage = (e) => {
       if (e.data.type === 'error') {
         throw new Error(e.data.message);
@@ -34,7 +35,18 @@ export default class XmmTrainerSink {
       if (e.data.type === 'model') {
         this.sink.event(currentTime(this.scheduler), e.data.params);
       }
+      if (e.data.type === 'connection') {
+        workerConnected = true;
+      }
     };
+    setTimeout(() => {
+      if (!workerConnected) {
+        throw new Error('Cannot connect to XMM training Web Worker. Make sure to place the file `xmm.worker.js` at the root of your application.');
+      }
+    }, 5000);
+    this.worker.postMessage({
+      type: 'connect',
+    });
   }
 
   event(t, x) {
@@ -56,7 +68,8 @@ export default class XmmTrainerSink {
     });
     if (this.trainingSet.empty()) return;
     this.worker.postMessage({
-      type: this.modelType,
+      type: 'train',
+      modelType: this.modelType,
       trainingSet: this.trainingSet,
       configuration: this.configuration,
     });

@@ -12,7 +12,7 @@
         <pre>{{paragraph.value}}</pre>
       </span>
       <span v-else-if="paragraph.type === 'link'">
-        <a :href="paragraph.jsdoc ? `#${paragraph.url}` : paragraph.url" :target="paragraph.jsdoc ? '' : '_blank'">{{paragraph.children[0].value}}</a>
+        <a :href="paragraph.jsdoc ? `/api/${paragraph.url}` : paragraph.url" :target="paragraph.jsdoc ? '' : '_blank'">{{paragraph.children[0].value}}</a>
       </span>
       <span v-else-if="paragraph.type === 'inlineCode'">
         <code>{{paragraph.value}}</code>

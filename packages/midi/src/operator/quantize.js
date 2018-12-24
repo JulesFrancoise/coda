@@ -126,7 +126,7 @@ function quantizeRound(x, notes) {
  * @param  {Stream} source             Input stream (~midi notes)
  * @return {Stream}                    Quantized stream
  *
- * @see {@link https://github.com/danigb/tonal}
+ * @see https://github.com/danigb/tonal
  */
 export default function quantize(options = {}, source) {
   const attr = validateStream('quantize', specification, source.attr);

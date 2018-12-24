@@ -42,18 +42,35 @@ function trainHMM(trainingSet, configuration) {
   } catch (e) {
     postMessage({
       type: 'error',
-      message: `An error occurred during the training: ${e}`,
+      message: `[XMM Worker] An error occurred during the training: ${e}`,
     });
   }
   return null;
 }
 
 onmessage = function onmessage(e) {
-  const { trainingSet, configuration, type } = e.data;
-  const f = type === 'gmm' ? trainGMM : trainHMM;
-  const params = f(trainingSet, configuration);
-  postMessage({
-    type: 'model',
-    params,
-  });
+  if (!e.data || !e.data.type) {
+    postMessage({
+      type: 'error',
+      message: '[XMM Worker] Invalid message',
+    });
+  }
+  if (e.data.type === 'connect') {
+    postMessage({
+      type: 'connection',
+    });
+  } else if (e.data.type === 'train') {
+    const { trainingSet, configuration, modelType } = e.data;
+    const f = modelType === 'gmm' ? trainGMM : trainHMM;
+    const params = f(trainingSet, configuration);
+    postMessage({
+      type: 'model',
+      params,
+    });
+  } else {
+    postMessage({
+      type: 'error',
+      message: '[XMM Worker] Invalid message type',
+    });
+  }
 };

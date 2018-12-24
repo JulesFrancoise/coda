@@ -98,6 +98,23 @@ const xmmPredictFactory = type =>
  * @param  {string} [options.output='smoothedLogLikelihoods'] Type of output data.
  * @param  {Stream} source input data stream
  * @return {Stream}
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.gmmTrain({ gaussians: 3 });
+ *
+ * // Perform real-time recognition
+ * c = a.gmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'GMM-based recognition' });
  */
 export const gmmPredict = xmmPredictFactory('gmm');
 
@@ -117,6 +134,23 @@ export const gmmPredict = xmmPredictFactory('gmm');
  * @param  {string} [options.output='smoothedLogLikelihoods'] Type of output data.
  * @param  {Stream} source input data stream
  * @return {Stream}
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.hmmTrain({ states: 5 });
+ *
+ * // Perform real-time recognition
+ * c = a.hmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
  */
 export const hmmPredict = xmmPredictFactory('hmm');
 
@@ -136,5 +170,22 @@ export const hmmPredict = xmmPredictFactory('hmm');
  * @param  {string} [options.output='smoothedLogLikelihoods'] Type of output data.
  * @param  {Stream} source input data stream
  * @return {Stream}
+ *
+ * @example
+ * // Generate a smooth random signal
+ * a = periodic(20)
+ * .rand({ size: 2 })
+ * .biquad({ f0: 2 })
+ * .plot({ legend: 'Data Stream' });
+ *
+ * // Setup a data recorder
+ * b = a.recorder({ name: 'data' });
+ *
+ * // Dynamically train when changes occur in the recorder
+ * model = b.hhmmTrain({ states: 5 });
+ *
+ * // Perform real-time recognition
+ * c = a.hhmmPredict({ model })
+ *   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
  */
 export const hhmmPredict = xmmPredictFactory('hhmm');

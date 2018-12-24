@@ -34,5 +34,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn build
+      - run: yarn build --ignore @coda/playground
       - run: yarn test
