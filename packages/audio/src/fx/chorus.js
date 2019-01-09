@@ -17,7 +17,7 @@ const definitions = {
   },
   delay: {
     type: 'float',
-    default: 0.0045,
+    default: 0.45,
   },
 };
 
@@ -34,7 +34,7 @@ class Chorus extends BaseAudioEffect {
    * @param {Object} options                Effect options
    * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
    * @param {Number} [options.feedback=0.2] Feedback level
-   * @param {Number} [options.delay=0.0045] Delay time (s)
+   * @param {Number} [options.delay=0.45] Delay time (s)
    */
   constructor(options) {
     super();
@@ -62,10 +62,10 @@ class Chorus extends BaseAudioEffect {
  *
  * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
  *
- * @param {Object} [options={}]          Effect options
+ * @param {Object} [options={}]           Effect options
  * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
  * @param {Number} [options.feedback=0.2] Feedback level
- * @param {Number} [options.delay=0.0045] Delay time (s)
+ * @param {Number} [options.delay=0.45]   Delay time (s)
  * @return {Chorus} Chorus engine
  */
 export default function chorus(options = {}) {
