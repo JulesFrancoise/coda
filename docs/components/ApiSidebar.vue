@@ -13,6 +13,7 @@
         <li
           v-for="(f, j) in section"
           v-show="!search || f.name.includes(search)"
+          :style="f.name === entry && 'font-weight: bold'"
           :key="`outline-section-${i}-${j}`"
         >
           <a :href="`/api/${f.name}`">
@@ -39,6 +40,7 @@ export default {
       .filter(x => !!x);
     return {
       search: false,
+      entry,
       sections,
     };
   },

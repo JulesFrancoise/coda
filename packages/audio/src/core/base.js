@@ -4,18 +4,19 @@ import { newDefaultScheduler } from '@most/scheduler';
 
 /**
  * Base architecture for Audio engines accepting stream parameters
- * @private
  */
 export default class BaseAudioEngine {
   constructor() {
     /**
      * Output AudioNode
      * @type {GainNode}
+     * @private
      */
     this.output = audioContext.createGain();
     /**
      * Set of functions used to dispose the synthesizer
      * @type {Array<Function>}
+     * @private
      */
     this.disposeFuncs = [];
   }
@@ -31,7 +32,7 @@ export default class BaseAudioEngine {
   /**
    * Connect the audio engine to a given destination (AudioNode or Engine). By default, the
    * destination is the audio context destination
-   * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
+   * @param  {AudioNode|BaseAudioEngine} [destination=null] destination
    * @return {BaseAudioEngine}
    */
   connect(destination = null) {
@@ -50,7 +51,7 @@ export default class BaseAudioEngine {
   /**
    * Disconnect the audio engine from a given destination (AudioNode or Engine). By default, the
    * destination is the audio context destination
-   * @param  {AudioNode|BaseAudioEngine|null} [destination=null] destination
+   * @param  {AudioNode|BaseAudioEngine} [destination=null] destination
    * @return {BaseAudioEngine}
    */
   disconnect(destination = null) {
@@ -69,10 +70,13 @@ export default class BaseAudioEngine {
   /**
    * Add a new parameter to the Synth. The parameter accepts either fixed values or streams of
    * values
+   *
    * @param {String}   name         Parameter name
    * @param {*}        defaultValue Default value
    * @param {Function} callback     Callback function, called whenever a new value is available
    * for the parameter
+   *
+   * @private
    */
   defineParameter(name, defaultValue, callback, throttleTime = 20) {
     let current = defaultValue;
@@ -115,9 +119,10 @@ export default class BaseAudioEngine {
 
   /**
    * Properly dispose the synthesizer (terminates parameter streams).
+   * @private
    */
   dispose() {
-    this.stop();
+    this.output.disconnect();
     this.disposeFuncs.forEach((f) => { f(); });
   }
 }

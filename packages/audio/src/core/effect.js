@@ -3,7 +3,6 @@ import BaseAudioEngine from './base';
 
 /**
  * Base architecture for Audio Effects engines accepting stream parameters
- * @private
  * @property {Number|Stream<Number>} dry Dry level (direct audio)
  * @property {Number|Stream<Number>} wet Wet level (effect audio)
  */
@@ -13,16 +12,19 @@ export default class BaseAudioEffect extends BaseAudioEngine {
     /**
      * Input audio node
      * @type {GainNode}
+     * @private
      */
     this.input = audioContext.createGain();
     /**
      * Output dry level
      * @type {GainNode}
+     * @private
      */
     this.dryNode = audioContext.createGain();
     /**
      * Output wet level
      * @type {GainNode}
+     * @private
      */
     this.wetNode = audioContext.createGain();
     this.input.connect(this.dryNode);
@@ -42,5 +44,16 @@ export default class BaseAudioEffect extends BaseAudioEngine {
    */
   get isCompositeAudioNode() { // eslint-disable-line
     return true;
+  }
+
+  /**
+   * Dispose synth
+   * @private
+   */
+  dispose() {
+    this.dryNode.disconnect();
+    this.wetNode.disconnect();
+    this.input.disconnect();
+    super.dispose();
   }
 }

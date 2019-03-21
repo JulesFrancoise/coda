@@ -78,10 +78,43 @@
           ></api-paragraph>
         </span>
       </div>
-      <h4 v-if="entry.kind === 'class'">Methods</h4>
+      <h4 v-if="hasOwnProperties || hasParentProperties">Properties</h4>
+      <div
+        class="properties"
+        v-if="hasOwnProperties || hasParentProperties"
+      >
+        <ul class="classProperties">
+          <li v-for="m in entry.properties">
+            <code>.{{m.name}}: {{formatType(m.type)}}</code> <api-paragraph
+              v-for="(par, l) in m.description.children"
+              :key="`api-entry-ret-par-${l}`"
+              :data="par"
+            ></api-paragraph>
+          </li>
+        </ul>
+        <div
+          v-for="parent in parents.filter(x => x.properties.length)"
+          v-if="hasParentProperties"
+        >
+          <i>Inherited from {{parent.name}}:</i>
+          <ul class="classProperties">
+            <li
+              v-for="m in parent.properties"
+              v-if="!entry.properties.map(x => x.name).includes(m.name)"
+            >
+            <code>.{{m.name}}: {{formatType(m.type)}}</code> <api-paragraph
+              v-for="(par, l) in m.description.children"
+              :key="`api-entry-ret-par-${l}`"
+              :data="par"
+            ></api-paragraph>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h4 v-if="hasOwnMembers || hasParentMembers">Methods</h4>
       <div
         class="methods"
-        v-if="entry.kind === 'class'"
+        v-if="hasOwnMembers || hasParentMembers"
       >
         <ul class="classMethod">
           <li v-for="m in entry.members.instance">
@@ -89,8 +122,8 @@
           </li>
         </ul>
         <div
-          v-for="parent in entry.augments.map(x => findEntry(x.name))"
-          v-if="parent"
+          v-for="parent in parents.filter(x => x.members.instance.length)"
+          v-if="hasParentMembers"
         >
           <i>Inherited from {{parent.name}}:</i>
           <ul class="classMethod">
@@ -98,7 +131,11 @@
               v-for="m in parent.members.instance"
               v-if="!entry.members.instance.map(x => x.name).includes(m.name)"
             >
-              .{{signature(m)}}
+              <code style="font-weight: normal;">.{{signature(m)}}</code> <api-paragraph
+              v-for="(par, l) in m.description.children"
+              :key="`api-entry-ret-par-${l}`"
+              :data="par"
+              ></api-paragraph>
             </li>
           </ul>
         </div>
@@ -151,6 +188,21 @@ export default {
       });
       return p;
     },
+    parents() {
+      return this.entry.augments.map(x => this.findEntry(x.name));
+    },
+    hasOwnMembers() {
+      return (this.entry.members.instance.length > 0);
+    },
+    hasParentMembers() {
+      return this.parents.reduce((b, parent) => b || (parent.members.instance.length > 0), false);
+    },
+    hasOwnProperties() {
+      return (this.entry.properties.length > 0);
+    },
+    hasParentProperties() {
+      return this.parents.reduce((b, parent) => b || (parent.properties.length > 0), false);
+    },
   },
   methods: {
     signature(entry, includeName = true) {
@@ -178,8 +230,8 @@ export default {
         }
         if (t.type === 'UnionType') {
           return t.elements.map(this.formatType)
-            .reduce((x, y) => `${x} | ${y}`, '')
-            .slice(2);
+            .reduce((x, y) => `${x}|${y}`, '')
+            .slice(1);
         }
         return t;
       }
@@ -220,7 +272,8 @@ h4 {
   padding: 10px;
   color: #5c5c5c;
 }
-ul.classMethod {
+ul.classMethod, ul.classProperties {
+  margin-left: 0;
   list-style: none;
 }
 
