@@ -3,6 +3,7 @@ import leap_ from './leapmotion';
 import myo_ from './myo';
 import devicemotion_ from './devicemotion';
 import smartphone_ from './smartphone';
+import riot_ from './riot';
 
 function streamifyFinger(f) {
   return {
@@ -78,5 +79,16 @@ export function smartphone(name) {
     acc: new Stream(sm.acc),
     accG: new Stream(sm.accG),
     gyro: new Stream(sm.gyro),
+  };
+}
+
+export function riot(name) {
+  const sm = riot_(name);
+  return {
+    acc: new Stream(sm.acc),
+    gyro: new Stream(sm.gyro),
+    magneto: new Stream(sm.magneto),
+    quat: new Stream(sm.quat),
+    euler: new Stream(sm.euler),
   };
 }

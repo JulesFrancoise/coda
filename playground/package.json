@@ -13,10 +13,11 @@
   },
   "dependencies": {
     "@coda/sandbox": "^0.0.1",
+    "@ircam/motion-input": "^1.0.7",
     "codemirror": "^5.40.0",
     "express": "^4.16.4",
     "jshint": "^2.9.6",
-    "@ircam/motion-input": "^1.0.7",
+    "osc": "^2.2.4",
     "vue": "^2.5.17",
     "vue-codemirror": "^4.0.5",
     "vue-router": "^3.0.1",
