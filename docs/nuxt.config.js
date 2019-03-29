@@ -3,6 +3,7 @@ const api = require('./pages/api.json');
 const apiEntries = api.filter(x => x.kind !== 'note').map(x => x.name).concat(['']);
 
 module.exports = {
+  mode: 'spa',
   /*
   ** Headers of the page
   */
