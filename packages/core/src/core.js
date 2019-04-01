@@ -22,6 +22,7 @@ import kicks_ from './operator/kicks';
 import wavelet_ from './operator/wavelet';
 import adaptive_ from './operator/adaptive';
 import distance_ from './operator/distance';
+import intensity_ from './operator/intensity';
 
 export const accum = stream =>
   new Stream(accum_(stream));
@@ -127,3 +128,6 @@ export const adaptive = (options, stream) =>
 
 export const distance = (first, second) =>
   new Stream(distance_(first, second));
+
+export const intensity = (options, stream) =>
+  new Stream(intensity_(options, stream));

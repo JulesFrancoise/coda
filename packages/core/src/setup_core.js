@@ -21,6 +21,7 @@ import kicks from './operator/kicks';
 import wavelet from './operator/wavelet';
 import adaptive from './operator/adaptive';
 import distance from './operator/distance';
+import intensity from './operator/intensity';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -322,5 +323,14 @@ export default function setupCore(Stream) {
    */
   s.prototype.distance = function distance_(second) {
     return new Stream(distance(this, second));
+  };
+
+  /**
+   * @ignore
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.intensity = function intensity_(options) {
+    return new Stream(intensity(options, this));
   };
 }
