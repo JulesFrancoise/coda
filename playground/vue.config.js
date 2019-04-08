@@ -8,6 +8,9 @@ module.exports = {
       new CopyWebpackPlugin([
         { from: './examples/**/*.js', to: './examples/', flatten: true },
         { from: './media/**/*.flac', to: './media/', flatten: true },
+        { from: './media/**/*.wav', to: './media/', flatten: true },
+        { from: './media/**/*.ogg', to: './media/', flatten: true },
+        { from: './media/**/*.mp3', to: './media/', flatten: true },
         { from: './media/**/*.json', to: './media/', flatten: true },
         { from: './node_modules/@coda/sandbox/dist/xmm.worker.js', to: './xmm.worker.js' },
         { from: './node_modules/@coda/sandbox/dist/xmm.worker.js.map', to: './xmm.worker.js.map' },
