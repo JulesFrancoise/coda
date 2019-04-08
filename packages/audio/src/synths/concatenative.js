@@ -255,6 +255,7 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.resampling,
       (value) => {
         this.concatenativeEngine.resampling = value;
+        console.log('resampling', this.concatenativeEngine.resampling, value);
       },
     );
     this.defineParameter(
@@ -289,8 +290,14 @@ export class ConcatenativeEngine extends BaseAudioEngine {
    * @return {ConcatenativeEngine} Concatenative engine instance
    */
   async load(filename) {
-    const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
-    const descFile = `${this.filePrefix}${filename}.json`;
+    const fp = filename.split('.');
+    const fext = fp[fp.length - 1];
+    const hasExt = (['flac', 'wav', 'mp3', 'ogg', 'aif', 'aiff'].includes(fext));
+    const fname = hasExt ? fp.slice(0, fp.length - 1).join('.') : filename;
+    const audioFile = hasExt
+      ? `${this.filePrefix}${filename}`
+      : `${this.filePrefix}${filename}.${this.fileExt}`;
+    const descFile = `${this.filePrefix}${fname}.json`;
     try {
       const [buffer, markers] = await this.loader.load([audioFile, descFile]);
       this.concatenativeEngine.buffer = buffer;

@@ -50,7 +50,11 @@ class Convolver extends BaseAudioEffect {
    * @param  {String} filename File name (in /media)
    */
   load(filename) {
-    const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
+    const fp = filename.split('.');
+    const fext = fp[fp.length - 1];
+    const audioFile = (['flac', 'wav', 'mp3', 'ogg'].includes(fext))
+      ? `${this.filePrefix}${filename}`
+      : `${this.filePrefix}${filename}.${this.fileExt}`;
     this.loader.load(audioFile).then((loaded) => {
       if (this.convolver) {
         this.input.disconnect(this.convolver);
