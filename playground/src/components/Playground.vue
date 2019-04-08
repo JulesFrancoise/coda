@@ -118,7 +118,7 @@ export default {
     },
   },
 };
-</script>s
+</script>
 
 <style>
 .playground {

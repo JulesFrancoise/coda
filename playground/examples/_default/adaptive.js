@@ -3,8 +3,8 @@
 // =====
 //
 // The adaptive operator performs normalization of an incoming scalar or vector stream.
-// The min/max bounds of the incoming signal are continuously re-estimated on a given duration,
-// with a given refresh rate.
+// The min/max bounds of the incoming signal are continuously re-estimated on a given
+// duration, with a given refresh rate.
 //
 
 options = {
