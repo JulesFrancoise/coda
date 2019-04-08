@@ -12,6 +12,8 @@
       <div class="button" @click="changeDisplay('fill')">{{fill}}</div>
     </div>
     <div class="plot">
+      <div class="mintxt">{{min}}</div>
+      <div class="maxtxt">{{max}}</div>
       <canvas
         ref="canvas"
         width="700"
@@ -197,3 +199,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.mintxt, .maxtxt {
+  font-size: 9px;
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+.mintxt {
+  margin-top: 94px;
+}
+</style>
