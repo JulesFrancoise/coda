@@ -303,5 +303,8 @@ export class PolyCatartEngine extends PolyAudioEngine {
  */
 export default function catart(options = {}) {
   const opts = parseParameters(definitions, options);
-  return new PolyCatartEngine(opts);
+  if (opts.voices > 1) {
+    return new PolyCatartEngine(opts);
+  }
+  return new CatartEngine(opts);
 }
