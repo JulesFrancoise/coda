@@ -23,6 +23,7 @@ function createStream(id, channel, size) {
     attr: {
       format: 'vector',
       size,
+      samplerate: 100,
     },
     run(sink, scheduler) {
       callbacks[id][channel] = (m) => {
@@ -67,7 +68,7 @@ function createStream(id, channel, size) {
  */
 export default function riot(id = 0) {
   if (window.location.hostname !== 'localhost') {
-    throw new Error('The `riot` operator is only availiable locally');
+    throw new Error('The `riot` operator is only available locally');
   }
   const host = 'ws://localhost:9090';
   const socket = new WebSocket(host);

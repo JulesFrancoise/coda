@@ -43,6 +43,7 @@ toc:
   - devicemotion
   - leapmotion
   - myo
+  - riot
   - smartphone
   - name: "@coda/max"
   - fromMax
