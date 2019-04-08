@@ -10,7 +10,7 @@ const specification = numIdx => ({
     required: true,
     check: ['scalar', 'vector'],
     transform() {
-      return 'vector';
+      return numIdx > 1 ? 'vector' : 'scalar';
     },
   },
   size: {
