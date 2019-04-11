@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 491.0, 603.0, 61.0, 22.0 ],
+					"text" : "pipo.chop"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-37",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -1369,8 +1380,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "int", "" ],
-					"patching_rect" : [ 34.0, 522.0, 1262.0, 35.0 ],
-					"text" : "mubu.process container audio slice:fft:sum:scale:onseg @name seg @prepad 0 @slice.size 1024 @slice.hop 256 @slice.norm power @fft.mode power @fft.weighting itur468 @sum.colname Loudness @scale.inmin 1 @scale.inmax 10 @scale.outmin 0 @scale.outmax 12 @scale.func log @scale.base 10 @onseg.duration 1 @onseg.min 1 @onseg.max 1 @onseg.mean 1 @onseg.stddev 1 @onseg.startisonset 1 @info gui \"interface markers, autobounds 1\""
+					"patching_rect" : [ 34.0, 522.0, 1255.0, 35.0 ],
+					"text" : "mubu.process container audio slice:fft:sum:scale:chop @name seg @prepad 0 @slice.size 1024 @slice.hop 256 @slice.norm power @fft.mode power @fft.weighting itur468 @sum.colname Loudness @scale.inmin 1 @scale.inmax 10 @scale.outmin 0 @scale.outmax 10 @scale.func log @scale.base 10 @chop.size 100 @chop.duration 1 @chop.min 1 @chop.max 1 @chop.mean 1 @chop.stddev 1 @info gui \"interface markers, autobounds 1\""
 				}
 
 			}
@@ -1459,7 +1470,7 @@
 					"cursor_shape" : "bar",
 					"cursor_size" : 3,
 					"cursor_visible" : 1,
-					"domain_bounds" : [ 0.0, 157048.140589569171425 ],
+					"domain_bounds" : [ 0.0, 9999.977324263038099 ],
 					"domainruler_bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"domainruler_fgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"domainruler_grid" : 0,
@@ -1575,6 +1586,10 @@
 			}
 , 			{
 				"name" : "mubu.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "pipo.chop.mxo",
 				"type" : "iLaX"
 			}
  ],
