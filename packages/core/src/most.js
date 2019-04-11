@@ -417,8 +417,15 @@ export const zip = (f, stream1, source) =>
  * noise = periodic(20).rand().plot({ legend: 'noise' });
  * click = click(doc).sample(noise).tap(log);
  */
-export const sample = (source, sampler) =>
-  new Stream(withAttr(source.attr)(most.sample(source, sampler)));
+export const sample = (source, sampler) => {
+  const ss = new Stream(withAttr(source.attr)(most.sample(source, sampler)));
+  if (ss.attr.samplerate) delete ss.attr.samplerate;
+  if (sampler.attr.samplerate) {
+    ss.attr.samplerate = sampler.attr.samplerate;
+  }
+  return ss;
+};
+
 
 /**
  * Like `sample`, but the value stream and sampler streams are switched
@@ -434,8 +441,14 @@ export const sample = (source, sampler) =>
  * noise = periodic(20).rand().plot({ legend: 'noise' });
  * click = noise.resample(click(doc)).tap(log);
  */
-export const resample = (sampler, source) =>
-  new Stream(withAttr(source.attr)(most.sample(source, sampler)));
+export const resample = (sampler, source) => {
+  const ss = new Stream(withAttr(source.attr)(most.sample(source, sampler)));
+  if (ss.attr.samplerate) delete ss.attr.samplerate;
+  if (sampler.attr.samplerate) {
+    ss.attr.samplerate = sampler.attr.samplerate;
+  }
+  return ss;
+};
 
 /**
  * For each event in a sampler Stream, apply a function to combine its value

@@ -191,7 +191,13 @@ export default function setupMost(Stream) {
    * @return {Stream}
    */
   s.prototype.resample = function resample_(sampler) {
-    return this.createWithAttr(most.sample(this, sampler));
+    const ss = new Stream(most.sample(this, sampler));
+    ss.attr = this.attr;
+    if (ss.attr.samplerate) delete ss.attr.samplerate;
+    if (sampler.attr.samplerate) {
+      ss.attr.samplerate = sampler.attr.samplerate;
+    }
+    return ss;
   };
 
   /**
@@ -200,7 +206,12 @@ export default function setupMost(Stream) {
    * @return {Stream}
    */
   s.prototype.sample = function sample_(values) {
+    const sr = this.samplerate;
     this.attr = values.attr;
+    if (this.attr.samplerate) delete this.attr.samplerate;
+    if (sr) {
+      this.attr.samplerate = sr;
+    }
     return this.createWithAttr(most.sample(values, this));
   };
 
