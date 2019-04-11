@@ -10,14 +10,27 @@ const definitions = {
   rate: {
     type: 'float',
     default: 1.5,
+    min: 0,
+    max: 8,
   },
   feedback: {
     type: 'float',
-    default: 0.2,
+    default: 0.4,
+    min: 0,
+    max: 1,
+  },
+  depth: {
+    type: 'float',
+    default: 0.7,
+    min: 0,
+    max: 1,
   },
   delay: {
     type: 'float',
-    default: 0.45,
+    default: 0.0045,
+    // default: 0.45,
+    min: 0,
+    max: 1,
   },
 };
 
@@ -33,8 +46,9 @@ class Chorus extends BaseAudioEffect {
   /**
    * @param {Object} options                Effect options
    * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
-   * @param {Number} [options.feedback=0.2] Feedback level
-   * @param {Number} [options.delay=0.45] Delay time (s)
+   * @param {Number} [options.feedback=0.4] Feedback level
+   * @param {Number} [options.depth=0.7]    Feedback level
+   * @param {Number} [options.delay=0.0045] Delay time (s)
    */
   constructor(options) {
     super();
@@ -51,6 +65,9 @@ class Chorus extends BaseAudioEffect {
     this.defineParameter('feedback', options.feedback, (x) => {
       this.chorus.feedback = x;
     });
+    this.defineParameter('depth', options.depth, (x) => {
+      this.chorus.depth = x;
+    });
     this.defineParameter('delay', options.delay, (x) => {
       this.chorus.delay = x;
     });
@@ -64,8 +81,9 @@ class Chorus extends BaseAudioEffect {
  *
  * @param {Object} [options={}]           Effect options
  * @param {Number} [options.rate=1.5]     Chorus rate (Hz)
- * @param {Number} [options.feedback=0.2] Feedback level
- * @param {Number} [options.delay=0.45]   Delay time (s)
+ * @param {Number} [options.feedback=0.4] Feedback level
+ * @param {Number} [options.depth=0.7]    Feedback level
+ * @param {Number} [options.delay=0.0045] Delay time (s)
  * @return {Chorus} Chorus engine
  */
 export default function chorus(options = {}) {

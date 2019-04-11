@@ -7,20 +7,20 @@ import tuna from '../lib/tuna';
  * @ignore
  */
 const definitions = {
-  outputGain: {
-    type: 'float',
-    default: 0.5,
-    min: 0,
-  },
   drive: {
     type: 'float',
-    default: 0.7,
+    default: 1,
     min: 0,
     max: 1,
   },
+  outputGain: {
+    type: 'float',
+    default: -3,
+    max: 0,
+  },
   amount: {
     type: 'float',
-    default: 1,
+    default: 0,
     min: 0,
     max: 1,
   },
@@ -44,15 +44,15 @@ const definitions = {
  */
 class Overdrive extends BaseAudioEffect {
   /**
-   * @param {Object} [options={}]               Effect optionss
-   * @param {Number} [options.outputGain=0.5]   Output Gain
-   * @param {Number} [options.drive=0.7]        Drive
-   * @param {Number} [options.amount=1]         Amount
+   * @param {Object} [options={}]               Effect options
+   * @param {Number} [options.outputGain=-3]    Output Gain (dB)
+   * @param {Number} [options.drive=1]          Drive
+   * @param {Number} [options.amount=0]         Amount
    * @param {Number} [options.algorithmIndex=0] Type of Overdrive Algorithm (0-5)
    */
   constructor(options) {
     super();
-    this.overdrive = new tuna.Overdrive(options);
+    this.overdrive = new tuna.Overdrive({ ...options, curveAmount: options.amount });
     this.input.connect(this.overdrive);
     this.overdrive.connect(this.wetNode);
     this.defineParameter('outputGain', options.outputGain, (x) => {
@@ -76,9 +76,9 @@ class Overdrive extends BaseAudioEffect {
  * Based on the Tuna Audio effect library: https://github.com/Theodeus/tuna/
  *
  * @param {Object} [options={}]               Effect options
- * @param {Number} [options.outputGain=0.5]   Output Gain
- * @param {Number} [options.drive=0.7]        Drive
- * @param {Number} [options.amount=1]         Amount
+ * @param {Number} [options.outputGain=-3]    Output Gain (dB)
+ * @param {Number} [options.drive=1]          Drive
+ * @param {Number} [options.amount=0]         Amount
  * @param {Number} [options.algorithmIndex=0] Type of Overdrive Algorithm (0-5)
  * @return {Overdrive} Overdrive engine
  */

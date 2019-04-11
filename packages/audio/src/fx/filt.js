@@ -61,7 +61,7 @@ class AudioFilter extends BaseAudioEffect {
    */
   constructor(options) {
     super();
-    this.filt = new tuna.AudioFilter(options);
+    this.filt = new tuna.Filter(options);
     this.input.connect(this.filt);
     this.filt.connect(this.wetNode);
     this.defineParameter('frequency', options.frequency, (x) => {
