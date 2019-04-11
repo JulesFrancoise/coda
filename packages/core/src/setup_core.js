@@ -18,10 +18,13 @@ import rand from './operator/rand';
 import scale from './operator/scale';
 import autoscale from './operator/autoscale';
 import kicks from './operator/kicks';
+import kick from './operator/kick';
 import wavelet from './operator/wavelet';
 import adaptive from './operator/adaptive';
 import distance from './operator/distance';
 import intensity from './operator/intensity';
+import lineto from './operator/lineto';
+import adsr from './operator/adsr';
 
 export default function setupCore(Stream) {
   const s = Stream;
@@ -112,6 +115,15 @@ export default function setupCore(Stream) {
    */
   s.prototype.kicks = function kicks_(options) {
     return new Stream(kicks(options, this));
+  };
+
+  /**
+   * @ignore
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.kick = function kick_(options) {
+    return new Stream(kick(options, this));
   };
 
   /**
@@ -332,5 +344,23 @@ export default function setupCore(Stream) {
    */
   s.prototype.intensity = function intensity_(options) {
     return new Stream(intensity(options, this));
+  };
+
+  /**
+   * @ignore
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.lineto = function lineto_(options) {
+    return new Stream(lineto(options, this));
+  };
+
+  /**
+   * @ignore
+   * @param  {Object} options Options
+   * @return {Stream}
+   */
+  s.prototype.adsr = function adsr_(options) {
+    return new Stream(adsr(options, this));
   };
 }

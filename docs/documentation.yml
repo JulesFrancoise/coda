@@ -5,6 +5,7 @@ toc:
   - accum
   - adaptive
   - add
+  - adsr
   - autoscale
   - biquad
   - clip
@@ -16,6 +17,8 @@ toc:
   - force
   - intensity
   - kicks
+  - line
+  - lineto
   - max
   - mean
   - meanstd

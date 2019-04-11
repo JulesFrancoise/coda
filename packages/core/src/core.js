@@ -19,10 +19,14 @@ import rand_ from './operator/rand';
 import scale_ from './operator/scale';
 import autoscale_ from './operator/autoscale';
 import kicks_ from './operator/kicks';
+import kick_ from './operator/kick';
 import wavelet_ from './operator/wavelet';
 import adaptive_ from './operator/adaptive';
 import distance_ from './operator/distance';
 import intensity_ from './operator/intensity';
+import line_ from './operator/line';
+import lineto_ from './operator/lineto';
+import adsr_ from './operator/adsr';
 
 export const accum = stream =>
   new Stream(accum_(stream));
@@ -53,6 +57,9 @@ export const force = (options, stream) =>
 
 export const kicks = (options, stream) =>
   new Stream(kicks_(options, stream));
+
+export const kick = (options, stream) =>
+  new Stream(kick_(options, stream));
 
 export const max = stream =>
   new Stream(reduce_.max(stream));
@@ -131,3 +138,12 @@ export const distance = (first, second) =>
 
 export const intensity = (options, stream) =>
   new Stream(intensity_(options, stream));
+
+export const line = options =>
+  new Stream(line_(options));
+
+export const lineto = (options, stream) =>
+  new Stream(lineto_(options, stream));
+
+export const adsr = (options, stream) =>
+  new Stream(adsr_(options, stream));

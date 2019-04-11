@@ -85,8 +85,10 @@ function triggerScalar(down, up) {
  */
 export default function schmitt(options, source) {
   const attr = validateStream('schmitt', specification, source.attr);
-  delete attr.samplerate;
   const params = parseParameters(definitions, options);
+  if (!params.continuous) {
+    delete attr.samplerate;
+  }
   if (attr.format === 'scalar') {
     const f = triggerScalar(params.down, params.up);
     return params.continuous ?
