@@ -255,7 +255,6 @@ export class ConcatenativeEngine extends BaseAudioEngine {
       options.resampling,
       (value) => {
         this.concatenativeEngine.resampling = value;
-        console.log('resampling', this.concatenativeEngine.resampling, value);
       },
     );
     this.defineParameter(
