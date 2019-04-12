@@ -2,6 +2,32 @@ import { audioContext } from 'waves-audio';
 import { runEffects, tap, takeWhile, throttle } from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
 
+export const masterGain = audioContext.createGain();
+masterGain.gain.setValueAtTime(0.3, audioContext.currentTime);
+masterGain.connect(audioContext.destination);
+
+export const Master = {
+  setGain(value) {
+    console.log('value', value);
+    masterGain.gain.setValueAtTime(value, audioContext.currentTime);
+    console.log('masterGain.gain', masterGain.gain);
+    console.log('masterGain', masterGain);
+  },
+  getGain() {
+    return masterGain.gain;
+  },
+  gain: {
+    set(value) {
+      console.log('value', value);
+      masterGain.gain.setValueAtTime(value, audioContext.currentTime);
+      console.log('masterGain.gain', masterGain.gain);
+    },
+    get() {
+      return masterGain.gain;
+    },
+  },
+};
+
 /**
  * Base architecture for Audio engines accepting stream parameters
  */
@@ -43,7 +69,8 @@ export default class BaseAudioEngine {
         this.output.connect(destination);
       }
     } else {
-      this.output.connect(audioContext.destination);
+      this.output.connect(masterGain);
+      // this.output.connect(audioContext.destination);
     }
     return this;
   }
@@ -62,7 +89,8 @@ export default class BaseAudioEngine {
         this.output.disconnect(destination);
       }
     } else {
-      this.output.disconnect(audioContext.destination);
+      this.output.disconnect(masterGain);
+      // this.output.disconnect(audioContext.destination);
     }
     return this;
   }

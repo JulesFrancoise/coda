@@ -1,7 +1,8 @@
 import { audioContext } from 'waves-audio';
 import { runEffects, tap, takeWhile, throttle } from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
-import BaseAudioEngine from './base';
+import BaseAudioEngine, { masterGain } from './base';
+// import { masterGain } from './base';
 
 /**
  * Base architecture for Polyphonic Audio engines accepting stream parameters
@@ -71,7 +72,8 @@ export default class PolyAudioEngine extends BaseAudioEngine {
         this.output.connect(destination);
       }
     } else {
-      this.output.connect(audioContext.destination);
+      this.output.connect(masterGain);
+      // this.output.connect(audioContext.destination);
     }
     return this;
   }
@@ -90,7 +92,8 @@ export default class PolyAudioEngine extends BaseAudioEngine {
         this.output.disconnect(destination);
       }
     } else {
-      this.output.disconnect(audioContext.destination);
+      this.output.disconnect(masterGain);
+      // this.output.disconnect(audioContext.destination);
     }
     return this;
   }

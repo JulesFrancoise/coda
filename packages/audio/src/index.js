@@ -17,3 +17,5 @@ export { default as phaser } from './fx/phaser';
 export { default as panner } from './fx/panner';
 export { default as pingpong } from './fx/pingpong';
 export { default as tremolo } from './fx/tremolo';
+
+export { Master } from './core/base';
