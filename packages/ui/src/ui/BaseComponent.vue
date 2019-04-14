@@ -75,7 +75,7 @@ export default {
   width: calc(100% - 10px);
   margin: 5px;
   color: white;
-  border: 1px solid #828282;
+  border: 1px solid #6272a4;
   border-radius: 8px;
   overflow: hidden;
   min-height: 116px;
@@ -95,8 +95,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  background-color: #393939;
-  border-bottom: 1px solid #828282;
+  background-color: #1e2338;
+  border-bottom: 1px solid #6272a4;
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -127,7 +127,7 @@ export default {
   align-items: center;
   align-content: center;
   margin: 1px 1px;
-  border: 1px solid #696969;
+  border: 1px solid #6272a4;
   text-align: center;
   color: white;
   padding: 1px 4px;
@@ -138,14 +138,14 @@ export default {
   transition: color linear 0.3s, background-color linear 0.3s;
 }
 .button:hover {
-  background-color: #8c8c8c;
+  background-color: #6272a4;
   transition: color linear 0.3s, background-color linear 0.3s;
 }
 .button.active {
-  background-color: #409be6;
+  background-color: #66d9ef;
 }
 .button.active:hover {
-  background-color: #6ba8da;
+  background-color: #50fa7b;
 }
 .common_tools {
   margin-left: 6px;
@@ -189,8 +189,7 @@ export default {
 input {
   background-color: inherit;
   font-size: 9px;
-  /* background-color: #a29f9f; */
-  border: 1px solid #999;
+  border: 1px solid #6272a4;
   border-radius: 0;
   color: white;
   transition: color 0.3s linear;

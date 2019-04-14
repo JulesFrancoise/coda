@@ -124,7 +124,7 @@ export default {
   height: auto;
   display: flex;
   flex-direction: row;
-  background-color: rgb(39, 40, 34);
+  background-color: #0C1021;
 }
 
 .left {
@@ -141,8 +141,8 @@ export default {
   padding-left: 30px;
   padding-top: 4px;
   height: 20px;
-  background-color: #1a1b16;
-  color: #d0d0d0;
+  background-color: #000620;
+  color: #6d8a88;
   transition: background-color 1s linear;
 }
 
@@ -156,13 +156,13 @@ export default {
   left: 10px;
   bottom: 4px;
   position: absolute;
-  color: #0f5998;
+  color: #6d8a88;
 }
 
 #splitbar {
-  width: 3px;
+  width: 1px;
   display: block;
-  background-color: black;
+  background-color: #3c4972;
   cursor: col-resize;
   z-index: 3;
 }

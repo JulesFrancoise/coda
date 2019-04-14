@@ -52,13 +52,13 @@ export default {
   width: 100%;
   height: 32px;
   margin: 0;
-  background: #1a1b16;
-  color: #fff;
+  background: #000620;
+  color: #3c4972;
   display: flex;
   flex-direction: row;
   align-items: center;
   align-content: stretch;
-  border-bottom: 1px solid #8f8f8f;
+  border-bottom: 1px solid #3c4972;
 }
 
 #header .menu {

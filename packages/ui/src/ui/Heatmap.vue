@@ -34,7 +34,7 @@ export default {
     this.tmpCanvas = this.$refs.tmpCanvas;
     this.tmpContext = this.tmpCanvas.getContext('2d');
     this.colors = colormap({
-      colormap: 'jet',
+      colormap: 'cubehelix',
       nshades: 100,
       format: 'hex',
       alpha: 1,

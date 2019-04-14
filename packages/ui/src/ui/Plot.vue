@@ -96,7 +96,7 @@ export default {
       // Draw the previous image on tmpCanvas
       this.tmpContext.drawImage(this.canvas, 0, 0, width, height);
       // Fill the new area in the main context
-      this.context.fillStyle = '#272822';
+      this.context.fillStyle = '#000620';
       this.context.fillRect(width - ((n + 1) * this.dx), 0, ((n + 1) * this.dx), height);
 
       // Update Min/Max
@@ -174,7 +174,8 @@ export default {
       this.length = Math.floor(this.length * factor);
     },
     color(idx) {
-      const colors = ['#32699c', '#25b478', '#b94250', '#da7524', '#0abb9c', '#a822a3'];
+      // const colors = ['#32699c', '#25b478', '#b94250', '#da7524', '#0abb9c', '#a822a3'];
+      const colors = ['#50fa7b', '#66d9ef', '#ff79c6', '#ff6400', '#f1fa8c', '#bd93f9'];
       return colors[idx % 6];
     },
     changeDisplay(type) {

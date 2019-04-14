@@ -286,7 +286,6 @@ export default {
   align-items: center;
   align-content: center;
   height: 16px;
-  background-color: #4d4d4d;
 }
 .nodes_buttons {
   border-left: 2px solid #409be6;
@@ -304,7 +303,7 @@ export default {
   flex-direction: column;
 }
 .nodes__ svg {
-  border-right: 1px solid #4d4d4d;
+  border-right: 1px solid #0C1021;
 }
 .svg_node {
   fill: #409be6;

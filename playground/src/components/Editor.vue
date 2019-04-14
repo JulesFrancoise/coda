@@ -11,7 +11,7 @@
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
+import 'codemirror/theme/dracula.css';
 import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/comment/comment';
@@ -120,7 +120,7 @@ export default {
       cmOptions: {
         mode: 'javascript',
         keyMap: 'playground', // playground
-        theme: 'monokai',
+        theme: 'dracula',
         autofocus: true,
         matchBrackets: true,
         tabSize: 2,
@@ -278,5 +278,9 @@ export default {
 li.CodeMirror-hint-active {
   background: #08f;
   color: white;
+}
+
+.cm-s-dracula.CodeMirror, .cm-s-dracula .CodeMirror-gutters {
+  background-color: #0C1021 !important;
 }
 </style>
