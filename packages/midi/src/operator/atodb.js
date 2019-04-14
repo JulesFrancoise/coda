@@ -36,8 +36,8 @@ const specification = {
  */
 export default function atodb(source) {
   const attr = validateStream('atodb', specification, source.attr);
-  const func = (attr.format === 'scalar') ?
-    a => 20 * Math.log10(a) :
-    x => x.map(a => 20 * Math.log10(a));
+  const func = (attr.format === 'scalar')
+    ? a => 20 * Math.log10(a)
+    : x => x.map(a => 20 * Math.log10(a));
   return withAttr(attr)(map(func, source));
 }

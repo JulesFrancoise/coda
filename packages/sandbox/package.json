@@ -21,15 +21,8 @@
     "@coda/ml": "^0.0.1",
     "@coda/sensors": "^0.0.1",
     "@coda/ui": "^0.0.1",
-    "@most/scheduler": "^1.2.1",
-    "escodegen": "^1.11.0",
+    "@most/scheduler": "^1.2.2",
+    "escodegen": "^1.11.1",
     "esprima": "^4.0.1"
-  },
-  "devDependencies": {
-    "benchmark": "^2.1.4",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
-    "rollup": "^0.63.5",
-    "rollup-plugin-node-builtins": "^2.1.2"
   }
 }

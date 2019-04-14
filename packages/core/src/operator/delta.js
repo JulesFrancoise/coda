@@ -93,8 +93,8 @@ export default function delta(options = {}, source) {
   const attr = validateStream('delta', specification, source.attr);
   const params = parseParameters(definitions, options);
   if (params.size % 2 === 0) params.size -= 1;
-  const f = (attr.format === 'scalar') ?
-    deltaFilterScalar(params.size, attr.samplerate || 1) :
-    deltaFilterVector(attr.size, params.size, attr.samplerate || 1);
+  const f = (attr.format === 'scalar')
+    ? deltaFilterScalar(params.size, attr.samplerate || 1)
+    : deltaFilterVector(attr.size, params.size, attr.samplerate || 1);
   return withAttr(attr)(map(f, source));
 }

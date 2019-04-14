@@ -33,13 +33,11 @@
 <script>
 import createSandbox from '@coda/sandbox';
 import Editor from './Editor';
-import MyHeader from './Header';
 
 export default {
   name: 'Playground',
   components: {
     Editor,
-    MyHeader,
   },
   props: {
     value: {

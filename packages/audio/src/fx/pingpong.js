@@ -1,5 +1,4 @@
 import { parseParameters } from '@coda/prelude';
-import { audioContext } from 'waves-audio';
 import BaseAudioEffect from '../core/effect';
 import tuna from '../lib/tuna';
 

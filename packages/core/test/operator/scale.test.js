@@ -72,9 +72,9 @@ test('Scales a scalar stream', async () => {
   result.forEach(({ value }) => {
     expect(typeof value).toBe('number');
   });
-  expect(result.map(x => x.value)).toEqual(input.map(x =>
-    options.outmin + ((options.outmax - options.outmin) *
-      ((x - options.inmin) / (options.inmax - options.inmin)))));
+  expect(result.map(x => x.value))
+    .toEqual(input.map(x => options.outmin + ((options.outmax - options.outmin)
+      * ((x - options.inmin) / (options.inmax - options.inmin)))));
 });
 
 test('Scales a vector stream', async () => {
@@ -99,8 +99,8 @@ test('Scales a vector stream', async () => {
   const result = await collectEventsFor(input.length, stream);
   result.forEach(({ value }, i) => {
     expect(value instanceof Array).toBeTruthy();
-    expect(value).toEqual(input[i].map(x =>
-      options.outmin + ((options.outmax - options.outmin) *
-        ((x - options.inmin) / (options.inmax - options.inmin)))));
+    expect(value)
+      .toEqual(input[i].map(x => options.outmin + ((options.outmax - options.outmin)
+        * ((x - options.inmin) / (options.inmax - options.inmin)))));
   });
 });

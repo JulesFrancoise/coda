@@ -8,8 +8,7 @@
 </template>
 
 <script>
-import ApiSidebar from '../components/ApiSidebar.vue';
-import ApiEntry from '../components/ApiEntry.vue';
+import ApiSidebar from '../components/ApiSidebar';
 import api from './api.json';
 
 let currentSection = 'default';
@@ -26,7 +25,7 @@ const structuredApi = api.reduce((s, entry) => {
 
 export default {
   layout: 'fixed',
-  components: { ApiSidebar, ApiEntry },
+  components: { ApiSidebar },
   data() {
     return {
       fixed: false,

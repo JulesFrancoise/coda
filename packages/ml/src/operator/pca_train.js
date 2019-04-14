@@ -30,6 +30,7 @@ class PCASink {
     this.pca = new PCA(dataset);
     this.sink.event(t, this.pca.toJSON());
   }
+
   /**
    * End the stream
    * @param  {Number} t Timestamp
@@ -38,6 +39,7 @@ class PCASink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp

@@ -57,36 +57,35 @@ const hmmDefinitions = {
  * @param  {Object} definitions Training parameters definitions
  * @return {Function}           Training operator
  */
-const xmmTrainFactory = (type, definitions) =>
-  function xmmTrain(options = {}, source) {
-    if (!source.attr || !source.attr.containerId) {
-      throw new Error('The source stream must include a `containerId` attribute.');
-    }
-    const params = parseParameters(definitions, options);
-    const configuration = {
-      type,
-      ...params,
-      regularization: {
-        absolute: params.regularizationAbs,
-        relative: params.regularizationRel,
-      },
-    };
-    return {
-      attr: {
-        type,
-        format: 'xmm',
-      },
-      run(sink, scheduler) {
-        const trainerSink = new XmmTrainerSink(
-          source.attr.containerId,
-          configuration,
-          sink,
-          scheduler,
-        );
-        return source.run(trainerSink, scheduler);
-      },
-    };
+const xmmTrainFactory = (type, definitions) => function xmmTrain(options = {}, source) {
+  if (!source.attr || !source.attr.containerId) {
+    throw new Error('The source stream must include a `containerId` attribute.');
+  }
+  const params = parseParameters(definitions, options);
+  const configuration = {
+    type,
+    ...params,
+    regularization: {
+      absolute: params.regularizationAbs,
+      relative: params.regularizationRel,
+    },
   };
+  return {
+    attr: {
+      type,
+      format: 'xmm',
+    },
+    run(sink, scheduler) {
+      const trainerSink = new XmmTrainerSink(
+        source.attr.containerId,
+        configuration,
+        sink,
+        scheduler,
+      );
+      return source.run(trainerSink, scheduler);
+    },
+  };
+};
 
 /**
  * Train a Gaussian Mixture Model for recognition from a stream of recording events.

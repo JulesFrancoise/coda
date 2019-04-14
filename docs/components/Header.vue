@@ -52,7 +52,8 @@ header .title {
   align-items: flex-start;
   padding-right: 20px;
   border-right: 1px solid #dedede;
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #35495e;
   letter-spacing: 1px;
 }

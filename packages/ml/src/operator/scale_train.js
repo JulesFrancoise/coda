@@ -49,6 +49,7 @@ class ScaleLearnScalarSink {
     });
     this.sink.event(t, { min: this.min, max: this.max });
   }
+
   /**
    * End the stream
    * @param  {Number} t Timestamp
@@ -57,6 +58,7 @@ class ScaleLearnScalarSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp
@@ -110,6 +112,7 @@ class ScaleLearnVectorSink {
     });
     this.sink.event(t, this.minmax);
   }
+
   /**
    * End the stream
    * @param  {Number} t Timestamp
@@ -118,6 +121,7 @@ class ScaleLearnVectorSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp

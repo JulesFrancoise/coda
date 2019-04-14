@@ -42,7 +42,8 @@ function sumVector(x, y) {
 export default function accum(source) {
   const attr = validateStream('accum', specification, source.attr);
   const accumFn = (attr.format === 'scalar') ? (x, y) => x + y : sumVector;
-  const accumInit = (attr.format === 'scalar') ?
-    0 : new Array(attr.size).fill(0);
+  const accumInit = (attr.format === 'scalar')
+    ? 0
+    : new Array(attr.size).fill(0);
   return withAttr(attr)(skip(1, scan(accumFn, accumInit, source)));
 }

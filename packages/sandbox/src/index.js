@@ -24,8 +24,9 @@ const findStream = sandbox => (stream) => {
   return (streamId && streamId[0]) || null;
 };
 
-const streamExists = sandbox => streamId =>
-  Object.keys(sandbox.streams).includes(streamId);
+const streamExists = sandbox => streamId => (
+  Object.keys(sandbox.streams).includes(streamId)
+);
 
 const cancelStream = sandbox => (streamId) => {
   const s = sandbox;
@@ -34,8 +35,9 @@ const cancelStream = sandbox => (streamId) => {
   }
 };
 
-const synthExists = sandbox => synthId =>
-  Object.keys(sandbox.synths).includes(synthId);
+const synthExists = sandbox => synthId => (
+  Object.keys(sandbox.synths).includes(synthId)
+);
 
 const stopSynth = sandbox => (synthId) => {
   const s = sandbox;

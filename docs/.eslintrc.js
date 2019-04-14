@@ -1,24 +1,23 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   env: {
-    browser: true,
+    node: true,
   },
-  plugins: ['html'],
-  extends: 'airbnb-base',
-  // add your custom rules here
+  extends: [
+    'plugin:vue/essential',
+    '@vue/airbnb',
+  ],
   rules: {
-    // don't require .vue extension when importing
-    'import/extensions': [
-      'error',
-      'always',
-      {
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'import/extensions': ['error', 'always', {
         js: 'never',
+        mjs: 'never',
         vue: 'never',
       },
     ],
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
-  globals: {},
+  parserOptions: {
+    parser: 'babel-eslint',
+  },
 };

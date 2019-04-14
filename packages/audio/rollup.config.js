@@ -21,7 +21,6 @@ let plugins = [
   }),
   babel({
     exclude: 'node_modules/**',
-    plugins: ['external-helpers'],
   }),
 ];
 if (process.env.NODE_ENV === 'production') {

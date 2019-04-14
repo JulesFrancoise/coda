@@ -14,20 +14,11 @@
   },
   "dependencies": {
     "@coda/prelude": "^0.0.1",
-    "@most/disposable": "^1.1.0",
-    "@most/scheduler": "^1.2.1",
-    "colormap": "^2.3.0",
-    "vue": "^2.5.16",
-    "vue-awesome": "^3.0.5",
-    "vue-template-compiler": "^2.5.16"
-  },
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "css-loader": "^0.28.11",
-    "eslint": "^5.2.0",
-    "eslint-plugin-html": "^4.0.3",
-    "eslint-plugin-import": "^2.11.0",
-    "rollup": "^0.63.5",
-    "rollup-plugin-vue": "4.2.0"
+    "@most/disposable": "^1.2.1",
+    "@most/scheduler": "^1.2.2",
+    "colormap": "^2.3.1",
+    "vue": "^2.6.10",
+    "vue-awesome": "^3.5.1",
+    "vue-template-compiler": "^2.6.10"
   }
 }

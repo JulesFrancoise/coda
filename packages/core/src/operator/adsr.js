@@ -1,5 +1,12 @@
 import { parseParameters, validateStream, withAttr } from '@coda/prelude';
-import { map, switchLatest, mergeArray, now, at, filter } from '@most/core';
+import {
+  map,
+  switchLatest,
+  mergeArray,
+  now,
+  at,
+  filter,
+} from '@most/core';
 import lineto from './lineto';
 
 /**

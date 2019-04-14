@@ -39,6 +39,7 @@ class AutoScaleScalarSink {
      */
     this.inmax = -Infinity;
   }
+
   /**
    * Propagate a scaled value, guaranteeing that the output range is always [0; 1]
    * @param  {Number} t Timestamp
@@ -54,6 +55,7 @@ class AutoScaleScalarSink {
       this.sink.event(t, y);
     }
   }
+
   /**
    * End the stream
    * @param  {Number} t Timestamp
@@ -62,6 +64,7 @@ class AutoScaleScalarSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp
@@ -97,6 +100,7 @@ class AutoScaleVectorSink {
      */
     this.inmax = Array.from(Array(size), () => -Infinity);
   }
+
   /**
    * Propagate a scaled value, guaranteeing that the output range is always [0; 1]
    * @param  {Number} t Timestamp
@@ -112,6 +116,7 @@ class AutoScaleVectorSink {
     });
     this.sink.event(t, y);
   }
+
   /**
    * End the stream
    * @param  {Number} t Timestamp
@@ -120,6 +125,7 @@ class AutoScaleVectorSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error
    * @param  {Number} t Timestamp

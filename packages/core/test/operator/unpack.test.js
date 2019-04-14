@@ -23,8 +23,7 @@ test('Unpack a vector stream to an array of scalar streams', async () => {
     size: 3,
   })(makeEventsFromArray(0, input));
   const streams = unpack(a);
-  const result = await Promise.all(streams.map(s =>
-    collectEventsFor(input.length, s)));
+  const result = await Promise.all(streams.map(s => collectEventsFor(input.length, s)));
   const expected = [[1, 4, 7, 10], [2, 5, 8, 11], [3, 6, 9, 12]];
   streams.forEach((s, i) => {
     expect(s.attr.format).toBe('scalar');

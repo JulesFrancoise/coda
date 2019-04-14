@@ -1,5 +1,9 @@
-import { audioContext } from 'waves-audio';
-import { runEffects, tap, takeWhile, throttle } from '@most/core';
+import {
+  runEffects,
+  tap,
+  takeWhile,
+  throttle,
+} from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
 import BaseAudioEngine, { masterGain } from './base';
 // import { masterGain } from './base';

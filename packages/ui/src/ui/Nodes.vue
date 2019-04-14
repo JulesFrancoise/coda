@@ -19,6 +19,7 @@
         <div
           v-for="(node, idx) in nodes"
           class="button"
+          :key="`node_but_idx_${idx}`"
           :class="(parseInt(idx, 10) === nodeIndex) && 'active'"
           @click="nodeIndex = parseInt(idx, 10)"
         >{{ idx }}</div>
@@ -46,7 +47,10 @@
           @touchmove.prevent="dragTouch"
           @touchend="drop"
         >
-          <g v-for="(node, idx) in nodes" >
+          <g
+            v-for="(node, idx) in nodes"
+            :key="`node-g-${idx}`"
+          >
             <circle
               class="svg_node"
               :class="(parseInt(idx, 10) === nodeIndex) && 'active'"

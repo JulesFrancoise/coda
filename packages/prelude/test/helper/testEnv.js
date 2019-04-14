@@ -5,9 +5,19 @@
 /** @author Brian Cavalier */
 /** @author John Hann */
 
-import { newScheduler, newTimeline, currentTime, delay } from '@most/scheduler';
-// eslint-disable-next-line
-import { propagateEventTask, propagateEndTask, runEffects, tap } from '@most/core';
+import {
+  newScheduler,
+  newTimeline,
+  currentTime,
+  delay,
+} from '@most/scheduler';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  propagateEventTask,
+  propagateEndTask,
+  runEffects,
+  tap,
+} from '@most/core';
 import { disposeWith, disposeNone } from '@most/disposable';
 import VirtualTimer from './VirtualTimer';
 import withAttr from '../../src/lib/with_attr';
@@ -32,8 +42,9 @@ export function collectEvents(stream, scheduler) {
   return runEffects(s, scheduler).then(() => into);
 }
 
-export const collectEventsFor = (nticks, stream) =>
-  collectEvents(stream, ticks(nticks));
+export const collectEventsFor = (nticks, stream) => (
+  collectEvents(stream, ticks(nticks))
+);
 
 const appendEvent = (sink, scheduler) => (s, event) => {
   const task = delay(event.time, propagateEventTask(event.value, sink), scheduler);
@@ -66,16 +77,18 @@ export const atTimes = array => withAttr({})(new AtTimes(array));
 
 export const atTime = (time, value) => atTimes([{ time, value }]);
 
-export const makeEventsFromArray = (dt, a) =>
-  atTimes(a.map((value, i) => ({ time: i * dt, value })));
+export const makeEventsFromArray = (dt, a) => (
+  atTimes(a.map((value, i) => ({ time: i * dt, value })))
+);
 
-export const makeEvents = (dt, n) =>
-  makeEventsFromArray(dt, Array.from(Array(n), (_, i) => i));
+export const makeEvents = (dt, n) => (
+  makeEventsFromArray(dt, Array.from(Array(n), (_, i) => i))
+);
 
 function randVect(n) {
   return Array.from(Array(n), () => Math.random());
 }
 
-export const makeRandomEvents = (n, size) => ((size > 1) ?
-  makeEventsFromArray(0, Array.from(Array(n), () => randVect(size))) :
-  makeEventsFromArray(0, randVect(n)));
+export const makeRandomEvents = (n, size) => ((size > 1)
+  ? makeEventsFromArray(0, Array.from(Array(n), () => randVect(size)))
+  : makeEventsFromArray(0, randVect(n)));

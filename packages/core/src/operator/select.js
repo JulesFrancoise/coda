@@ -52,8 +52,8 @@ export default function select(indices, source) {
   if (!indicesValid(idx, source.attr.size)) {
     throw new Error('Indices must be an array of integers in the range of the source stream');
   }
-  const selectionFunction = (source.attr.format === 'scalar') ?
-    frame => idx.map(() => frame) :
-    frame => idx.map(i => frame[i]);
+  const selectionFunction = (source.attr.format === 'scalar')
+    ? frame => idx.map(() => frame)
+    : frame => idx.map(i => frame[i]);
   return withAttr(attr)(map(selectionFunction, source));
 }

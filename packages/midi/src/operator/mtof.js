@@ -25,8 +25,8 @@ const specification = {
  */
 export default function mtof(source) {
   const attr = validateStream('mtof', specification, source.attr);
-  const func = (attr.format === 'scalar') ?
-    m => 27.5 * (2 ** ((m - 21) / 12)) :
-    x => x.map(m => 27.5 * (2 ** ((m - 21) / 12)));
+  const func = (attr.format === 'scalar')
+    ? m => 27.5 * (2 ** ((m - 21) / 12))
+    : x => x.map(m => 27.5 * (2 ** ((m - 21) / 12)));
   return withAttr(attr)(map(func, source));
 }

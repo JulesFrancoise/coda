@@ -16,16 +16,9 @@
   },
   "dependencies": {
     "@coda/prelude": "^0.0.1",
-    "@most/core": "^1.3.2",
+    "@most/core": "^1.3.4",
     "@most/dom-event": "^2.0.0",
-    "@most/scheduler": "^1.2.1",
+    "@most/scheduler": "^1.2.2",
     "complex-js": "^5.0.0"
-  },
-  "devDependencies": {
-    "benchmark": "^2.1.4",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
-    "jest": "^23.4.2",
-    "rollup": "^0.63.5"
   }
 }

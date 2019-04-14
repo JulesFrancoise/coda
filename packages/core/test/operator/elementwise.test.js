@@ -1,5 +1,10 @@
 import { withAttr } from '@coda/prelude';
-import elementwise, { add, sub, mul, div } from '../../src/operator/elementwise';
+import elementwise, {
+  add,
+  sub,
+  mul,
+  div,
+} from '../../src/operator/elementwise';
 import { makeEventsFromArray, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async () => {

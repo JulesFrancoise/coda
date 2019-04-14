@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import GuideSidebar from '../../components/GuideSidebar.vue';
+import GuideSidebar from '../../components/GuideSidebar';
 import content from './getting-started.md';
 
 export default {

@@ -89,23 +89,25 @@ export default class ContinuousWaveletTransform {
     const minIndex = 1 + (Math.sign(minV) * Math.trunc(Math.abs(minV)));
     const maxIndex = 1 + (Math.sign(maxV) * Math.trunc(Math.abs(maxV)));
     this.size = maxIndex - minIndex;
-    this.scales = Array.from(Array(this.size), (_, i) =>
-      scale0 * (2 ** ((i + minIndex) / this.bandsPerOctave)));
+    this.scales = Array.from(
+      Array(this.size),
+      (_, i) => scale0 * (2 ** ((i + minIndex) / this.bandsPerOctave)),
+    );
     this.frequencies = this.scales.map(x => scale2frequency(x, this.omega0));
     this.downsamplingFactors = Array(this.size).fill(1);
     if (this.optimisation !== 'none') {
       for (let i = 0; i < this.size; i += 1) {
-        const samplerateRatio =
-          (['standard1', 'aggressive1'].includes(this.optimisation)) ?
-            (this.samplerate / 8) / this.frequencies[i] :
-            (this.samplerate / 4) / this.frequencies[i];
+        const samplerateRatio = (['standard1', 'aggressive1'].includes(this.optimisation))
+          ? (this.samplerate / 8) / this.frequencies[i]
+          : (this.samplerate / 4) / this.frequencies[i];
         this.downsamplingFactors[i] = Math.max(Math.trunc(samplerateRatio), 1);
       }
     }
 
     this.wavelets = Array.from(Array(this.size), (_, i) => {
-      const sr = (this.optimisation === 'none') ? this.samplerate :
-        this.samplerate / this.downsamplingFactors[i];
+      const sr = (this.optimisation === 'none')
+        ? this.samplerate
+        : this.samplerate / this.downsamplingFactors[i];
       return new MorletWavelet(sr, this.scales[i], this.omega0);
     });
 
@@ -116,8 +118,10 @@ export default class ContinuousWaveletTransform {
     } else {
       for (let i = 0; i < this.size; i += 1) {
         this.data[this.downsamplingFactors[i]] = null;
-        if (this.downsamplingFactors[i] > 1 &&
-          !Object.keys(this.filters).includes(this.downsamplingFactors[i])) {
+        if (
+          this.downsamplingFactors[i] > 1
+          && !Object.keys(this.filters).includes(this.downsamplingFactors[i])
+        ) {
           const filt = new LowpassFilter(0.8 / this.downsamplingFactors[i]);
           this.filters[this.downsamplingFactors[i]] = filt;
         }
@@ -147,9 +151,9 @@ export default class ContinuousWaveletTransform {
       for (let i = this.size - 1; i >= 0; i -= 1) {
         const decimation = this.downsamplingFactors[i];
         if (decimation !== previousDecimation) {
-          let filteredValue = (decimation > 1) ?
-            this.filters[decimation].filter(value) :
-            value;
+          let filteredValue = (decimation > 1)
+            ? this.filters[decimation].filter(value)
+            : value;
           if (this.data[decimation] !== null) {
             this.data[decimation].push(filteredValue);
           } else {

@@ -35,6 +35,7 @@ class SocketClient {
 
   addChannel(name, callback) {
     if (Object.keys(this.channels).includes(name)) {
+      // eslint-disable-next-line no-console
       console.log('Channel', name, 'already exists');
       return;
     }
@@ -44,6 +45,7 @@ class SocketClient {
 
   removeChannel(name) {
     if (!Object.keys(this.channels).includes(name)) {
+      // eslint-disable-next-line no-console
       console.log('Channel', name, 'does not exists');
       return;
     }
@@ -55,6 +57,7 @@ class SocketClient {
     this.socket.onmessage = (ev) => {
       // was it a dict?
       if (ev.data.charAt(0) === '{') {
+        // eslint-disable-next-line no-console
         console.log('Dicts are not currently supported');
         // attempt to json parse it:
         // const tree = JSON.parse(ev.data);

@@ -54,8 +54,8 @@ export default class MorletWavelet {
      */
     this.prepadValue = Complex(0, 0);
     for (let t = -padding; t < 0; t += 1) {
-      const waveletArg = (t - (this.windowSize / 2)) /
-        (this.scale * this.samplerate);
+      const waveletArg = (t - (this.windowSize / 2))
+        / (this.scale * this.samplerate);
       this.prepadValue = this.prepadValue.add(this.phi(waveletArg).conjugate());
     }
     /**
@@ -64,13 +64,13 @@ export default class MorletWavelet {
      */
     this.postpadValue = Complex(0, 0);
     for (let t = this.windowSize; t < this.windowSize + padding; t += 1) {
-      const waveletArg = (t - (this.windowSize / 2)) /
-        (this.scale * this.samplerate);
+      const waveletArg = (t - (this.windowSize / 2))
+        / (this.scale * this.samplerate);
       this.postpadValue = this.postpadValue.add(this.phi(waveletArg).conjugate());
     }
     for (let t = 0; t < this.windowSize; t += 1) {
-      const waveletArg = (t - (this.windowSize / 2)) /
-        (this.scale * this.samplerate);
+      const waveletArg = (t - (this.windowSize / 2))
+        / (this.scale * this.samplerate);
       this.values[t] = this.phi(waveletArg);
     }
   }
@@ -81,8 +81,8 @@ export default class MorletWavelet {
    * @return {Complex}    Wavelet value for the given argument
    */
   phi(arg) {
-    const x1 = (Math.exp(-0.5 * arg * arg) * (Math.PI ** -0.25)) /
-      Math.sqrt(this.scale * this.samplerate);
+    const x1 = (Math.exp(-0.5 * arg * arg) * (Math.PI ** -0.25))
+      / Math.sqrt(this.scale * this.samplerate);
     const x2 = Complex.exp(Complex(0, this.omega0 * arg))
       .subtract(Complex.exp(Complex(-0.5 * this.omega0 * this.omega0, 0)));
     return Complex(x1, 0).multiply(x2);
@@ -116,8 +116,8 @@ export default class MorletWavelet {
  * @private
  */
 export function scale2frequency(scale, omega0) {
-  return (omega0 + Math.sqrt(2 + (omega0 * omega0))) /
-    (4 * Math.PI * scale);
+  return (omega0 + Math.sqrt(2 + (omega0 * omega0)))
+    / (4 * Math.PI * scale);
 }
 
 /**
@@ -129,6 +129,6 @@ export function scale2frequency(scale, omega0) {
  * @private
  */
 export function frequency2scale(frequency, omega0) {
-  return (omega0 + Math.sqrt(2 + (omega0 * omega0))) /
-    (4 * Math.PI * frequency);
+  return (omega0 + Math.sqrt(2 + (omega0 * omega0)))
+    / (4 * Math.PI * frequency);
 }

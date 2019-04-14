@@ -14,12 +14,7 @@
   },
   "dependencies": {
     "@coda/prelude": "^0.0.1",
-    "@most/core": "^1.3.2",
-    "@most/scheduler": "^1.2.1"
-  },
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
-    "rollup": "^0.63.5"
+    "@most/core": "^1.3.4",
+    "@most/scheduler": "^1.2.2"
   }
 }

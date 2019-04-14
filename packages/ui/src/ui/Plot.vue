@@ -59,8 +59,7 @@ export default {
   },
   watch: {
     channels(k) {
-      this.buffer = Array.from(new Array(this.length), () =>
-        new Array(k).fill(NaN));
+      this.buffer = Array.from(new Array(this.length), () => new Array(k).fill(NaN));
       this.previousFrame = Array.from(Array(k), () => 101);
       this.min = +Infinity;
       this.max = -Infinity;
@@ -69,8 +68,10 @@ export default {
       if (this.buffer.length > n) {
         this.buffer.splice(0, this.buffer.length - n);
       } else {
-        const zeros = Array.from(Array(n - this.buffer.length), () =>
-          Array(this.channels).fill(NaN));
+        const zeros = Array.from(
+          Array(n - this.buffer.length),
+          () => Array(this.channels).fill(NaN),
+        );
         this.buffer = zeros.concat(this.buffer);
       }
       this.updateCanvasDims();

@@ -91,18 +91,18 @@ export default function schmitt(options, source) {
   }
   if (attr.format === 'scalar') {
     const f = triggerScalar(params.down, params.up);
-    return params.continuous ?
-      withAttr(attr)(map(f, source)) :
-      withAttr(attr)(skipRepeats(map(f, source)));
+    return params.continuous
+      ? withAttr(attr)(map(f, source))
+      : withAttr(attr)(skipRepeats(map(f, source)));
   }
   const triggerFuncs = Array.from(
     Array(attr.size),
     () => triggerScalar(params.down, params.up),
   );
   const f = frame => frame.map((x, i) => triggerFuncs[i](x));
-  return params.continuous ?
-    withAttr(attr)(map(f, source)) :
-    withAttr(attr)(skipRepeatsWith(
+  return params.continuous
+    ? withAttr(attr)(map(f, source))
+    : withAttr(attr)(skipRepeatsWith(
       (a, b) => a.reduce((t, x, i) => t && x === b[i], true),
       map(f, source),
     ));

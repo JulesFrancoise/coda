@@ -16,13 +16,8 @@
     "@coda/core": "^0.0.1",
     "@coda/prelude": "^0.0.1",
     "@ircam/motion-input": "^1.0.7",
-    "@most/scheduler": "^1.2.1",
+    "@most/scheduler": "^1.2.2",
     "leapjs": "^0.6.4",
     "myo": "^3.0.0"
-  },
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
-    "rollup": "^0.63.5"
   }
 }

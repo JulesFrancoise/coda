@@ -131,9 +131,9 @@ function quantizeRound(x, notes) {
 export default function quantize(options = {}, source) {
   const attr = validateStream('quantize', specification, source.attr);
   const params = parseParameters(definitions, options);
-  const scaleName = params.scale.includes(' ') ?
-    params.scale :
-    `C ${params.scale}`;
+  const scaleName = params.scale.includes(' ')
+    ? params.scale
+    : `C ${params.scale}`;
   if (!Scale.exists(scaleName)) {
     throw new Error(`This scale does not exist, See:\n${Scale.names()}`);
   }
@@ -157,8 +157,8 @@ export default function quantize(options = {}, source) {
     default:
       quantFunc = quantizeRound;
   }
-  const f = attr.format === 'scalar' ?
-    x => quantFunc(x, midiNotes) :
-    frame => frame.map(x => quantFunc(x, midiNotes));
+  const f = attr.format === 'scalar'
+    ? x => quantFunc(x, midiNotes)
+    : frame => frame.map(x => quantFunc(x, midiNotes));
   return withAttr(attr)(map(f, source));
 }

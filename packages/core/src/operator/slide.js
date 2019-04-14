@@ -85,6 +85,7 @@ class SlidingWindowSink {
   end(t) {
     return this.sink.end(t);
   }
+
   /**
    * Propagate an error on the stream
    * @param  {number} t   event timestamp

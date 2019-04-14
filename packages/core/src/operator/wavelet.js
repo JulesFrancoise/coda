@@ -159,8 +159,8 @@ function scalogramVector(size, params, samplerate) {
 export default function wavelet(options = {}, source) {
   const baseAttr = validateStream('wavelet', specification, source.attr);
   const params = parseParameters(definitions, options);
-  const { attr, f } = (baseAttr.format === 'scalar') ?
-    scalogramScalar(params, baseAttr.samplerate) :
-    scalogramVector(baseAttr.size, params, baseAttr.samplerate);
+  const { attr, f } = (baseAttr.format === 'scalar')
+    ? scalogramScalar(params, baseAttr.samplerate)
+    : scalogramVector(baseAttr.size, params, baseAttr.samplerate);
   return withAttr({ ...baseAttr, ...attr })(map(f, source));
 }

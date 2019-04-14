@@ -22,7 +22,7 @@ test('Throws if the input stream has invalid attributes', async () => {
 });
 
 test('Computes the Online CWT on a scalar stream', async () => {
-  const input = readFileSync('./test/data/wavelet.data.txt', 'utf8')
+  const input = readFileSync('./packages/core/test/data/wavelet.data.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => parseFloat(line.split(' ')[0]))
@@ -39,7 +39,7 @@ test('Computes the Online CWT on a scalar stream', async () => {
   result.forEach(({ value }) => {
     expect(value instanceof Array).toBeTruthy();
   });
-  const mubuScalo = readFileSync('./test/data/wavelet.scalo.txt', 'utf8')
+  const mubuScalo = readFileSync('./packages/core/test/data/wavelet.scalo.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat))
@@ -57,7 +57,7 @@ test('Computes the Online CWT on a scalar stream', async () => {
 });
 
 test('Computes the Online CWT on a vector stream', async () => {
-  const input = readFileSync('./test/data/wavelet.data6.txt', 'utf8')
+  const input = readFileSync('./packages/core/test/data/wavelet.data6.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat))
@@ -74,7 +74,7 @@ test('Computes the Online CWT on a vector stream', async () => {
   result.forEach(({ value }) => {
     expect(value instanceof Array).toBeTruthy();
   });
-  const mubuScalo = readFileSync('./test/data/wavelet.scalo6.txt', 'utf8')
+  const mubuScalo = readFileSync('./packages/core/test/data/wavelet.scalo6.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat))
@@ -92,7 +92,7 @@ test('Computes the Online CWT on a vector stream', async () => {
 });
 
 test('Computes the Online CWT on a scalar stream (standard optimisation)', async () => {
-  const input = readFileSync('./test/data/wavelet.data.txt', 'utf8')
+  const input = readFileSync('./packages/core/test/data/wavelet.data.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => parseFloat(line.split(' ')[0]))
@@ -109,7 +109,7 @@ test('Computes the Online CWT on a scalar stream (standard optimisation)', async
   result.forEach(({ value }) => {
     expect(value instanceof Array).toBeTruthy();
   });
-  const mubuScalo = readFileSync('./test/data/wavelet.scalo.standard2.txt', 'utf8')
+  const mubuScalo = readFileSync('./packages/core/test/data/wavelet.scalo.standard2.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat))

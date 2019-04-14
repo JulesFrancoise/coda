@@ -149,13 +149,9 @@ export default {
   },
   computed: {
     pathTemplate() {
-      if (this.fill === 'none') {
-        return ['M ', ''];
-      } else if (this.fill === 'bottom') {
-        return ['M 0,1 L', ' L5,1 z'];
-      } else if (this.fill === 'top') {
-        return ['M 0,0 L', ' L5,0 z'];
-      }
+      if (this.fill === 'none') return ['M ', ''];
+      if (this.fill === 'bottom') return ['M 0,1 L', ' L5,1 z'];
+      if (this.fill === 'top') return ['M 0,0 L', ' L5,0 z'];
       return ['M 0,0.5 L', ' L5,0.5 z'];
     },
   },

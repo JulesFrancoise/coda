@@ -29,8 +29,8 @@ const specification = (format, size) => ({
 export default function distance(first, second) {
   validateStream('distance', specification(first.attr.format, first.attr.size), second.attr);
   const attr = validateStream('distance', specification(), first.attr);
-  const f = first.attr.format === 'scalar' ?
-    (x, y) => Math.abs(y - x) :
-    (x, y) => Math.sqrt(y.reduce((s, _, t) => s + ((y[t] - x[t]) * (y[t] - x[t])), 0));
+  const f = first.attr.format === 'scalar'
+    ? (x, y) => Math.abs(y - x)
+    : (x, y) => Math.sqrt(y.reduce((s, _, t) => s + ((y[t] - x[t]) * (y[t] - x[t])), 0));
   return withAttr(attr)(snapshot(f, second, first));
 }

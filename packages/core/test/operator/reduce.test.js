@@ -1,5 +1,11 @@
 import { withAttr } from '@coda/prelude';
-import reduce, { sum, prod, min, max, minmax } from '../../src/operator/reduce';
+import reduce, {
+  sum,
+  prod,
+  min,
+  max,
+  minmax,
+} from '../../src/operator/reduce';
 import { makeEventsFromArray, collectEventsFor } from '../../../prelude/test/helper/testEnv';
 
 test('Throws if the input stream has invalid attributes', async () => {

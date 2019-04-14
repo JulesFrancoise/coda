@@ -42,45 +42,44 @@ const definitions = type => ({
  * @param  {String} [type] Model type ('gmm', 'hmm', 'hhmm').
  * @return {Function}      Recognition function
  */
-const xmmPredictFactory = type =>
-  function xmmPredict(options = {}, source) {
-    if (!options.model || !options.model.run) {
-      throw new Error('The `xmmPredicy` module requires a stream of model parameters');
-    }
-    const { model } = options;
-    if (!model.attr.type || model.attr.type !== type) {
-      throw new Error(`The 'xmmPredicy' module requires a model stream of type '${type}'`);
-    }
-    const params = parseParameters(definitions(type), options);
-    let fetchOutput;
-    if (params.output === 'all') {
-      fetchOutput = res => Object.assign({}, res);
-    } else if (['alpha', 'beta'].includes(params.output)) {
-      fetchOutput = (res, pred) => pred.models[res.likeliest][params.output].slice();
-    } else {
-      fetchOutput = res => res[params.output].slice();
-    }
-    return {
-      attr: {
-        format: 'vector',
-        size: (params.output === 'outputValues') ? 2 : 1,
-        varsize: true,
-      },
-      run(sink, scheduler) {
-        const predictionSink = new XmmPredictionSink(
-          model,
-          fetchOutput,
-          params.likelihoodWindow,
-          sink,
-          scheduler,
-        );
-        const modelDisposable = model.run(predictionSink.modelStream, scheduler);
-        const dataDisposable = source.run(predictionSink, scheduler);
+const xmmPredictFactory = type => function xmmPredict(options = {}, source) {
+  if (!options.model || !options.model.run) {
+    throw new Error('The `xmmPredicy` module requires a stream of model parameters');
+  }
+  const { model } = options;
+  if (!model.attr.type || model.attr.type !== type) {
+    throw new Error(`The 'xmmPredicy' module requires a model stream of type '${type}'`);
+  }
+  const params = parseParameters(definitions(type), options);
+  let fetchOutput;
+  if (params.output === 'all') {
+    fetchOutput = res => Object.assign({}, res);
+  } else if (['alpha', 'beta'].includes(params.output)) {
+    fetchOutput = (res, pred) => pred.models[res.likeliest][params.output].slice();
+  } else {
+    fetchOutput = res => res[params.output].slice();
+  }
+  return {
+    attr: {
+      format: 'vector',
+      size: (params.output === 'outputValues') ? 2 : 1,
+      varsize: true,
+    },
+    run(sink, scheduler) {
+      const predictionSink = new XmmPredictionSink(
+        model,
+        fetchOutput,
+        params.likelihoodWindow,
+        sink,
+        scheduler,
+      );
+      const modelDisposable = model.run(predictionSink.modelStream, scheduler);
+      const dataDisposable = source.run(predictionSink, scheduler);
 
-        return disposeBoth(modelDisposable, dataDisposable);
-      },
-    };
+      return disposeBoth(modelDisposable, dataDisposable);
+    },
   };
+};
 
 /**
  * Real-time recognition using GMMs

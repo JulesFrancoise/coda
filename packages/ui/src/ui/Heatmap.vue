@@ -62,15 +62,19 @@ export default {
   },
   watch: {
     channels(k) {
-      this.buffer = Array.from(Array(this.length), () =>
-        (k === 1 ? NaN : Array(k).fill(NaN)));
+      this.buffer = Array.from(
+        Array(this.length),
+        () => (k === 1 ? NaN : Array(k).fill(NaN)),
+      );
     },
     length(n) {
       if (this.buffer.length > n) {
         this.buffer.splice(0, this.buffer.length - n);
       } else {
-        const zeros = Array.from(Array(n - this.buffer.length), () =>
-          (this.channels === 1 ? NaN : Array(this.channels).fill(NaN)));
+        const zeros = Array.from(
+          Array(n - this.buffer.length),
+          () => (this.channels === 1 ? NaN : Array(this.channels).fill(NaN)),
+        );
         this.buffer = zeros.concat(this.buffer);
       }
     },

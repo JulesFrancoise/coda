@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ApiEntry from '../../components/ApiEntry.vue';
+import ApiEntry from '../../components/ApiEntry';
 import api from '../api.json';
 
 const filteredApi = api.filter(entry => entry.kind !== 'note');

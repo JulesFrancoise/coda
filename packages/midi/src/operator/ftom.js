@@ -25,8 +25,8 @@ const specification = {
  */
 export default function ftom(source) {
   const attr = validateStream('ftom', specification, source.attr);
-  const func = (attr.format === 'scalar') ?
-    f => 69 + (12 * Math.log2(f / 440)) :
-    x => x.map(f => 69 + (12 * Math.log2(f / 440)));
+  const func = (attr.format === 'scalar')
+    ? f => 69 + (12 * Math.log2(f / 440))
+    : x => x.map(f => 69 + (12 * Math.log2(f / 440)));
   return withAttr(attr)(map(func, source));
 }

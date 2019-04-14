@@ -88,8 +88,7 @@ Object.keys(paramTemplates).forEach((type) => {
         throw new Error(`Invalid value for array<${type}> param "${name}": ${value} is not an array`);
       }
       try {
-        return value.map(x =>
-          paramTemplates[type].typeCheckFunction(x, definition, name));
+        return value.map(x => paramTemplates[type].typeCheckFunction(x, definition, name));
       } catch (e) {
         throw new Error(`Invalid value for array<${type}> param "${name}": ${value}`);
       }

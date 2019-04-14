@@ -274,7 +274,11 @@ function tryEvent(t, x, sink) {
  *   .plot({ stacked: true, legend: 'Raw EMG data' })
  *   .force()
  *   .mvavrg({ size: 9 })
- *   .plot({ stacked: true, fill: 'bottom', legend: 'Force estimation from the EMG (contraction)' });
+ *   .plot({
+ *     stacked: true,
+ *     fill: 'bottom',
+ *     legend: 'Force estimation from the EMG (contraction)',
+ *    });
 
  */
 export default function myo(name = '') {

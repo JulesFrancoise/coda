@@ -8,8 +8,9 @@ import { domEvent } from '@most/dom-event';
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#empty
  */
-export const empty = () =>
-  new Stream(withAttr({})(most.empty()));
+export const empty = () => (
+  new Stream(withAttr({})(most.empty()))
+);
 
 /**
  * Create a Stream containing no events and never ends.
@@ -17,8 +18,9 @@ export const empty = () =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#never
  */
-export const never = () =>
-  new Stream(withAttr({})(most.never()));
+export const never = () => (
+  new Stream(withAttr({})(most.never()))
+);
 
 /**
  * Create a Stream containing a single event at time 0.
@@ -80,8 +82,9 @@ export const at = (t, x) => {
  * // Generate a periodic signal with 500 ms interval and randomize the stream values.
  * a = periodic(500).map(() => Math.random()).tap(log);
  */
-export const periodic = period =>
-  new Stream(withAttr({ samplerate: 1000 / period })(most.periodic(period)));
+export const periodic = period => (
+  new Stream(withAttr({ samplerate: 1000 / period })(most.periodic(period)))
+);
 
 /**
  * Create a Stream that fails with the provided Error at time 0. This can be
@@ -92,8 +95,9 @@ export const periodic = period =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#throwerror
  */
-export const throwError = error =>
-  new Stream(withAttr({})(most.throwError(error)));
+export const throwError = error => (
+  new Stream(withAttr({})(most.throwError(error)))
+);
 
 /**
  * Prepend an event at time 0.
@@ -125,8 +129,9 @@ export const startWith = (x, source) => {
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html?highlight=continuewith#cont}inuewit
  */
-export const continueWith = (f, source) =>
-  new Stream(withAttr(source.attr)(most.continueWith(f, source)));
+export const continueWith = (f, source) => (
+  new Stream(withAttr(source.attr)(most.continueWith(f, source)))
+);
 
 /**
  * Apply a function to each event value.
@@ -144,8 +149,9 @@ export const continueWith = (f, source) =>
  *   .map(f)
  *   .tap(log)
  */
-export const map = (f, source) =>
-  new Stream(withAttr(source.attr)(most.map(f, source)));
+export const map = (f, source) => (
+  new Stream(withAttr(source.attr)(most.map(f, source)))
+);
 
 /**
  * Replace each event value with x.
@@ -183,8 +189,9 @@ export const constant = (x, source) => {
  * // Apply a function with side effects, to log the values to the console
  * a = periodic(500).rand().tap(log);
  */
-export const tap = (f, source) =>
-  new Stream(withAttr(source.attr)(most.tap(f, source)));
+export const tap = (f, source) => (
+  new Stream(withAttr(source.attr)(most.tap(f, source)))
+);
 
 /**
  * Apply the latest function in a Stream of functions to the latest value of
@@ -197,8 +204,9 @@ export const tap = (f, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#ap
  */
-export const ap = (fs, source) =>
-  new Stream(withAttr(source.attr)(most.ap(fs, source)));
+export const ap = (fs, source) => (
+  new Stream(withAttr(source.attr)(most.ap(fs, source)))
+);
 
 /**
  * Incrementally accumulate results, starting with the provided initial value.
@@ -216,8 +224,9 @@ export const ap = (fs, source) =>
  *   .scan((s, x) => s + x, 0)
  *   .tap(log);
  */
-export const scan = (f, initial, source) =>
-  new Stream(withAttr(source.attr)(most.scan(f, initial, source)));
+export const scan = (f, initial, source) => (
+  new Stream(withAttr(source.attr)(most.scan(f, initial, source)))
+);
 
 /**
  * Accumulate results using a feedback loop that emits one value and feeds back
@@ -234,8 +243,9 @@ export const scan = (f, initial, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#loop
  */
-export const loop = (stepper, seed, source) =>
-  new Stream(withAttr(source.attr)(most.loop(stepper, seed, source)));
+export const loop = (stepper, seed, source) => (
+  new Stream(withAttr(source.attr)(most.loop(stepper, seed, source)))
+);
 
 /**
  * Replace each event value with the array item at the respective index. The
@@ -248,8 +258,9 @@ export const loop = (stepper, seed, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#withitems
  */
-export const withItems = (items, source) =>
-  new Stream(withAttr(source.attr)(most.withItems(items, source)));
+export const withItems = (items, source) => (
+  new Stream(withAttr(source.attr)(most.withItems(items, source)))
+);
 
 /**
  * Apply a function to the latest event and the array value at the respective
@@ -263,8 +274,9 @@ export const withItems = (items, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#zipitems
  */
-export const zipItems = (f, items, source) =>
-  new Stream(withAttr(source.attr)(most.zipItems(f, items, source)));
+export const zipItems = (f, items, source) => (
+  new Stream(withAttr(source.attr)(most.zipItems(f, items, source)))
+);
 
 /**
  * Given a higher-order Stream, return a new Stream that adopts the behavior of
@@ -275,8 +287,9 @@ export const zipItems = (f, items, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#switchlatest
  */
-export const switchLatest = source =>
-  new Stream(withAttr(source.attr)(most.switchLatest(source)));
+export const switchLatest = source => (
+  new Stream(withAttr(source.attr)(most.switchLatest(source)))
+);
 
 /**
  * Given a higher-order Stream, return a new Stream that merges all the inner
@@ -287,8 +300,9 @@ export const switchLatest = source =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#join
  */
-export const join = source =>
-  new Stream(withAttr(source.attr)(most.join(source)));
+export const join = source => (
+  new Stream(withAttr(source.attr)(most.join(source)))
+);
 
 /**
  * Transform each event in `stream` into a new Stream, and then merge each into
@@ -299,8 +313,9 @@ export const join = source =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#chain
  */
-export const chain = (f, source) =>
-  new Stream(withAttr(source.attr)(most.chain(f, source)));
+export const chain = (f, source) => (
+  new Stream(withAttr(source.attr)(most.chain(f, source)))
+);
 
 /**
  * Transform each event in `stream` into a Stream, and then concatenate each
@@ -315,8 +330,9 @@ export const chain = (f, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#concatmap
  */
-export const concatMap = (f, source) =>
-  new Stream(withAttr(source.attr)(most.concatMap(f, source)));
+export const concatMap = (f, source) => (
+  new Stream(withAttr(source.attr)(most.concatMap(f, source)))
+);
 
 /**
  * Given a higher-order Stream, return a new Stream that merges inner Streams
@@ -330,8 +346,9 @@ export const concatMap = (f, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#mergeconcurrently
  */
-export const mergeConcurrently = (concurrency, source) =>
-  new Stream(withAttr(source.attr)(most.mergeConcurrently(concurrency, source)));
+export const mergeConcurrently = (concurrency, source) => (
+  new Stream(withAttr(source.attr)(most.mergeConcurrently(concurrency, source)))
+);
 
 /**
  * Lazily apply a function `f` to each event in a Stream, merging them into the
@@ -346,8 +363,9 @@ export const mergeConcurrently = (concurrency, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#mergemapconcurrently
  */
-export const mergeMapConcurrently = (f, concurrency, source) =>
-  new Stream(withAttr(source.attr)(most.mergeMapConcurrently(f, concurrency, source)));
+export const mergeMapConcurrently = (f, concurrency, source) => (
+  new Stream(withAttr(source.attr)(most.mergeMapConcurrently(f, concurrency, source)))
+);
 
 /**
  * Create a new Stream containing events from two Streams.
@@ -368,8 +386,9 @@ export const mergeMapConcurrently = (f, concurrency, source) =>
  * b = periodic(100).take(3).constant(2);
  * c = a.merge(b).tap(log);
  */
-export const merge = (stream1, source) =>
-  new Stream(withAttr(source.attr)(most.merge(stream1, source)));
+export const merge = (stream1, source) => (
+  new Stream(withAttr(source.attr)(most.merge(stream1, source)))
+);
 
 /**
  * Apply a function to the most recent event from each Stream when a new event
@@ -385,8 +404,9 @@ export const merge = (stream1, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#combine
  */
-export const combine = (f, stream1, source) =>
-  new Stream(withAttr(source.attr)(most.combine(f, stream1, source)));
+export const combine = (f, stream1, source) => (
+  new Stream(withAttr(source.attr)(most.combine(f, stream1, source)))
+);
 
 /**
  * Apply a function to corresponding pairs of events from the inputs Streams.
@@ -398,8 +418,9 @@ export const combine = (f, stream1, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#zip
  */
-export const zip = (f, stream1, source) =>
-  new Stream(withAttr(source.attr)(most.zip(f, stream1, source)));
+export const zip = (f, stream1, source) => (
+  new Stream(withAttr(source.attr)(most.zip(f, stream1, source)))
+);
 
 /**
  * For each event in a sampler Stream, replace the event value with the latest
@@ -462,8 +483,9 @@ export const resample = (sampler, source) => {
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#snapshot
  */
-export const snapshot = (f, values, source) =>
-  new Stream(withAttr(source.attr)(most.snapshot(f, values, source)));
+export const snapshot = (f, values, source) => (
+  new Stream(withAttr(source.attr)(most.snapshot(f, values, source)))
+);
 
 /**
  * Retain only events for which a predicate is truthy.
@@ -476,8 +498,9 @@ export const snapshot = (f, values, source) =>
  * @example
  * a = periodic(200).rand().filter(x => x > 0.8).tap(log);
  */
-export const filter = (p, source) =>
-  new Stream(withAttr(source.attr)(most.filter(p, source)));
+export const filter = (p, source) => (
+  new Stream(withAttr(source.attr)(most.filter(p, source)))
+);
 
 /**
  * Remove adjacent repeated events.
@@ -487,8 +510,9 @@ export const filter = (p, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#skiprepeats
  */
-export const skipRepeats = source =>
-  new Stream(withAttr(source.attr)(most.skipRepeats(source)));
+export const skipRepeats = source => (
+  new Stream(withAttr(source.attr)(most.skipRepeats(source)))
+);
 
 /**
  * Remove adjacent repeated events, using the provided equality function to
@@ -499,8 +523,9 @@ export const skipRepeats = source =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#skiprepeatswith
  */
-export const skipRepeatsWith = (equals, source) =>
-  new Stream(withAttr(source.attr)(most.skipRepeatsWith(equals, source)));
+export const skipRepeatsWith = (equals, source) => (
+  new Stream(withAttr(source.attr)(most.skipRepeatsWith(equals, source)))
+);
 
 /**
  * Keep only events in a range, where start <= index < end, and index is the
@@ -513,8 +538,9 @@ export const skipRepeatsWith = (equals, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#id48
  */
-export const slice = (start, end, source) =>
-  new Stream(withAttr(source.attr)(most.slice(start, end, source)));
+export const slice = (start, end, source) => (
+  new Stream(withAttr(source.attr)(most.slice(start, end, source)))
+);
 
 /**
  * Keep at most the first n events from `stream`.
@@ -525,8 +551,9 @@ export const slice = (start, end, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#take
  */
-export const take = (n, source) =>
-  new Stream(withAttr(source.attr)(most.take(n, source)));
+export const take = (n, source) => (
+  new Stream(withAttr(source.attr)(most.take(n, source)))
+);
 
 /**
  * Discard the first n events from stream.
@@ -537,8 +564,9 @@ export const take = (n, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#skip
  */
-export const skip = (n, source) =>
-  new Stream(withAttr(source.attr)(most.skip(n, source)));
+export const skip = (n, source) => (
+  new Stream(withAttr(source.attr)(most.skip(n, source)))
+);
 
 /**
  * Keep all events until predicate returns `false`, and discard the rest.
@@ -549,8 +577,9 @@ export const skip = (n, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#takewhile
  */
-export const takeWhile = (p, source) =>
-  new Stream(withAttr(source.attr)(most.takeWhile(p, source)));
+export const takeWhile = (p, source) => (
+  new Stream(withAttr(source.attr)(most.takeWhile(p, source)))
+);
 
 /**
  * Discard all events until predicate returns `false`, and keep the rest.
@@ -561,8 +590,9 @@ export const takeWhile = (p, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#skipwhile
  */
-export const skipWhile = (p, source) =>
-  new Stream(withAttr(source.attr)(most.skipWhile(p, source)));
+export const skipWhile = (p, source) => (
+  new Stream(withAttr(source.attr)(most.skipWhile(p, source)))
+);
 
 /**
  * Discard all events after the first event for which predicate returns true.
@@ -573,8 +603,9 @@ export const skipWhile = (p, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#skipafter
  */
-export const skipAfter = (p, source) =>
-  new Stream(withAttr(source.attr)(most.skipAfter(p, source)));
+export const skipAfter = (p, source) => (
+  new Stream(withAttr(source.attr)(most.skipAfter(p, source)))
+);
 
 /**
  * Keep all events in one Stream until the first event occurs in another.
@@ -585,8 +616,9 @@ export const skipAfter = (p, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#until
  */
-export const until = (endSignal, source) =>
-  new Stream(withAttr(source.attr)(most.until(endSignal, source)));
+export const until = (endSignal, source) => (
+  new Stream(withAttr(source.attr)(most.until(endSignal, source)))
+);
 
 /**
  * Discard all events in one Stream until the first event occurs in another.
@@ -597,8 +629,9 @@ export const until = (endSignal, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#since
  */
-export const since = (startSignal, source) =>
-  new Stream(withAttr(source.attr)(most.since(startSignal, source)));
+export const since = (startSignal, source) => (
+  new Stream(withAttr(source.attr)(most.since(startSignal, source)))
+);
 
 /**
  * Keep events that occur during a time window defined by a higher-order Stream.
@@ -607,8 +640,9 @@ export const since = (startSignal, source) =>
  * @param  {Stream} source Source stream
  * @return {Stream}
  */
-export const during = (timeWindow, source) =>
-  new Stream(withAttr(source.attr)(most.during(timeWindow, source)));
+export const during = (timeWindow, source) => (
+  new Stream(withAttr(source.attr)(most.during(timeWindow, source)))
+);
 
 /**
  * Timeshift a Stream by the specified Delay.
@@ -619,8 +653,9 @@ export const during = (timeWindow, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#id57
  */
-export const delay = (delayTime, source) =>
-  new Stream(withAttr(source.attr)(most.delay(delayTime, source)));
+export const delay = (delayTime, source) => (
+  new Stream(withAttr(source.attr)(most.delay(delayTime, source)))
+);
 
 /**
  * Create a Stream with localized Time values, whose origin (i.e., time 0) is
@@ -636,8 +671,9 @@ export const delay = (delayTime, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#withlocaltime
  */
-export const withLocalTime = (origin, source) =>
-  new Stream(withAttr(source.attr)(most.withLocalTime(origin, source)));
+export const withLocalTime = (origin, source) => (
+  new Stream(withAttr(source.attr)(most.withLocalTime(origin, source)))
+);
 
 /**
  * Limit the rate of events by suppressing events that occur too often
@@ -648,8 +684,9 @@ export const withLocalTime = (origin, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#throttle
  */
-export const throttle = (period, source) =>
-  new Stream(withAttr(source.attr)(most.throttle(period, source)));
+export const throttle = (period, source) => (
+  new Stream(withAttr(source.attr)(most.throttle(period, source)))
+);
 
 /**
  * Wait for a burst of events to subside and keep only the last event in the
@@ -664,8 +701,9 @@ export const throttle = (period, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#debounce
  */
-export const debounce = (period, source) =>
-  new Stream(withAttr(source.attr)(most.debounce(period, source)));
+export const debounce = (period, source) => (
+  new Stream(withAttr(source.attr)(most.debounce(period, source)))
+);
 
 /**
  * Create a Stream containing a promise’s value.
@@ -675,8 +713,9 @@ export const debounce = (period, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#frompromise
  */
-export const fromPromise = promise =>
-  new Stream(withAttr({})(most.fromPromise(promise)));
+export const fromPromise = promise => (
+  new Stream(withAttr({})(most.fromPromise(promise)))
+);
 
 /**
  * Turn a Stream of promises into a Stream containing the promises’ values.
@@ -686,8 +725,9 @@ export const fromPromise = promise =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#awaitpromises
  */
-export const awaitPromises = source =>
-  new Stream(withAttr({})(most.awaitPromises(source)));
+export const awaitPromises = source => (
+  new Stream(withAttr({})(most.awaitPromises(source)))
+);
 
 /**
  * Recover from a stream failure by calling a function to create a new Stream.
@@ -698,8 +738,9 @@ export const awaitPromises = source =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#recoverwith
  */
-export const recoverWith = (f, source) =>
-  new Stream(withAttr(source.attr)(most.recoverWith(f, source)));
+export const recoverWith = (f, source) => (
+  new Stream(withAttr(source.attr)(most.recoverWith(f, source)))
+);
 
 /**
  * Returns a Stream equivalent to the original but which can be shared more
@@ -710,8 +751,9 @@ export const recoverWith = (f, source) =>
  *
  * @see https://mostcore.readthedocs.io/en/latest/api.html#multicast
  */
-export const multicast = source =>
-  new Stream(withAttr(source.attr)(most.multicast(source)));
+export const multicast = source => (
+  new Stream(withAttr(source.attr)(most.multicast(source)))
+);
 
 /**
  * Utility function for Most DomEvent streams
@@ -744,8 +786,9 @@ function createPointerStream(eventType, node, capture) {
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const click = (node, capture = false) =>
-  createPointerStream('click', node, capture);
+export const click = (node, capture = false) => (
+  createPointerStream('click', node, capture)
+);
 
 /**
  * Create a stream of DOM dblclick events
@@ -756,8 +799,9 @@ export const click = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const dblclick = (node, capture = false) =>
-  createPointerStream('dblclick', node, capture);
+export const dblclick = (node, capture = false) => (
+  createPointerStream('dblclick', node, capture)
+);
 
 /**
  * Create a stream of DOM mousedown events
@@ -768,8 +812,9 @@ export const dblclick = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mousedown = (node, capture = false) =>
-  createPointerStream('mousedown', node, capture);
+export const mousedown = (node, capture = false) => (
+  createPointerStream('mousedown', node, capture)
+);
 
 /**
  * Create a stream of DOM mouseup events
@@ -780,8 +825,9 @@ export const mousedown = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mouseup = (node, capture = false) =>
-  createPointerStream('mouseup', node, capture);
+export const mouseup = (node, capture = false) => (
+  createPointerStream('mouseup', node, capture)
+);
 
 /**
  * Create a stream of DOM mousemove events
@@ -792,8 +838,9 @@ export const mouseup = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mousemove = (node, capture = false) =>
-  createPointerStream('mousemove', node, capture);
+export const mousemove = (node, capture = false) => (
+  createPointerStream('mousemove', node, capture)
+);
 
 /**
  * Create a stream of DOM mouseover events
@@ -804,8 +851,9 @@ export const mousemove = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mouseover = (node, capture = false) =>
-  createPointerStream('mouseover', node, capture);
+export const mouseover = (node, capture = false) => (
+  createPointerStream('mouseover', node, capture)
+);
 
 /**
  * Create a stream of DOM mouseenter events
@@ -816,8 +864,9 @@ export const mouseover = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mouseenter = (node, capture = false) =>
-  createPointerStream('mouseenter', node, capture);
+export const mouseenter = (node, capture = false) => (
+  createPointerStream('mouseenter', node, capture)
+);
 
 /**
  * Create a stream of DOM mouseout events
@@ -828,8 +877,9 @@ export const mouseenter = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mouseout = (node, capture = false) =>
-  createPointerStream('mouseout', node, capture);
+export const mouseout = (node, capture = false) => (
+  createPointerStream('mouseout', node, capture)
+);
 
 /**
  * Create a stream of DOM mouseleave events
@@ -840,8 +890,9 @@ export const mouseout = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const mouseleave = (node, capture = false) =>
-  createPointerStream('mouseleave', node, capture);
+export const mouseleave = (node, capture = false) => (
+  createPointerStream('mouseleave', node, capture)
+);
 
 /**
  * Create a stream of DOM touchstart events
@@ -852,8 +903,9 @@ export const mouseleave = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const touchstart = (node, capture = false) =>
-  createPointerStream('touchstart', node, capture);
+export const touchstart = (node, capture = false) => (
+  createPointerStream('touchstart', node, capture)
+);
 
 /**
  * Create a stream of DOM touchend events
@@ -864,8 +916,9 @@ export const touchstart = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const touchend = (node, capture = false) =>
-  createPointerStream('touchend', node, capture);
+export const touchend = (node, capture = false) => (
+  createPointerStream('touchend', node, capture)
+);
 
 /**
  * Create a stream of DOM touchmove events
@@ -876,8 +929,9 @@ export const touchend = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const touchmove = (node, capture = false) =>
-  createPointerStream('touchmove', node, capture);
+export const touchmove = (node, capture = false) => (
+  createPointerStream('touchmove', node, capture)
+);
 
 /**
  * Create a stream of DOM touchcancel events
@@ -888,5 +942,6 @@ export const touchmove = (node, capture = false) =>
  *
  * @see https://github.com/mostjs/dom-event
  */
-export const touchcancel = (node, capture = false) =>
-  createPointerStream('touchcancel', node, capture);
+export const touchcancel = (node, capture = false) => (
+  createPointerStream('touchcancel', node, capture)
+);

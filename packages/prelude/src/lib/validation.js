@@ -107,9 +107,9 @@ export default function validateStream(operator, specification, values) {
     // Check the validity of the input stream's attribute
     checkSpec(operator, attr, spec.check, values[attr]);
 
-    attributes[attr] = spec.transform ?
-      spec.transform(values[attr]) :
-      values[attr];
+    attributes[attr] = spec.transform
+      ? spec.transform(values[attr])
+      : values[attr];
   });
   return attributes;
 }

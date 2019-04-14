@@ -146,8 +146,7 @@ export class CatartEngine extends ConcatenativeEngine {
       max: Array.from(Array(dim), () => -Infinity),
     });
     descData.forEach((v, j) => {
-      descData[j] = v.map((x, i) =>
-        ((x - bounds.min[i]) / (bounds.max[i] - bounds.min[i])))
+      descData[j] = v.map((x, i) => ((x - bounds.min[i]) / (bounds.max[i] - bounds.min[i])))
         .concat([j]);
     });
     this.knn = new KNN(descData, { k: this.k });

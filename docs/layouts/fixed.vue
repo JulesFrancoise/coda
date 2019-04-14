@@ -7,10 +7,11 @@
 </template>
 
 <script type="text/javascript">
-import SiteHeader from '../components/Header.vue';
-import SiteFooter from '../components/Footer.vue';
+import SiteHeader from '../components/Header';
+// import SiteFooter from '../components/Footer';
 
 export default {
-  components: { SiteHeader, SiteFooter },
+  components: { SiteHeader },
+  // components: { SiteHeader, SiteFooter },
 };
 </script>

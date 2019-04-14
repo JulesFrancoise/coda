@@ -29,7 +29,7 @@ test('Throws if the input stream has invalid attributes', async () => {
 });
 
 test('Extracts the force from a scalar stream of EMG Data', async () => {
-  const emg = readFileSync('./test/data/emg.txt', 'utf8')
+  const emg = readFileSync('./packages/core/test/data/emg.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => parseFloat(line.split(' ')[0]));
@@ -47,7 +47,7 @@ test('Extracts the force from a scalar stream of EMG Data', async () => {
   result.forEach(({ value }) => {
     expect(typeof value).toBe('number');
   });
-  const mubuForce = readFileSync('./test/data/force.txt', 'utf8')
+  const mubuForce = readFileSync('./packages/core/test/data/force.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => parseFloat(line.split(' ')[0]));
@@ -61,7 +61,7 @@ test('Extracts the force from a scalar stream of EMG Data', async () => {
 });
 
 test('Extracts the force from a vector stream of EMG Data', async () => {
-  const emg = readFileSync('./test/data/emg.txt', 'utf8')
+  const emg = readFileSync('./packages/core/test/data/emg.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat));
@@ -79,13 +79,13 @@ test('Extracts the force from a vector stream of EMG Data', async () => {
   result.forEach(({ value }) => {
     expect(value instanceof Array).toBeTruthy();
   });
-  const mubuForce = readFileSync('./test/data/force.txt', 'utf8')
+  const mubuForce = readFileSync('./packages/core/test/data/force.txt', 'utf8')
     .split('\n')
     .filter(l => l !== '')
     .map(line => line.split(' ').map(parseFloat));
-  const percentCorrect = result.map(({ value }, i) =>
-    allTrue(approxArrayEqual(value, mubuForce[i], 0.02)))
-    .reduce((y, x) => y + x, 0.0);
+  const percentCorrect = result.map(({ value }, i) => allTrue(
+    approxArrayEqual(value, mubuForce[i], 0.02),
+  )).reduce((y, x) => y + x, 0.0);
   // Check that 90% of the prediction is correct (to allow numerical errors)
   expect(percentCorrect / result.length > 0.9).toBeTruthy();
 });

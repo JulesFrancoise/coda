@@ -277,8 +277,7 @@ function bayesianFilter(
   for (let t = 0; t < levels; t += 1) {
     state[t] = ((t + 1) * mvc) / levels;
   }
-  const diff = (diffusion ** 2) /
-    (samplerate * ((mvc / levels) ** 2));
+  const diff = (diffusion ** 2) / (samplerate * ((mvc / levels) ** 2));
   g[0] = diff / 2.0;
   g[1] = 1.0 - diff - jumpRate;
   g[2] = diff / 2.0;

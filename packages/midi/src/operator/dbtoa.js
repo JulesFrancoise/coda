@@ -36,8 +36,8 @@ const specification = {
  */
 export default function dbtoa(source) {
   const attr = validateStream('dbtoa', specification, source.attr);
-  const func = (attr.format === 'scalar') ?
-    db => 10 ** (db / 20) :
-    x => x.map(db => 10 ** (db / 20));
+  const func = (attr.format === 'scalar')
+    ? db => 10 ** (db / 20)
+    : x => x.map(db => 10 ** (db / 20));
   return withAttr(attr)(map(func, source));
 }

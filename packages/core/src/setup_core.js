@@ -1,11 +1,23 @@
-import elementwise, { add, sub, mul, div } from './operator/elementwise';
+import elementwise, {
+  add,
+  sub,
+  mul,
+  div,
+} from './operator/elementwise';
 import { mean, std, meanstd } from './operator/meanstd';
 import pak from './operator/pak';
 import pack from './operator/pack';
 import schmitt from './operator/schmitt';
 import select from './operator/select';
 import slide from './operator/slide';
-import reduce, { min, max, minmax, sum, prod, norm } from './operator/reduce';
+import reduce, {
+  min,
+  max,
+  minmax,
+  sum,
+  prod,
+  norm,
+} from './operator/reduce';
 import unpack from './operator/unpack';
 import biquad from './operator/biquad';
 import force from './operator/force';

@@ -74,15 +74,16 @@ class AdaptiveScaleSink {
     this.skip = this.refresh * this.samplerate;
     this.buffer = new CircularBuffer(this.windowsSize);
     this.eventIndex = 0;
-    this.updateMinMax = (attr.format === 'scalar') ?
-      this.updateMinMaxScalar :
-      this.updateMinMaxVector;
+    this.updateMinMax = (attr.format === 'scalar')
+      ? this.updateMinMaxScalar
+      : this.updateMinMaxVector;
     this.eventIndex = 0;
-    this.scaleValue = (attr.format === 'scalar') ?
-      this.scaleScalar :
-      this.scaleVector;
+    this.scaleValue = (attr.format === 'scalar')
+      ? this.scaleScalar
+      : this.scaleVector;
     this.size = attr.size;
   }
+
   /**
    * @param  {Number} t Timestamp
    * @param  {Number} x value

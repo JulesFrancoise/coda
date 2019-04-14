@@ -14,7 +14,9 @@ let plugins = [
   VuePlugin(),
   babel({
     exclude: 'node_modules/**',
-    plugins: ['external-helpers'],
+    runtimeHelpers: true,
+    sourceMap: true,
+    extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue'],
   }),
 ];
 if (process.env.NODE_ENV === 'production') {

@@ -161,11 +161,11 @@ export default class LowpassFilter {
   filter(value) {
     const filteredValue = (this.b[0] * value) + this.z[0];
     for (let i = 0; i < this.order - 1; i += 1) {
-      this.z[i] = ((this.b[i + 1] * value) + this.z[i + 1]) -
-        (this.a[i + 1] * filteredValue);
+      this.z[i] = ((this.b[i + 1] * value) + this.z[i + 1])
+        - (this.a[i + 1] * filteredValue);
     }
-    this.z[this.order - 1] = (this.b[this.order] * value) -
-      (this.a[this.order] * filteredValue);
+    this.z[this.order - 1] = (this.b[this.order] * value)
+      - (this.a[this.order] * filteredValue);
     return filteredValue;
   }
 }

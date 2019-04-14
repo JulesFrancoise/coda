@@ -1,6 +1,8 @@
 <template>
   <div class="api_entry">
-    <h2 class="name"># {{entry.name}} <span style="color: #9f9f9f;">{{signature(entry, false)}}</span></h2>
+    <h2 class="name">
+      # {{entry.name}} <span style="color: #9f9f9f;">{{signature(entry, false)}}</span>
+    </h2>
     <div class="api_entry_container">
       <api-paragraph
         v-for="(d, k) in entry.description.children"
@@ -69,7 +71,9 @@
         class="returns"
         v-if="entry.returns.length"
       >
-        <code style='margin-left: 10px;'>{{entry.returns[0].type && entry.returns[0].type.name}}</code>
+        <code style='margin-left: 10px;'>
+          {{entry.returns[0].type && entry.returns[0].type.name}}
+        </code>
         <span v-if="!!entry.returns[0].description">
           <api-paragraph
             v-for="(par, l) in entry.returns[0].description.children"
@@ -84,7 +88,10 @@
         v-if="hasOwnProperties || hasParentProperties"
       >
         <ul class="classProperties">
-          <li v-for="m in entry.properties">
+          <li
+            v-for="(m, cpidx) in entry.properties"
+            :key="`class-prop-${cpidx}`"
+          >
             <code>.{{m.name}}: {{formatType(m.type)}}</code> <api-paragraph
               v-for="(par, l) in m.description.children"
               :key="`api-entry-ret-par-${l}`"
@@ -93,22 +100,27 @@
           </li>
         </ul>
         <div
-          v-for="parent in parents.filter(x => x.properties.length)"
           v-if="hasParentProperties"
         >
-          <i>Inherited from {{parent.name}}:</i>
-          <ul class="classProperties">
-            <li
-              v-for="m in parent.properties"
-              v-if="!entry.properties.map(x => x.name).includes(m.name)"
-            >
-            <code>.{{m.name}}: {{formatType(m.type)}}</code> <api-paragraph
-              v-for="(par, l) in m.description.children"
-              :key="`api-entry-ret-par-${l}`"
-              :data="par"
-            ></api-paragraph>
-            </li>
-          </ul>
+          <div
+            v-for="(parent, pidx) in parents.filter(x => x.properties.length)"
+            :key="`class-parent-${pidx}`"
+          >
+            <i>Inherited from {{parent.name}}:</i>
+            <ul class="classProperties">
+              <li
+                v-for="(m, cpidx) in parent.properties
+                  .filter(m => !entry.properties.map(x => x.name).includes(m.name))"
+                :key="`class-prop-${cpidx}`"
+              >
+              <code>.{{m.name}}: {{formatType(m.type)}}</code> <api-paragraph
+                v-for="(par, l) in m.description.children"
+                :key="`api-entry-ret-par-${l}`"
+                :data="par"
+              ></api-paragraph>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <h4 v-if="hasOwnMembers || hasParentMembers">Methods</h4>
@@ -117,27 +129,33 @@
         v-if="hasOwnMembers || hasParentMembers"
       >
         <ul class="classMethod">
-          <li v-for="m in entry.members.instance">
+          <li
+            v-for="(m, cmidx) in entry.members.instance"
+            :key="`class-method-id-${cmidx}`"
+          >
             .{{signature(m)}}
           </li>
         </ul>
-        <div
-          v-for="parent in parents.filter(x => x.members.instance.length)"
-          v-if="hasParentMembers"
-        >
-          <i>Inherited from {{parent.name}}:</i>
-          <ul class="classMethod">
-            <li
-              v-for="m in parent.members.instance"
-              v-if="!entry.members.instance.map(x => x.name).includes(m.name)"
-            >
-              <code style="font-weight: normal;">.{{signature(m)}}</code> <api-paragraph
-              v-for="(par, l) in m.description.children"
-              :key="`api-entry-ret-par-${l}`"
-              :data="par"
-              ></api-paragraph>
-            </li>
-          </ul>
+        <div v-if="hasParentMembers">
+          <div
+            v-for="(parent, paridx) in parents.filter(x => x.members.instance.length)"
+            :key="`parent-idx-${paridx}`"
+          >
+            <i>Inherited from {{parent.name}}:</i>
+            <ul class="classMethod">
+              <li
+                v-for="(m, pardidx) in parent.members.instance
+                  .filter(m => !entry.members.instance.map(x => x.name).includes(m.name))"
+                :key="`parent-idx-${pardidx}`"
+              >
+                <code style="font-weight: normal;">.{{signature(m)}}</code> <api-paragraph
+                v-for="(par, l) in m.description.children"
+                :key="`api-entry-ret-par-${l}`"
+                :data="par"
+                ></api-paragraph>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <h4>Examples</h4>
@@ -165,8 +183,8 @@
 </template>
 
 <script>
-import ApiParagraph from './ApiParagraph.vue';
-import CodeExample from './CodeExample.vue';
+import ApiParagraph from './ApiParagraph';
+import CodeExample from './CodeExample';
 
 export default {
   name: 'api-entry',

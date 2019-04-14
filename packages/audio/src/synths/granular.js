@@ -129,8 +129,7 @@ export class GranularEngine extends BaseAudioEngine {
       'position',
       options.position,
       (value) => {
-        this.granularEngine.position =
-          value * this.granularEngine.bufferDuration;
+        this.granularEngine.position = value * this.granularEngine.bufferDuration;
       },
     );
     this.defineParameter(
