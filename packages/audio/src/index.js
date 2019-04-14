@@ -1,3 +1,5 @@
+export { default as Master } from './core/master';
+
 // Synths
 export { default as granular } from './synths/granular';
 export { default as concatenative } from './synths/concatenative';
@@ -17,5 +19,3 @@ export { default as phaser } from './fx/phaser';
 export { default as panner } from './fx/panner';
 export { default as pingpong } from './fx/pingpong';
 export { default as tremolo } from './fx/tremolo';
-
-export { Master } from './core/base';

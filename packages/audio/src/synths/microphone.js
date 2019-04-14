@@ -1,5 +1,5 @@
-import { audioContext } from 'waves-audio';
 import { parseParameters } from '@coda/prelude';
+import { audioContext } from '../core/master';
 import BaseAudioEngine from '../core/base';
 
 /**

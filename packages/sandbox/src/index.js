@@ -211,6 +211,8 @@ const runInSandbox = sandbox => async function run(code) {
   }
 };
 
+export { Master } from '@coda/audio';
+
 export default function createSandbox(uiContainer, logCallback) {
   codaCore.Stream.use(codaUi, uiContainer);
   const s = Object.assign(

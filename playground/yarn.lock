@@ -1787,6 +1787,11 @@ warning-symbol@^0.1.0:
   resolved "https://registry.yarnpkg.com/warning-symbol/-/warning-symbol-0.1.0.tgz#bb31dd11b7a0f9d67ab2ed95f457b65825bbad21"
   integrity sha1-uzHdEbeg+dZ6su2V9Fe2WCW7rSE=
 
+web-audio-peak-meter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/web-audio-peak-meter/-/web-audio-peak-meter-1.0.0.tgz#cd988d6e73ea0523354085fba31b867d0f713523"
+  integrity sha1-zZiNbnPqBSM1QIX7oxuGfQ9xNSM=
+
 which-pm-runs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/which-pm-runs/-/which-pm-runs-1.0.0.tgz#670b3afbc552e0b55df6b7780ca74615f23ad1cb"

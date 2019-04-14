@@ -1,6 +1,6 @@
 import * as wavesLoaders from 'waves-loaders';
-import { audioContext } from 'waves-audio';
 import { parseParameters } from '@coda/prelude';
+import { audioContext } from '../core/master';
 import BaseAudioEffect from '../core/effect';
 
 /**

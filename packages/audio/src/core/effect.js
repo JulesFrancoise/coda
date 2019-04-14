@@ -1,4 +1,4 @@
-import { audioContext } from 'waves-audio';
+import { audioContext } from './master';
 import BaseAudioEngine from './base';
 
 /**

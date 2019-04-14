@@ -5,8 +5,8 @@ import {
   throttle,
 } from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
-import BaseAudioEngine, { masterGain } from './base';
-// import { masterGain } from './base';
+import BaseAudioEngine from './base';
+import Master from './master';
 
 /**
  * Base architecture for Polyphonic Audio engines accepting stream parameters
@@ -76,8 +76,7 @@ export default class PolyAudioEngine extends BaseAudioEngine {
         this.output.connect(destination);
       }
     } else {
-      this.output.connect(masterGain);
-      // this.output.connect(audioContext.destination);
+      this.output.connect(Master.masterGainNode);
     }
     return this;
   }
@@ -96,8 +95,7 @@ export default class PolyAudioEngine extends BaseAudioEngine {
         this.output.disconnect(destination);
       }
     } else {
-      this.output.disconnect(masterGain);
-      // this.output.disconnect(audioContext.destination);
+      this.output.disconnect(Master.masterGainNode);
     }
     return this;
   }

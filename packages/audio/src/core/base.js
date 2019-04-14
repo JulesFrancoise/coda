@@ -1,4 +1,3 @@
-import { audioContext } from 'waves-audio';
 import {
   runEffects,
   tap,
@@ -6,27 +5,7 @@ import {
   throttle,
 } from '@most/core';
 import { newDefaultScheduler } from '@most/scheduler';
-
-export const masterGain = audioContext.createGain();
-masterGain.gain.setValueAtTime(0.3, audioContext.currentTime);
-masterGain.connect(audioContext.destination);
-
-export const Master = {
-  setGain(value) {
-    masterGain.gain.setValueAtTime(value, audioContext.currentTime);
-  },
-  getGain() {
-    return masterGain.gain;
-  },
-  gain: {
-    set(value) {
-      masterGain.gain.setValueAtTime(value, audioContext.currentTime);
-    },
-    get() {
-      return masterGain.gain;
-    },
-  },
-};
+import Master, { audioContext } from './master';
 
 /**
  * Base architecture for Audio engines accepting stream parameters
@@ -69,8 +48,7 @@ export default class BaseAudioEngine {
         this.output.connect(destination);
       }
     } else {
-      this.output.connect(masterGain);
-      // this.output.connect(audioContext.destination);
+      this.output.connect(Master.masterGainNode);
     }
     return this;
   }
@@ -89,8 +67,7 @@ export default class BaseAudioEngine {
         this.output.disconnect(destination);
       }
     } else {
-      this.output.disconnect(masterGain);
-      // this.output.disconnect(audioContext.destination);
+      this.output.disconnect(Master.masterGainNode);
     }
     return this;
   }

@@ -9,16 +9,7 @@ import pkg from './package.json';
 
 let plugins = [
   resolve(),
-  commonjs({
-    // browser: true,
-    // preferBuiltins: false,
-    // namedExports: {
-    //   // left-hand side can be an absolute path, a path
-    //   // relative to the current directory, or the name
-    //   // of a module in node_modules
-    //   'waves-audio': ['audioContext'],
-    // },
-  }),
+  commonjs(),
   babel({
     exclude: 'node_modules/**',
   }),

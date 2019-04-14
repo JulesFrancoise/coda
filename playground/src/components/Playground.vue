@@ -14,6 +14,7 @@
         @run="run"
       />
       <div class="console" :class="consoleError && 'error'">{{consoleMsg}}</div>
+      <div id="meter"></div>
     </div>
     <div
       id="splitbar"
@@ -31,7 +32,8 @@
 </template>
 
 <script>
-import createSandbox from '@coda/sandbox';
+import createSandbox, { Master } from '@coda/sandbox';
+import webAudioPeakMeter from 'web-audio-peak-meter';
 import Editor from './Editor';
 
 export default {
@@ -87,6 +89,18 @@ export default {
     document.documentElement.addEventListener('touchmove', this.move, true);
     document.documentElement.addEventListener('touchend touchcancel', this.up, true);
     document.documentElement.addEventListener('touchstart', this.up, true);
+
+    const myMeterElement = document.getElementById('meter');
+    const meterNode = webAudioPeakMeter.createMeterNode(Master.masterGainNode, Master.audioContext);
+    webAudioPeakMeter.createMeter(myMeterElement, meterNode, {
+      borderSize: 0,
+      fontSize: 8,
+      backgroundColor: '#0C1021',
+      tickColor: 'transparent',
+      gradient: ['red 2%', '#ff0 16%', 'lime 45%', '#080 100%'],
+      maskTransition: '0.2s',
+    });
+    console.log('webAudioPeakMeter', webAudioPeakMeter);
   },
   beforeDestroy() {
     document.documentElement.removeEventListener('mousemove', this.move);
@@ -144,6 +158,7 @@ export default {
   background-color: #000620;
   color: #6d8a88;
   transition: background-color 1s linear;
+  font-family: monospace;
 }
 
 .console.error {
@@ -168,11 +183,21 @@ export default {
 }
 
 #ui {
+  position: relative;
   width: calc(50% - 3px);
   padding-right: 8px;
   height: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column;
+}
+
+#meter {
+  position: absolute;
+  left: -16px;
+  bottom: 0;
+  width: 18px;
+  height: 100%;
+  z-index: 5;
 }
 </style>
