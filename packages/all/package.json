@@ -1,7 +1,7 @@
 {
   "name": "@coda/all",
   "description": "CO/DA - All libs!",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "private": true,
@@ -13,12 +13,12 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@coda/audio": "^0.0.1",
-    "@coda/core": "^0.0.1",
-    "@coda/max": "^0.0.1",
-    "@coda/midi": "^0.0.1",
-    "@coda/ml": "^0.0.1",
-    "@coda/sensors": "^0.0.1",
-    "@coda/ui": "^0.0.1"
+    "@coda/audio": "^0.0.2",
+    "@coda/core": "^0.0.2",
+    "@coda/max": "^0.0.2",
+    "@coda/midi": "^0.0.2",
+    "@coda/ml": "^0.0.2",
+    "@coda/sensors": "^0.0.2",
+    "@coda/ui": "^0.0.2"
   }
 }

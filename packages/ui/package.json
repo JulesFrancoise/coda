@@ -1,7 +1,7 @@
 {
   "name": "@coda/ui",
   "description": "Movement Analysis & Visualization with Reactive Streams",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "private": true,
@@ -13,7 +13,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@coda/prelude": "^0.0.1",
+    "@coda/prelude": "^0.0.2",
     "@most/disposable": "^1.2.1",
     "@most/scheduler": "^1.2.2",
     "colormap": "^2.3.1",

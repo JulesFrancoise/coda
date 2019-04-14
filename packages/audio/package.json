@@ -1,7 +1,7 @@
 {
   "name": "@coda/audio",
   "description": "Movement Analysis with Reactive Streams",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "private": true,
@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@coda/prelude": "^0.0.1",
+    "@coda/prelude": "^0.0.2",
     "@most/core": "^1.3.4",
     "@most/scheduler": "^1.2.2",
     "ml-distance-euclidean": "^2.0.0",
