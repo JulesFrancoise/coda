@@ -1,8 +1,8 @@
 <template>
   <div id="header">
     <div class="menu">
-      <h1>CO/DA</h1>
-      <span>demos:</span>
+      <h1 style="font-family: monospace; font-size: 12px;">coda.playground }-{o</h1>
+      <span></span>
       <select v-model=selected>
         <optgroup label="user examples">
           <option
@@ -17,7 +17,7 @@
           >{{example}}</option>
         </optgroup>
       </select>
-      <button type="button" name="run" @click="runScript">run</button>
+      <!-- <button type="button" name="run" @click="runScript">run</button> -->
     </div>
     <div id="streams"></div>
   </div>
@@ -89,17 +89,23 @@ export default {
   flex-direction: row;
   padding: 8px;
   justify-content: flex-end;
+  font-family: monospace;
 }
 
 #streams .stream {
-  padding-top: 2px;
   padding-bottom: 5px;
   padding-left: 6px;
   padding-right: 6px;
   margin-left: 6px;
   height: 10px;
-  border: 1px solid #258ccf;
-  color: #258ccf;
+  border: 1px solid #3c4972;
+  color: #3c4972;
   border-radius: 10px;
+}
+
+select {
+  background-color: #0C1021;
+  border-color: #3c4972;
+  color: #3c4972;
 }
 </style>
