@@ -90,6 +90,8 @@ export default {
     document.documentElement.addEventListener('touchend touchcancel', this.up, true);
     document.documentElement.addEventListener('touchstart', this.up, true);
 
+    document.documentElement.addEventListener('mousedown', this.mousedown, true);
+
     const myMeterElement = document.getElementById('meter');
     const meterNode = webAudioPeakMeter.createMeterNode(Master.masterGainNode, Master.audioContext);
     webAudioPeakMeter.createMeter(myMeterElement, meterNode, {
@@ -100,7 +102,6 @@ export default {
       gradient: ['red 2%', '#ff0 16%', 'lime 45%', '#080 100%'],
       maskTransition: '0.2s',
     });
-    console.log('webAudioPeakMeter', webAudioPeakMeter);
   },
   beforeDestroy() {
     document.documentElement.removeEventListener('mousemove', this.move);
@@ -127,6 +128,10 @@ export default {
     },
     run(code) {
       this.runSnippet(code);
+    },
+    mousedown() {
+      Master.audioContext.resume();
+      document.documentElement.removeEventListener('mousedown', this.mousedown, true);
     },
   },
 };
