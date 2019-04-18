@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    const example = 'basic';
+    const example = process.env.VUE_APP_DEFAULT_SCRIPT;
     this.load(example);
     this.$refs.header.selected = example;
     // window.onbeforeunload = () => '';

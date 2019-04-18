@@ -3,17 +3,15 @@
     <div class="menu">
       <h1 style="font-family: monospace; font-size: 12px;">coda.playground }-{o</h1>
       <span></span>
-      <select v-model=selected>
-        <optgroup label="user examples">
+      <select v-model="selected">
+        <optgroup
+          v-for="proj in projects"
+          :key="`optgroup-${proj}`"
+          :label="proj"
+        >
           <option
-            v-for="example in userExamples"
-            :key="`userEx-${example}`"
-          >{{example}}</option>
-        </optgroup>
-        <optgroup label="default examples">
-          <option
-            v-for="example in defaultExamples"
-            :key="`defEx-${example}`"
+            v-for="example in projectExamples[proj]"
+            :key="`projectEx-${proj}-${example}`"
           >{{example}}</option>
         </optgroup>
       </select>
@@ -28,10 +26,16 @@ export default {
   name: 'MyHeader',
   data() {
     const defaultExample = 'basic';
+    const projects = process.env.VUE_APP_PROJECTS.split(':');
+    const projectExamples = projects
+      .map(proj => ({
+        [proj]: process.env[`VUE_APP_EXAMPLES_${proj.toUpperCase()}`].split(':'),
+      }))
+      .reduce((a, b) => ({ ...a, ...b }), {});
     return {
       selected: defaultExample,
-      userExamples: process.env.VUE_APP_USER_EXAMPLES.split(':'),
-      defaultExamples: process.env.VUE_APP_DEFAULT_EXAMPLES.split(':'),
+      projects,
+      projectExamples,
     };
   },
   watch: {

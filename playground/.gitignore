@@ -23,10 +23,6 @@ yarn-error.log*
 
 # Local examples and media
 
-examples/*
-!examples/_default
-!examples/README.md
-
-media/*
-!media/_default
-!media/README.md
+projects/*
+!projects/Examples
+!projects/README.md
