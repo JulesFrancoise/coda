@@ -9,13 +9,14 @@ import configSensors from './packages/sensors/rollup.config';
 import configUi from './packages/ui/rollup.config';
 
 function fixConfiguration(config, path) {
-  config.input = `${path}/${config.input}`;
+  const c = config;
+  c.input = `${path}/${config.input}`;
   if (Array.isArray(config.output)) {
     config.output.forEach((o, i) => {
-      config.output[i].file = `${path}/${o.file}`;
+      c.output[i].file = `${path}/${o.file}`;
     });
   } else {
-    config.output.file = `${path}/${config.output.file}`;
+    c.output.file = `${path}/${config.output.file}`;
   }
 }
 

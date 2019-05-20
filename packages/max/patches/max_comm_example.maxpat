@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -44,7 +44,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 52.509185791015625, 403.0, 71.0, 22.0 ],
+					"patching_rect" : [ 20.509185791015625, 400.0, 71.0, 22.0 ],
 					"text" : "fromsymbol"
 				}
 
@@ -56,7 +56,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 52.509185791015625, 15.0, 113.0, 22.0 ],
+					"patching_rect" : [ 20.509185791015625, 12.0, 113.0, 22.0 ],
 					"text" : "metro 10 @active 1"
 				}
 
@@ -68,7 +68,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 109.509185791015625, 314.0, 29.5, 22.0 ],
+					"patching_rect" : [ 77.509185791015625, 311.0, 29.5, 22.0 ],
 					"text" : "t b l"
 				}
 
@@ -80,7 +80,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 194.657470703125, 190.0, 65.0, 22.0 ],
+					"patching_rect" : [ 162.657470703125, 187.0, 65.0, 22.0 ],
 					"text" : "0.1 0.2 0.3"
 				}
 
@@ -92,7 +92,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 109.509185791015625, 190.0, 65.0, 22.0 ],
+					"patching_rect" : [ 77.509185791015625, 187.0, 65.0, 22.0 ],
 					"text" : "0.1 0.2 0.3"
 				}
 
@@ -104,7 +104,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 52.509185791015625, 503.0, 348.0, 22.0 ],
+					"patching_rect" : [ 20.509185791015625, 459.0, 348.0, 22.0 ],
 					"text" : "bla 0.835443 0.012018 0.652915"
 				}
 
@@ -116,7 +116,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 194.657470703125, 234.0, 79.0, 22.0 ],
+					"patching_rect" : [ 162.657470703125, 231.0, 79.0, 22.0 ],
 					"text" : "prepend gyro"
 				}
 
@@ -128,7 +128,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 109.509185791015625, 234.0, 75.0, 22.0 ],
+					"patching_rect" : [ 77.509185791015625, 231.0, 75.0, 22.0 ],
 					"text" : "prepend acc"
 				}
 
@@ -141,7 +141,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 52.509185791015625, 359.0, 89.0, 22.0 ],
+					"patching_rect" : [ 20.509185791015625, 356.0, 89.0, 22.0 ],
 					"text" : "ws @port 8081"
 				}
 
