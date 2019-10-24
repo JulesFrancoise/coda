@@ -1,7 +1,7 @@
 {
   "name": "@coda/sandbox",
   "description": "CO/DA Sanndbox for live-coding",
-  "version": "0.0.2",
+  "version": "0.0.3-alpha.0",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -13,13 +13,13 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@coda/audio": "^0.0.2",
-    "@coda/core": "^0.0.2",
-    "@coda/max": "^0.0.2",
-    "@coda/midi": "^0.0.2",
-    "@coda/ml": "^0.0.2",
-    "@coda/sensors": "^0.0.2",
-    "@coda/ui": "^0.0.2",
+    "@coda/audio": "^0.0.3-alpha.0",
+    "@coda/core": "^0.0.3-alpha.0",
+    "@coda/max": "^0.0.3-alpha.0",
+    "@coda/midi": "^0.0.3-alpha.0",
+    "@coda/ml": "^0.0.3-alpha.0",
+    "@coda/sensors": "^0.0.3-alpha.0",
+    "@coda/ui": "^0.0.3-alpha.0",
     "@most/scheduler": "^1.2.2",
     "escodegen": "^1.11.1",
     "esprima": "^4.0.1"
