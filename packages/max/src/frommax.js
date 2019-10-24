@@ -86,8 +86,8 @@ const definitions = {
     default: 'localhost',
   },
   port: {
-    type: 'string',
-    default: 'localhost',
+    type: 'integer',
+    default: 8080,
   },
   channel: {
     type: 'string',
