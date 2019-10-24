@@ -81,7 +81,11 @@ const socketClient = new SocketClient();
  * @ignore
  */
 const definitions = {
-  hostname: {
+  host: {
+    type: 'string',
+    default: 'localhost',
+  },
+  port: {
     type: 'string',
     default: 'localhost',
   },
@@ -110,15 +114,20 @@ function tryEvent(t, x, sink) {
 /**
  * Receive data from Max
  *
- * @param  {Object}  [options={}]                   Options
- * @param  {string} [options.hostname='localhost'] Hostname (ws server)
+ * @param  {Object} [options={}]                   Options
+ * @param  {string} [options.host='localhost'] Hostname (ws server)
+ * @param  {number} [options.port=8080] Port (ws server)
  * @param  {string} [options.channel='data']       Channel name
  * @return {Stream}                                 Unchanged stream
  */
 export default function fromMax(options = {}) {
-  const { hostname, channel, size } = parseParameters(definitions, options);
-  // connectWebsocket(hostname, 8081);
-  socketClient.connect(hostname, 8081);
+  const {
+    host,
+    port,
+    channel,
+    size,
+  } = parseParameters(definitions, options);
+  socketClient.connect(host, port);
   return {
     attr: { format: size > 1 ? 'vector' : 'scalar', size },
     run(sink, scheduler) {
