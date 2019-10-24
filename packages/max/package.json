@@ -1,7 +1,7 @@
 {
   "name": "@coda/max",
   "description": "CO/DA Communication with Cycling'74 Max",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.3-alpha.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",
