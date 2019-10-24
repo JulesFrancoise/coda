@@ -1,6 +1,6 @@
 {
   "name": "@coda/playground",
-  "version": "0.0.3-alpha.1",
+  "version": "0.0.3-alpha.2",
   "private": true,
   "description": "A live-coding editor playground for Coda",
   "author": "Jules Françoise <me@julesfrancoise.com>",
@@ -12,7 +12,7 @@
     "server": "node server/index.js"
   },
   "dependencies": {
-    "@coda/sandbox": "^0.0.3-alpha.1",
+    "@coda/sandbox": "^0.0.3-alpha.2",
     "@ircam/motion-input": "^1.0.7",
     "codemirror": "^5.45.0",
     "express": "^4.16.4",
