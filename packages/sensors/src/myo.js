@@ -212,11 +212,17 @@ class MyoQuatSource extends MyoDataSource {
   }
 }
 
-try {
-  Myo.connect('com.coda.myolala');
-} catch (e) {
-  // eslint-disable-next-line no-console
-  console.log('Unable to activate myo (use only locally)');
+let initialized = false;
+
+function initializeMyoSDK() {
+  if (initialized) return;
+  try {
+    Myo.connect('com.coda.myolala');
+    initialized = true;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Unable to activate myo (use only locally)');
+  }
 }
 
 /**
@@ -282,6 +288,7 @@ function tryEvent(t, x, sink) {
 
  */
 export default function myo(name = '') {
+  initializeMyoSDK();
   const deviceList = Myo.myos.map(x => x.name);
   const deviceName = name || (deviceList && deviceList[0]);
   const device = Myo.myos[deviceList.indexOf(deviceName)];
