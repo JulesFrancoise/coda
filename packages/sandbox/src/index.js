@@ -74,71 +74,56 @@ class Sandbox {
   async run(code) {
     // 1. Parse the JS code to track assignments
     try {
-      const { body } = parseScript(code);
-      const statements = [];
-      const assignedVariables = [];
-      // Parse statements and variable assignments
-      body.forEach((statementData) => {
-        const {
-          type,
-          expression,
-          declarations,
-        } = statementData;
-        let assignment = null;
-        let statement = null;
-        if (type === 'FunctionDeclaration') {
-          throw new Error('Function declarations are not available at the moment, use arrow functions');
-        } else if (type === 'VariableDeclaration') {
-          if (declarations.length > 1) {
-            throw new Error('THERE ARE MORE THAN 2 ASSIGNMENTS !#!???!?');
-          }
-          assignment = declarations[0].id.name;
-          statement = generate(declarations[0]);
-        } else if (type === 'ExpressionStatement') {
-          statement = generate(expression);
-          if (expression.type === 'CallExpression') {
-            if (expression.callee.type === 'Identifier'
-              && expression.callee.name === 'stop') {
-              const arg = expression.arguments[0].type === 'Literal'
-                ? expression.arguments[0].value
-                : expression.arguments[0].name;
-              statement = `stop('${arg}');`;
-            }
-          }
-          if (expression.type === 'AssignmentExpression') {
-            assignment = generate(expression.left);
-          }
-        }
-        // Avoid running multiple assignments in the same code block
-        const alreadyAssigned = statements.map(x => x[1]).indexOf(assignment);
-        if (alreadyAssigned >= 0) {
-          statements[alreadyAssigned][1] = null;
-        }
-        assignedVariables.push(assignment);
-        statements.push([statement, assignment]);
-      });
-      // Cancel all streams that are assigned to existing variables
-      await this.streamManager.stopMany(assignedVariables);
-      // Execute statements and run streams
-      statements.forEach(([statement, assignment]) => {
-        vm.runInContext(statement, this.sandbox);
-        if (assignment) {
-          this.streamManager.start(assignment);
-          this.synthManager.start(assignment);
-        }
-        // try {
-        //   const isStream = !!this.sandbox[assignment] && this.sandbox[assignment].isStream;
-        //   const isSynth = !!this.sandbox[assignment] && this.sandbox[assignment].isSynth;
-        //   if (isStream) {
-        //     // Run stream
-        //     this.streamManager.start(assignment);
-        //   } else if (isSynth) {
-        //     this.synthManager.start(assignment);
-        //   }
-        // } catch (e) {} // eslint-disable-line
-      });
+      this.runStatements(parseScript(code).body);
     } catch (e) {
       this.sandbox.err(e); // eslint-disable-line no-console
+    }
+  }
+
+  async runStatements(statements) {
+    if (!statements.length) return;
+    const [{
+      type,
+      expression,
+      declarations,
+    }, ...rest] = statements;
+    let assignment = null;
+    let statement = null;
+    if (type === 'FunctionDeclaration') {
+      throw new Error('Function declarations are not available at the moment, use arrow functions');
+    } else if (type === 'VariableDeclaration') {
+      if (declarations.length > 1) {
+        throw new Error('THERE ARE MORE THAN 2 ASSIGNMENTS !#!???!?');
+      }
+      assignment = declarations[0].id.name;
+      statement = generate(declarations[0]);
+    } else if (type === 'ExpressionStatement') {
+      statement = generate(expression);
+      if (expression.type === 'CallExpression') {
+        if (expression.callee.type === 'Identifier'
+          && expression.callee.name === 'stop') {
+          const arg = expression.arguments[0].type === 'Literal'
+            ? expression.arguments[0].value
+            : expression.arguments[0].name;
+          statement = `stop('${arg}');`;
+        }
+      }
+      if (expression.type === 'AssignmentExpression') {
+        assignment = generate(expression.left);
+      }
+    }
+    await this.runStatement(statement, assignment);
+    this.runStatements(rest);
+  }
+
+  async runStatement(statement, assignment) {
+    if (assignment) {
+      await this.streamManager.stopOne(assignment);
+    }
+    vm.runInContext(statement, this.sandbox);
+    if (assignment) {
+      await this.streamManager.start(assignment);
+      await this.synthManager.start(assignment);
     }
   }
 }
