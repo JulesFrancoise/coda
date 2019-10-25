@@ -16,6 +16,27 @@ export default class StreamManager {
     this.scheduler = newDefaultScheduler();
   }
 
+  getObjRef(path) {
+    const p = [...path];
+    if (p.length > 0) {
+      const x = p.pop();
+      return this.getObjRef(p)[x];
+    }
+    return this.context;
+  }
+
+  setObjRef(path, value) {
+    if (path.length <= 1) {
+      throw new Error('Path must have at least one arguments');
+    }
+    if (path.length === 1) {
+      this.context[path[0]] = value;
+    }
+    const last = path[path.length - 1];
+    const prefix = this.getObjRef(path.slice(0, path.length - 1));
+    prefix[last] = value;
+  }
+
   exists(streamId) {
     return Object.keys(this.context.streams).includes(streamId);
   }
@@ -41,9 +62,8 @@ export default class StreamManager {
     if (Array.isArray(target)) {
       const streams = target.filter(x => isObject(x) && x.isStream);
       streams.forEach((stream, i) => {
-        const streamId = `${arg}_arr_${i}`;
-        this.context[streamId] = stream;
-        this.startOne(streamId);
+        const streamId = `${arg}.${i}`;
+        this.startOne(streamId, [arg, i]);
       });
       target.stop = () => {
         this.stop(arg);
@@ -53,8 +73,7 @@ export default class StreamManager {
         .filter(x => target[x] && target[x].isStream)
         .forEach((x) => {
           const streamId = `${arg}.${x}`;
-          this.context[streamId] = target[x];
-          this.startOne(streamId);
+          this.startOne(streamId, [arg, x]);
         });
       target.stop = () => {
         this.stop(arg);
@@ -70,8 +89,8 @@ export default class StreamManager {
    * @param  {object} sandbox the Node VM context
    * @return {function}       [description]
    */
-  async startOne(streamId) {
-    const stream = this.context[streamId];
+  async startOne(streamId, path = undefined) {
+    const stream = path ? this.getObjRef(path) : this.context[streamId];
     if (!stream || !stream.isStream) return;
     // If a stream with the same name already exists, cancel it.
     await this.stopOne(streamId);
@@ -93,7 +112,11 @@ export default class StreamManager {
       },
     };
     // Multicast the stream (for multiple sinks) and merge with the canceller stream
-    this.context[streamId] = multicast(until(cancellerStream, stream));
+    if (path) {
+      this.setObjRef(path, multicast(until(cancellerStream, stream)));
+    } else {
+      this.context[streamId] = multicast(until(cancellerStream, stream));
+    }
     this.context[streamId].stop = () => this.stopOne(streamId);
     // Run the stream
     const effects = runEffects(this.context[streamId], this.scheduler)
@@ -125,7 +148,7 @@ export default class StreamManager {
     if (!target) return null;
     if (Array.isArray(target)) {
       const streamIds = target.filter(x => isObject(x) && x.isStream)
-        .map((_, i) => `${arg}_arr_${i}`);
+        .map((_, i) => `${arg}.${i}`);
       return this.stopMany(streamIds);
     }
     if (isObject(target) && !target.isStream) {
