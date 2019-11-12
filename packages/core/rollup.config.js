@@ -3,7 +3,8 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 // import { plugin as analyze } from 'rollup-plugin-analyzer';
-import minify from 'rollup-plugin-minify-es';
+// import visualizer from 'rollup-plugin-visualizer';
+import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
@@ -16,9 +17,10 @@ let plugins = [
 ];
 if (process.env.NODE_ENV === 'production') {
   plugins = plugins.concat([
-    minify(),
+    terser(),
     filesize(),
     // analyze(),
+    // visualizer(),
   ]);
 }
 
