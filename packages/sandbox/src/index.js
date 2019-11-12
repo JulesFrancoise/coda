@@ -112,7 +112,12 @@ class Sandbox {
         assignment = generate(expression.left);
       }
     }
-    await this.runStatement(statement, assignment);
+    // 1. Parse the JS code to track assignments
+    try {
+      await this.runStatement(statement, assignment);
+    } catch (e) {
+      this.sandbox.err(e); // eslint-disable-line no-console
+    }
     this.runStatements(rest);
   }
 

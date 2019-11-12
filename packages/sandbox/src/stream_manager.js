@@ -117,9 +117,10 @@ export default class StreamManager {
     } else {
       this.context[streamId] = multicast(until(cancellerStream, stream));
     }
-    this.context[streamId].stop = () => this.stopOne(streamId);
+    const s = path ? this.getObjRef(path) : this.context[streamId];
+    s.stop = () => this.stopOne(streamId);
     // Run the stream
-    const effects = runEffects(this.context[streamId], this.scheduler)
+    const effects = runEffects(s, this.scheduler)
       .then(() => {
         const elt = this.context.doc.getElementById(`stream-display-${streamId}`);
         if (elt) {
