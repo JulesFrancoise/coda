@@ -52,8 +52,8 @@ export function leapmotion({ period = 0 } = {}) {
   };
 }
 
-export async function myo(name) {
-  const m = await myo_(name);
+export function myo(name) {
+  const m = myo_(name);
   return {
     emg: new Stream(m.emg),
     acc: new Stream(m.acc),

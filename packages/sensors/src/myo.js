@@ -217,13 +217,12 @@ let initialized = false;
 function initializeMyoSDK() {
   if (!initialized) {
     try {
+      Myo.onError(() => {
+        console.log('Myo error'); // eslint-disable-line no-console
+      });
       Myo.connect();
-      return new Promise((resolve, reject) => {
-        Myo.on('ready', () => {
-          initialized = true;
-          resolve();
-        });
-        setTimeout(reject, 20000);
+      Myo.on('ready', () => {
+        initialized = true;
       });
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -232,6 +231,7 @@ function initializeMyoSDK() {
   }
   return Promise.resolve();
 }
+initializeMyoSDK();
 
 /**
  * Try to propagate an event or propagate an error to the stream
@@ -244,6 +244,7 @@ function tryEvent(t, x, sink) {
     sink.error(t, e);
   }
 }
+
 
 /**
  * The myo module listens to the data emitted by the Myo armband. Rather than
@@ -295,8 +296,7 @@ function tryEvent(t, x, sink) {
  *    });
 
  */
-export default async function myo(name = '') {
-  await initializeMyoSDK();
+export default function myo(name = '') {
   const deviceList = Myo.myos.map(x => x.name);
   const deviceName = name || (deviceList && deviceList[0]);
   const device = Myo.myos[deviceList.indexOf(deviceName)];
