@@ -102,6 +102,10 @@ section {
   margin-bottom: 20px;
 }
 
+section img {
+  max-width: 100%;
+}
+
 ul {
   margin-top: 10px;
   margin-left: 30px;
@@ -128,3 +132,4 @@ th, td {
   padding: 2px 10px;
   /* min-width: 120px; */
 }
+
