@@ -1,7 +1,7 @@
 {
   "name": "@coda/prelude",
   "description": "Set of base definitions for the CODA library",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.4-alpha.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",

@@ -1,7 +1,7 @@
 {
   "name": "@coda/sensors",
   "description": "Sensors sources for coda.js",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.4-alpha.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -12,8 +12,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@coda/core": "^0.0.4-alpha.0",
-    "@coda/prelude": "^0.0.4-alpha.0",
+    "@coda/core": "^0.0.4-alpha.1",
+    "@coda/prelude": "^0.0.4-alpha.1",
     "@ircam/motion-input": "^1.0.7",
     "@most/scheduler": "^1.2.2",
     "leapjs": "^0.6.4",

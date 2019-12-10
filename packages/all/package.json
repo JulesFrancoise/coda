@@ -1,7 +1,7 @@
 {
   "name": "@coda/all",
   "description": "CO/DA - All libs!",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.4-alpha.1",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -12,13 +12,13 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@coda/audio": "^0.0.4-alpha.0",
-    "@coda/core": "^0.0.4-alpha.0",
-    "@coda/max": "^0.0.4-alpha.0",
-    "@coda/midi": "^0.0.4-alpha.0",
-    "@coda/ml": "^0.0.4-alpha.0",
-    "@coda/sensors": "^0.0.4-alpha.0",
-    "@coda/ui": "^0.0.4-alpha.0"
+    "@coda/audio": "^0.0.4-alpha.1",
+    "@coda/core": "^0.0.4-alpha.1",
+    "@coda/max": "^0.0.4-alpha.1",
+    "@coda/midi": "^0.0.4-alpha.1",
+    "@coda/ml": "^0.0.4-alpha.1",
+    "@coda/sensors": "^0.0.4-alpha.1",
+    "@coda/ui": "^0.0.4-alpha.1"
   },
   "publishConfig": {
     "access": "public"
