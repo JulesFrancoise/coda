@@ -18,5 +18,8 @@
     "@most/scheduler": "^1.2.2",
     "ml-pca": "^2.1.0",
     "xmm": "github:JulesFrancoise/xmmjs"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

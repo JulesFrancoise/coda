@@ -18,5 +18,8 @@
     "@most/scheduler": "^1.2.2",
     "leapjs": "^0.6.4",
     "myo": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

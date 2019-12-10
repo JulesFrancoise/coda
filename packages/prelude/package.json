@@ -16,5 +16,8 @@
   "dependencies": {
     "@most/disposable": "^1.2.1",
     "@most/scheduler": "^1.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

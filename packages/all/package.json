@@ -19,5 +19,8 @@
     "@coda/ml": "^0.0.4-alpha.0",
     "@coda/sensors": "^0.0.4-alpha.0",
     "@coda/ui": "^0.0.4-alpha.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

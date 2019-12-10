@@ -19,5 +19,8 @@
     "@most/dom-event": "^2.0.0",
     "@most/scheduler": "^1.2.2",
     "complex-js": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

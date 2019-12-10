@@ -19,5 +19,8 @@
     "vue": "^2.6.10",
     "vue-awesome": "^3.5.1",
     "vue-template-compiler": "^2.6.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
