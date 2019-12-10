@@ -1,6 +1,6 @@
 {
   "name": "@coda/docs",
-  "version": "0.0.3-alpha.2",
+  "version": "0.0.3-alpha.0",
   "description": "coda.js documentation",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
@@ -17,12 +17,6 @@
   },
   "dependencies": {
     "@coda/sandbox": "^0.0.3-alpha.2",
-    "@nuxtjs/markdownit": "^1.2.1",
-    "documentation": "^8.1.0",
-    "element-ui": "^2.4.8",
-    "nuxt": "^2.3.4",
-    "prismjs": "^1.15.0",
-    "vue": "^2.5.17",
-    "vue-linkify": "^1.0.1"
+    "documentation": "^8.1.0"
   }
 }

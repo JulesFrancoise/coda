@@ -165,7 +165,8 @@ function createRawStream(manager, samplePeriod = 0) {
  * @param  {Number} [options.period=10] Sampling period, if resampling is desired.
  * @return {Object} Leap Motion Data Structure, containing a nested set of streams
  * of the following form:
- * ```
+ *
+ * @example
  * {
  *   hands: {
  *     left: {
@@ -201,7 +202,6 @@ function createRawStream(manager, samplePeriod = 0) {
  *   }
  *   raw: <Stream of objects with thte raw datat of each frame>
  * }
- * ```
  *
  * @see For more information about the Leap Motion Device, see https://www.leapmotion.com/. For details on the LeapJS API, see https://github.com/leapmotion/leapjs
  *

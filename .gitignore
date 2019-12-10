@@ -5,3 +5,5 @@
 /packages/*/dist
 lerna-debug.log
 coverage
+docs/.vuepress/dist
+api.json
