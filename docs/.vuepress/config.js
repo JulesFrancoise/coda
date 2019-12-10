@@ -6,6 +6,7 @@ module.exports = {
     // ['link', { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }],
     // ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
     // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
+    ['script', { src: '/sandbox.js' }],
   ],
   serviceWorker: false,
   themeConfig: {
@@ -34,6 +35,8 @@ module.exports = {
         'coda-ml',
         'coda-sensors',
         'coda-ui',
+        'most-core',
+        'misc',
       ],
       '/': [
         '/installation',

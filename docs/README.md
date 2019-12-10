@@ -23,6 +23,11 @@ In this example, we map the position and velocity of the mouse to control sound 
 Audio might be loud!
 :::
 
+<CodeExample
+  name="Love on the Beat"
+  code="const mousePosition = mousemove(doc).plot();"
+>
+
 ```js
 const mousePosition = mousemove(doc)
   .startWith([0.5, 0.5])   // initialize position to [0.5; 0.5]
@@ -52,3 +57,6 @@ granulator.position = mousePosition.unpack()[0];
 granulator.resampling = mousePosition.unpack()[1]
   .scale({ outmin: -2400, outmax: 2400 });
 ```
+
+</CodeExample>
+

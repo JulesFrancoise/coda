@@ -14,12 +14,18 @@ The `atob` operator converts a stream of scalar or vector values from<br>amplitu
 **Returns** `Stream` Scaled stream (dB values)
 
 **Example**
+
+
+<CodeExample name="atodb">
+
 ```js
 db = now([0, 0.5, 1])
   .tap(x => console.log(`Amplitude: [${x}]`))
   .atodb()
   .tap(x => console.log(`deciBels: [${x}]`));
 ```
+
+</CodeExample>
 
 
 ## dbtoa
@@ -36,12 +42,18 @@ The `dbtoa` operator converts a stream of scalar or vector values from<br>deciBe
 **Returns** `Stream` Scaled stream (amplitude values)
 
 **Example**
+
+
+<CodeExample name="dbtoa">
+
 ```js
 a = now([0, -6, -Infinity])
   .tap(x => console.log(`deciBels: [${x}]`))
   .dbtoa()
   .tap(x => console.log(`Amplitude: [${x}]`));
 ```
+
+</CodeExample>
 
 
 ## ftom

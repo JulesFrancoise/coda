@@ -85,8 +85,8 @@ api.forEach((entry, i) => {
   if (entry.kind === 'note') {
     if (packageName) {
       const fileName = (packageName === '@coda/core')
-        ? './docs/api/README.md'
-        : `./docs/api/coda-${packageName.split('/')[1]}.md`;
+        ? './api/README.md'
+        : `./api/${packageName.toLowerCase().split('/').join('-').split('@').join('')}.md`;
       console.log('packageName', packageName, packageName === '@coda/core', fileName);
       fs.writeFileSync(fileName, mdContent);
       // fs.writeFileSync(fileName, cleanup(mdContent));
@@ -131,7 +131,7 @@ api.forEach((entry, i) => {
     // if (example.caption && example.caption.children) {
     //   mdContent += ` ${toText(example.caption ? example.caption.children : '')}`;
     // }
-    mdContent += `\`\`\`js\n${example.description}\n\`\`\`\n\n`;
+    mdContent += `\n\n<CodeExample name="${entry.name}">\n\n\`\`\`js\n${example.description}\n\`\`\`\n\n</CodeExample>\n\n`;
   });
   // TODO:  hasOwn Properties
   // mdContent += `${}\n\n`;
@@ -139,8 +139,8 @@ api.forEach((entry, i) => {
 });
 
 const fileName = (packageName === '@coda/core')
-  ? './docs/api/README.md'
-  : `./docs/api/coda-${packageName.split('/')[1]}.md`;
+  ? './api/README.md'
+  : `./api/${packageName.toLowerCase().split('/').join('-').split('@').join('')}.md`;
 console.log('packageName', packageName, packageName === '@coda/core', fileName);
 fs.writeFileSync(fileName, mdContent);
 

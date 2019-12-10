@@ -235,6 +235,10 @@ Create an audio source from the microphone
 **Returns** `MicrophoneSource` 
 
 **Example**
+
+
+<CodeExample name="microphone">
+
 ```js
 // Create a source from the microphone
 m = microphone();
@@ -248,6 +252,8 @@ c.feedback = 0.97;
 c.delay = 0.45;
 c.rate = 10;
 ```
+
+</CodeExample>
 
 
 ## moogFilter

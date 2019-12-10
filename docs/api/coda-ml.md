@@ -25,6 +25,10 @@ the root of your application.
 **Returns** `Stream` Stream of model parameters
 
 **Example**
+
+
+<CodeExample name="gmmTrain">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -42,6 +46,8 @@ model = b.gmmTrain({ gaussians: 3 });
 c = a.gmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'GMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## gmmPredict
@@ -76,6 +82,10 @@ More details here...
 **Returns** `Stream` 
 
 **Example**
+
+
+<CodeExample name="gmmPredict">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -93,6 +103,8 @@ model = b.gmmTrain({ gaussians: 3 });
 c = a.gmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'GMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## hmmTrain
@@ -121,6 +133,10 @@ the root of your application.
 **Returns** `Stream` Stream of model parameters
 
 **Example**
+
+
+<CodeExample name="hmmTrain">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -138,6 +154,8 @@ model = b.hmmTrain({ states: 5 });
 c = a.hmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## hmmPredict
@@ -172,6 +190,10 @@ More details here...
 **Returns** `Stream` 
 
 **Example**
+
+
+<CodeExample name="hmmPredict">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -189,6 +211,8 @@ model = b.hmmTrain({ states: 5 });
 c = a.hmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## hhmmTrain
@@ -217,6 +241,10 @@ the root of your application.
 **Returns** `Stream` Stream of model parameters
 
 **Example**
+
+
+<CodeExample name="hhmmTrain">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -234,6 +262,8 @@ model = b.hhmmTrain({ states: 5 });
 c = a.hhmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## hhmmPredict
@@ -268,6 +298,10 @@ More details here...
 **Returns** `Stream` 
 
 **Example**
+
+
+<CodeExample name="hhmmPredict">
+
 ```js
 // Generate a smooth random signal
 a = periodic(20)
@@ -285,6 +319,8 @@ model = b.hhmmTrain({ states: 5 });
 c = a.hhmmPredict({ model })
   .plot({ fill: 'bottom', stacked: true, legend: 'HMM-based recognition' });
 ```
+
+</CodeExample>
 
 
 ## pcaTrain

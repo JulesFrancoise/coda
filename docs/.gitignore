@@ -1,0 +1,4 @@
+.vuepress/dist
+.vuepress/public/xmm.worker.js*
+.vuepress/public/sandbox.js
+api.json

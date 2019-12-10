@@ -33,6 +33,10 @@ check why some descriptors do not run sometimes (multiple streams)
 
 
 **Example**
+
+
+<CodeExample name="devicemotion">
+
 ```js
 dm = devicemotion();
 
@@ -45,6 +49,8 @@ s2 = dm.acc
 s3 = dm.gyro
   .plot({ legend: 'Rotation Rates' });
 ```
+
+</CodeExample>
 
 
 ## leapmotion
@@ -75,6 +81,10 @@ Throw an error when the Leap Motion middleware is not running
 **Returns** `Object` Leap Motion Data Structure, containing a nested set of streams<br>of the following form:
 
 **Example**
+
+
+<CodeExample name="leapmotion">
+
 ```js
 {
   hands: {
@@ -113,7 +123,13 @@ Throw an error when the Leap Motion middleware is not running
 }
 ```
 
+</CodeExample>
+
 **Example**
+
+
+<CodeExample name="leapmotion">
+
 ```js
 // Create a leapmotion listener
 leap = leapmotion();
@@ -127,6 +143,8 @@ rightThumb = leap.hands.right.thumb.tipPosition;
 rightIndex = leap.hands.right.index.tipPosition;
 thumb2index = rightThumb.distance(rightIndex).plot({ legend: 'thumb-index distance' });
 ```
+
+</CodeExample>
 
 
 ## myo
@@ -166,6 +184,10 @@ For more information about the Myo Device, see https://support.getmyo.com/hc/en-
 ```
 
 **Example**
+
+
+<CodeExample name="myo">
+
 ```js
 // Connect to the default myo armband. You can specify the device name in argument.
 m = myo();
@@ -186,6 +208,8 @@ emg = myo().emg
     legend: 'Force estimation from the EMG (contraction)',
    });
 ```
+
+</CodeExample>
 
 
 ## riot
@@ -214,6 +238,10 @@ Stream data from a connected R-IoT.This operator returns a data structure includ
 
 
 **Example**
+
+
+<CodeExample name="riot">
+
 ```js
 sm = riot();
 
@@ -222,6 +250,8 @@ s1 = sm.acc
 s2 = sm.gyro
   .plot({ legend: 'Gyroscopes' });
 ```
+
+</CodeExample>
 
 
 ## smartphone
@@ -249,6 +279,10 @@ This object is similar to the `devicemotion` operator, it returns a Devicemotion
 
 
 **Example**
+
+
+<CodeExample name="smartphone">
+
 ```js
 sm = smartphone('test'); // connect your smartphone with the id 'test'
 
@@ -261,5 +295,7 @@ s2 = sm.acc
 s3 = sm.gyro
   .plot({ legend: 'Rotation Rates' });
 ```
+
+</CodeExample>
 
 

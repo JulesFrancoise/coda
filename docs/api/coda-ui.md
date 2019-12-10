@@ -18,9 +18,15 @@ Simple Heatmap UI component. The heatmap works like a sonogram<br>visualization 
 **Returns** `Stream` Scalogram stream
 
 **Example**
+
+
+<CodeExample name="heatmap">
+
 ```js
 noise = periodic(20).rand({ size: 20 }).heatmap();
 ```
+
+</CodeExample>
 
 
 ## looper
@@ -41,10 +47,16 @@ Data Looper UI component. This module allows to record a buffer of Stream<br>dat
 **Returns** `Stream` Output Stream: either unchanged input stream (in<br>'thru' or 'recording' modes), or loop of the recorded buffer (in playing<br>mode)
 
 **Example**
+
+
+<CodeExample name="looper">
+
 ```js
 data = periodic(10).rand().mvavrg({ size: 30 }).plot();
 l = data.looper().plot();
 ```
+
+</CodeExample>
 
 
 ## nodes
@@ -86,11 +98,17 @@ Simple Plotter UI component.
 **Returns** `Stream` Unchanged Input Stream
 
 **Example**
+
+
+<CodeExample name="plot">
+
 ```js
 p = periodic(20).rand({ size: 3 })
   .plot({ legend: 'Simple plot', stacked: true });
 runEffects(p, newDefaultScheduler());
 ```
+
+</CodeExample>
 
 
 ## recorder

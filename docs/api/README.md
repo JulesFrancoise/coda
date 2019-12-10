@@ -14,6 +14,10 @@ Accumulate the values of a scalar or vector stream
 **Returns** `Stream` Stream of accumulated values
 
 **Example**
+
+
+<CodeExample name="accum">
+
 ```js
 // generate a constant unit signal sampled at 1Hz, and accumulate
 // the results (sliced at 10 iterations)
@@ -23,6 +27,8 @@ const process = periodic(500)
   .take(10)
   .tap(log);
 ```
+
+</CodeExample>
 
 
 ## adaptive
@@ -42,6 +48,10 @@ Automatically scale an incoming stream of scalar or vector values over the X pre
 **Returns** `Stream` Scaled stream
 
 **Example**
+
+
+<CodeExample name="adaptive">
+
 ```js
 // Generate a random signal and apply adaptive scaling
 a = periodic(10)
@@ -51,6 +61,8 @@ a = periodic(10)
   .adaptive({ duration: 10, refresh: 2 })
   .plot();
 ```
+
+</CodeExample>
 
 
 ## add
@@ -72,11 +84,17 @@ add$ for a version that triggers from all streams.
 **Returns** `Stream` Output stream of summed values
 
 **Example**
+
+
+<CodeExample name="add">
+
 ```js
 const c = add(now(3), now(2)).tap(console.log);
 // This is equivalent to:
 // const c = now(3).add(now(2)).tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## adsr
@@ -113,10 +131,16 @@ Automatically scale an incoming stream of scalar or vector values to the<br>[0; 
 **Returns** `Stream` Scaled stream
 
 **Example**
+
+
+<CodeExample name="autoscale">
+
 ```js
 const source = periodic(200).rand().scale({ outmin: -30, outmax: 200 });
 const scaled = source.autoscale().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## biquad
@@ -142,10 +166,16 @@ https://github.com/wavesjs/waves-lfo
 **Returns** `Stream` Stream of filtered values
 
 **Example**
+
+
+<CodeExample name="biquad">
+
 ```js
 const noise = periodic(20).rand().plot({ legend: 'Random Signal' });
 const filtered = noise.biquad({ f0: 0.8 }).plot({ legend: 'Filtered Signal' });
 ```
+
+</CodeExample>
 
 
 ## clip
@@ -165,10 +195,16 @@ Clip an incoming stream of scalar or vector to a given range.
 **Returns** `Stream` Clipped stream
 
 **Example**
+
+
+<CodeExample name="clip">
+
 ```js
 s = periodic(20).rand().biquad({ f0: 1, q: 5 }).plot({ legend: 'original signal' });
 c = s.clip({ min: 0.3, max: 0.8 }).plot({ legend: 'original signal' });
 ```
+
+</CodeExample>
 
 
 ## cycle
@@ -186,12 +222,18 @@ Cycle through a set of symbols. Each event on the input stream will result<br>in
 **Returns** `Stream` Output Stream, sampled from the buffer, with<br>corresponding attributes (e.g. using an array of numbers as a buffer<br>will result in a stream with attributes `{ format: 'scalar', size: 1 }`).
 
 **Example**
+
+
+<CodeExample name="cycle">
+
 ```js
 a = periodic(250)
   .cycle(['A2', 'C3', 'A5', 'D1'])
   .take(8)
   .tap(log);
 ```
+
+</CodeExample>
 
 
 ## delta
@@ -210,6 +252,10 @@ The `delta` operator computes a differentiation of an incoming stream of<br>scal
 **Returns** `Stream` Scaled stream
 
 **Example**
+
+
+<CodeExample name="delta">
+
 ```js
 // Compute mouse velocity/acceleration from a resampled version of the mouse position
 a = mousemove(doc)
@@ -221,6 +267,8 @@ a = mousemove(doc)
   .delta({ size: 5 })
   .plot({ legend: 'Mouse acceleration' });
 ```
+
+</CodeExample>
 
 
 ## distance
@@ -257,11 +305,17 @@ div$ for a version that triggers from all streams.
 **Returns** `Stream` Output stream of divided values
 
 **Example**
+
+
+<CodeExample name="div">
+
 ```js
 const c = div(now(9), now(2)).tap(console.log);
 // This is equivalent to:
 // const c = now(9).div(now(2)).tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## elementwise
@@ -284,10 +338,16 @@ elementwise for a version that triggers from all streams.
 **Returns** `Stream` Output stream of combined values
 
 **Example**
+
+
+<CodeExample name="elementwise">
+
 ```js
 const norm = (x, y) => Math.sqrt(x * x + y * y);
 const c = elementwise(norm, now([4, 2]), now([3, 1])).tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## force
@@ -312,6 +372,10 @@ neurophysiology 97.2 (2007): 1839-1845.
 **Returns** `Stream` Stream of force from the EMG
 
 **Example**
+
+
+<CodeExample name="force">
+
 ```js
 fake = periodic(5)
   .rand()
@@ -320,6 +384,8 @@ fake = periodic(5)
   .plot();
 f = fake.withAttr({ type: 'emg' }).force().plot();
 ```
+
+</CodeExample>
 
 
 ## intensity
@@ -339,6 +405,10 @@ Compute the intensity of the motion from accelerometer signals
 **Returns** `Stream` Stream of intensity values (scalar)
 
 **Example**
+
+
+<CodeExample name="intensity">
+
 ```js
 fakeAcc = periodic(10)
   .rand({ size: 3 })
@@ -346,6 +416,8 @@ fakeAcc = periodic(10)
   .plot({ legend: 'accelerometer signal'});
 intensity = fakeAcc.intensity().plot({ legend: 'Intensity' });
 ```
+
+</CodeExample>
 
 
 ## kicks
@@ -415,9 +487,15 @@ Compute the maximum of each frame of a vector stream
 **Returns** `Stream` Scalar stream (frame maximum)
 
 **Example**
+
+
+<CodeExample name="max">
+
 ```js
 s = now([1, 2, 3, -4]).max().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## mean
@@ -434,9 +512,15 @@ Compute the mean of the values of a vector stream
 **Returns** `Stream` Scalar stream (mean of the vector values)
 
 **Example**
+
+
+<CodeExample name="mean">
+
 ```js
 m = now([1, 2, 3]).mean().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## meanstd
@@ -453,9 +537,15 @@ Compute the mean and standard deviation of the values of a vector stream
 **Returns** `Stream` Scalar stream ([mean, std] of the vector values)
 
 **Example**
+
+
+<CodeExample name="meanstd">
+
 ```js
 m = now([1, 2, 3, 4, 5]).meanstd().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## min
@@ -472,9 +562,15 @@ Compute the minimum of each frame of a vector stream
 **Returns** `Stream` Scalar stream (frame minimum)
 
 **Example**
+
+
+<CodeExample name="min">
+
 ```js
 s = now([1, 2, 3, -4]).min().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## minmax
@@ -491,9 +587,15 @@ Compute the minimum and maximum of each frame of a vector stream
 **Returns** `Stream` Scalar stream ([min, max])
 
 **Example**
+
+
+<CodeExample name="minmax">
+
 ```js
 s = now([1, 2, 3, -4]).minmax().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## mul
@@ -515,11 +617,17 @@ mul$ for a version that triggers from all streams.
 **Returns** `Stream` Output stream of multiplied values
 
 **Example**
+
+
+<CodeExample name="mul">
+
 ```js
 const c = mul(now(7), now(3)).tap(console.log);
 // This is equivalent to:
 // const c = now(7).mul(now(3)).tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## mvavrg
@@ -538,10 +646,16 @@ Compute a moving average on a scalar or vector stream
 **Returns** `Stream` Stream of filtered values
 
 **Example**
+
+
+<CodeExample name="mvavrg">
+
 ```js
 noise = periodic(10).rand().plot();
 filtered = noise.mvavrg({ size: 20 }).plot();
 ```
+
+</CodeExample>
 
 
 ## norm
@@ -558,9 +672,15 @@ Compute the norm of a vector
 **Returns** `Stream` Scalar stream (norm)
 
 **Example**
+
+
+<CodeExample name="norm">
+
 ```js
 s = now([1, 2, 3]).norm().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## pack
@@ -577,11 +697,17 @@ Pack a vector of scalar streams to a stream of vectors.
 **Returns** `Stream` Stream of concatenated values
 
 **Example**
+
+
+<CodeExample name="pack">
+
 ```js
 a = periodic(100).constant(2);
 b = periodic(100).rand();
 c = pack([a, b]).plot();
 ```
+
+</CodeExample>
 
 
 ## pak
@@ -598,11 +724,17 @@ Pack a vector of scalar streams to a stream of vectors. This operator is similar
 **Returns** `Stream` Stream of concatenated values
 
 **Example**
+
+
+<CodeExample name="pak">
+
 ```js
 a = periodic(200).rand();
 b = periodic(10).rand();
 c = pak([a, b]).plot();
 ```
+
+</CodeExample>
 
 
 ## prod
@@ -619,9 +751,15 @@ Multiply the elements of each frame of a vector stream
 **Returns** `Stream` Scalar stream (product of the vector values)
 
 **Example**
+
+
+<CodeExample name="prod">
+
 ```js
 s = now([1, 2, 3]).prod().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## rand
@@ -640,10 +778,16 @@ The rand operator generates a stream of scalars or vectors with random<br>values
 **Returns** `Stream` Scaled stream
 
 **Example**
+
+
+<CodeExample name="rand">
+
 ```js
 randValues = periodic(500).rand().tap(console.log);
 noise = periodic(10).rand({ size: 3 }).plot();
 ```
+
+</CodeExample>
 
 
 ## reduce
@@ -662,11 +806,17 @@ Apply a reducer to each frame of a vector stream
 **Returns** `Stream` Scalar stream
 
 **Example**
+
+
+<CodeExample name="reduce">
+
 ```js
 r = now([1, 2, 3])
   .reduce((s, x) => s + x, 0)
   .tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## scale
@@ -688,11 +838,17 @@ The `scale` operator scales an incoming stream of scalar or vector values<br>giv
 **Returns** `Stream` Scaled stream
 
 **Example**
+
+
+<CodeExample name="scale">
+
 ```js
 a = periodic(50).rand();
 b = a.scale({ outmin: -1, outmax: 3 });
 c = pack([a, b]).plot();
 ```
+
+</CodeExample>
 
 
 ## schmitt
@@ -717,6 +873,10 @@ https://en.wikipedia.org/wiki/Schmitt_trigger
 **Returns** `Stream` Binary Stream (scalar or<br>vector). By default, the output stream contains events only on triggers. If<br>`options.continuous = true`, then the output stream contains as many events<br>as the input stream.
 
 **Example**
+
+
+<CodeExample name="schmitt">
+
 ```js
 a = periodic(10)
   .rand()
@@ -725,6 +885,8 @@ a = periodic(10)
   .schmitt({ up: 0.6, down: 0.4, continuous: true })
   .plot({ legend: 'Schmitt Trigger', fill: 'bottom' });
 ```
+
+</CodeExample>
 
 
 ## select
@@ -742,11 +904,17 @@ Select the channels of a numeric stream from a set of indices
 **Returns** `Stream` The stream of vectors with values at the selected indices
 
 **Example**
+
+
+<CodeExample name="select">
+
 ```js
 a = periodic(100).rand({ size: 5 }).plot({ stacked: true });
 b = a.select([0, 0, 2]).plot({ stacked: true });
 c = a.select(1).plot();
 ```
+
+</CodeExample>
 
 
 ## slide
@@ -766,10 +934,16 @@ Compute a sliding window on a scalar or vector stream
 **Returns** `Stream` Stream of sliding windows
 
 **Example**
+
+
+<CodeExample name="slide">
+
 ```js
 noise = periodic(100).rand().take(10);
 w = noise.slide({ size: 4 }).tap(log)
 ```
+
+</CodeExample>
 
 
 ## std
@@ -786,9 +960,15 @@ Compute the standard deviation of the values of a vector stream
 **Returns** `Stream` Scalar stream (std of the vector values)
 
 **Example**
+
+
+<CodeExample name="std">
+
 ```js
 m = now([1, 2, 3]).std().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## sub
@@ -810,11 +990,17 @@ sub$ for a version that triggers from all streams.
 **Returns** `Stream` Output stream of subtracted values
 
 **Example**
+
+
+<CodeExample name="sub">
+
 ```js
 const c = sub(now(7), now(3)).tap(console.log);
 // This is equivalent to:
 // const c = now(7).sub(now(3)).tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## sum
@@ -831,9 +1017,15 @@ Sum the elements of each frame of a vector stream
 **Returns** `Stream` Scalar stream (sum of the vector values)
 
 **Example**
+
+
+<CodeExample name="sum">
+
 ```js
 s = now([1, 2, 3]).sum().tap(console.log);
 ```
+
+</CodeExample>
 
 
 ## unpack
@@ -850,12 +1042,18 @@ Unpack a stream of vectors to a vector of scalar streams.
 **Returns** `Array` Array of scalar streams
 
 **Example**
+
+
+<CodeExample name="unpack">
+
 ```js
 s = periodic(20).rand({ size: 2 }).plot({ legend: 'Original Signal'});
 [s1, s2] = s.unpack();
 a1 = s1.plot({ legend: 'First channel' });
 a2 = s2.plot({ legend: 'Second channel' });
 ```
+
+</CodeExample>
 
 
 ## wavelet
@@ -882,10 +1080,16 @@ Complement description
 **Returns** `Stream` Stream of Scalogram frames
 
 **Example**
+
+
+<CodeExample name="wavelet">
+
 ```js
 m = mousemove(doc).resample(periodic(10)).plot({ legend: 'mouse position' });
 w = m.wavelet().heatmap({ legend: 'Wavelet Transform of the mouse position' });
 ```
+
+</CodeExample>
 
 
 ## withAttr

@@ -1,9 +1,7 @@
 **/.DS_Store
-/node_modules
-/packages/*/node_modules
+**/node_modules
 /packages/*/.nyc_output
 /packages/*/dist
 lerna-debug.log
 coverage
-docs/.vuepress/dist
 api.json
