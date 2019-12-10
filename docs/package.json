@@ -1,6 +1,6 @@
 {
   "name": "@coda/docs",
-  "version": "0.0.3-alpha.2",
+  "version": "0.0.4-alpha.0",
   "description": "coda.js documentation",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@coda/sandbox": "^0.0.3-alpha.2",
+    "@coda/sandbox": "^0.0.4-alpha.0",
     "@nuxtjs/markdownit": "^1.2.1",
     "documentation": "^8.1.0",
     "element-ui": "^2.4.8",

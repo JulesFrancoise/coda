@@ -1,7 +1,7 @@
 {
   "name": "@coda/midi",
   "description": "MIDI Operators for CO/DA",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.4-alpha.0",
   "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "main": "dist/index.js",
@@ -13,7 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@coda/prelude": "^0.0.3-alpha.0",
+    "@coda/prelude": "^0.0.4-alpha.0",
     "@most/core": "^1.3.4",
     "tonal": "^2.2.2"
   }
