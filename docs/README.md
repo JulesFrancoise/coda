@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /coda-logo.png
+heroImage: /coda-logo.jpg
 heroText: '---'
 tagline: coda.js is a javascript library and live-coding environment dedicated to the design of bodily interactions with audio and visual processing.
 actionText: Get Started →

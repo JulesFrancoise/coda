@@ -4,7 +4,9 @@
 
 ## Why coda?
 
-The coda.js library emerged in the context of the CO/DA research project at [LIMSI-CNRS](https://www.limsi.fr/fr/), that focuses on live-coding as a practice for improvisation in interactive dance. The goal was to develop a set of tools for prototyping body-based interactions on the fly, while a dancer is improvising.
+The coda.js library emerged in the context of the CO/DA research project at [LIMSI-CNRS](https://www.limsi.fr/fr/), that focuses on live-coding as a practice for improvisation in interactive dance. The goal was to develop a set of tools for prototyping movement-sound interactions on the fly, while a dancer is improvising.
+
+![Overview of a dance and live-coding improvisation](./livecode-dance.jpg)
 
 To that end, we developed a number of libraries supporting rapid design of interactions based on real-time movement information. coda.js integrates a number of modules for movement sensing (with wrappers for common devices such as the Myo Armband), movement signal processing (from low-level analysis blocks and filters to more advanced representations such as the wavelet transform), mapping tools (both for direct mapping and techniques using machine learning for recognition and regression), as well as some sound synthesis and effect engines.
 
@@ -22,10 +24,9 @@ To that end, we developed a number of libraries supporting rapid design of inter
 
 Coda is composed of a core library that extends the [`most.js`](https://github.com/mostjs/core) reactive programming library with low-level signal processing operators. The library also includes several optional packages and a live-coding environment.
 
-![Visual overview of the coda.js library architecture](./coda_architecture.png)
+![Visual overview of the coda.js library architecture](./coda_architecture.jpg)
 
-**Packages:**
-
+Formally, the library is shipped with the following additional packages:
 - `audio` contains sound synthesis engines and audio effects
 - `max` contains operators for communication with Max/MSP
 - `midi` contains MIDI processing utilities

@@ -4,7 +4,7 @@
 
 The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: <a href="https://playcoda.netlify.com" target="_blank">https://playcoda.netlify.com</a>
 
-> Note that the hosted version has limitations regarding the use of movement sensors, that often require that you run the environment on your own computer.
+> Note that the hosted version has limitations regarding the use of movement sensors, that usually require that you run the environment on your own computer.
 
 ## Defining and Running Streams
 
