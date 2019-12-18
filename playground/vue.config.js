@@ -25,6 +25,7 @@ module.exports = {
     plugins: [
       new CopyWebpackPlugin(copyList),
     ],
+    devtool: 'source-map',
   },
   pages: {
     index: {
