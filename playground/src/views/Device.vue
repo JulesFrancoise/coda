@@ -1,6 +1,6 @@
 <template>
   <div class="device">
-    <h1>Stream device data to baba</h1>
+    <h1>Stream device data to coda</h1>
     <input type="text" name="devname" v-model="id" placeholder="enter id">
     <button type="button" name="connect" @click="connect">connect</button>
     <div>
