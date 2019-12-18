@@ -766,13 +766,18 @@ export const multicast = source => (
  */
 function createPointerStream(eventType, node, capture) {
   const n = (node instanceof HTMLDocument) ? node.body : node;
-  const { width, height } = n.getBoundingClientRect();
+  const {
+    left,
+    top,
+    width,
+    height,
+  } = n.getBoundingClientRect();
   return new Stream(withAttr({
     type: 'position',
     format: 'vector',
     size: 2,
   })(most.map(
-    e => [e.clientX / width, e.clientY / height],
+    e => [(e.clientX - left) / width, (e.clientY - top) / height],
     domEvent(eventType, node, capture),
   )));
 }
