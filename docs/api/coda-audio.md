@@ -237,7 +237,7 @@ Create an audio source from the microphone
 **Example**
 
 
-<CodeExample name="microphone">
+<CodeExample>
 
 ```js
 // Create a source from the microphone

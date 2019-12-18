@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /coda-logo.jpg
+heroImage: /coda-jumbo.jpg
 heroText: '---'
 tagline: coda.js is a javascript library and live-coding environment dedicated to the design of bodily interactions with audio and visual processing.
 actionText: Get Started →
@@ -23,10 +23,7 @@ In this example, we map the position and velocity of the mouse to control sound 
 Audio might be loud!
 :::
 
-<CodeExample
-  name="Love on the Beat"
-  code="const mousePosition = mousemove(doc).plot();"
->
+<CodeExample>
 
 ```js
 const mousePosition = mousemove(doc)
@@ -53,9 +50,8 @@ const granulator = granular({
 granulator.connect();
 
 granulator.gain = mouseEnergy;
-granulator.position = mousePosition.unpack()[0];
-granulator.resampling = mousePosition.unpack()[1]
-  .scale({ outmin: -2400, outmax: 2400 });
+granulator.position = mousePosition.select(0);
+granulator.resampling = mousePosition.select(1).scale({ outmin: -2400, outmax: 0 });
 ```
 
 </CodeExample>

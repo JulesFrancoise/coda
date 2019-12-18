@@ -1,36 +1,22 @@
 # Getting Started
 
+Coda is a JavaScript library build upon a reactive programming paradigm for movement signal processing and interaction design.
+
+If you are not familiar with Web development and JavaScript, check out [JavaScript in 14 minutes](https://jgthms.com/javascript-in-14-minutes/) by Jeremy Thomas for a very brief introduction. Other interesting (and more complete) ressources include:
+
+- The web development course of the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript),
+- The [Modern JavaScript Tutorial](https://javascript.info/variables),
+- [Eloquent JavaScript](https://eloquentjavascript.net/),
+- The [FreeCodeCamp course](https://www.freecodecamp.org/)
+
 ## Using the live-coding editor
 
 The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: <a href="https://playcoda.netlify.com" target="_blank">https://playcoda.netlify.com</a>
 
-> Note that the hosted version has limitations regarding the use of movement sensors, that usually require that you run the environment on your own computer.
+::: warning
+Note that the hosted version has limitations regarding the use of movement sensors, that usually require that you run the environment on your own computer.
+:::
 
-## Defining and Running Streams
-
-### Sources & Sinks
-
-### Operators
-
-### Types of streams
-
-## Building a sonification system
-
-TODO:
-
-<code-example
-  code="const randomSignal = periodic(10)
-.rand({ size: 2 })
-.plot({ legend: 'Random data (100Hz)'});
-
-const filteredSignal = randomSignal
-.biquad({ f0: 1, q: 3 }) // low-pass biquad filter
-.plot({ legend: 'Filtered data'});
-
-runEffects(filteredSignal, newDefaultScheduler());"
-  name="index-codex-1"
-></code-example>
-
-## Running the Playground Locally
-
-TODO
+::: tip
+The following tutorial embeds interactive code examples that can be executed in place. If you wish to edit and extend the proposed example, copy and paste them in the live-coding editor!
+:::

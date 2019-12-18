@@ -12,6 +12,7 @@ module.exports = {
   themeConfig: {
     repo: 'JulesFrancoise/coda',
     docsDir: 'docs',
+    logo: '/coda-logo.jpg',
     nav: [
       {
         text: 'Guide',
@@ -41,20 +42,15 @@ module.exports = {
       '/': [
         '/installation',
         '/guide/',
-        '/guide/getting-started',
-        // {
-        //   title: 'Core Concepts',
-        //   collapsable: false,
-        //   children: [
-        //     '/guide/core-components',
-        //     '/guide/input',
-        //     '/guide/data',
-        //     '/guide/models',
-        //     '/guide/training',
-        //     '/guide/validation',
-        //     '/guide/interaction',
-        //   ]
-        // },
+        {
+          title: 'Guide',
+          collapsable: false,
+          children: [
+            '/guide/getting-started',
+            '/guide/creating-running-streams',
+            '/guide/sonification',
+          ]
+        },
         '/credits',
       ]
     },

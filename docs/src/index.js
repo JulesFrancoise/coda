@@ -1,3 +1,3 @@
-import createSandbox from '@coda/sandbox';
+import createSandbox, { Master } from '@coda/sandbox';
 
-export default createSandbox;
+export default { createSandbox, Master };

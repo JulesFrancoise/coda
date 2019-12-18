@@ -16,7 +16,7 @@ Accumulate the values of a scalar or vector stream
 **Example**
 
 
-<CodeExample name="accum">
+<CodeExample>
 
 ```js
 // generate a constant unit signal sampled at 1Hz, and accumulate
@@ -50,7 +50,7 @@ Automatically scale an incoming stream of scalar or vector values over the X pre
 **Example**
 
 
-<CodeExample name="adaptive">
+<CodeExample>
 
 ```js
 // Generate a random signal and apply adaptive scaling
@@ -86,7 +86,7 @@ add$ for a version that triggers from all streams.
 **Example**
 
 
-<CodeExample name="add">
+<CodeExample>
 
 ```js
 const c = add(now(3), now(2)).tap(console.log);
@@ -133,7 +133,7 @@ Automatically scale an incoming stream of scalar or vector values to the<br>[0; 
 **Example**
 
 
-<CodeExample name="autoscale">
+<CodeExample>
 
 ```js
 const source = periodic(200).rand().scale({ outmin: -30, outmax: 200 });
@@ -168,7 +168,7 @@ https://github.com/wavesjs/waves-lfo
 **Example**
 
 
-<CodeExample name="biquad">
+<CodeExample>
 
 ```js
 const noise = periodic(20).rand().plot({ legend: 'Random Signal' });
@@ -197,7 +197,7 @@ Clip an incoming stream of scalar or vector to a given range.
 **Example**
 
 
-<CodeExample name="clip">
+<CodeExample>
 
 ```js
 s = periodic(20).rand().biquad({ f0: 1, q: 5 }).plot({ legend: 'original signal' });
@@ -224,7 +224,7 @@ Cycle through a set of symbols. Each event on the input stream will result<br>in
 **Example**
 
 
-<CodeExample name="cycle">
+<CodeExample>
 
 ```js
 a = periodic(250)
@@ -254,7 +254,7 @@ The `delta` operator computes a differentiation of an incoming stream of<br>scal
 **Example**
 
 
-<CodeExample name="delta">
+<CodeExample>
 
 ```js
 // Compute mouse velocity/acceleration from a resampled version of the mouse position
@@ -307,7 +307,7 @@ div$ for a version that triggers from all streams.
 **Example**
 
 
-<CodeExample name="div">
+<CodeExample>
 
 ```js
 const c = div(now(9), now(2)).tap(console.log);
@@ -340,7 +340,7 @@ elementwise for a version that triggers from all streams.
 **Example**
 
 
-<CodeExample name="elementwise">
+<CodeExample>
 
 ```js
 const norm = (x, y) => Math.sqrt(x * x + y * y);
@@ -374,7 +374,7 @@ neurophysiology 97.2 (2007): 1839-1845.
 **Example**
 
 
-<CodeExample name="force">
+<CodeExample>
 
 ```js
 fake = periodic(5)
@@ -407,7 +407,7 @@ Compute the intensity of the motion from accelerometer signals
 **Example**
 
 
-<CodeExample name="intensity">
+<CodeExample>
 
 ```js
 fakeAcc = periodic(10)
@@ -489,7 +489,7 @@ Compute the maximum of each frame of a vector stream
 **Example**
 
 
-<CodeExample name="max">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3, -4]).max().tap(console.log);
@@ -514,7 +514,7 @@ Compute the mean of the values of a vector stream
 **Example**
 
 
-<CodeExample name="mean">
+<CodeExample>
 
 ```js
 m = now([1, 2, 3]).mean().tap(console.log);
@@ -539,7 +539,7 @@ Compute the mean and standard deviation of the values of a vector stream
 **Example**
 
 
-<CodeExample name="meanstd">
+<CodeExample>
 
 ```js
 m = now([1, 2, 3, 4, 5]).meanstd().tap(console.log);
@@ -564,7 +564,7 @@ Compute the minimum of each frame of a vector stream
 **Example**
 
 
-<CodeExample name="min">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3, -4]).min().tap(console.log);
@@ -589,7 +589,7 @@ Compute the minimum and maximum of each frame of a vector stream
 **Example**
 
 
-<CodeExample name="minmax">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3, -4]).minmax().tap(console.log);
@@ -619,7 +619,7 @@ mul$ for a version that triggers from all streams.
 **Example**
 
 
-<CodeExample name="mul">
+<CodeExample>
 
 ```js
 const c = mul(now(7), now(3)).tap(console.log);
@@ -648,7 +648,7 @@ Compute a moving average on a scalar or vector stream
 **Example**
 
 
-<CodeExample name="mvavrg">
+<CodeExample>
 
 ```js
 noise = periodic(10).rand().plot();
@@ -674,7 +674,7 @@ Compute the norm of a vector
 **Example**
 
 
-<CodeExample name="norm">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3]).norm().tap(console.log);
@@ -699,7 +699,7 @@ Pack a vector of scalar streams to a stream of vectors.
 **Example**
 
 
-<CodeExample name="pack">
+<CodeExample>
 
 ```js
 a = periodic(100).constant(2);
@@ -726,7 +726,7 @@ Pack a vector of scalar streams to a stream of vectors. This operator is similar
 **Example**
 
 
-<CodeExample name="pak">
+<CodeExample>
 
 ```js
 a = periodic(200).rand();
@@ -753,7 +753,7 @@ Multiply the elements of each frame of a vector stream
 **Example**
 
 
-<CodeExample name="prod">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3]).prod().tap(console.log);
@@ -780,7 +780,7 @@ The rand operator generates a stream of scalars or vectors with random<br>values
 **Example**
 
 
-<CodeExample name="rand">
+<CodeExample>
 
 ```js
 randValues = periodic(500).rand().tap(console.log);
@@ -808,7 +808,7 @@ Apply a reducer to each frame of a vector stream
 **Example**
 
 
-<CodeExample name="reduce">
+<CodeExample>
 
 ```js
 r = now([1, 2, 3])
@@ -840,7 +840,7 @@ The `scale` operator scales an incoming stream of scalar or vector values<br>giv
 **Example**
 
 
-<CodeExample name="scale">
+<CodeExample>
 
 ```js
 a = periodic(50).rand();
@@ -875,7 +875,7 @@ https://en.wikipedia.org/wiki/Schmitt_trigger
 **Example**
 
 
-<CodeExample name="schmitt">
+<CodeExample>
 
 ```js
 a = periodic(10)
@@ -906,7 +906,7 @@ Select the channels of a numeric stream from a set of indices
 **Example**
 
 
-<CodeExample name="select">
+<CodeExample>
 
 ```js
 a = periodic(100).rand({ size: 5 }).plot({ stacked: true });
@@ -936,7 +936,7 @@ Compute a sliding window on a scalar or vector stream
 **Example**
 
 
-<CodeExample name="slide">
+<CodeExample>
 
 ```js
 noise = periodic(100).rand().take(10);
@@ -962,7 +962,7 @@ Compute the standard deviation of the values of a vector stream
 **Example**
 
 
-<CodeExample name="std">
+<CodeExample>
 
 ```js
 m = now([1, 2, 3]).std().tap(console.log);
@@ -992,7 +992,7 @@ sub$ for a version that triggers from all streams.
 **Example**
 
 
-<CodeExample name="sub">
+<CodeExample>
 
 ```js
 const c = sub(now(7), now(3)).tap(console.log);
@@ -1019,7 +1019,7 @@ Sum the elements of each frame of a vector stream
 **Example**
 
 
-<CodeExample name="sum">
+<CodeExample>
 
 ```js
 s = now([1, 2, 3]).sum().tap(console.log);
@@ -1044,7 +1044,7 @@ Unpack a stream of vectors to a vector of scalar streams.
 **Example**
 
 
-<CodeExample name="unpack">
+<CodeExample>
 
 ```js
 s = periodic(20).rand({ size: 2 }).plot({ legend: 'Original Signal'});
@@ -1082,7 +1082,7 @@ Complement description
 **Example**
 
 
-<CodeExample name="wavelet">
+<CodeExample>
 
 ```js
 m = mousemove(doc).resample(periodic(10)).plot({ legend: 'mouse position' });

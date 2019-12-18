@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "docs:prepare": "webpack && npm run api && node prepare_docs.js",
+    "docs:prepare": "webpack && npm run api && node prepare_docs.js && cp ../packages/all/dist/index.js .vuepress/public/coda.min.js",
     "api": "documentation build ../packages/**/src/index.js -f json -o api.json --sort-order alpha --config documentation.yml",
     "api:dev": "documentation build ../packages/**/src/index.js -f json -o api.json --sort-order alpha --config documentation.yml --watch"
   },

@@ -1,4 +1,5 @@
 .vuepress/dist
 .vuepress/public/xmm.worker.js*
+.vuepress/public/coda.min.js
 .vuepress/public/sandbox.js
 api.json

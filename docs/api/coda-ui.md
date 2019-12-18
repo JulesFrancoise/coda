@@ -20,7 +20,7 @@ Simple Heatmap UI component. The heatmap works like a sonogram<br>visualization 
 **Example**
 
 
-<CodeExample name="heatmap">
+<CodeExample>
 
 ```js
 noise = periodic(20).rand({ size: 20 }).heatmap();
@@ -49,7 +49,7 @@ Data Looper UI component. This module allows to record a buffer of Stream<br>dat
 **Example**
 
 
-<CodeExample name="looper">
+<CodeExample>
 
 ```js
 data = periodic(10).rand().mvavrg({ size: 30 }).plot();
@@ -100,7 +100,7 @@ Simple Plotter UI component.
 **Example**
 
 
-<CodeExample name="plot">
+<CodeExample>
 
 ```js
 p = periodic(20).rand({ size: 3 })

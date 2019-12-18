@@ -35,7 +35,7 @@ check why some descriptors do not run sometimes (multiple streams)
 **Example**
 
 
-<CodeExample name="devicemotion">
+<CodeExample>
 
 ```js
 dm = devicemotion();
@@ -83,7 +83,7 @@ Throw an error when the Leap Motion middleware is not running
 **Example**
 
 
-<CodeExample name="leapmotion">
+<CodeExample>
 
 ```js
 {
@@ -128,7 +128,7 @@ Throw an error when the Leap Motion middleware is not running
 **Example**
 
 
-<CodeExample name="leapmotion">
+<CodeExample>
 
 ```js
 // Create a leapmotion listener
@@ -186,7 +186,7 @@ For more information about the Myo Device, see https://support.getmyo.com/hc/en-
 **Example**
 
 
-<CodeExample name="myo">
+<CodeExample>
 
 ```js
 // Connect to the default myo armband. You can specify the device name in argument.
@@ -240,7 +240,7 @@ Stream data from a connected R-IoT.This operator returns a data structure includ
 **Example**
 
 
-<CodeExample name="riot">
+<CodeExample>
 
 ```js
 sm = riot();
@@ -281,7 +281,7 @@ This object is similar to the `devicemotion` operator, it returns a Devicemotion
 **Example**
 
 
-<CodeExample name="smartphone">
+<CodeExample>
 
 ```js
 sm = smartphone('test'); // connect your smartphone with the id 'test'

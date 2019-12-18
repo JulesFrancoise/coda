@@ -16,7 +16,7 @@ The `atob` operator converts a stream of scalar or vector values from<br>amplitu
 **Example**
 
 
-<CodeExample name="atodb">
+<CodeExample>
 
 ```js
 db = now([0, 0.5, 1])
@@ -44,7 +44,7 @@ The `dbtoa` operator converts a stream of scalar or vector values from<br>deciBe
 **Example**
 
 
-<CodeExample name="dbtoa">
+<CodeExample>
 
 ```js
 a = now([0, -6, -Infinity])

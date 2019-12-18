@@ -27,7 +27,7 @@ the root of your application.
 **Example**
 
 
-<CodeExample name="gmmTrain">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal
@@ -84,7 +84,7 @@ More details here...
 **Example**
 
 
-<CodeExample name="gmmPredict">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal
@@ -135,7 +135,7 @@ the root of your application.
 **Example**
 
 
-<CodeExample name="hmmTrain">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal
@@ -192,7 +192,7 @@ More details here...
 **Example**
 
 
-<CodeExample name="hmmPredict">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal
@@ -243,7 +243,7 @@ the root of your application.
 **Example**
 
 
-<CodeExample name="hhmmTrain">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal
@@ -300,7 +300,7 @@ More details here...
 **Example**
 
 
-<CodeExample name="hhmmPredict">
+<CodeExample>
 
 ```js
 // Generate a smooth random signal

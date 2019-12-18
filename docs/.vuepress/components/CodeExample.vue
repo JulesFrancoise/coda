@@ -12,21 +12,22 @@
     </div>
     <div v-show="running" style="position: relative;">
       <div class="console" :class="consoleError && 'error'">{{consoleMsg}}</div>
-      <div :id="`${name}-ui`" class="ui"></div>
+      <div :id="uiContainer" class="ui"></div>
     </div>
   </div>
 </template>
 
 <script>
-/* global createSandbox */
+/* global sandbox */
 export default {
   name: 'CodeExample',
-  props: {
-    // code: String,
-    name: String,
-  },
   data() {
+    const uiContainer = 'ui-xxxxxxxxxxxx'.replace(
+      /[x]/g,
+      () => (Math.random() * 16 | 0).toString(16),
+    );
     return {
+      uiContainer,
       running: false,
       consoleMsg: '',
       consoleError: false,
@@ -37,9 +38,12 @@ export default {
       return this.$slots.default[0].elm.innerText;
     },
   },
+  mounted() {
+    document.documentElement.addEventListener('mousedown', this.mousedown, true);
+  },
   methods: {
     run() {
-      this.runSnippet = createSandbox(`${this.name}-ui`, (msg, isError) => {
+      this.runSnippet = sandbox.createSandbox(this.uiContainer, (msg, isError) => {
         this.consoleMsg = msg;
         if (isError) {
           this.consoleError = true;
@@ -54,6 +58,11 @@ export default {
     stop() {
       this.runSnippet('clear();');
       this.running = false;
+    },
+    mousedown() {
+      sandbox.Master.audioContext.resume();
+      console.log('sandbox.Master', sandbox.Master);
+      document.documentElement.removeEventListener('mousedown', this.mousedown, true);
     },
   },
 };
@@ -71,7 +80,6 @@ export default {
 
 .coda-code-example .editor {
   position: relative;
-  font-size: 14px;
   z-index: 2;
 }
 

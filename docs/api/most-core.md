@@ -54,7 +54,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#now
 **Example**
 
 
-<CodeExample name="now">
+<CodeExample>
 
 ```js
 // Log the array [1, 2] to the console right away
@@ -85,7 +85,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#at
 **Example**
 
 
-<CodeExample name="at">
+<CodeExample>
 
 ```js
 // Log the array [1, 2] to the console after 1 second
@@ -115,7 +115,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#periodic
 **Example**
 
 
-<CodeExample name="periodic">
+<CodeExample>
 
 ```js
 // Generate a periodic signal with 500 ms interval and randomize the stream values.
@@ -202,7 +202,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#map
 **Example**
 
 
-<CodeExample name="map">
+<CodeExample>
 
 ```js
 // Apply a function (in this example, double) to all events in a stream
@@ -255,7 +255,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#tap
 **Example**
 
 
-<CodeExample name="tap">
+<CodeExample>
 
 ```js
 // Apply a function with side effects, to log the values to the console
@@ -306,7 +306,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#scan
 **Example**
 
 
-<CodeExample name="scan">
+<CodeExample>
 
 ```js
 // Accumulate the values of a constant stream
@@ -511,7 +511,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#merge
 **Example**
 
 
-<CodeExample name="merge">
+<CodeExample>
 
 ```js
 a = periodic(500).take(3).constant('a');
@@ -583,7 +583,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#sample
 **Example**
 
 
-<CodeExample name="sample">
+<CodeExample>
 
 ```js
 // Sample a noise signal from a stream of click events
@@ -615,7 +615,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#sample
 **Example**
 
 
-<CodeExample name="resample">
+<CodeExample>
 
 ```js
 // Sample a noise signal from a stream of click events
@@ -667,7 +667,7 @@ https://mostcore.readthedocs.io/en/latest/api.html#filter
 **Example**
 
 
-<CodeExample name="filter">
+<CodeExample>
 
 ```js
 a = periodic(200).rand().filter(x => x > 0.8).tap(log);

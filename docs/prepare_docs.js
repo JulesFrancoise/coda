@@ -3,15 +3,24 @@ const api = require('./api.json');
 
 function cleanup(str) {
   return str
-    .split('<Boolean>').join('&lt;Boolean&gt;')
-    .split('<boolean>').join('&lt;boolean&gt;')
-    .split('<Number>').join('&lt;Number&gt;')
-    .split('<number>').join('&lt;number&gt;')
-    .split('<Stream>').join('&lt;Stream&gt;')
-    .split('<<Vector(3)>>').join('&lt;<Vector(3)>&gt;')
-    .split('<Function>').join('&lt;Function&gt;')
-    .split('<string>').join('&lt;string&gt;')
-    .split('<String>').join('&lt;String&gt;');
+    .split('<Boolean>')
+    .join('&lt;Boolean&gt;')
+    .split('<boolean>')
+    .join('&lt;boolean&gt;')
+    .split('<Number>')
+    .join('&lt;Number&gt;')
+    .split('<number>')
+    .join('&lt;number&gt;')
+    .split('<Stream>')
+    .join('&lt;Stream&gt;')
+    .split('<<Vector(3)>>')
+    .join('&lt;<Vector(3)>&gt;')
+    .split('<Function>')
+    .join('&lt;Function&gt;')
+    .split('<string>')
+    .join('&lt;string&gt;')
+    .split('<String>')
+    .join('&lt;String&gt;');
 }
 
 function formatType(t) {
@@ -81,12 +90,14 @@ function toText(x, inline = false) {
 
 let packageName = null;
 let mdContent = '';
-api.forEach((entry, i) => {
+api.forEach((entry) => {
   if (entry.kind === 'note') {
     if (packageName) {
       const fileName = (packageName === '@coda/core')
         ? './api/README.md'
-        : `./api/${packageName.toLowerCase().split('/').join('-').split('@').join('')}.md`;
+        : `./api/${packageName.toLowerCase().split('/').join('-').split('@')
+          .join('')}.md`;
+      // eslint-disable-next-line no-console
       console.log('packageName', packageName, packageName === '@coda/core', fileName);
       fs.writeFileSync(fileName, mdContent);
       // fs.writeFileSync(fileName, cleanup(mdContent));
@@ -131,7 +142,7 @@ api.forEach((entry, i) => {
     // if (example.caption && example.caption.children) {
     //   mdContent += ` ${toText(example.caption ? example.caption.children : '')}`;
     // }
-    mdContent += `\n\n<CodeExample name="${entry.name}">\n\n\`\`\`js\n${example.description}\n\`\`\`\n\n</CodeExample>\n\n`;
+    mdContent += `\n\n<CodeExample>\n\n\`\`\`js\n${example.description}\n\`\`\`\n\n</CodeExample>\n\n`;
   });
   // TODO:  hasOwn Properties
   // mdContent += `${}\n\n`;
@@ -140,7 +151,9 @@ api.forEach((entry, i) => {
 
 const fileName = (packageName === '@coda/core')
   ? './api/README.md'
-  : `./api/${packageName.toLowerCase().split('/').join('-').split('@').join('')}.md`;
+  : `./api/${packageName.toLowerCase().split('/').join('-').split('@')
+    .join('')}.md`;
+// eslint-disable-next-line no-console
 console.log('packageName', packageName, packageName === '@coda/core', fileName);
 fs.writeFileSync(fileName, mdContent);
 
