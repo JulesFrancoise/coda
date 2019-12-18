@@ -1,4 +1,4 @@
 module.exports = {
   default: 'basic',
-  projects: [],
+  projects: ['IMI_2019'],
 };

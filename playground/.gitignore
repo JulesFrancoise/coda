@@ -25,4 +25,5 @@ yarn-error.log*
 
 projects/*
 !projects/Examples
+!projects/IMI_2019
 !projects/README.md
