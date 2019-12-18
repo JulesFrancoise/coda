@@ -1,28 +1,16 @@
 {
   "name": "@coda/docs",
-  "version": "0.0.3-alpha.2",
+  "version": "0.0.4-alpha.1",
   "description": "coda.js documentation",
-  "author": "Jules Françoise <me@julesfrancoise.com>",
+  "author": "Jules Françoise <me@julesfrancoise.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "copylib": "cp ../packages/all/dist/index.js ./static/coda.js && cp ../packages/ml/dist/xmm.worker.js ./static/xmm.worker.js",
-    "dev": "yarn copylib &&  yarn doc --watch & nuxt",
-    "build": "yarn copylib && yarn doc && nuxt build",
-    "start": "yarn doc && nuxt start",
-    "generate": "yarn copylib && yarn doc && nuxt generate",
-    "doc": "documentation build ../packages/**/src/index.js -f json -o pages/api.json --sort-order alpha --config documentation.yml",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "docs:prepare": "webpack && npm run api && node prepare_docs.js",
+    "api": "documentation build ../packages/**/src/index.js -f json -o api.json --sort-order alpha --config documentation.yml",
+    "api:dev": "documentation build ../packages/**/src/index.js -f json -o api.json --sort-order alpha --config documentation.yml --watch"
   },
   "dependencies": {
-    "@coda/sandbox": "^0.0.3-alpha.2",
-    "@nuxtjs/markdownit": "^1.2.1",
-    "documentation": "^8.1.0",
-    "element-ui": "^2.4.8",
-    "nuxt": "^2.3.4",
-    "prismjs": "^1.15.0",
-    "vue": "^2.5.17",
-    "vue-linkify": "^1.0.1"
+    "@coda/sandbox": "^0.0.3-alpha.2"
   }
 }

@@ -40,7 +40,7 @@ function createStream(channel) {
 
 /**
  * Stream data from a connected smartphone. To connect a new smartphone, go to:
- * - <a href="https://animacoda.netlify.com/device" target="_blank">https://animacoda.netlify.com/device</a> if using the online version
+ * - <a href="https://playcoda.netlify.com/device" target="_blank">https://playcoda.netlify.com/device</a> if using the online version
  * - <a href="http://localhost:8080/device" target="_blank">http://localhost:8080/device</a> if running the playground on your machine
  *
  * This object is similar to the `devicemotion` operator, it returns a Devicemotion data

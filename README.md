@@ -19,7 +19,7 @@
 
 ### Getting Started with the Live-Coding environment
 
-Just get to [https://animacoda.netlify.com](https://animacoda.netlify.com) and start playing!
+Just get to [https://playcoda.netlify.com](https://playcoda.netlify.com) and start playing!
 
 ### Installing and integrating coda.js
 
