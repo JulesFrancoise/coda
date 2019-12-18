@@ -5,14 +5,14 @@
 //
 
 // From your smartphone:
-// -> go to https://imi18playground.netlify.com/device
+// -> go to https://playcoda.netlify.com/device
 // -> choose a unique ID
 //
 // Once connected, execute the following line (alt+enter), with YOUR ID:
-m = smartphone('jules');
+m = smartphone('xxx');
 
 // To access the acceleration:
-acc = m.acc.plot({ legend: 'Accceleration without gravity '});
+acc = m.acc.plot({ legend: 'Acceleration without gravity '});
 
 // => Perform analysis here
 
