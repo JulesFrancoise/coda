@@ -15,7 +15,7 @@
     "docs:prepare": "cd docs && npm run docs:prepare",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "npm run build --ignore @coda/playground && npm run docs:prepare && npm run docs:build",
+    "docs:deploy": "npm run build && npm run docs:prepare && npm run docs:build",
     "lint": "eslint --ext .js,.vue packages/*/src packages/*/test playground/src docs/pages docs/components docs/layouts",
     "release": "lerna publish --ignore @coda/docs @coda/playground",
     "test": "jest",
