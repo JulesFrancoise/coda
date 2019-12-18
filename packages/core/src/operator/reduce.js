@@ -119,7 +119,7 @@ export function minmax(source) {
  * s = now([1, 2, 3]).norm().tap(console.log);
  */
 export function norm(source) {
-  return withAttr({ format: 'scalar', size: 1 })(map(x => Math.sqrt(x), reduce(
+  return withAttr({ ...source.attr, format: 'scalar', size: 1 })(map(x => Math.sqrt(x), reduce(
     (s, x) => s + (x ** 2),
     0,
     source,
