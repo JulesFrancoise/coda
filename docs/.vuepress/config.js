@@ -26,6 +26,10 @@ module.exports = {
         text: 'Examples',
         link: '/examples/',
       },
+      {
+        text: 'Playground',
+        link: 'https://playcoda.netlify.com',
+      },
     ],
     sidebar: {
       '/api/': [

@@ -11,12 +11,14 @@ If you are not familiar with Web development and JavaScript, check out [JavaScri
 
 ## Using the live-coding editor
 
-The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: <a href="https://playcoda.netlify.com" target="_blank">https://playcoda.netlify.com</a>
+The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: [https://playcoda.netlify.com](https://playcoda.netlify.com).
+
+::: tip
+The playground allows to interpret statements interactively. There are two shortcuts to know:
+- `ALT+ENTER` executes the entire block where the pointer is situated
+- `CTRL+ENTER` executes the current selection (or the current line only, if no text is selected).
+:::
 
 ::: warning
 Note that the hosted version has limitations regarding the use of movement sensors, that usually require that you run the environment on your own computer.
-:::
-
-::: tip
-The following tutorial embeds interactive code examples that can be executed in place. If you wish to edit and extend the proposed example, copy and paste them in the live-coding editor!
 :::

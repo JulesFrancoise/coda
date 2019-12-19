@@ -21,6 +21,10 @@ Coda heavily relies on a reactive programming library called `most` (see [https:
 
 ## Creating, Transforming and Consuming Streams
 
+::: tip
+The following tutorial embeds interactive code examples that can be executed in place. If you wish to edit and extend the proposed example, copy and paste them in [the live-coding editor](https://playcoda.netlify.com)!
+:::
+
 Several Coda operators are "Sources", meaning that they allow you to create data streams. For example, coda provides the `periodic` source from most, which creates an infinite stream of events that are fired periodically at a fixed period.
 
 To create a periodic stream of period 1 second, we just need to execute the following:
