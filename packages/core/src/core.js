@@ -160,6 +160,10 @@ export const pack = streams => (
   new Stream(pack_(streams))
 );
 
+export const concat = streams => (
+  new Stream(pack_(streams.reduce((a, x) => a.concat(unpack(x)), [])))
+);
+
 export const wavelet = (options, stream) => (
   new Stream(wavelet_(options, stream))
 );
