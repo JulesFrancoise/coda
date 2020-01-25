@@ -68,7 +68,8 @@ export default class StreamManager {
       target.stop = () => {
         this.stop(arg);
       };
-    } else if (isObject(target) && !target.isStream && !target.isSynth) {
+    } else if (isObject(target) && target.autorun !== false
+      && !target.isStream && !target.isSynth) {
       Object.keys(target)
         .filter(x => target[x] && target[x].isStream)
         .forEach((x) => {
