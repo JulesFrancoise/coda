@@ -28,6 +28,11 @@
   resolved "https://registry.yarnpkg.com/@most/types/-/types-1.0.2.tgz#a272c919a3dafe942bd02d63402f0548593af870"
   integrity sha512-ZVkDwaiuGVTXywADeJ3aUBsD41UURldIljlsSTMdiWfhVEOY7dsY8iq+9wFUjRZYjhnpn9tLiOHaqyjbxm1prg==
 
+"@tensorflow-models/posenet@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/posenet/-/posenet-2.2.1.tgz#2f0a68d909842f59eec195f23c6f3d4cebc53fa8"
+  integrity sha512-n9/g6DfjAyrBTf/zt1haRCyWsgALxUCzg9/Ks3Y2mbYavRZVSCSTRPy/qlE5Hr4tLfyckGfDN14zmGTthNcg/g==
+
 colormap@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/colormap/-/colormap-2.3.1.tgz#9f2ab643591c0728d32332d5480b2487a4e0f249"

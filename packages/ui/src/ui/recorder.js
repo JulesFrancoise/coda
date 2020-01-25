@@ -70,14 +70,18 @@ class RecorderSink {
     this.container = container;
     this.bufferIndex = 0;
     this.recording = false;
+    this.labels = {};
   }
 
   record(recording, bufferIndex) {
     this.recording = recording;
     this.bufferIndex = bufferIndex;
+    if (!this.labels[bufferIndex]) {
+      this.labels[bufferIndex] = this.bufferIndex.toString();
+    }
     if (this.recording) {
       this.container.buffers[this.bufferIndex] = {
-        label: this.bufferIndex.toString(),
+        label: this.labels[bufferIndex],
         data: [],
       };
     }
@@ -100,6 +104,8 @@ class RecorderSink {
   }
 
   setLabel(bufferIndex, label) {
+    this.labels[bufferIndex] = label;
+    if (!this.container.buffers[bufferIndex]) return;
     this.container.buffers[bufferIndex].label = label;
     this.sink.event(currentTime(this.scheduler), {
       type: 'label',
