@@ -1,5 +1,6 @@
 **/.DS_Store
 **/node_modules
+.vscode
 /packages/*/.nyc_output
 /packages/*/dist
 lerna-debug.log
