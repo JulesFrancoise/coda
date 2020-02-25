@@ -1,4 +1,13 @@
+import { Stream } from '@coda/prelude';
+import meter_ from './analysis/meter';
+
 export { default as Master } from './core/master';
+
+// Analysis
+export function meter(audioSource) {
+  return new Stream(meter_(audioSource));
+}
+
 
 // Synths
 export { default as granular } from './synths/granular';
