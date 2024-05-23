@@ -3,6 +3,7 @@
 Coda relies on **reactive programming**, a paradigm designed to easily create and manipulate asynchronous data streams. With reactive programming, you can create data streams from anything (timers, clicks, keyboard events, motion sensor events, ...), filter them and transform them to finally consume them by reacting to their events.
 
 From André Staltz's [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754):
+
 > **Reactive programming is programming with asynchronous data streams.**
 >
 > In a way, this isn't anything new. Event buses or your typical click events are really an asynchronous event stream, on which you can observe and do some side effects. Reactive is that idea on steroids. You are able to create data streams of anything, not just from click and hover events. Streams are cheap and ubiquitous, anything can be a stream: variables, user inputs, properties, caches, data structures, etc. For example, imagine your Twitter feed would be a data stream in the same fashion that click events are. You can listen to that stream and react accordingly.
@@ -22,7 +23,7 @@ Coda heavily relies on a reactive programming library called `most` (see [https:
 ## Creating, Transforming and Consuming Streams
 
 ::: tip
-The following tutorial embeds interactive code examples that can be executed in place. If you wish to edit and extend the proposed example, copy and paste them in [the live-coding editor](https://playcoda.netlify.com)!
+The following tutorial embeds interactive code examples that can be executed in place. If you wish to edit and extend the proposed example, copy and paste them in [the live-coding editor](https://playcoda.netlify.app)!
 :::
 
 Several Coda operators are "Sources", meaning that they allow you to create data streams. For example, coda provides the `periodic` source from most, which creates an infinite stream of events that are fired periodically at a fixed period.
@@ -64,7 +65,7 @@ For example, we can use the standard method [`tap`](https://mostcore.readthedocs
 ```js
 // Create a periodic stream of period 1 second and log each event to the console
 a = periodic(1000).tap(eventValue => {
-  log('Received event: ', eventValue);
+  log("Received event: ", eventValue);
 });
 ```
 
@@ -82,7 +83,7 @@ a = periodic(1000)
   .constant(1)
   .accum()
   .tap(x => {
-    log('Number of events: ', x);
+    log("Number of events: ", x);
   });
 ```
 
@@ -97,10 +98,9 @@ Wrapping [@most/dom-event](https://github.com/mostjs/dom-event), Coda provides a
 <CodeExample>
 
 ```js
-m = mousemove(doc)
-  .tap(coords => {
-    log(`Mouse coordinates: [${coords}]`);
-  });
+m = mousemove(doc).tap(coords => {
+  log(`Mouse coordinates: [${coords}]`);
+});
 ```
 
 </CodeExample>
@@ -116,15 +116,15 @@ All pointer events produce the same type of stream of coordinates. It is also po
 <CodeExample>
 
 ```js
-m = click(doc.querySelector('#my-box'))
-  .tap(coords => {
-    log(`Mouse coordinates: [${coords}]`);
-  });
+m = click(doc.querySelector("#my-box")).tap(coords => {
+  log(`Mouse coordinates: [${coords}]`);
+});
 ```
 
 </CodeExample>
 
 Coda also provides a number of bindings to commercial motion sensing devices (see [documentation](/api/coda-sensors.html)):
+
 - `devicemotion` to capture smartphone's motion data
 - `leapmotion` to capture a hand's skeleton with the [Leap Motion](https://www.leapmotion.com/) controller
 - `myo` to capture inertial and EMG data from the [Myo Armband](https://support.getmyo.com/hc/en-us/articles/203398347-Getting-started-with-your-Myo-armband)
@@ -137,10 +137,9 @@ Coda provides some 'sinks' that allow for the visualization of continuous data s
 <CodeExample>
 
 ```js
-m = mousemove(doc)
-  .plot({
-    legend: 'Mouse position (normalized)',
-  });
+m = mousemove(doc).plot({
+  legend: "Mouse position (normalized)"
+});
 ```
 
 </CodeExample>
@@ -158,11 +157,11 @@ We can easily resample the `mousemove` stream at a fixed sampling rate using the
 ```js
 m = mousemove(doc)
   .plot({
-    legend: 'Mouse position (normalized)',
+    legend: "Mouse position (normalized)"
   })
   .resample(periodic(20))
   .plot({
-    legend: 'Mouse position (normalized and resampled)',
+    legend: "Mouse position (normalized and resampled)"
   });
 ```
 
@@ -176,15 +175,15 @@ Because sensor signals can be noisy, we can smooth the signal using a filter, fo
 m = mousemove(doc)
   .resample(periodic(20))
   .plot({
-    legend: 'Mouse position (normalized and resampled)',
+    legend: "Mouse position (normalized and resampled)"
   })
   .mvavrg({ size: 10 })
   .plot({
-    legend: 'Mouse position (normalized, resampled and smoothed)',
+    legend: "Mouse position (normalized, resampled and smoothed)"
   })
   .mvavrg({ size: 40 })
   .plot({
-    legend: 'Mouse position (normalized, resampled and VERY smoothed)',
+    legend: "Mouse position (normalized, resampled and VERY smoothed)"
   });
 ```
 
@@ -199,11 +198,11 @@ m = mousemove(doc)
   .resample(periodic(20))
   .mvavrg({ size: 10 })
   .plot({
-    legend: 'Mouse position (normalized, resampled and smoothed)',
+    legend: "Mouse position (normalized, resampled and smoothed)"
   })
   .delta({ size: 5 })
   .plot({
-    legend: 'Mouse velocity',
+    legend: "Mouse velocity"
   });
 ```
 
@@ -219,11 +218,11 @@ m = mousemove(doc)
   .mvavrg({ size: 10 })
   .delta({ size: 5 })
   .plot({
-    legend: 'Mouse velocity (x, y)',
+    legend: "Mouse velocity (x, y)"
   })
   .norm()
   .plot({
-    legend: 'Overall Mouse velocity',
+    legend: "Overall Mouse velocity"
   });
 ```
 

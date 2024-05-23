@@ -10,7 +10,7 @@ Use the playground or the compiled versions (see Glitch examples).
 
 ### Online playground (no installation)
 
-The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: <a href="https://playcoda.netlify.com" target="_blank">https://playcoda.netlify.com</a>
+The easiest way to get started with `coda.js` is to play around the live-coding environment. Nothing needs to be installed, you just need a **recent** browser (**Chrome** or **Firefox** are recommended). A hosted version of the playground is available online: <a href="https://playcoda.netlify.app" target="_blank">https://playcoda.netlify.app</a>
 
 ::: warning
 Note that the hosted version has limitations regarding the use of movement sensors, that usually require that you run the environment on your own computer.
@@ -28,7 +28,7 @@ Put the compiled playground online and write setup instructions
 
 ## Installing the full library (Direct Download / CDN)
 
-A compiled version of the full library is available at: [https://codajs.netlify.com/coda.min.js](https://codajs.netlify.com/coda.min.js).
+A compiled version of the full library is available at: [https://codajs.netlify.app/coda.min.js](https://codajs.netlify.app/coda.min.js).
 
 The following snippet gives the minimal HTML code necessary to run an application with coda.
 
@@ -37,24 +37,24 @@ A more complete example is available on Glitch.com: [https://glitch.com/~coda-st
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Coda Starter</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="lib/coda.min.js"></script>
-</head>
-<body>
-  <h1>Coda Starter</H1>
-  <p>Move the mouse</p>
-  <script>
-const paragraph = document.querySelector('p');
-const m = coda.mousemove(document).tap(coords => {
-  paragraph.innerText = `Mouse coordinates: [${coords}]`;
-});
-coda.runEffects(m, coda.newDefaultScheduler());
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Coda Starter</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="lib/coda.min.js"></script>
+  </head>
+  <body>
+    <h1>Coda Starter</h1>
+    <p>Move the mouse</p>
+    <script>
+      const paragraph = document.querySelector("p");
+      const m = coda.mousemove(document).tap(coords => {
+        paragraph.innerText = `Mouse coordinates: [${coords}]`;
+      });
+      coda.runEffects(m, coda.newDefaultScheduler());
+    </script>
+  </body>
 </html>
 ```
 

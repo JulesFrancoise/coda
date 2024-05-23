@@ -7,10 +7,10 @@
 ```
 
 Create streams from the DeviceMotion API. Three streams are created:
+
 - `acc`: acceleration without gravity
 - `accG`: acceleration including gravity
 - `gyro`: gyroscopes (rotation rates)
-
 
 ::: warning
 This operator does not work on all devices (especially, on desktop computers).
@@ -24,34 +24,31 @@ https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
 check why some descriptors do not run sometimes (multiple streams)
 :::
 
-|Parameter|Type|Default|Description|
-|---|---|---|---|
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+
+
 **Returns** `Object` Devicemotion data structure, including the following streams:
+
 - `acc`: acceleration without gravity
 - `accG`: acceleration including gravity
 - `gyro`: gyroscopes (rotation rates)
 
-
 **Example**
-
 
 <CodeExample>
 
 ```js
 dm = devicemotion();
 
-s1 = dm.accG
-  .plot({ legend: 'Acceleration Including Gravity' });
+s1 = dm.accG.plot({ legend: "Acceleration Including Gravity" });
 
-s2 = dm.acc
-  .plot({ legend: 'Acceleration' });
+s2 = dm.acc.plot({ legend: "Acceleration" });
 
-s3 = dm.gyro
-  .plot({ legend: 'Rotation Rates' });
+s3 = dm.gyro.plot({ legend: "Rotation Rates" });
 ```
 
 </CodeExample>
-
 
 ## leapmotion
 
@@ -74,14 +71,14 @@ For more information about the Leap Motion Device, see https://www.leapmotion.co
 Throw an error when the Leap Motion middleware is not running
 :::
 
-|Parameter|Type|Default|Description|
-|---|---|---|---|
-|options|Object|{}|Options|
-|options.period|Number|10|Sampling period, if resampling is desired.|
+| Parameter      | Type   | Default | Description                                |
+| -------------- | ------ | ------- | ------------------------------------------ |
+| options        | Object | {}      | Options                                    |
+| options.period | Number | 10      | Sampling period, if resampling is desired. |
+
 **Returns** `Object` Leap Motion Data Structure, containing a nested set of streams<br>of the following form:
 
 **Example**
-
 
 <CodeExample>
 
@@ -127,7 +124,6 @@ Throw an error when the Leap Motion middleware is not running
 
 **Example**
 
-
 <CodeExample>
 
 ```js
@@ -141,11 +137,12 @@ rightHere = leap.hands.right.visible.skipRepeats().tap(log);
 // index finger
 rightThumb = leap.hands.right.thumb.tipPosition;
 rightIndex = leap.hands.right.index.tipPosition;
-thumb2index = rightThumb.distance(rightIndex).plot({ legend: 'thumb-index distance' });
+thumb2index = rightThumb
+  .distance(rightIndex)
+  .plot({ legend: "thumb-index distance" });
 ```
 
 </CodeExample>
-
 
 ## myo
 
@@ -154,12 +151,12 @@ thumb2index = rightThumb.distance(rightIndex).plot({ legend: 'thumb-index distan
 ```
 
 The myo module listens to the data emitted by the Myo armband. Rather than<br>returning a complex stream with all datatypes, the myo factory function<br>return an object containing the following streams:
+
 - `emg`: EMG Data (vector, 8 channels)
 - `acc`: accelerometer data (vector, 3D)
 - `gyro`: gyroscope data (vector, 3D)
 - `quat`: orientation data as quaternions (vector, 4D)
 - `pose/pose_off`: beginning and end of the gestures recognized by the factory<br>myo classification (string)
-
 
 ::: warning
 This operator only works locally. The Myo must be properly configured,
@@ -170,18 +167,20 @@ and the Myo Connect middleware must tbe installed and Running.
 For more information about the Myo Device, see https://support.getmyo.com/hc/en-us. For details on the `myo.js` API, see https://github.com/thalmiclabs/myo.js
 :::
 
-|Parameter|Type|Default|Description|
-|---|---|---|---|
-|name|String|''|Name of the armband|
+| Parameter | Type   | Default | Description         |
+| --------- | ------ | ------- | ------------------- |
+| name      | String | ''      | Name of the armband |
+
 **Returns** `Object` An object containing a set of streams, of the<br>form:```
 {
-  emg: Stream<format='vector', size=8>
-  acc: Stream<format='vector', size=3>
-  gyro: Stream<format='vector', size=3>
-  quat: Stream<format='vector', size=4>
-  pose/pose_off: Stream<format='string'>
+emg: Stream<format='vector', size=8>
+acc: Stream<format='vector', size=3>
+gyro: Stream<format='vector', size=3>
+quat: Stream<format='vector', size=4>
+pose/pose_off: Stream<format='string'>
 }
-```
+
+````
 
 **Example**
 
@@ -207,10 +206,9 @@ emg = myo().emg
     fill: 'bottom',
     legend: 'Force estimation from the EMG (contraction)',
    });
-```
+````
 
 </CodeExample>
-
 
 ## riot
 
@@ -219,40 +217,37 @@ emg = myo().emg
 ```
 
 Stream data from a connected R-IoT.This operator returns a data structure including the following streams:
+
 - `acc`: acceleration
 - `gyro`: gyroscopes (rotation rates)
 - `quat`: quaternions (orientation)
 - `euler`: euler angles (orientation)
 - `magneto`: magnetometers
 
+| Parameter | Type   | Default | Description    |
+| --------- | ------ | ------- | -------------- |
+| id        | Number | 0       | RIOT Device ID |
 
-|Parameter|Type|Default|Description|
-|---|---|---|---|
-|id|Number|0|RIOT Device ID|
 **Returns** `Object` data structure including the following streams:
+
 - `acc`: acceleration
 - `gyro`: gyroscopes (rotation rates)
 - `quat`: quaternions (orientation)
 - `euler`: euler angles (orientation)
 - `magneto`: magnetometers
-
 
 **Example**
-
 
 <CodeExample>
 
 ```js
 sm = riot();
 
-s1 = sm.acc
-  .plot({ legend: 'Acceleration' });
-s2 = sm.gyro
-  .plot({ legend: 'Gyroscopes' });
+s1 = sm.acc.plot({ legend: "Acceleration" });
+s2 = sm.gyro.plot({ legend: "Gyroscopes" });
 ```
 
 </CodeExample>
-
 
 ## smartphone
 
@@ -261,41 +256,36 @@ s2 = sm.gyro
 ```
 
 Stream data from a connected smartphone. To connect a new smartphone, go to:
-- <a href="https://playcoda.netlify.com/device" target="_blank">https://playcoda.netlify.com/device</a> if using the online version
+
+- <a href="https://playcoda.netlify.app/device" target="_blank">https://playcoda.netlify.app/device</a> if using the online version
 - <a href="http://localhost:8080/device" target="_blank">http://localhost:8080/device</a> if running the playground on your machine
-This object is similar to the `devicemotion` operator, it returns a Devicemotion data<br>structure, including the following streams:
+  This object is similar to the `devicemotion` operator, it returns a Devicemotion data<br>structure, including the following streams:
 - `acc`: acceleration without gravity
 - `accG`: acceleration including gravity
 - `gyro`: gyroscopes (rotation rates)
 
+| Parameter | Type   | Default | Description |
+| --------- | ------ | ------- | ----------- |
+| name      | String |         | Device name |
 
-|Parameter|Type|Default|Description|
-|---|---|---|---|
-|name|String||Device name|
 **Returns** `Object` Devicemotion data structure, including the following streams:
+
 - `acc`: acceleration without gravity
 - `accG`: acceleration including gravity
 - `gyro`: gyroscopes (rotation rates)
-
 
 **Example**
-
 
 <CodeExample>
 
 ```js
-sm = smartphone('test'); // connect your smartphone with the id 'test'
+sm = smartphone("test"); // connect your smartphone with the id 'test'
 
-s1 = sm.accG
-  .plot({ legend: 'Acceleration Including Gravity' });
+s1 = sm.accG.plot({ legend: "Acceleration Including Gravity" });
 
-s2 = sm.acc
-  .plot({ legend: 'Acceleration' });
+s2 = sm.acc.plot({ legend: "Acceleration" });
 
-s3 = sm.gyro
-  .plot({ legend: 'Rotation Rates' });
+s3 = sm.gyro.plot({ legend: "Rotation Rates" });
 ```
 
 </CodeExample>
-
-

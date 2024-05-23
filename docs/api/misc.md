@@ -1,5 +1,42 @@
 # Misc
 
+## addCallback
+
+```ts
+ addCallback(callbackId: String, callback: Function)0
+```
+
+Register a new callback function
+
+|Parameter|Type|Default|Description|
+|---|---|---|---|
+|callbackId|String||Callback id (for later deletions)|
+|callback|Function||Callback function, that applies to a Leap Motion Frame|
+
+## processFrame
+
+```ts
+ processFrame(frame: Leap.Frame)0
+```
+
+Process a Leap Motion Frame
+
+|Parameter|Type|Default|Description|
+|---|---|---|---|
+|frame|Leap.Frame||Leap Motion Frame|
+
+## removeCallback
+
+```ts
+ removeCallback(callbackId: String)0
+```
+
+Remove an existing callback function
+
+|Parameter|Type|Default|Description|
+|---|---|---|---|
+|callbackId|String||Callback id|
+
 ## BaseAudioEffect
 
 ```ts
@@ -67,4 +104,15 @@ Simple multidimensional kick detection.
 |source|Stream||Source Stream (scalar or vector)|
 **Returns** `Stream` Binary Kick detection stream
 
+
+## setupCamera
+
+```ts
+ setupCamera()0
+```
+
+Loads a the camera to be used in the demo
+
+|Parameter|Type|Default|Description|
+|---|---|---|---|
 
