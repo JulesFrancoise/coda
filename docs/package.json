@@ -11,6 +11,6 @@
     "api:dev": "documentation build ../packages/**/src/index.js -f json -o api.json --sort-order alpha --config documentation.yml --watch"
   },
   "dependencies": {
-    "@coda/sandbox": "^0.0.3-alpha.2"
+    "@coda/sandbox": "^0.0.4-alpha.1"
   }
 }
