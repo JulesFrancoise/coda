@@ -210,11 +210,23 @@ export class GranularEngine extends BaseAudioEngine {
    * @return {GranularEngine} Granular engine instance
    */
   load(filename) {
-    const fp = filename.split('.');
-    const fext = fp[fp.length - 1];
-    const audioFile = (['flac', 'wav', 'mp3', 'ogg', 'aif', 'aiff'].includes(fext))
-      ? `${this.filePrefix}${filename}`
-      : `${this.filePrefix}${filename}.${this.fileExt}`;
+    let audioFile;
+    function isValidURL(str) {
+      const pattern = new RegExp(
+        '^(https?:\\/\\/)?((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|((\\d{1,3}\\.){3}\\d{1,3}))(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*(\\?[;&a-z\\d%_.~+=-]*)?(\\#[-a-z\\d_]*)?$',
+        'i',
+      ); // fragment locator
+      return !!pattern.test(str);
+    }
+    if (isValidURL(filename)) {
+      audioFile = filename;
+    } else {
+      const fp = filename.split('.');
+      const fext = fp[fp.length - 1];
+      audioFile = ['flac', 'wav', 'mp3', 'ogg', 'aif', 'aiff'].includes(fext)
+        ? `${this.filePrefix}${filename}`
+        : `${this.filePrefix}${filename}.${this.fileExt}`;
+    }
     this.loader.load(audioFile).then((loaded) => {
       this.granularEngine.buffer = loaded;
       this.position = this.position;

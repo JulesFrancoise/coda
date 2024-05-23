@@ -10,7 +10,7 @@
   coda.js relies on the most.js reactive programming library, allowing for easy asynchronous data stream processing.
 - **Compact Syntax**
   coda.js was designed with a compact syntax allowing for extremely rapid prototyping of movement-based interactions.
-**Multiple Devices**
+  **Multiple Devices**
   coda.js integrates binding to several commercial sensing devices such as the Myo armband or the Leap Motion, and easily communicates with Cycling'74 Max 8
 - **Low-level Signal Processing**
 - **Movement Data Visualisation**
@@ -19,15 +19,16 @@
 
 ### Getting Started with the Live-Coding environment
 
-Just get to [https://animacoda.netlify.com](https://animacoda.netlify.com) and start playing!
+Just get to [https://playcoda.netlify.app](https://playcoda.netlify.app) and start playing!
 
 ### Installing and integrating coda.js
 
 ##### Browser
 
 Just grab the full library and start playing:
+
 ```
-<script src="https://codajs.netlify.com/coda.js"></script>
+<script src="https://codajs.netlify.app/coda.js"></script>
 ```
 
 ##### Node.js
@@ -43,10 +44,12 @@ The coda.js library emerged in the context of the CO/DA research project at [LIM
 CO/DA has been developed at [LIMSI-CNRS](https://www.limsi.fr/en/) by [Jules Françoise](https://www.julesfrancoise.com), and is released under the MIT Licence. The CO/DA project is funded by Réseau Francilien en Sciences Informatiques ([DIM RFSI](https://dim-rfsi.fr/)) of the French Ile-de-France region (2018).
 
 **Contributors:**
+
 - Jules Françoise
 - Lucie Van Nieuwenhuyze
 
 Coda would not exist without the tremendous work of other open-source contributors. In particular, coda heavily relies on several open-source libraries:
+
 - [Most](https://github.com/mostjs/core): Monadic Event Stream
 - [Vue](https://vuejs.org): The Progressive JavaScript Framework
 - [Waves-LFO](https://github.com/wavesjs/waves-lfo): Ircam's Low Frequency Operators

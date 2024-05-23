@@ -79,6 +79,7 @@ export default {
   border-radius: 8px;
   overflow: hidden;
   min-height: 116px;
+  flex-shrink: 0;
 }
 .component.paused {
   min-height: 0;

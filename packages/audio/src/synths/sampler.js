@@ -142,7 +142,23 @@ export class SamplerEngine extends BaseAudioEngine {
    * @return {SamplerEngine} Sampler engine instance
    */
   async load(filename) {
-    const audioFile = `${this.filePrefix}${filename}.${this.fileExt}`;
+    let audioFile;
+    function isValidURL(str) {
+      const pattern = new RegExp(
+        '^(https?:\\/\\/)?((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|((\\d{1,3}\\.){3}\\d{1,3}))(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*(\\?[;&a-z\\d%_.~+=-]*)?(\\#[-a-z\\d_]*)?$',
+        'i',
+      ); // fragment locator
+      return !!pattern.test(str);
+    }
+    if (isValidURL(filename)) {
+      audioFile = filename;
+    } else {
+      const fp = filename.split('.');
+      const fext = fp[fp.length - 1];
+      audioFile = ['flac', 'wav', 'mp3', 'ogg', 'aif', 'aiff'].includes(fext)
+        ? `${this.filePrefix}${filename}`
+        : `${this.filePrefix}${filename}.${this.fileExt}`;
+    }
     try {
       const buffer = await this.loader.load(audioFile);
       this.samplerEngine.buffer = buffer;

@@ -12,6 +12,12 @@
     <div class="error" v-if="socketError">
       Socket error: cannot connect to server...
     </div>
+    <div class="error" v-if="!!err">
+      {{err}}
+    </div>
+    <div>
+      <br>accG: {{accG}}
+    </div>
   </div>
 </template>
 
@@ -20,10 +26,11 @@ import MotionInput from '@ircam/motion-input';
 
 export default {
   data() {
-    const isIP = (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.hostname));
-    const host = isIP
-      ? `ws://${window.location.hostname}:9090`
-      : 'wss://codaws.glitch.me/';
+    // const isIP = (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.hostname));
+    // const host = isIP
+    //   ? `ws://${window.location.hostname}:9090`
+    // : 'wss://codaws.glitch.me/';
+    const host = 'wss://codaws.glitch.me/';
     const socket = new WebSocket(host);
     socket.onmessage = this.onMsg;
     socket.onopen = () => {
@@ -33,6 +40,7 @@ export default {
       this.socketError = true;
     };
     return {
+      accG: null,
       id: '',
       socketError: true,
       idError: false,
@@ -40,11 +48,22 @@ export default {
       socket,
       msg: '',
       connected: false,
+      err: false,
     };
   },
   methods: {
     connect() {
       this.socket.send(JSON.stringify({ type: 'connect', id: this.id }));
+      this.err = typeof DeviceMotionEvent.requestPermission;
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission().then(() => {
+          this.stream();
+        }).catch((e) => {
+          this.err = e;
+        });
+      } else {
+        this.err = 'non iOS 13';
+      }
     },
     onMsg(json) {
       const m = JSON.parse(json.data);
@@ -60,6 +79,7 @@ export default {
       }
     },
     stream() {
+      this.err = false;
       MotionInput
         .init([
           'accelerationIncludingGravity',
@@ -73,6 +93,7 @@ export default {
         ]) => {
           if (accelerationIncludingGravity.isProvided && accelerationIncludingGravity.isValid) {
             accelerationIncludingGravity.addListener((val) => {
+              this.accG = val;
               this.socket.send(JSON.stringify({
                 type: 'data',
                 id: this.id,
@@ -100,6 +121,7 @@ export default {
           }
         })
         .catch((err) => {
+          this.err = err;
           console.error(err.stack); // eslint-disable-line no-console
         });
     },

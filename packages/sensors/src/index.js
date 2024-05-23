@@ -85,6 +85,7 @@ export function smartphone(name) {
 export function riot(name) {
   const sm = riot_(name);
   return {
+    autorun: false,
     acc: new Stream(sm.acc),
     gyro: new Stream(sm.gyro),
     magneto: new Stream(sm.magneto),
